@@ -1,0 +1,30 @@
+<page-header class="bg-blue-600"></page-header>
+
+<div class="matero-col">
+    <mat-card>
+      <mat-tab-group class="m--16">
+        <mat-tab label="Local Profiles">
+          <div class="m-16">
+             <app-local-profile></app-local-profile>
+          </div>
+        </mat-tab>
+        <mat-tab label="National Profiles">
+          <div class="m-16">
+            <app-national-profile></app-national-profile>
+          </div>
+        </mat-tab>
+        <mat-tab label="All Profiles">
+          <div class="m-16">
+             <div class="row">
+                 <div class="col-lg-6">
+                    <app-all-profile-one></app-all-profile-one>
+                 </div>
+                 <div class="col-lg-6">
+                    <app-all-profile-one></app-all-profile-one>
+                </div>
+             </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>

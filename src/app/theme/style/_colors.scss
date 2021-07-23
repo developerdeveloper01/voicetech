@@ -1,0 +1,290 @@
+// Material color helpers including text color and background color
+
+@mixin generate-color($prefix, $property) {
+  @each $name, $value in $mat-colors {
+    // If the value is a map, continue to each
+    @if type-of($value) == 'map' {
+      @each $hue, $color in $value {
+        @if ($hue != 'contrast') {
+          .#{$prefix + '-' + $name + '-' + $hue} {
+            #{$property}: $color !important;
+          }
+        }
+        // alias
+        @if ($name == 'gray') {
+          .#{$prefix + '-grey-' + $hue} {
+            @extend .#{$prefix + '-gray-' + $hue} !optional;
+          }
+        }
+
+        @if ($name == 'blue-gray') {
+          .#{$prefix + '-blue-grey-' + $hue} {
+            @extend .#{$prefix + '-blue-gray-' + $hue} !optional;
+          }
+        }
+      }
+    }
+
+    @if type-of($value) == 'color' {
+      .#{$prefix + '-' + $name} {
+        #{$property}: $value !important;
+      }
+    }
+  }
+}
+
+// Generate text color helpers
+@include generate-color('text', 'color');
+
+// Generate background color helpers
+@include generate-color('bg', 'background-color');
+
+// start new css
+.bg-blue-500 {
+  background-color: #f00 !important;
+}
+
+mat-icon.mat-icon.notranslate.icon-set.material-icons.mat-icon-no-color {
+  position: absolute;
+  top: 23px;
+  right: 40px;
+  font-size: 40px;
+}
+
+h2.tl-c {
+  font-size: 17px;
+  font-weight: 500;
+  color: #218cfd;
+}
+
+.section-card {
+  width: 100%;
+  display: inline-block;
+  padding: 40px 10px;
+}
+
+// .pie-chart1
+.pie-chart1 {
+  background:
+    radial-gradient(
+      circle closest-side,
+      white 0,
+      white 50%,
+      #cdcdcd 40%,
+      transparent 63%,
+      transparent 70%,
+      white 0
+    ),
+    conic-gradient(
+      #2f3ad0 0,
+      #2f3ad0 50%,
+      #f28e2c 0,
+      #f28e2c 50%,
+    );
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  margin: 0;
+}
+
+.pie-chart1 h2 {
+  position: absolute;
+  margin: 1rem;
+}
+
+.pie-chart1 cite {
+  position: absolute;
+  bottom: 0;
+  font-size: 80%;
+  padding: 1rem;
+  color: gray;
+}
+
+.pie-chart1 figcaption {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  font-size: smaller;
+  text-align: right;
+}
+
+.pie-chart1 span::after {
+  display: inline-block;
+  content: "";
+  width: .8em;
+  height: .8em;
+  margin-left: .4em;
+  border-radius: .2em;
+  background: currentColor;
+}
+
+// pie chart2
+
+.pie-chart2 {
+  background:
+    radial-gradient(
+      circle closest-side,
+      white 0,
+      white 50%,
+      #cdcdcd 40%,
+      transparent 63%,
+      transparent 70%,
+      white 0
+    ),
+    conic-gradient(
+      #2f3ad0 0,
+      #2f3ad0 30%,
+      #e15759 0,
+      #e15759 70%,
+    );
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  margin: 0;
+}
+
+.pie-chart2 h2 {
+  position: absolute;
+  margin: 1rem;
+}
+
+.pie-chart2 cite {
+  position: absolute;
+  bottom: 0;
+  font-size: 80%;
+  padding: 1rem;
+  color: gray;
+}
+
+.pie-chart2 figcaption {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  font-size: smaller;
+  text-align: right;
+}
+
+.pie-chart2 span::after {
+  display: inline-block;
+  content: "";
+  width: .8em;
+  height: .8em;
+  margin-left: .4em;
+  border-radius: .2em;
+  background: currentColor;
+}
+
+// piechart3
+.pie-chart3 {
+  background:
+    radial-gradient(
+      circle closest-side,
+      white 0,
+      white 50%,
+      #cdcdcd 40%,
+      transparent 63%,
+      transparent 70%,
+      white 0
+    ),
+    conic-gradient(
+      #2f3ad0 0,
+      #2f3ad0 10%,
+      #59a14f 0,
+      #59a14f 90%
+    );
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  margin: 0;
+}
+
+.pie-chart3 h2 {
+  position: absolute;
+  margin: 1rem;
+}
+
+.pie-chart3 cite {
+  position: absolute;
+  bottom: 0;
+  font-size: 80%;
+  padding: 1rem;
+  color: gray;
+}
+
+.pie-chart3 figcaption {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  font-size: smaller;
+  text-align: right;
+}
+
+.pie-chart3 span::after {
+  display: inline-block;
+  content: "";
+  width: .8em;
+  height: .8em;
+  margin-left: .4em;
+  border-radius: .2em;
+  background: currentColor;
+}
+
+// piechart4
+
+.pie-chart4 {
+  background:
+    radial-gradient(
+      circle closest-side,
+      white 0,
+      white 50%,
+      #cdcdcd 40%,
+      transparent 63%,
+      transparent 70%,
+      white 0
+    ),
+    conic-gradient(
+      #2f3ad0 0,
+      #2f3ad0 20%,
+      #f28e2c 0,
+      #f28e2c 30%,
+      #e15759 0,
+      #e15759 20%,
+      #76b7b2 0,
+      #76b7b2 30%
+    );
+  position: relative;
+  width: 100%;
+  min-height: 350px;
+  margin: 0;
+}
+
+.pie-chart4 h2 {
+  position: absolute;
+  margin: 1rem;
+}
+
+.pie-chart4 cite {
+  position: absolute;
+  bottom: 0;
+  font-size: 80%;
+  padding: 1rem;
+  color: gray;
+}
+
+.pie-chart4 figcaption {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  font-size: smaller;
+  text-align: right;
+}
+
+.pie-chart4 span::after {
+  display: inline-block;
+  content: "";
+  width: .8em;
+  height: .8em;
+  margin-left: .4em;
+  border-radius: .2em;
+  background: currentColor;
+}
