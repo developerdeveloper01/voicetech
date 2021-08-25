@@ -84,7 +84,7 @@
       "route": "staff",
       "name": "staff",
       "type": "sub",
-      "icon": "done_all",
+      "icon": "people_outline",
       "children": [
 
         {
@@ -100,11 +100,18 @@
       ]
     },
     {
+      "route": "enquiry",
+      "name": "enquiry",
+      "type": "link",
+      "icon": "format_list_bulleted"
+    },
+    {
       "route": "ivr-services",
       "name": "ivr-services",
       "type": "link",
       "icon": "perm_data_setting"
     },
+    
     {
       "route": "call-center",
       "name": "call-center",

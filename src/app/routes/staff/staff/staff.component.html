@@ -1,1 +1,113 @@
-<p>staff works!</p>
+<page-header class="bg-blue-600"></page-header>
+ 
+<section>
+    <div class="row">
+        <div class="col-lg-8">
+            <form>
+                <mat-form-field class="m-r-8">
+                  <input matInput [(ngModel)]="query.q" name="q" placeholder="Query String">
+                </mat-form-field>
+              
+                <mat-form-field class="m-r-8">
+                  <mat-select [(ngModel)]="query.sort" name="sort" placeholder="Sort">
+                    <mat-option>-- None --</mat-option>
+                    <mat-option value="stars">stars</mat-option>
+                    <mat-option value="forks">forks</mat-option>
+                    <mat-option value="updated">updated</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              
+                <mat-form-field class="m-r-8">
+                  <mat-select [(ngModel)]="query.order" name="order" placeholder="Order">
+                    <mat-option>-- None --</mat-option>
+                    <mat-option value="desc">desc</mat-option>
+                    <mat-option value="asc">asc</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              
+                <button class="m-r-8" mat-raised-button color="primary" (click)="search()">Search</button>
+              </form>
+              
+              
+              <mtx-grid [data]="list"
+                        [columns]="columns"
+                        [length]="total"
+                        [loading]="isLoading"
+                        [pageOnFront]="false"
+                        [pageIndex]="query.page"
+                        [pageSize]="query.per_page"
+                        [pageSizeOptions]="[5,10,20]"
+                        (page)="getNextPage($event)">
+              </mtx-grid>
+        </div>
+        <div class="col-lg-4">
+            <mat-card *ngIf="toggleeditstaff" style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
+              <mat-card-title>Roles</mat-card-title>
+        
+              <form  class="form-field-full">
+                <div fxLayout="row wrap" fxLayoutGap="8px grid">
+        
+                  <div fxFlex="50" fxFlex.lt-sm="100">
+                    <mat-form-field>
+                      <mat-label>Title</mat-label>
+                      <input matInput placeholder="Simple placeholder" formControlName="name"
+                             required>
+                      <mat-error >
+                        {{'validations.required' | translate}}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+        
+                  <div fxFlex="100" fxFlex.lt-sm="100">
+                    <mat-checkbox value='true' class="st-chk">Read Service</mat-checkbox>
+                    <mat-checkbox value='true' class="st-chk">Write Service</mat-checkbox>
+                    <mat-checkbox value='true' class="st-chk">Read Products</mat-checkbox>
+                    <mat-checkbox value='true' class="st-chk">Write Products
+                    </mat-checkbox>
+                    <mat-checkbox value='true' class="st-chk">Read Calls</mat-checkbox>
+                    <mat-checkbox value='true' class="st-chk">Write Calls</mat-checkbox>
+                  </div>
+                </div>
+        
+                <button mat-raised-button color="primary" class="m-t-8">Save</button>
+                <button mat-raised-button color="primary" class="m-t-8 m-l-4" (click)="editstaffchk()">Edit</button>
+              </form>
+        
+            </mat-card>
+            <!-- editform -->
+            <mat-card *ngIf="!toggleeditstaff" style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
+                <mat-card-title>Edit</mat-card-title>
+          
+                <form  class="form-field-full">
+                  <div fxLayout="row wrap" fxLayoutGap="8px grid">
+          
+                    <div fxFlex="50" fxFlex.lt-sm="100">
+                      <mat-form-field>
+                        <mat-label>Title</mat-label>
+                        <input matInput placeholder="Simple placeholder" formControlName="name"
+                               required>
+                        <mat-error >
+                          {{'validations.required' | translate}}
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+          
+                    <div fxFlex="100" fxFlex.lt-sm="100">
+                      <mat-checkbox value='true' class="st-chk">Read Service</mat-checkbox>
+                      <mat-checkbox value='true' class="st-chk">Write Service</mat-checkbox>
+                      <mat-checkbox value='true' class="st-chk">Read Products</mat-checkbox>
+                      <mat-checkbox value='true' class="st-chk">Write Products
+                      </mat-checkbox>
+                      <mat-checkbox value='true' class="st-chk">Read Calls</mat-checkbox>
+                      <mat-checkbox value='true' class="st-chk">Write Calls</mat-checkbox>
+                    </div>
+                  </div>
+          
+                  <button mat-raised-button color="primary" class="m-t-8">Update</button>
+                </form>
+          
+              </mat-card>
+               <!-- editform close -->
+          </div> 
+    </div>
+</section>

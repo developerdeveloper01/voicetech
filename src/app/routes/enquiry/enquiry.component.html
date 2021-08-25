@@ -3,7 +3,7 @@
 
 
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-12">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
 
           <!--- Note that these columns can be defined in any order.
@@ -38,8 +38,8 @@
         </table>
     
   </div>
-  <div class="col-lg-4">
-    <mat-card *ngIf="toggleeditrole" style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
+  <!-- <div class="col-lg-4">
+    <mat-card style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
       <mat-card-title>Roles</mat-card-title>
 
       <form [formGroup]="addroleform" class="form-field-full">
@@ -68,44 +68,8 @@
         </div>
 
         <button mat-raised-button color="primary" class="m-t-8">Save</button>
-        <button mat-raised-button color="primary" class="m-t-8 m-l-4" (click)="editrole()">Edit</button>
       </form>
 
     </mat-card>
-
-    <!-- edit role -->
-    <mat-card *ngIf="!toggleeditrole"  style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
-      <mat-card-title>Edit Roles</mat-card-title>
-
-      <form [formGroup]="addroleform" class="form-field-full">
-        <div fxLayout="row wrap" fxLayoutGap="8px grid">
-
-          <div fxFlex="50" fxFlex.lt-sm="100">
-            <mat-form-field>
-              <mat-label>Title</mat-label>
-              <input matInput placeholder="Simple placeholder" formControlName="name"
-                     required>
-              <mat-error *ngIf="addroleform.get('name').invalid">
-                {{'validations.required' | translate}}
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div fxFlex="100" fxFlex.lt-sm="100">
-            <mat-checkbox value='true' class="st-chk">Read Service</mat-checkbox>
-            <mat-checkbox value='true' class="st-chk">Write Service</mat-checkbox>
-            <mat-checkbox value='true' class="st-chk">Read Products</mat-checkbox>
-            <mat-checkbox value='true' class="st-chk">Write Products
-            </mat-checkbox>
-            <mat-checkbox value='true' class="st-chk">Read Calls</mat-checkbox>
-            <mat-checkbox value='true' class="st-chk">Write Calls</mat-checkbox>
-          </div>
-        </div>
-
-        <button mat-raised-button color="primary" class="m-t-8">update</button>
-      </form>
-
-    </mat-card>
-    <!-- close -->
-  </div> 
+  </div>  -->
   </div>

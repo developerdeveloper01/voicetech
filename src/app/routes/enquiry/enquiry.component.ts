@@ -25,17 +25,17 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 @Component({
-  selector: 'app-role',
-  templateUrl: './role.component.html',
-  styleUrls: ['./role.component.scss'],
+  selector: 'app-enquiry',
+  templateUrl: './enquiry.component.html',
+  styleUrls: ['./enquiry.component.scss'],
 })
-export class RoleComponent implements OnInit, OnDestroy {
+export class EnquiryComponent implements OnInit {
   q = {
     username: '',
     email: '',
     gender: '',
   };
-  toggleeditrole: boolean = true;
+
   reactiveForm1: FormGroup;
   reactiveForm2: FormGroup;
   addroleform: FormGroup;
@@ -106,14 +106,5 @@ export class RoleComponent implements OnInit, OnDestroy {
       : form.get('email').hasError('email')
       ? 'validations.invalid_email'
       : '';
-  }
-
-  editrole() {
-    console.log('button clicked');
-    if (this.toggleeditrole == false) {
-      this.toggleeditrole = true;
-    } else {
-      this.toggleeditrole = false;
-    }
   }
 }

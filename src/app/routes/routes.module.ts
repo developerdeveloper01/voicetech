@@ -15,6 +15,7 @@ import { ReportComponent } from './report/report.component';
 import { NetworkComponent } from './network/network.component';
 import { SecurityComponent } from './security/security.component';
 import { SystemSettingComponent } from './system-setting/system-setting.component';
+import { EnquiryComponent } from './enquiry/enquiry.component';
 
 const COMPONENTS = [DashboardComponent, LoginComponent, RegisterComponent];
 const COMPONENTS_DYNAMIC = [];
@@ -33,6 +34,7 @@ const COMPONENTS_DYNAMIC = [];
     NetworkComponent,
     SecurityComponent,
     SystemSettingComponent,
+    EnquiryComponent,
   ],
   entryComponents: COMPONENTS_DYNAMIC,
 })

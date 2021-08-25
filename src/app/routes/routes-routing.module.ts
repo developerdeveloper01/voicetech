@@ -24,6 +24,7 @@ import { InternalSipComponent } from './sip-service/sip-setting/internal-sip/int
 import { LocalProfileComponent } from './sip-service/sip-profile/local-profile/local-profile.component';
 import { NationalProfileComponent } from './sip-service/sip-profile/national-profile/national-profile.component';
 import { AllProfileOneComponent } from './sip-service/sip-profile/all-profile-one/all-profile-one.component';
+import { EnquiryComponent } from './enquiry/enquiry.component';
 
 const routes: Routes = [
   {
@@ -86,6 +87,8 @@ const routes: Routes = [
       { path: 'sms-email-configuration', component: SmsEmailConfigurationComponent },
       { path: 'list-manager', component: ListManagerComponent },
       { path: 'report', component: ReportComponent },
+
+      { path: 'enquiry', component: EnquiryComponent },
       { path: 'network', component: NetworkComponent },
       { path: 'security', component: SecurityComponent },
       { path: 'system-setting', component: SystemSettingComponent },
