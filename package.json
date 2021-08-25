@@ -14,7 +14,7 @@
     "build:starter": "gulp --gulpfile gulpfile.js",
     "copy:schematics": "npm run clean:schematics && cpr schematics dist/schematics",
     "clean:schematics": "rimraf dist/schematics",
-    "lint": "npm run lint:ts && npm run lint:scss",
+    "lint": "npm run lint:ts",
     "lint:ts": "tslint -p tsconfig.app.json -c tslint.json 'src/**/*.ts'",
     "lint:scss": "stylelint --syntax scss 'src/**/*.scss' --fix",
     "hmr": "ng serve --hmr -c hmr --disable-host-check",
