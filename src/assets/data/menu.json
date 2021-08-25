@@ -10,7 +10,6 @@
         "value": "5"
       }
     },
-
     {
       "route": "service",
       "name": "service",
@@ -34,7 +33,6 @@
         }
       ]
     },
-
     {
       "route": "sip-service",
       "name": "sip-service",
@@ -58,7 +56,6 @@
         }
       ]
     },
-
     {
       "route": "smart-sip-pbx",
       "name": "smart-sip-pbx",
@@ -83,7 +80,25 @@
         }
       ]
     },
+    {
+      "route": "staff",
+      "name": "staff",
+      "type": "sub",
+      "icon": "done_all",
+      "children": [
 
+        {
+          "route": "role",
+          "name": "role",
+          "type": "link"
+        },
+        {
+          "route": "staff",
+          "name": "staff",
+          "type": "link"
+        }
+      ]
+    },
     {
       "route": "ivr-services",
       "name": "ivr-services",

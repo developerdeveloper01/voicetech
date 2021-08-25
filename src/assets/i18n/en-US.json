@@ -99,6 +99,11 @@
     "smart-sip-pbx.sip-services": "SIP Services",
     "smart-sip-pbx.user-group": "User-Group",
 
+    "staff": "Manage Staff",
+    "staff.role": "Role",
+    "staff.staff": "Staff",
+
+
     "ivr-services": "IVR Services",
     "call-center": "Call Center",
     "voice-broadcast": "Voice Broadcast",
@@ -153,6 +158,7 @@
     "range_page_label_1": "no record",
     "range_page_label_2": "{{startIndex}} - {{endIndex}} of {{length}}"
   },
+
   "table_kitchen_sink": {
     "position": "Position",
     "name": "Name",

@@ -22,6 +22,7 @@ import { appInitializerProviders } from '@core/initializers';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemDataService } from './shared/in-mem/in-mem-data.service';
+import { UserService } from './user.service';
 
 // Required for AOT compilation
 export function TranslateHttpLoaderFactory(http: HttpClient) {
@@ -58,6 +59,7 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
     { provide: BASE_URL, useValue: environment.baseUrl },
     httpInterceptorProviders,
     appInitializerProviders,
+    UserService,
   ],
   bootstrap: [AppComponent],
 })

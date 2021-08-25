@@ -1,0 +1,75 @@
+<page-header></page-header>
+
+
+
+<div fxLayout="row wrap" class="matero-row">
+  <div fxFlex="66.67" fxFlex.lt-sm="100" class="matero-col">
+    <mat-card>
+      <mat-card-title>Roles</mat-card-title>
+
+      <form [formGroup]="addroleform" class="form-field-full">
+        <div fxLayout="row wrap" fxLayoutGap="8px grid">
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Title</mat-label>
+              <input matInput placeholder="Simple placeholder" formControlName="name"
+                     required>
+              <mat-error *ngIf="addroleform.get('name').invalid">
+                {{'validations.required' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50" fxFlex.lt-sm="100">
+
+            <mat-checkbox value='true'>Read Service</mat-checkbox>
+
+            <mat-checkbox value='true'>Write Service</mat-checkbox>
+            <mat-checkbox value='true'>Read Products</mat-checkbox>
+            <mat-checkbox value='true'>Write Products
+            </mat-checkbox>
+            <mat-checkbox value='true'>Read Calls</mat-checkbox>
+            <mat-checkbox value='true'>Write Calls</mat-checkbox>
+          </div>
+        </div>
+
+        <button mat-raised-button color="primary" class="m-t-8">Save</button>
+      </form>
+
+    </mat-card>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> Weight </th>
+        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Symbol </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+</div>

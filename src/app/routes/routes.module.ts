@@ -20,8 +20,20 @@ const COMPONENTS = [DashboardComponent, LoginComponent, RegisterComponent];
 const COMPONENTS_DYNAMIC = [];
 
 @NgModule({
-  imports: [SharedModule, RoutesRoutingModule,SipServiceModule],
-  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC, IvrServiceComponent, CallCenterComponent, VoiceBroadcastComponent, SmsEmailConfigurationComponent, ListManagerComponent, ReportComponent, NetworkComponent, SecurityComponent, SystemSettingComponent],
+  imports: [SharedModule, RoutesRoutingModule, SipServiceModule],
+  declarations: [
+    ...COMPONENTS,
+    ...COMPONENTS_DYNAMIC,
+    IvrServiceComponent,
+    CallCenterComponent,
+    VoiceBroadcastComponent,
+    SmsEmailConfigurationComponent,
+    ListManagerComponent,
+    ReportComponent,
+    NetworkComponent,
+    SecurityComponent,
+    SystemSettingComponent,
+  ],
   entryComponents: COMPONENTS_DYNAMIC,
 })
 export class RoutesModule {}

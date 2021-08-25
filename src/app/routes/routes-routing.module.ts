@@ -25,7 +25,6 @@ import { LocalProfileComponent } from './sip-service/sip-profile/local-profile/l
 import { NationalProfileComponent } from './sip-service/sip-profile/national-profile/national-profile.component';
 import { AllProfileOneComponent } from './sip-service/sip-profile/all-profile-one/all-profile-one.component';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -49,7 +48,8 @@ const routes: Routes = [
       },
       {
         path: 'sip-service',
-        loadChildren: () => import('./sip-service/sip-service.module').then(m => m.SipServiceModule),
+        loadChildren: () =>
+          import('./sip-service/sip-service.module').then(m => m.SipServiceModule),
       },
       {
         path: 'forms',
@@ -78,10 +78,8 @@ const routes: Routes = [
       },
       {
         path: 'service',
-        loadChildren: () =>
-          import('./service/service/service.module').then(m => m.ServiceModule),
+        loadChildren: () => import('./service/service/service.module').then(m => m.ServiceModule),
       },
-
       { path: 'ivr-services', component: IvrServiceComponent },
       { path: 'call-center', component: CallCenterComponent },
       { path: 'voice-broadcast', component: VoiceBroadcastComponent },
@@ -103,7 +101,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./smart-sip-pbx/smart-sip-pbx.module').then(m => m.SmartSipPbxModule),
       },
-      
+      //dy
+      {
+        path: 'staff',
+        loadChildren: () => import('./staff/staff.module').then(m => m.StaffModule),
+      },
     ],
   },
   {
