@@ -101,7 +101,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./smart-sip-pbx/smart-sip-pbx.module').then(m => m.SmartSipPbxModule),
       },
-      //dy
       {
         path: 'staff',
         loadChildren: () => import('./staff/staff.module').then(m => m.StaffModule),
