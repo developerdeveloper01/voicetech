@@ -108,6 +108,10 @@ const routes: Routes = [
         path: 'staff',
         loadChildren: () => import('./staff/staff.module').then(m => m.StaffModule),
       },
+      {
+        path: 'numbers',
+        loadChildren: () => import('./numbers/numbers.module').then(m => m.NumbersModule),
+      },
     ],
   },
   {

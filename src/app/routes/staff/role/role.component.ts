@@ -64,7 +64,7 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   trueValue = 'true';
 
   columns: MtxGridColumn[] = [
-    { header: 'Name', sortable: true, field: 'name' },
+    { header: 'Name', sortable: true, field: 'name',showExpand: true  },
     { header: 'Status', sortable: true, field: 'status' },
     {
       header: 'Read Call Details',
@@ -88,7 +88,6 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
       header: 'Read IVR',
       field: 'r_ivr',
       type: 'tag',
-      hide: true,
       tag: {
         true: { text: 'Yes', color: 'green-100' },
         false: { text: 'No', color: 'red-100' },
@@ -97,7 +96,6 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       header: 'Write IVR',
       field: 'w_ivr',
-      hide: true,
       type: 'tag',
       tag: {
         true: { text: 'Yes', color: 'green-100' },
@@ -107,7 +105,6 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       header: 'Read SIP',
       field: 'r_sip',
-      hide: true,
       type: 'tag',
       tag: {
         true: { text: 'Yes', color: 'green-100' },
@@ -117,7 +114,6 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
     {
       header: 'Write SIP',
       field: 'w_sip',
-      hide: true,
       type: 'tag',
       tag: {
         true: { text: 'Yes', color: 'green-100' },
@@ -128,7 +124,6 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
       header: 'Read User Details',
       field: 'r_userdetails',
       type: 'tag',
-      hide: true,
       tag: {
         true: { text: 'Yes', color: 'green-100' },
         false: { text: 'No', color: 'red-100' },
@@ -138,7 +133,6 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
       header: 'Write User Details',
       field: 'w_userdetails',
       type: 'tag',
-      hide: true,
       tag: {
         true: { text: 'Yes', color: 'green-100' },
         false: { text: 'No', color: 'red-100' },
@@ -172,11 +166,13 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
       ],
     },
   ];
+
   list = [];
   total = 0;
   isLoading = true;
   allroles: any;
 
+  //table
   multiSelectable = true;
   rowSelectable = true;
   hideRowSelectionCheckbox = false;
@@ -184,9 +180,9 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   columnHideable = true;
   columnMovable = true;
   rowHover = true;
-  rowStriped = false; //true
+  rowStriped = false;
   showPaginator = true;
-  expandable = false;
+  expandable = true;
   columnResizable = true;
 
   constructor(
@@ -257,10 +253,10 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
     this.translateSubscription.unsubscribe();
   }
 
-  getErrorMessage(form: FormGroup) {
-    return form.get('email').hasError('required')
+  getErrorMessage(addroleform: FormGroup) {
+    return addroleform.get('name').hasError('required')
       ? 'validations.required'
-      : form.get('email').hasError('email')
+      : addroleform.get('email').hasError('email')
       ? 'validations.invalid_email'
       : '';
   }
@@ -293,7 +289,6 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
 
   submitroleForm() {
     console.log(this.addroleform.value);
-    //addrole(data)
     this.userService.addrole(this.addroleform.value).subscribe(
       (response: any) => {
         console.log(response);
@@ -314,12 +309,12 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   getallroles() {
     this.userService.getallroles().subscribe(
       (response: any) => {
-        console.log(response);
+        console.log('%crole.component.ts line:311 response', 'color: #26bfa5;', response);
         this.list = response.data;
         this.isLoading = false;
       },
       error => {
-        console.log(error);
+        console.log('%cerror role.component.ts line:318 ', 'color: red; display: block; width: 100%;', error);
       }
     );
   }

@@ -234,13 +234,13 @@ export class StaffComponent implements OnInit {
   getallstaff() {
     this.userService.getallstaff().subscribe(
       (response: any) => {
-        console.log(response);
-        //this.getallroles();
+        console.log('%cstaff.component.ts line:238 response', 'color: white; background-color: #007acc;', response);
         this.list = response.data;
         this.isLoading = false;
       },
       error => {
         console.log(error);
+
       }
     );
   }

@@ -1,0 +1,47 @@
+<h2 mat-dialog-title>Edit DST Number</h2>
+<form [formGroup]="editdstnumber" (ngSubmit)="submitdstnumber()">
+  <mat-dialog-content>
+
+
+    <mat-form-field>
+      <mat-label>IP</mat-label>
+      <mat-select formControlName="ip"
+                  required>
+        <mat-option *ngFor="let ip of allips; index as i;" [value]="ip._id">
+          {{ ip.ipnumber }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="editdstnumber.get('ip').invalid">
+        {{'validations.required'| translate}}
+      </mat-error>
+    </mat-form-field>
+
+    <table class="demo-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="demo-full-width">
+            <mat-label>DST Number</mat-label>
+            <input type="number" matInput placeholder="991515000" formControlName="dstnumber"
+                   required>
+            <mat-error *ngIf="editdstnumber.get('dstnumber').invalid">
+              {{'validations.required'| translate}}
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-checkbox class="st-chk" [value]="falseValue"
+                        (change)="checkboxChange($event.source, $event.checked)"
+                        formControlName="inusestatus">In Use
+          </mat-checkbox>
+        </td>
+      </tr>
+    </table>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial
+            type="submit">Submit</button>
+  </mat-dialog-actions>
+</form>

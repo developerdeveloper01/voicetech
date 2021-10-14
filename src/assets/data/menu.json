@@ -62,7 +62,6 @@
       "type": "sub",
       "icon": "done_all",
       "children": [
-
         {
           "route": "sip-user",
           "name": "sip-user",
@@ -86,7 +85,6 @@
       "type": "sub",
       "icon": "people_outline",
       "children": [
-
         {
           "route": "role",
           "name": "role",
@@ -95,6 +93,24 @@
         {
           "route": "staff",
           "name": "staff",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "numbers",
+      "name": "numbers",
+      "type": "sub",
+      "icon": "local_phone",
+      "children": [
+        {
+          "route": "dstnumber",
+          "name": "dstnumber",
+          "type": "link"
+        },
+        {
+          "route": "ips",
+          "name": "ips",
           "type": "link"
         }
       ]
@@ -111,7 +127,7 @@
       "type": "link",
       "icon": "perm_data_setting"
     },
-    
+
     {
       "route": "call-center",
       "name": "call-center",
@@ -178,10 +194,7 @@
         }
       ],
       "permissions": {
-        "only": [
-          "ADMIN",
-          "MANAGER"
-        ]
+        "only": ["ADMIN", "MANAGER"]
       }
     },
     {
@@ -409,10 +422,7 @@
         }
       ],
       "permissions": {
-        "except": [
-          "MANAGER",
-          "GUEST"
-        ]
+        "except": ["MANAGER", "GUEST"]
       }
     },
     {

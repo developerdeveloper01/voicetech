@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UserService {
-  backendurl = 'http://localhost:5555/api';
+  backendurl = 'http://localhost:6789/api';
 
   constructor(public http: HttpClient) {}
 
@@ -38,4 +38,36 @@ export class UserService {
   getallstaff() {
     return this.http.get(`${this.backendurl}/admin/allstaff`);
   }
+
+  //ips
+  addip(data) {
+    return this.http.post(`${this.backendurl}/admin/addprovidedip`, data);
+  }
+
+  viewoneip(id) {
+    return this.http.get(`${this.backendurl}/admin/viewoneprovidedip/${id}`);
+  }
+
+  getallips() {
+    return this.http.get(`${this.backendurl}/admin/allprovidedip`);
+  }
+
+  //ips
+  adddstnumber(data) {
+    return this.http.post(`${this.backendurl}/admin/adddstnumber`, data);
+  }
+
+  viewonedstnumber(id) {
+    return this.http.get(`${this.backendurl}/admin/viewonedstnumber/${id}`);
+  }
+
+  editdstnumber(id,data){
+    return this.http.post(`${this.backendurl}/admin/editdstnumber/${id}`,data);
+  }
+
+  getalldstnumbers() {
+    return this.http.get(`${this.backendurl}/admin/alldstnumber`);
+  }
+
+
 }

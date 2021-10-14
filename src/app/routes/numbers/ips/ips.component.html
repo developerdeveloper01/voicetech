@@ -1,22 +1,32 @@
 <page-header class="bg-blue-600"></page-header>
 
 
-
 <div class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-4">
     <mat-card *ngIf="toggleeditrole" class="mat-elevation-z8">
-      <mat-card-title>Roles</mat-card-title>
+      <mat-card-title>IPs</mat-card-title>
 
-      <form [formGroup]="addroleform" (ngSubmit)="submitroleForm()" class="form-field-full">
+      <form [formGroup]="addipform" (ngSubmit)="submitipForm()" class="form-field-full">
         <div fxLayout="row wrap" fxLayoutGap="8px grid">
 
-          <div fxFlex="50" fxFlex.lt-sm="100">
+          <div fxFlex="100" fxFlex.lt-sm="100">
             <mat-form-field>
-              <mat-label>Title</mat-label>
-              <input matInput placeholder="Admin" formControlName="name"
+              <mat-label>IP</mat-label>
+              <input matInput placeholder="103.8.43.14" formControlName="ipnumber"
                      required>
-              <mat-error *ngIf="addroleform.get('name').invalid">
-                {{'validations.required' | translate}}
+              <mat-error *ngIf="addipform.get('ipnumber').invalid">
+                {{'validations.required'| translate}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="100" fxFlex.lt-sm="100">
+            <mat-form-field>
+              <mat-label>Provider</mat-label>
+              <input matInput placeholder="Admin" formControlName="title"
+                     required>
+              <mat-error *ngIf="addipform.get('title').invalid">
+                {{'validations.required'| translate}}
               </mat-error>
             </mat-form-field>
           </div>
@@ -24,37 +34,14 @@
           <div fxFlex="100" fxFlex.lt-sm="100">
             <mat-checkbox class="st-chk" [value]="falseValue"
                           (change)="checkboxChange($event.source, $event.checked)"
-                          formControlName="r_calldetails">Read Service
+                          formControlName="activestatus">Active Status
             </mat-checkbox>
-            <mat-checkbox class="st-chk" [value]="falseValue"
-                          (change)="checkboxChange($event.source, $event.checked)"
-                          formControlName="w_calldetails">Write Service
-            </mat-checkbox>
-            <mat-checkbox class="st-chk" [value]="falseValue"
-                          (change)="checkboxChange($event.source, $event.checked)"
-                          formControlName="r_userdetails">Read Products
-            </mat-checkbox>
-            <mat-checkbox class="st-chk" [value]="falseValue"
-                          (change)="checkboxChange($event.source, $event.checked)"
-                          formControlName="w_userdetails">Write Products
-            </mat-checkbox>
-            <mat-checkbox class="st-chk" [value]="falseValue"
-                          (change)="checkboxChange($event.source, $event.checked)"
-                          formControlName="r_sip">Read Calls
-            </mat-checkbox>
-            <mat-checkbox class="st-chk" [value]="falseValue"
-                          (change)="checkboxChange($event.source, $event.checked)"
-                          formControlName="w_sip">Write Calls
-            </mat-checkbox>
-            <mat-checkbox class="st-chk" [value]="falseValue"
-                          (change)="checkboxChange($event.source, $event.checked)"
-                          formControlName="r_ivr">Read IVR
-            </mat-checkbox>
-            <mat-checkbox class="st-chk" [value]="falseValue"
-                          (change)="checkboxChange($event.source, $event.checked)"
-                          formControlName="w_ivr">Write IVR
-            </mat-checkbox>
+            <!-- <mat-slide-toggle [value]="falseValue" [checked]="falseValue"
+                              (change)="checkboxChange($event.source, $event.checked)"
+                              formControlName="activestatus">Status</mat-slide-toggle> -->
           </div>
+
+
         </div>
 
         <button mat-raised-button color="primary" class="m-t-8" type="submit">Save</button>
@@ -66,31 +53,41 @@
 
     <!-- edit role -->
     <mat-card *ngIf="!toggleeditrole" style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
-      <mat-card-title>Edit Roles</mat-card-title>
+      <mat-card-title>Edit IP</mat-card-title>
 
-      <form [formGroup]="addroleform" class="form-field-full">
+      <form [formGroup]="editipform" (ngSubmit)="updateipForm()" class="form-field-full">
         <div fxLayout="row wrap" fxLayoutGap="8px grid">
 
-          <div fxFlex="50" fxFlex.lt-sm="100">
+          <div fxFlex="100" fxFlex.lt-sm="100">
             <mat-form-field>
-              <mat-label>Title</mat-label>
-              <input matInput placeholder="Simple placeholder" formControlName="name"
+              <mat-label>IP</mat-label>
+              <input matInput placeholder="103.8.43.14" formControlName="ipnumber"
                      required>
-              <mat-error *ngIf="addroleform.get('name').invalid">
-                {{'validations.required' | translate}}
+              <mat-error *ngIf="editipform.get('ipnumber').invalid">
+                {{'validations.required'| translate}}
               </mat-error>
             </mat-form-field>
           </div>
 
           <div fxFlex="100" fxFlex.lt-sm="100">
-            <mat-checkbox value='true' class="st-chk">Read Service</mat-checkbox>
-            <mat-checkbox value='true' class="st-chk">Write Service</mat-checkbox>
-            <mat-checkbox value='true' class="st-chk">Read Products</mat-checkbox>
-            <mat-checkbox value='true' class="st-chk">Write Products
-            </mat-checkbox>
-            <mat-checkbox value='true' class="st-chk">Read Calls</mat-checkbox>
-            <mat-checkbox value='true' class="st-chk">Write Calls</mat-checkbox>
+            <mat-form-field>
+              <mat-label>Title</mat-label>
+              <input matInput placeholder="Admin" formControlName="title"
+                     required>
+              <mat-error *ngIf="editipform.get('title').invalid">
+                {{'validations.required'| translate}}
+              </mat-error>
+            </mat-form-field>
           </div>
+
+          <div fxFlex="100" fxFlex.lt-sm="100">
+            <mat-checkbox class="st-chk" [value]="falseValue"
+                          (change)="checkboxChange($event.source, $event.checked)"
+                          formControlName="activestatus">Read Service
+            </mat-checkbox>
+          </div>
+
+
         </div>
 
         <button mat-raised-button color="primary" class="m-t-8" type="submit">update</button>
@@ -102,7 +99,7 @@
     <!-- close -->
   </div>
 
-  <div class="col-lg-12">
+  <div class="col-lg-8">
     <!-- <form>
       <mat-form-field class="m-r-8">
         <input matInput [(ngModel)]="query.q" name="q" placeholder="Query String">
@@ -143,8 +140,8 @@
       <!-- <mat-checkbox [(ngModel)]="expandable" (change)="enableRowExpandable()">Row Expandable
       </mat-checkbox> -->
       <!-- <mat-checkbox [(ngModel)]="showPaginator">Show Paginator</mat-checkbox> -->
-      <mat-checkbox [(ngModel)]="isLoading">Refresh</mat-checkbox>
-      <mat-checkbox [(ngModel)]="toggleeditrole">Edit Toggle</mat-checkbox>
+      <!-- <mat-checkbox [(ngModel)]="isLoading">Refresh</mat-checkbox>
+      <mat-checkbox [(ngModel)]="toggleeditrole">Edit Toggle</mat-checkbox> -->
       <!-- <mat-checkbox [(ngModel)]="columnResizable">Column Resizable</mat-checkbox> -->
     </div>
 
@@ -160,7 +157,7 @@
               [rowHover]="rowHover"
               [rowStriped]="rowStriped"
               [showToolbar]="showToolbar"
-              [toolbarTitle]="'Role & Permissions'"
+              [toolbarTitle]="'IP'"
               [columnHideable]="columnHideable"
               [columnMovable]="columnMovable"
               [expandable]="expandable"

@@ -71,11 +71,11 @@
     "helpers": "Helpers",
     "helpers.css-class": "CSS Class",
 
-    "smartsippbx":"Smart SIP PBX",
-    "smartsippbx.extension":"Extension",
-    "smartsippbx.extension.sipusers":"SIP User",
-    "smartsippbx.extension.sipservices":"SIP Services",
-    "smartsippbx.extension.usergroup":"User Group",
+    "smartsippbx": "Smart SIP PBX",
+    "smartsippbx.extension": "Extension",
+    "smartsippbx.extension.sipusers": "SIP User",
+    "smartsippbx.extension.sipservices": "SIP Services",
+    "smartsippbx.extension.usergroup": "User Group",
 
     "menu-level": "Menu Level",
     "menu-level.level-1-1": "Level 1.1",
@@ -103,8 +103,11 @@
     "staff.role": "Role",
     "staff.staff": "Staff",
 
-    "enquiry": "Enquiry",
+    "numbers": "Numbers",
+    "numbers.dstnumber": "DST Numbers",
+    "numbers.ips": "IPs",
 
+    "enquiry": "Enquiry",
 
     "ivr-services": "IVR Services",
     "call-center": "Call Center",
@@ -115,8 +118,6 @@
     "network": "network",
     "security": "security",
     "system-setting": "System setting"
-
-
   },
   "validations": {
     "required": "This field is required",
@@ -182,5 +183,4 @@
     "ok": "Ok",
     "close": "Close"
   }
-
 }
