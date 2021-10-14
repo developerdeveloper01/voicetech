@@ -10,6 +10,124 @@
         "value": "5"
       }
     },
+    
+    {
+      "route": "products",
+      "name": "products",
+      "type": "sub",
+      "icon": "subject",
+      "children": [
+        {
+          "route": "off-ivr-system",
+          "name": "off-ivr-system",
+          "type": "sub",
+          "children": [
+            {
+              "route": "centralized-business-number",
+              "name": "centralized-business-number",
+              "type": "link"
+                            
+            },
+            {
+              "route": "ivr-greeting",
+              "name": "ivr-greeting",
+              "type": "link"
+                            
+            },
+            {
+              "route": "call-routing",
+              "name": "call-routing",
+              "type": "link"
+            },
+            {
+              "route": "call-recording",
+              "name": "call-recording",
+              "type": "link"
+            },
+            {
+              "route": "call-records",
+              "name": "call-records",
+              "type": "link"
+            },
+            {
+              "route": "timely-follow-up",
+              "name": "timely-follow-up",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route":"cloud-call-centre",
+          "name":"cloud-call-centre",
+          "type" : "sub",
+          "children":[
+             {
+               "route":"click-to-call",
+               "name": "click-to-call",
+               "type":"link"
+             },
+             {
+              "route":"live-call-transfer",
+              "name": "live-call-transfer",
+              "type":"link"
+             },
+             {
+              "route":"crm-integration",
+              "name": "crm-integration",
+              "type":"link"
+            },
+            {
+              "route":"remote-terms",
+              "name": "remote-terms",
+              "type":"link"
+            },
+            {
+              "route":"call-masking",
+              "name": "call-masking",
+              "type":"link"
+            },
+            {
+              "route":"live-panel",
+              "name": "live-panel",
+              "type":"link"
+            },
+            {
+              "route":"outbound-calling",
+              "name": "outbound-calling",
+              "type":"link"
+            },
+            {
+              "route":"toll-free-calls",
+              "name": "toll-free-calls",
+              "type":"link"
+            },
+            {
+              "route":"call-queue",
+              "name": "call-queue",
+              "type":"link"
+            },
+            {
+              "route":"profeesional-number",
+              "name": "profeesional-number",
+              "type":"link"
+            },
+            {
+              "route":"multi-level-ivr",
+              "name": "multi-level-ivr",
+              "type":"link"
+            },
+            {
+              "route":"recorded-conversation",
+              "name": "recorded-conversation",
+              "type":"link"
+            }
+          ]
+        }
+       
+      ]
+
+    },
+
     {
       "route": "service",
       "name": "service",
@@ -105,6 +223,32 @@
       "type": "link",
       "icon": "format_list_bulleted"
     },
+    {
+      "route": "chat",
+      "name": "chat",
+      "type": "link",
+      "icon": "format_list_bulleted"
+    },
+    {
+      "route": "plan",
+      "name": "plan",
+      "type": "sub",
+      "icon": "account_circle",
+      "children": [
+        {
+          "route": "prepaid-plan",
+          "name": "prepaid-plan",
+          "type": "link"
+        },
+        {
+          "route": "postpaid-plan",
+          "name": "postpaid-plan",
+          "type": "link"
+        }
+       
+      ]
+    },
+    
     {
       "route": "ivr-services",
       "name": "ivr-services",
