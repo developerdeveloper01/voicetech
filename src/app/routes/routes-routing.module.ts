@@ -25,6 +25,7 @@ import { LocalProfileComponent } from './sip-service/sip-profile/local-profile/l
 import { NationalProfileComponent } from './sip-service/sip-profile/national-profile/national-profile.component';
 import { AllProfileOneComponent } from './sip-service/sip-profile/all-profile-one/all-profile-one.component';
 import { EnquiryComponent } from './enquiry/enquiry.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
   {
@@ -81,7 +82,14 @@ const routes: Routes = [
         path: 'service',
         loadChildren: () => import('./service/service/service.module').then(m => m.ServiceModule),
       },
+      {
+        path: 'products/off-ivr-system',
+        loadChildren: () =>
+          import('./products/off-ivr-system/off-ivr-system.module').then(m => m.OffIvrSystemModule),
+      },
+
       { path: 'ivr-services', component: IvrServiceComponent },
+      { path: 'chat', component: ChatComponent },
       { path: 'call-center', component: CallCenterComponent },
       { path: 'voice-broadcast', component: VoiceBroadcastComponent },
       { path: 'sms-email-configuration', component: SmsEmailConfigurationComponent },
@@ -110,7 +118,10 @@ const routes: Routes = [
       },
       {
         path: 'numbers',
-        loadChildren: () => import('./numbers/numbers.module').then(m => m.NumbersModule),
+        loadChildren: () => import('./numbers/numbers.module').then(m => m.NumbersModule)},
+        {
+        path: 'plan',
+        loadChildren: () => import('./plan/plan.module').then(m => m.PlanModule),
       },
     ],
   },

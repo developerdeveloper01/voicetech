@@ -16,6 +16,7 @@ import { NetworkComponent } from './network/network.component';
 import { SecurityComponent } from './security/security.component';
 import { SystemSettingComponent } from './system-setting/system-setting.component';
 import { EnquiryComponent } from './enquiry/enquiry.component';
+import { ChatComponent } from './chat/chat.component';
 
 const COMPONENTS = [DashboardComponent, LoginComponent, RegisterComponent];
 const COMPONENTS_DYNAMIC = [];
@@ -35,6 +36,7 @@ const COMPONENTS_DYNAMIC = [];
     SecurityComponent,
     SystemSettingComponent,
     EnquiryComponent,
+    ChatComponent,
   ],
   entryComponents: COMPONENTS_DYNAMIC,
 })

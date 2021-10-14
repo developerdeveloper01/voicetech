@@ -77,6 +77,29 @@
     "smartsippbx.extension.sipservices": "SIP Services",
     "smartsippbx.extension.usergroup": "User Group",
 
+    "products": "Product",
+    "products.off-ivr-system": "Office IVR System",
+    "products.off-ivr-system.centralized-business-number": "Centralized Business Number",
+    "products.off-ivr-system.ivr-greeting": "IVR Greeting",
+    "products.off-ivr-system.call-routing": "Call Routing",
+    "products.off-ivr-system.call-recording": "Call Recording",
+    "products.off-ivr-system.call-records": "Call Records",
+    "products.off-ivr-system.timely-follow-up": "Timely Follow-up",
+
+    "products.cloud-call-centre": "Cloud Call Centre",
+    "products.cloud-call-centre.click-to-call": "Click to Call",
+    "products.cloud-call-centre.live-call-transfer": "live-call-transfer",
+    "products.cloud-call-centre.crm-integration": "crm-integration",
+    "products.cloud-call-centre.remote-terms": "Remote Terms",
+    "products.cloud-call-centre.call-masking": "Call Masking",
+    "products.cloud-call-centre.live-panel": "Live Panel",
+    "products.cloud-call-centre.outbound-calling": "Outbound Calling",
+    "products.cloud-call-centre.toll-free-calls": "Toll Free calls",
+    "products.cloud-call-centre.call-queue": "Call Queue",
+    "products.cloud-call-centre.profeesional-number": "Profeesional Number",
+    "products.cloud-call-centre.multi-level-ivr": "multi-level-ivr",
+    "products.cloud-call-centre.recorded-conversation": "Recorded Conversation",
+
     "menu-level": "Menu Level",
     "menu-level.level-1-1": "Level 1.1",
     "menu-level.level-1-2": "Level 1.2",
@@ -108,6 +131,11 @@
     "numbers.ips": "IPs",
 
     "enquiry": "Enquiry",
+    "chat": "Chat",
+
+    "plan": "Plans",
+    "plan.prepaid-plan": "Prepaid plan",
+    "plan.postpaid-plan": "Postpaid plan",
 
     "ivr-services": "IVR Services",
     "call-center": "Call Center",
