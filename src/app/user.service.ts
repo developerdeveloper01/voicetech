@@ -12,4 +12,30 @@ export class UserService {
   login(data) {
     return this.http.post(`${this.backendurl}/user/login`, data);
   }
+
+  addrole(data) {
+    return this.http.post(`${this.backendurl}/admin/addrole`, data);
+  }
+
+  viewonerole(id) {
+    return this.http.get(`${this.backendurl}/admin/viewonerole/${id}`);
+  }
+
+  getallroles() {
+    return this.http.get(`${this.backendurl}/admin/allrole`);
+  }
+
+  //Inquiries
+  getinquires() {
+    return this.http.get(`${this.backendurl}/user/allinquiry`);
+  }
+
+  //add staff
+  addstaff(data) {
+    return this.http.post(`${this.backendurl}/admin/addstaff`, data);
+  }
+
+  getallstaff() {
+    return this.http.get(`${this.backendurl}/admin/allstaff`);
+  }
 }

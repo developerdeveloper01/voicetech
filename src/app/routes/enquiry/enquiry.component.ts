@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { Subscription } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { UserService } from 'app/user.service';
 
 export interface PeriodicElement {
   name: string;
@@ -40,57 +41,24 @@ export class EnquiryComponent implements OnInit {
   reactiveForm2: FormGroup;
   addroleform: FormGroup;
 
+  //variables
+
+  //dataSource: any;
+
   translateSubscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
     private dateAdapter: DateAdapter<any>,
-    private translate: TranslateService
-  ) {
-    this.reactiveForm1 = this.fb.group({
-      username: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      city: [''],
-      address: [''],
-      company: [''],
-      tele: [''],
-      website: [''],
-      date: [''],
-    });
+    private translate: TranslateService,
+    private userService: UserService
+  ) {}
 
-    this.reactiveForm2 = this.fb.group({
-      username: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      city: [''],
-      address: [''],
-      company: [''],
-      tele: [''],
-      website: [''],
-      date: [''],
-    });
-
-    this.addroleform = this.fb.group({
-      name: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      mobile: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      city: [''],
-      address: [''],
-      company: [''],
-      tele: [''],
-      website: [''],
-      date: [''],
-    });
-  }
-
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['product', 'desc', 'mobile', 'name', 'createdAt', 'actions'];
+  dataSource: any;
 
   ngOnInit() {
+    this.getallenquiries();
     this.translateSubscription = this.translate.onLangChange.subscribe((res: { lang: any }) => {
       this.dateAdapter.setLocale(res.lang);
     });
@@ -106,5 +74,17 @@ export class EnquiryComponent implements OnInit {
       : form.get('email').hasError('email')
       ? 'validations.invalid_email'
       : '';
+  }
+
+  getallenquiries() {
+    this.userService.getinquires().subscribe(
+      (response: any) => {
+        console.log(response);
+        this.dataSource = response.data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }
