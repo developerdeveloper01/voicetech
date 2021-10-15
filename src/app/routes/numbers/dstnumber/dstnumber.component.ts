@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Inject,
   OnDestroy,
@@ -67,7 +68,8 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
 
   //table
   list = [];
-  isLoading = false;
+  total = 0;
+  isLoading: Boolean;
   multiSelectable = true;
   rowSelectable = true;
   hideRowSelectionCheckbox = false;
@@ -75,9 +77,9 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
   columnHideable = true;
   columnMovable = true;
   rowHover = true;
-  rowStriped = false;
+  rowStriped = true;
   showPaginator = true;
-  expandable = false;
+  expandable = true;
   columnResizable = false;
 
   alldstnumbers: any;
@@ -85,10 +87,9 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     public dialogx: MtxDialog,
-    public userService: UserService
+    public userService: UserService,
+    private cdr: ChangeDetectorRef
   ) {}
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
     this.getallnumbers();
@@ -108,7 +109,7 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openEditDstNumber(value) {
     let editdailogRef = this.dialog.open(EditDstNumberFormComponent, {
-      width: '320px',
+      width: '500px',
       data: { record: value },
     });
 
@@ -119,11 +120,29 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   delete(value: any) {
-    this.dialogx.alert(`You have deleted ${value.position}!`);
+    this.userService.deletenumber(value._id).subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+        this.isLoading = false;
+        this.cdr.detectChanges();
+        this.dialogx.alert(`You have deleted ${value.dstnumber}!`);
+      },
+      error => {
+        console.log(
+          '%cerror ips.component.ts line:254 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
+      }
+    );
   }
 
   openAddDstNumber() {
-    this.dialog.open(AddDstNumberFormComponent, { width: '320px' });
+    let adddailogRef = this.dialog.open(AddDstNumberFormComponent, { width: '500px' });
+
+    adddailogRef.afterClosed().subscribe(() => {
+      this.getallnumbers();
+    });
   }
 
   changeSelect(e: any) {
@@ -139,6 +158,9 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
       (response: any) => {
         console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
         this.list = response.data;
+        this.total = response.data.length;
+        this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error => {
         console.log(
@@ -151,12 +173,14 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    console.log('view changed');
+    this.isLoading = false;
   }
 
   ngOnDestroy() {
     console.log('component destroyed');
   }
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 }
 
 @Component({
@@ -184,7 +208,10 @@ export class AddDstNumberFormComponent implements OnInit {
   ) {
     this.adddstnumber = this.fb.group({
       ip: ['', [Validators.required]],
-      dstnumber: ['', [Validators.required]],
+      dstnumber: [
+        '',
+        [Validators.required, Validators.min(1000000000), Validators.max(9999999999)],
+      ],
       inusestatus: [false],
     });
   }
@@ -193,12 +220,21 @@ export class AddDstNumberFormComponent implements OnInit {
     this.getallips();
   }
 
+  getErrorMessage(form: FormGroup) {
+    return form.get('dstnumber').hasError('required')
+      ? 'validations.required'
+      : form.get('dstnumber').hasError('min')
+      ? 'validations.min'
+      : form.get('dstnumber').hasError('max')
+      ? 'validations.max'
+      : '';
+  }
+
   checkboxChange(checkbox: MatCheckbox, checked: boolean) {
     checkbox.value = checked ? this.trueValue : this.falseValue;
   }
 
   submitdstnumber() {
-    console.log(this.adddstnumber.value);
     this.userService.adddstnumber(this.adddstnumber.value).subscribe(
       (response: any) => {
         console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
@@ -229,6 +265,10 @@ export class AddDstNumberFormComponent implements OnInit {
         );
       }
     );
+  }
+
+  isFieldValid(field: string) {
+    return !this.adddstnumber.get(field).valid && this.adddstnumber.get(field).touched;
   }
 }
 

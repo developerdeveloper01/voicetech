@@ -3,7 +3,7 @@
   <mat-dialog-content>
 
 
-    <mat-form-field>
+    <mat-form-field class="demo-full-width">
       <mat-label>IP</mat-label>
       <mat-select formControlName="ip"
                   required>
@@ -24,7 +24,7 @@
             <input type="number" matInput placeholder="991515000" formControlName="dstnumber"
                    required>
             <mat-error *ngIf="adddstnumber.get('dstnumber').invalid">
-              {{'validations.required'| translate}}
+              {{getErrorMessage(adddstnumber)| translate}}
             </mat-error>
           </mat-form-field>
         </td>
