@@ -2,8 +2,8 @@
 
 
 <div class="row">
-  <div class="col-lg-4">
-    <mat-card *ngIf="toggleeditrole" class="mat-elevation-z8">
+  <div class="col-lg-12">
+    <!-- <mat-card *ngIf="toggleeditrole" class="mat-elevation-z8">
       <mat-card-title>IPs</mat-card-title>
 
       <form [formGroup]="addipform" (ngSubmit)="submitipForm()" class="form-field-full">
@@ -36,22 +36,14 @@
                           (change)="checkboxChange($event.source, $event.checked)"
                           formControlName="activestatus">Active Status
             </mat-checkbox>
-            <!-- <mat-slide-toggle [value]="falseValue" [checked]="falseValue"
-                              (change)="checkboxChange($event.source, $event.checked)"
-                              formControlName="activestatus">Status</mat-slide-toggle> -->
           </div>
-
-
         </div>
 
         <button mat-raised-button color="primary" class="m-t-8" type="submit">Save</button>
-        <!-- <button mat-raised-button color="primary" class="m-t-8 m-l-4"
-                (click)="editrole()">Edit</button> -->
       </form>
 
     </mat-card>
 
-    <!-- edit role -->
     <mat-card *ngIf="!toggleeditrole" style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
       <mat-card-title>Edit IP</mat-card-title>
 
@@ -96,84 +88,51 @@
       </form>
 
     </mat-card>
-    <!-- close -->
-  </div>
+     -->
+    <!-- </div> -->
 
-  <div class="col-lg-8">
-    <!-- <form>
-      <mat-form-field class="m-r-8">
-        <input matInput [(ngModel)]="query.q" name="q" placeholder="Query String">
-      </mat-form-field>
+    <!-- <div class="col-lg-8"> -->
 
-      <mat-form-field class="m-r-8">
-        <mat-select [(ngModel)]="query.sort" name="sort" placeholder="Sort">
-          <mat-option>-- None --</mat-option>
-          <mat-option value="stars">stars</mat-option>
-          <mat-option value="forks">forks</mat-option>
-          <mat-option value="updated">updated</mat-option>
-        </mat-select>
-      </mat-form-field>
 
-      <mat-form-field class="m-r-8">
-        <mat-select [(ngModel)]="query.order" name="order" placeholder="Order">
-          <mat-option>-- None --</mat-option>
-          <mat-option value="desc">desc</mat-option>
-          <mat-option value="asc">asc</mat-option>
-        </mat-select>
-      </mat-form-field>
 
-      <button class="m-r-8" mat-raised-button color="primary" (click)="search()">Search</button>
-    </form> -->
+    <div class="col-lg-12">
+      <div class="data-grid-options">
+        <button
+                mat-flat-button
+                color="primary"
+                style="border-radius: 30px; padding: 5px; margin: 5px; float: right;">
+          <mat-icon color="white" style="margin-left: 8px;">add</mat-icon>
+          <span style="margin-right: 8px; padding: 5px;">Add IP </span>
+        </button>
+      </div>
 
-    <div class="data-grid-options">
-      <!-- <mat-checkbox [(ngModel)]="rowSelectable">Row Selectable</mat-checkbox>
-      <mat-checkbox [(ngModel)]="hideRowSelectionCheckbox">Hide checkbox</mat-checkbox>
-      <mat-radio-group [(ngModel)]="multiSelectable">
-        <mat-radio-button [value]="false">Single Selectable</mat-radio-button>
-        <mat-radio-button [value]="true">Multiple Selectable</mat-radio-button>
-      </mat-radio-group> -->
-      <!-- <mat-checkbox [(ngModel)]="showToolbar">Show Toolbar</mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="columnMovable">Column Moving</mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
-      <mat-checkbox [(ngModel)]="rowStriped">Striped</mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="expandable" (change)="enableRowExpandable()">Row Expandable
-      </mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="showPaginator">Show Paginator</mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="isLoading">Refresh</mat-checkbox>
-      <mat-checkbox [(ngModel)]="toggleeditrole">Edit Toggle</mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="columnResizable">Column Resizable</mat-checkbox> -->
+      <mtx-grid class="mat-elevation-z8" [data]="list"
+                [columns]="columns"
+                [loading]="isLoading"
+                [columnResizable]="columnResizable"
+                [multiSelectable]="multiSelectable"
+                [rowSelectable]="rowSelectable"
+                [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                [rowHover]="rowHover"
+                [rowStriped]="rowStriped"
+                [showToolbar]="showToolbar"
+                [toolbarTitle]="'IP'"
+                [columnHideable]="columnHideable"
+                [columnMovable]="columnMovable"
+                [expandable]="expandable"
+                [expansionTemplate]="expansionTpl"
+                [pageOnFront]="showPaginator"
+                [showPaginator]="showPaginator"
+                [pageSizeOptions]="[5,10,50,100]"
+                [pageIndex]="0"
+                [pageSize]="50"
+                (sortChange)="changeSort($event)"
+                (selectionChange)="changeSelect($event)">
+      </mtx-grid>
+      <ng-template #expansionTpl let-row>
+        {{row.name}}
+      </ng-template>
     </div>
 
 
-
-    <mtx-grid class="mat-elevation-z8" [data]="list"
-              [columns]="columns"
-              [loading]="isLoading"
-              [columnResizable]="columnResizable"
-              [multiSelectable]="multiSelectable"
-              [rowSelectable]="rowSelectable"
-              [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
-              [rowHover]="rowHover"
-              [rowStriped]="rowStriped"
-              [showToolbar]="showToolbar"
-              [toolbarTitle]="'IP'"
-              [columnHideable]="columnHideable"
-              [columnMovable]="columnMovable"
-              [expandable]="expandable"
-              [expansionTemplate]="expansionTpl"
-              [pageOnFront]="showPaginator"
-              [showPaginator]="showPaginator"
-              [pageSizeOptions]="[5,10,50,100]"
-              [pageIndex]="0"
-              [pageSize]="50"
-              (sortChange)="changeSort($event)"
-              (selectionChange)="changeSelect($event)">
-    </mtx-grid>
-    <ng-template #expansionTpl let-row>
-      {{row.name}}
-    </ng-template>
   </div>
-
-
-</div>

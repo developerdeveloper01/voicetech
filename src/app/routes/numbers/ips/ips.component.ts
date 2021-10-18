@@ -1,4 +1,4 @@
-import { Component, OnInit,ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatPaginator } from '@angular/material/paginator';
@@ -11,8 +11,6 @@ import { DateAdapter } from '@angular/material/core';
 import { TablesKitchenSinkEditComponent } from 'app/routes/tables/kitchen-sink/edit/edit.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
-
 @Component({
   selector: 'app-ips',
   templateUrl: './ips.component.html',
@@ -21,7 +19,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providers: [TablesRemoteDataService],
 })
 export class IpsComponent implements OnInit {
-
   toggleeditrole: boolean = true;
   addipform: FormGroup;
   editipform: FormGroup;
@@ -30,7 +27,6 @@ export class IpsComponent implements OnInit {
   trueValue = 'true';
 
   translateSubscription: Subscription;
-
 
   columns: MtxGridColumn[] = [
     { header: 'IP', sortable: true, field: 'ipnumber' },
@@ -86,7 +82,7 @@ export class IpsComponent implements OnInit {
   rowStriped = false;
   showPaginator = true;
   expandable = false;
-  columnResizable = true;
+  columnResizable = false;
 
   constructor(
     private fb: FormBuilder,
@@ -94,8 +90,7 @@ export class IpsComponent implements OnInit {
     private snackBar: MatSnackBar,
     private translate: TranslateService,
     private dateAdapter: DateAdapter<any>,
-    public dialog: MtxDialog,
-
+    public dialog: MtxDialog
   ) {
     this.addipform = this.fb.group({
       ipnumber: ['', [Validators.required]],
@@ -110,19 +105,13 @@ export class IpsComponent implements OnInit {
     });
   }
 
-
-  displayedColumns: string[] = [
-    'ipnumber',
-    'title',
-    'activestatus',
-    'actions',
-  ];
+  displayedColumns: string[] = ['ipnumber', 'title', 'activestatus', 'actions'];
   dataSource: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit(): void {
-    this.getallips()
+    this.getallips();
     this.translateSubscription = this.translate.onLangChange.subscribe((res: { lang: any }) => {
       this.dateAdapter.setLocale(res.lang);
     });
@@ -144,7 +133,6 @@ export class IpsComponent implements OnInit {
     this.dialog.alert(`You have deleted ${value.position}!`);
   }
 
-
   getallips() {
     this.userService.getallips().subscribe(
       (response: any) => {
@@ -153,7 +141,11 @@ export class IpsComponent implements OnInit {
         this.list = response.data;
       },
       error => {
-        console.log('%cerror role.component.ts line:318 ', 'color: red; display: block; width: 100%;', error);
+        console.log(
+          '%cerror role.component.ts line:318 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
       }
     );
   }
@@ -188,7 +180,11 @@ export class IpsComponent implements OnInit {
         this.getallips();
       },
       error => {
-        console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
+        console.log(
+          '%cerror ips.component.ts line:254 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
       }
     );
   }

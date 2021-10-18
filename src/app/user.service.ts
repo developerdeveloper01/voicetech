@@ -61,13 +61,15 @@ export class UserService {
     return this.http.get(`${this.backendurl}/admin/viewonedstnumber/${id}`);
   }
 
-  editdstnumber(id,data){
-    return this.http.post(`${this.backendurl}/admin/editdstnumber/${id}`,data);
+  editdstnumber(id, data) {
+    return this.http.post(`${this.backendurl}/admin/editdstnumber/${id}`, data);
+  }
+
+  deletenumber(id) {
+    return this.http.get(`${this.backendurl}/admin/deletedstnumber/${id}`);
   }
 
   getalldstnumbers() {
     return this.http.get(`${this.backendurl}/admin/alldstnumber`);
   }
-
-
 }

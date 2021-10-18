@@ -3,7 +3,7 @@
   <mat-dialog-content>
 
 
-    <mat-form-field>
+    <mat-form-field class="demo-full-width">
       <mat-label>IP</mat-label>
       <mat-select formControlName="ip"
                   required>
@@ -24,7 +24,7 @@
             <input type="number" matInput placeholder="991515000" formControlName="dstnumber"
                    required>
             <mat-error *ngIf="editdstnumber.get('dstnumber').invalid">
-              {{'validations.required'| translate}}
+              {{getErrorMessage(editdstnumber)| translate}}
             </mat-error>
           </mat-form-field>
         </td>
@@ -41,7 +41,7 @@
 
   <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial
+    <button mat-raised-button color="primary" mat-dialog-close [disabled]="editdstnumber.invalid" cdkFocusInitial
             type="submit">Submit</button>
   </mat-dialog-actions>
 </form>
