@@ -23,6 +23,7 @@ import { appInitializerProviders } from '@core/initializers';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemDataService } from './shared/in-mem/in-mem-data.service';
 import { UserService } from './user.service';
+import { UserModule } from './user/user.module';
 
 // Required for AOT compilation
 export function TranslateHttpLoaderFactory(http: HttpClient) {
@@ -38,6 +39,7 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
     CoreModule,
     ThemeModule,
     RoutesModule,
+    UserModule,
     SharedModule,
     FormlyConfigModule.forRoot(),
     NgxPermissionsModule.forRoot(),

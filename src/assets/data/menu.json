@@ -780,6 +780,44 @@
       "permissions": {
         "only": "ADMIN"
       }
+    },
+
+    {
+      "route": "user/dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "dashboard",
+      "badge": {
+        "color": "red-500",
+        "value": "5"
+      }
+    },
+
+    {
+      "route": "logs",
+      "name": "logs",
+      "type": "link",
+      "icon": "settings_phone"
+    },
+    {
+      "route": "reports",
+      "name": "reports",
+      "type": "sub",
+      "icon": "assignment_returned",
+      "children": [
+        {
+          "route": "incoming-call-report",
+          "name": "incoming-call-report",
+          "type": "link"
+        },
+        {
+          "route": "outgoing-call-report",
+          "name": "outgoing-call-report",
+          "type": "link"
+        }
+       
+      ]
     }
+
   ]
 }
