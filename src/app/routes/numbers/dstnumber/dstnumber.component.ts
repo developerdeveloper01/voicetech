@@ -33,8 +33,8 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
       type: 'tag',
       sortable: true,
       tag: {
-        true: { text: 'Yes', color: 'green-100' },
-        false: { text: 'No', color: 'red-100' },
+        true: { text: 'Yes', color: 'green-200' },
+        false: { text: 'No', color: 'red-200' },
       },
     },
     {
@@ -81,6 +81,7 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
   showPaginator = true;
   expandable = true;
   columnResizable = false;
+  columnMenuButtonType = 'raised';
 
   alldstnumbers: any;
 
@@ -103,7 +104,7 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
     const onOk = () => {
       this.dialogx.alert('Closed');
     };
-    // const dialogRef = this.dialog.alert('Clicked alert', 'this is description');
+
     dialogRef.afterClosed().subscribe(() => console.log('The dialog was closed'));
   }
 
@@ -124,6 +125,7 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
       (response: any) => {
         console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
         this.isLoading = false;
+        this.getallnumbers();
         this.cdr.detectChanges();
         this.dialogx.alert(`You have deleted ${value.dstnumber}!`);
       },
@@ -235,20 +237,25 @@ export class AddDstNumberFormComponent implements OnInit {
   }
 
   submitdstnumber() {
-    this.userService.adddstnumber(this.adddstnumber.value).subscribe(
-      (response: any) => {
-        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-        this.snackBar.open('DST Number Added Successfully!', '', { duration: 2000 });
-        this.adddstnumber.reset();
-      },
-      error => {
-        console.log(
-          '%cerror ips.component.ts line:254 ',
-          'color: red; display: block; width: 100%;',
-          error
-        );
-      }
-    );
+    if (this.adddstnumber.valid) {
+      this.userService.adddstnumber(this.adddstnumber.value).subscribe(
+        (response: any) => {
+          console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+          this.snackBar.open('DST Number Added Successfully!', '', { duration: 2000 });
+          this.adddstnumber.reset();
+          //this.adddstnumber.markAsUntouched();
+        },
+        error => {
+          console.log(
+            '%cerror ips.component.ts line:254 ',
+            'color: red; display: block; width: 100%;',
+            error
+          );
+        }
+      );
+    } else {
+      this.getErrorMessage(this.adddstnumber);
+    }
   }
 
   getallips() {
@@ -301,7 +308,12 @@ export class EditDstNumberFormComponent implements OnInit {
 
     this.editdstnumber = this.fb.group({
       ip: ['', [Validators.required]],
-      dstnumber: ['', [Validators.required]],
+      dstnumber: [
+        '',
+        [Validators.required,Validators.min(1000000000),
+          Validators.max(9999999999)],
+
+      ],
       inusestatus: [false],
     });
   }
@@ -313,6 +325,16 @@ export class EditDstNumberFormComponent implements OnInit {
       dstnumber: this.data?.record?.dstnumber ? this.data?.record?.dstnumber : 'null',
       inusestatus: this.data?.record?.inusestatus ? true : false,
     });
+  }
+
+  getErrorMessage(form: FormGroup) {
+    return form.get('dstnumber').hasError('required')
+      ? 'validations.required'
+      : form.get('dstnumber').hasError('min')
+      ? 'validations.min'
+      : form.get('dstnumber').hasError('max')
+      ? 'validations.max'
+      : '';
   }
 
   getallips() {
@@ -335,21 +357,30 @@ export class EditDstNumberFormComponent implements OnInit {
     checkbox.value = checked ? this.trueValue : this.falseValue;
   }
 
+  isFieldValid(field: string) {
+    return !this.editdstnumber.get(field).valid && this.editdstnumber.get(field).touched;
+  }
+
   submitdstnumber() {
     console.log(this.editdstnumber.value);
-    this.userService.editdstnumber(this.data.record._id, this.editdstnumber.value).subscribe(
-      (response: any) => {
-        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-        this.snackBar.open('IP Edited Successfully!', '', { duration: 2000 });
-        this.editdstnumber.reset();
-      },
-      error => {
-        console.log(
-          '%cerror ips.component.ts line:254 ',
-          'color: red; display: block; width: 100%;',
-          error
-        );
-      }
-    );
+
+    if (this.editdstnumber.valid) {
+      this.userService.editdstnumber(this.data.record._id, this.editdstnumber.value).subscribe(
+        (response: any) => {
+          console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+          this.snackBar.open('IP Edited Successfully!', '', { duration: 2000 });
+          this.editdstnumber.reset();
+        },
+        error => {
+          console.log(
+            '%cerror ips.component.ts line:254 ',
+            'color: red; display: block; width: 100%;',
+            error
+          );
+        }
+      );
+    } else {
+      this.getErrorMessage(this.editdstnumber);
+    }
   }
 }
