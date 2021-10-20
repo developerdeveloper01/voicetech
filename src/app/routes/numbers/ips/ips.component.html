@@ -1,138 +1,62 @@
 <page-header class="bg-blue-600"></page-header>
 
-
 <div class="row">
   <div class="col-lg-12">
-    <!-- <mat-card *ngIf="toggleeditrole" class="mat-elevation-z8">
-      <mat-card-title>IPs</mat-card-title>
-
-      <form [formGroup]="addipform" (ngSubmit)="submitipForm()" class="form-field-full">
-        <div fxLayout="row wrap" fxLayoutGap="8px grid">
-
-          <div fxFlex="100" fxFlex.lt-sm="100">
-            <mat-form-field>
-              <mat-label>IP</mat-label>
-              <input matInput placeholder="103.8.43.14" formControlName="ipnumber"
-                     required>
-              <mat-error *ngIf="addipform.get('ipnumber').invalid">
-                {{'validations.required'| translate}}
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div fxFlex="100" fxFlex.lt-sm="100">
-            <mat-form-field>
-              <mat-label>Provider</mat-label>
-              <input matInput placeholder="Admin" formControlName="title"
-                     required>
-              <mat-error *ngIf="addipform.get('title').invalid">
-                {{'validations.required'| translate}}
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div fxFlex="100" fxFlex.lt-sm="100">
-            <mat-checkbox class="st-chk" [value]="falseValue"
-                          (change)="checkboxChange($event.source, $event.checked)"
-                          formControlName="activestatus">Active Status
-            </mat-checkbox>
-          </div>
-        </div>
-
-        <button mat-raised-button color="primary" class="m-t-8" type="submit">Save</button>
-      </form>
-
-    </mat-card>
-
-    <mat-card *ngIf="!toggleeditrole" style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
-      <mat-card-title>Edit IP</mat-card-title>
-
-      <form [formGroup]="editipform" (ngSubmit)="updateipForm()" class="form-field-full">
-        <div fxLayout="row wrap" fxLayoutGap="8px grid">
-
-          <div fxFlex="100" fxFlex.lt-sm="100">
-            <mat-form-field>
-              <mat-label>IP</mat-label>
-              <input matInput placeholder="103.8.43.14" formControlName="ipnumber"
-                     required>
-              <mat-error *ngIf="editipform.get('ipnumber').invalid">
-                {{'validations.required'| translate}}
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div fxFlex="100" fxFlex.lt-sm="100">
-            <mat-form-field>
-              <mat-label>Title</mat-label>
-              <input matInput placeholder="Admin" formControlName="title"
-                     required>
-              <mat-error *ngIf="editipform.get('title').invalid">
-                {{'validations.required'| translate}}
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div fxFlex="100" fxFlex.lt-sm="100">
-            <mat-checkbox class="st-chk" [value]="falseValue"
-                          (change)="checkboxChange($event.source, $event.checked)"
-                          formControlName="activestatus">Read Service
-            </mat-checkbox>
-          </div>
-
-
-        </div>
-
-        <button mat-raised-button color="primary" class="m-t-8" type="submit">update</button>
-        <button mat-raised-button color="accent" type="button" class="m-t-8 m-l-4"
-                (click)="canceledit()">Cancel</button>
-      </form>
-
-    </mat-card>
-     -->
-    <!-- </div> -->
-
-    <!-- <div class="col-lg-8"> -->
-
-
-
-    <div class="col-lg-12">
       <div class="data-grid-options">
         <button
-                mat-flat-button
-                color="primary"
-                style="border-radius: 30px; padding: 5px; margin: 5px; float: right; margin-bottom: 10px;">
+          mat-raised-button
+          color="primary"
+          style="border-radius: 30px; padding: 5px; margin: 5px; float: right;"
+          (click)="openAddIp()">
           <mat-icon color="white" style="margin-left: 8px;">add</mat-icon>
           <span style="margin-right: 8px; padding: 5px;">Add IP </span>
         </button>
       </div>
 
-      <mtx-grid class="mat-elevation-z8" [data]="list"
-                [columns]="columns"
-                [loading]="isLoading"
-                [columnResizable]="columnResizable"
-                [multiSelectable]="multiSelectable"
-                [rowSelectable]="rowSelectable"
-                [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
-                [rowHover]="rowHover"
-                [rowStriped]="rowStriped"
-                [showToolbar]="showToolbar"
-                [toolbarTitle]="'IP'"
-                [columnHideable]="columnHideable"
-                [columnMovable]="columnMovable"
-                [expandable]="expandable"
-                [expansionTemplate]="expansionTpl"
-                [pageOnFront]="showPaginator"
-                [showPaginator]="showPaginator"
-                [pageSizeOptions]="[5,10,50,100]"
-                [pageIndex]="0"
-                [pageSize]="50"
-                (sortChange)="changeSort($event)"
-                (selectionChange)="changeSelect($event)">
+      <mtx-grid
+        class="mat-elevation-z8"
+        [data]="list"
+        [columns]="columns"
+        [loading]="isLoading"
+        [columnResizable]="columnResizable"
+        [multiSelectable]="multiSelectable"
+        [rowSelectable]="rowSelectable"
+        [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+        [rowHover]="rowHover"
+        [rowStriped]="rowStriped"
+        [showToolbar]="showToolbar"
+        [toolbarTitle]="'IP'"
+        [toolbarTemplate]="toolbarTpl"
+        [columnHideable]="columnHideable"
+        [columnMovable]="columnMovable"
+        [expandable]="expandable"
+        [cellTemplate]="{title: cityTpl}"
+        [expansionTemplate]="expansionTpl"
+        [pageOnFront]="showPaginator"
+        [showPaginator]="showPaginator"
+        [pageSizeOptions]="[50, 100, 200, 500]"
+        [pageIndex]="0"
+        [pageSize]="50"
+        (sortChange)="changeSort($event)"
+        (selectionChange)="changeSelect($event)"
+      >
       </mtx-grid>
       <ng-template #expansionTpl let-row>
-        {{row.name}}
+        {{ row.name }}
       </ng-template>
+      <ng-template #toolbarTpl>
+        <form >
+          <mat-form-field class="example-full-width m-r-8">
+          <mat-label>Search</mat-label>
+          <input placeholder="Search" type="text" matInput>
+        </mat-form-field>
+        <button mat-raised-button color="primary">Search</button>
+        </form>
+
+      </ng-template>
+      <ng-template #cityTpl let-row let-index="index" let-col="colDef">
+        <button mat-flat-button >{{row.title}}</button>
+      </ng-template>
+
     </div>
-
-
-  </div>
+</div>

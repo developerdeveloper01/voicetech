@@ -18,7 +18,7 @@ export class CheckboxComponent {
       completed: false,
       subtasks: [
         { name: 'Cook Dinner', completed: false },
-        { name: 'Read the Material Design Spec', completed: false },
+        { name: 'Read the Material Design Spec', completed: true },
         { name: 'Upgrade Application to Angular', completed: false },
       ],
     },
@@ -26,7 +26,7 @@ export class CheckboxComponent {
       name: 'Groceries',
       completed: false,
       subtasks: [
-        { name: 'Organic Eggs', completed: false },
+        { name: 'Organic Eggs', completed: true },
         { name: 'Protein Powder', completed: false },
         { name: 'Almond Meal Flour', completed: false },
       ],

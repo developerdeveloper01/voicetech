@@ -1,10 +1,7 @@
 <page-header class="bg-blue-600"></page-header>
-
-
-
 <div class="row">
   <div class="col-lg-12">
-    <mat-card *ngIf="toggleeditrole" class="mat-elevation-z8">
+    <!-- <mat-card *ngIf="toggleeditrole" class="mat-elevation-z8">
       <mat-card-title>Roles</mat-card-title>
 
       <form [formGroup]="addroleform" (ngSubmit)="submitroleForm()" class="form-field-full">
@@ -58,13 +55,10 @@
         </div>
 
         <button mat-raised-button color="primary" class="m-t-8" type="submit">Save</button>
-        <!-- <button mat-raised-button color="primary" class="m-t-8 m-l-4"
-                (click)="editrole()">Edit</button> -->
       </form>
 
     </mat-card>
 
-    <!-- edit role -->
     <mat-card *ngIf="!toggleeditrole" style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
       <mat-card-title>Edit Roles</mat-card-title>
 
@@ -98,57 +92,32 @@
                 (click)="canceledit()">Cancel</button>
       </form>
 
-    </mat-card>
-    <!-- close -->
+    </mat-card> -->
   </div>
 
   <div class="col-lg-12">
-    <!-- <form>
-      <mat-form-field class="m-r-8">
-        <input matInput [(ngModel)]="query.q" name="q" placeholder="Query String">
-      </mat-form-field>
-
-      <mat-form-field class="m-r-8">
-        <mat-select [(ngModel)]="query.sort" name="sort" placeholder="Sort">
-          <mat-option>-- None --</mat-option>
-          <mat-option value="stars">stars</mat-option>
-          <mat-option value="forks">forks</mat-option>
-          <mat-option value="updated">updated</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="m-r-8">
-        <mat-select [(ngModel)]="query.order" name="order" placeholder="Order">
-          <mat-option>-- None --</mat-option>
-          <mat-option value="desc">desc</mat-option>
-          <mat-option value="asc">asc</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <button class="m-r-8" mat-raised-button color="primary" (click)="search()">Search</button>
-    </form> -->
-
     <div class="data-grid-options">
-      <!-- <mat-checkbox [(ngModel)]="rowSelectable">Row Selectable</mat-checkbox>
-      <mat-checkbox [(ngModel)]="hideRowSelectionCheckbox">Hide checkbox</mat-checkbox>
-      <mat-radio-group [(ngModel)]="multiSelectable">
-        <mat-radio-button [value]="false">Single Selectable</mat-radio-button>
-        <mat-radio-button [value]="true">Multiple Selectable</mat-radio-button>
-      </mat-radio-group> -->
-      <!-- <mat-checkbox [(ngModel)]="showToolbar">Show Toolbar</mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="columnMovable">Column Moving</mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
-      <mat-checkbox [(ngModel)]="rowStriped">Striped</mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="expandable" (change)="enableRowExpandable()">Row Expandable
-      </mat-checkbox> -->
-      <!-- <mat-checkbox [(ngModel)]="showPaginator">Show Paginator</mat-checkbox> -->
-      <mat-checkbox [(ngModel)]="isLoading">Refresh</mat-checkbox>
-      <mat-checkbox [(ngModel)]="toggleeditrole">Edit Toggle</mat-checkbox>
-      <!-- <mat-checkbox [(ngModel)]="columnResizable">Column Resizable</mat-checkbox> -->
+
+      <!-- <div>
+        <input type="checkbox" id="toggle"/>
+        <label for="toggle"></label>
+      </div> -->
+
+      <!-- https://codepen.io/aaroniker/pen/rNNLQVe -->
+
+
+
+
+
+      <button
+        mat-raised-button
+        color="primary"
+        style="border-radius: 30px; padding: 5px; margin: 5px; float: right;"
+        (click)="openRole()">
+        <mat-icon color="white" style="margin-left: 8px;">add</mat-icon>
+        <span style="margin-right: 8px; padding: 5px;">Add Role </span>
+      </button>
     </div>
-
-
 
     <mtx-grid class="mat-elevation-z8" [data]="list"
               [columns]="columns"

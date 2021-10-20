@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { PlanRoutingModule } from './plan-routing.module';
 import {
+  AddPrepaidFormComponent,
   AddPrepaidplanOneFormComponent,
   EditPrepaidplanOneFormComponent,
   PrepaidPlanComponent,
@@ -29,25 +30,21 @@ const COMPONENTS = [
   PostpaidPlanComponent,
   ValidityPlanComponent,
   PricetominPlanComponent,
+  MinutePlanComponent
 ];
 const COMPONENTS_DYNAMIC = [
   AddValidityPlanFormComponent,
   EditValidityPlanFormComponent,
   AddPrepaidplanOneFormComponent,
-  EditPrepaidplanOneFormComponent,
   AddPtominPlanFormComponent,
   EditPtominPlanFormComponent,
   AddMinutePlanFormComponent,
   EditMinutePlanFormComponent,
+  AddPrepaidFormComponent
 ];
 
 @NgModule({
-  declarations: [
-    ...COMPONENTS,
-    ...COMPONENTS_DYNAMIC,
-    PricetominPlanComponent,
-    MinutePlanComponent,
-  ],
+  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC],
   imports: [SharedModule, PlanRoutingModule],
   entryComponents: COMPONENTS_DYNAMIC,
 })

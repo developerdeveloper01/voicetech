@@ -380,4 +380,120 @@ export class EditPrepaidplanOneFormComponent implements OnInit {
       this.getErrorMessage(this.editdstnumber);
     }
   }
+
+  openAddPrepaid() {
+    // let adddailogRef = this.dialog.open(AddPrepaidFormComponent, { width: '500px' });
+    // adddailogRef.afterClosed().subscribe(() => {
+    //   this.getallplans();
+    // });
+  }
+
+  getallplans() {
+    this.userService.getallplans().subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+      },
+      error => {
+        console.log(
+          '%cerror ips.component.ts line:254 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
+      }
+    );
+  }
+}
+
+@Component({
+  selector: 'add-prepaid-form',
+  styles: [
+    `
+      .demo-full-width {
+        width: 100%;
+      }
+    `,
+  ],
+  templateUrl: './add-prepaid-form.html',
+})
+export class AddPrepaidFormComponent implements OnInit {
+  falseValue = 'false';
+  trueValue = 'true';
+
+  addprepaidplan: FormGroup;
+  allips: any;
+
+  constructor(
+    private fb: FormBuilder,
+    public userService: UserService,
+    private snackBar: MatSnackBar
+  ) {
+    this.addprepaidplan = this.fb.group({
+      plantitle: ['', [Validators.required]],
+      dstnumber: [
+        '',
+        [Validators.required, Validators.min(1000000000), Validators.max(9999999999)],
+      ],
+      inusestatus: [false],
+    });
+  }
+
+  ngOnInit(): void {
+    this.getallips();
+  }
+
+  getErrorMessage(form: FormGroup) {
+    return form.get('dstnumber').hasError('required')
+      ? 'validations.required'
+      : form.get('dstnumber').hasError('min')
+      ? 'validations.min'
+      : form.get('dstnumber').hasError('max')
+      ? 'validations.max'
+      : '';
+  }
+
+  checkboxChange(checkbox: MatCheckbox, checked: boolean) {
+    checkbox.value = checked ? this.trueValue : this.falseValue;
+  }
+
+  submitprepaid() {
+    if (this.addprepaidplan.valid) {
+      this.userService.addplan(this.addprepaidplan.value).subscribe(
+        (response: any) => {
+          console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+          this.snackBar.open('Plan Added Successfully!', '', { duration: 2000 });
+          this.addprepaidplan.reset();
+          //this.addprepaidplan.markAsUntouched();
+        },
+        error => {
+          console.log(
+            '%cerror ips.component.ts line:254 ',
+            'color: red; display: block; width: 100%;',
+            error
+          );
+        }
+      );
+    } else {
+      this.getErrorMessage(this.addprepaidplan);
+    }
+  }
+
+  getallips() {
+    this.userService.getallips().subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+        this.allips = response.data;
+      },
+      error => {
+        console.log(
+          '%cerror ips.component.ts line:254 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
+      }
+    );
+  }
+
+  isFieldValid(field: string) {
+    return !this.addprepaidplan.get(field).valid && this.addprepaidplan.get(field).touched;
+  }
 }

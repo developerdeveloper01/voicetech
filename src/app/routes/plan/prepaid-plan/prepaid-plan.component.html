@@ -10,12 +10,12 @@
                         mat-raised-button
                         color="primary"
                         style="border-radius: 30px; padding: 5px; margin: 5px; float: right; margin-bottom: 10px;"
-                        (click)="openAddDstNumber()">
+                        >
                   <mat-icon color="white" style="margin-left: 8px;">add</mat-icon>
                   <span style="margin-right: 8px; padding: 5px;">Add  Plan </span>
                 </button>
               </div>
-          
+
               <mtx-grid
                         class="mat-elevation-z8"
                         [data]="list"
@@ -49,15 +49,58 @@
         </mat-tab>
         <mat-tab label="Price to Minute Plan">
           <div class="m-16">
-           
+
 
           </div>
         </mat-tab>
         <mat-tab label="Minute Plan">
           <div class="m-16">
-            
+
 
           </div>
         </mat-tab>
       </mat-tab-group>
-    </mat-card>
+    </mat-card> -->
+<div class="row">
+  <div class="col-lg-12">
+    <div class="data-grid-options">
+      <button
+          mat-raised-button
+          color="primary"
+          style="border-radius: 30px; padding: 5px; margin: 5px; float: right;"
+          >
+          <mat-icon color="white" style="margin-left: 8px;">add</mat-icon>
+          <span style="margin-right: 8px; padding: 5px;">Add Prepaid </span>
+        </button>
+    </div>
+    <mtx-grid
+        class="mat-elevation-z8"
+        [data]="list"
+        [columns]="columns"
+        [loading]="isLoading"
+        [columnResizable]="columnResizable"
+        [multiSelectable]="multiSelectable"
+        [rowSelectable]="rowSelectable"
+        [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+        [rowHover]="rowHover"
+        [rowStriped]="rowStriped"
+        [showToolbar]="showToolbar"
+        [toolbarTitle]="'IP'"
+        [columnHideable]="columnHideable"
+        [columnMovable]="columnMovable"
+        [expandable]="expandable"
+        [expansionTemplate]="expansionTpl"
+        [pageOnFront]="showPaginator"
+        [showPaginator]="showPaginator"
+        [pageSizeOptions]="[50, 100, 200, 500]"
+        [pageIndex]="0"
+        [pageSize]="50"
+        (sortChange)="changeSort($event)"
+        (selectionChange)="changeSelect($event)"
+      >
+      </mtx-grid>
+      <ng-template #expansionTpl let-row>
+        {{ row.name }}
+      </ng-template>
+  </div>
+</div>

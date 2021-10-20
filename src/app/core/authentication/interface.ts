@@ -1,3 +1,5 @@
+import { Interface } from "readline";
+
 export interface User {
   [propName: string]: any;
 
@@ -23,3 +25,4 @@ export interface RefreshToken {
   refreshTime: () => number;
   valid: () => boolean;
 }
+

@@ -6,6 +6,7 @@ import {
   Inject,
   OnDestroy,
   OnInit,
+  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -24,49 +25,15 @@ import { MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
-  columns: MtxGridColumn[] = [
-    { header: 'DST Number', sortable: true, field: 'dstnumber' },
-    { header: 'IP', sortable: true, field: 'ip.ipnumber' },
-    {
-      header: 'Active Status',
-      field: 'inusestatus',
-      type: 'tag',
-      sortable: true,
-      tag: {
-        true: { text: 'Yes', color: 'green-200' },
-        false: { text: 'No', color: 'red-200' },
-      },
-    },
-    {
-      header: 'Actions',
-      field: 'action',
-      minWidth: 120,
-      width: '120px',
-      pinned: 'right',
-      type: 'button',
-      buttons: [
-        {
-          type: 'icon',
-          icon: 'edit',
-          tooltip: 'edit',
-          click: record => this.openEditDstNumber(record),
-        },
-        {
-          color: 'warn',
-          icon: 'delete',
-          text: 'delete',
-          tooltip: 'delete',
-          pop: true,
-          popTitle: 'Confirm Delete',
-          popCloseText: 'Cancel',
-          popOkText: 'Delete',
-          click: record => this.delete(record),
-        },
-      ],
-    },
-  ];
+
+  @ViewChild('statusTpl', { static: true }) statusTpl: TemplateRef<any>;
+
+
+
+
 
   //table
+  columns = []
   list = [];
   total = 0;
   isLoading: Boolean;
@@ -81,7 +48,6 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
   showPaginator = true;
   expandable = true;
   columnResizable = false;
-  columnMenuButtonType = 'raised';
 
   alldstnumbers: any;
 
@@ -90,10 +56,55 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
     public dialogx: MtxDialog,
     public userService: UserService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+
+  }
 
   ngOnInit(): void {
+
     this.getallnumbers();
+
+    this.columns = [
+      { header: 'DST Number', sortable: true, field: 'dstnumber' },
+      { header: 'IP', sortable: true, field: 'ip.ipnumber' },
+      {
+        header: 'Active Status',
+        field: 'inusestatus',
+        type: 'tag',
+        sortable: true,
+        tag: {
+          true: { text: 'Yes', color: 'green-200' },
+          false: { text: 'No', color: 'red-200' },
+        },
+      },
+      {
+        header: 'Actions',
+        field: 'action',
+        minWidth: 120,
+        width: '120px',
+        pinned: 'right',
+        type: 'button',
+        buttons: [
+          {
+            type: 'icon',
+            icon: 'edit',
+            tooltip: 'edit',
+            click: record => this.openEditDstNumber(record),
+          },
+          {
+            color: 'warn',
+            icon: 'delete',
+            text: 'delete',
+            tooltip: 'delete',
+            pop: true,
+            popTitle: 'Confirm Delete',
+            popCloseText: 'Cancel',
+            popOkText: 'Delete',
+            click: record => this.delete(record),
+          },
+        ],
+      },
+    ];
   }
 
   edit(value: any) {
@@ -184,6 +195,7 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 }
+
 
 @Component({
   selector: 'add-dst-form',
