@@ -11,7 +11,6 @@ import { CallCenterComponent } from './call-center/call-center.component';
 import { VoiceBroadcastComponent } from './voice-broadcast/voice-broadcast.component';
 import { SmsEmailConfigurationComponent } from './sms-email-configuration/sms-email-configuration.component';
 import { ListManagerComponent } from './list-manager/list-manager.component';
-import { ReportComponent } from './report/report.component';
 import { NetworkComponent } from './network/network.component';
 import { SecurityComponent } from './security/security.component';
 import { SystemSettingComponent } from './system-setting/system-setting.component';
@@ -31,7 +30,6 @@ const COMPONENTS_DYNAMIC = [];
     VoiceBroadcastComponent,
     SmsEmailConfigurationComponent,
     ListManagerComponent,
-    ReportComponent,
     NetworkComponent,
     SecurityComponent,
     SystemSettingComponent,

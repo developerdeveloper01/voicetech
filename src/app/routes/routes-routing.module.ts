@@ -13,7 +13,6 @@ import { CallCenterComponent } from './call-center/call-center.component';
 import { VoiceBroadcastComponent } from './voice-broadcast/voice-broadcast.component';
 import { SmsEmailConfigurationComponent } from './sms-email-configuration/sms-email-configuration.component';
 import { ListManagerComponent } from './list-manager/list-manager.component';
-import { ReportComponent } from './report/report.component';
 import { NetworkComponent } from './network/network.component';
 import { SecurityComponent } from './security/security.component';
 import { SystemSettingComponent } from './system-setting/system-setting.component';
@@ -83,6 +82,10 @@ const routes: Routes = [
         loadChildren: () => import('./service/service/service.module').then(m => m.ServiceModule),
       },
       {
+        path: 'report',
+        loadChildren: () => import('./report/report.module').then(m => m.ReportModule),
+      },
+      {
         path: 'products/off-ivr-system',
         loadChildren: () =>
           import('./products/off-ivr-system/off-ivr-system.module').then(m => m.OffIvrSystemModule),
@@ -94,7 +97,6 @@ const routes: Routes = [
       { path: 'voice-broadcast', component: VoiceBroadcastComponent },
       { path: 'sms-email-configuration', component: SmsEmailConfigurationComponent },
       { path: 'list-manager', component: ListManagerComponent },
-      { path: 'report', component: ReportComponent },
 
       { path: 'enquiry', component: EnquiryComponent },
       { path: 'network', component: NetworkComponent },
