@@ -4,7 +4,7 @@
       "route": "dashboard",
       "name": "dashboard",
       "type": "link",
-      "icon": "dashboard",
+      "icon": "palette",
       "badge": {
         "color": "red-500",
         "value": "5"
@@ -237,19 +237,19 @@
       "route": "enquiry",
       "name": "enquiry",
       "type": "link",
-      "icon": "format_list_bulleted"
+      "icon": "border_color"
     },
     {
       "route": "chat",
       "name": "chat",
       "type": "link",
-      "icon": "format_list_bulleted"
+      "icon": "chat"
     },
     {
       "route": "plan",
       "name": "plan",
       "type": "sub",
-      "icon": "account_circle",
+      "icon": "money",
       "children": [
         {
           "route": "prepaid-plan",
@@ -300,7 +300,7 @@
       "route": "report",
       "name": "report",
       "type": "link",
-      "icon": "folder_open"
+      "icon": "description"
     },
     {
       "route": "network",
@@ -780,6 +780,44 @@
       "permissions": {
         "only": "ADMIN"
       }
+    },
+
+    {
+      "route": "user/dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "palette",
+      "badge": {
+        "color": "red-500",
+        "value": "5"
+      }
+    },
+
+    {
+      "route": "logs",
+      "name": "logs",
+      "type": "link",
+      "icon": "settings_phone"
+    },
+    {
+      "route": "reports",
+      "name": "reports",
+      "type": "sub",
+      "icon": "assignment_returned",
+      "children": [
+        {
+          "route": "incoming-call-report",
+          "name": "incoming-call-report",
+          "type": "link"
+        },
+        {
+          "route": "outgoing-call-report",
+          "name": "outgoing-call-report",
+          "type": "link"
+        }
+       
+      ]
     }
+
   ]
 }

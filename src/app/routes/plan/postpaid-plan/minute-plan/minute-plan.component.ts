@@ -16,14 +16,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'app/user.service';
 import { TablesKitchenSinkEditComponent } from 'app/routes/tables/kitchen-sink/edit/edit.component';
 import { MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
-
 @Component({
-  selector: 'app-validity-plan',
-  templateUrl: './validity-plan.component.html',
-  styleUrls: ['./validity-plan.component.scss'],
+  selector: 'app-minute-plan',
+  templateUrl: './minute-plan.component.html',
+  styleUrls: ['./minute-plan.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ValidityPlanComponent implements OnInit, AfterViewInit, OnDestroy {
+export class MinutePlanComponent implements OnInit {
   columns: MtxGridColumn[] = [
     { header: 'Validity Plan', sortable: true, field: 'validityplan' },
     { header: 'Price', sortable: true, field: 'price' },
@@ -109,7 +108,7 @@ export class ValidityPlanComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openEditDstNumber(value) {
-    let editdailogRef = this.dialog.open(EditValidityPlanFormComponent, {
+    let editdailogRef = this.dialog.open(EditMinutePlanFormComponent, {
       width: '500px',
       data: { record: value },
     });
@@ -140,7 +139,7 @@ export class ValidityPlanComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   openAddDstNumber() {
-    let adddailogRef = this.dialog.open(AddValidityPlanFormComponent, { width: '500px' });
+    let adddailogRef = this.dialog.open(AddMinutePlanFormComponent, { width: '500px' });
 
     adddailogRef.afterClosed().subscribe(() => {
       this.getallnumbers();
@@ -186,7 +185,7 @@ export class ValidityPlanComponent implements OnInit, AfterViewInit, OnDestroy {
 }
 
 @Component({
-  selector: 'add-validity-form',
+  selector: 'add-minute-form',
   styles: [
     `
       .demo-full-width {
@@ -194,9 +193,9 @@ export class ValidityPlanComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     `,
   ],
-  templateUrl: './add-validity-form.html',
+  templateUrl: './add-minute-form.html',
 })
-export class AddValidityPlanFormComponent implements OnInit {
+export class AddMinutePlanFormComponent implements OnInit {
   falseValue = 'false';
   trueValue = 'true';
 
@@ -280,7 +279,7 @@ export class AddValidityPlanFormComponent implements OnInit {
 }
 
 @Component({
-  selector: 'edit-validity-form',
+  selector: 'edit-minute-form',
   styles: [
     `
       .demo-full-width {
@@ -288,9 +287,9 @@ export class AddValidityPlanFormComponent implements OnInit {
       }
     `,
   ],
-  templateUrl: './edit-validity-form.html',
+  templateUrl: './edit-minute-form.html',
 })
-export class EditValidityPlanFormComponent implements OnInit {
+export class EditMinutePlanFormComponent implements OnInit {
   falseValue = 'false';
   trueValue = 'true';
 
@@ -301,7 +300,7 @@ export class EditValidityPlanFormComponent implements OnInit {
     private fb: FormBuilder,
     public userService: UserService,
     private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<EditValidityPlanFormComponent>,
+    public dialogRef: MatDialogRef<EditMinutePlanFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     console.log(data);

@@ -118,8 +118,9 @@ const routes: Routes = [
       },
       {
         path: 'numbers',
-        loadChildren: () => import('./numbers/numbers.module').then(m => m.NumbersModule)},
-        {
+        loadChildren: () => import('./numbers/numbers.module').then(m => m.NumbersModule),
+      },
+      {
         path: 'plan',
         loadChildren: () => import('./plan/plan.module').then(m => m.PlanModule),
       },
