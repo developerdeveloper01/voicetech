@@ -4,7 +4,7 @@
       "route": "dashboard",
       "name": "dashboard",
       "type": "link",
-      "icon": "dashboard",
+      "icon": "palette",
       "badge": {
         "color": "red-500",
         "value": "5"
@@ -237,19 +237,19 @@
       "route": "enquiry",
       "name": "enquiry",
       "type": "link",
-      "icon": "format_list_bulleted"
+      "icon": "border_color"
     },
     {
       "route": "chat",
       "name": "chat",
       "type": "link",
-      "icon": "format_list_bulleted"
+      "icon": "chat"
     },
     {
       "route": "plan",
       "name": "plan",
       "type": "sub",
-      "icon": "account_circle",
+      "icon": "money",
       "children": [
         {
           "route": "prepaid-plan",
@@ -300,7 +300,7 @@
       "route": "report",
       "name": "report",
       "type": "link",
-      "icon": "folder_open"
+      "icon": "description"
     },
     {
       "route": "network",
@@ -786,7 +786,7 @@
       "route": "user/dashboard",
       "name": "dashboard",
       "type": "link",
-      "icon": "dashboard",
+      "icon": "palette",
       "badge": {
         "color": "red-500",
         "value": "5"
