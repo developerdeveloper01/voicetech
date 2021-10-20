@@ -94,10 +94,10 @@ export class FormsDynamicComponent implements OnInit {
           templateOptions: {
             label: 'City',
             options: [
-              { id: 1, name: '北京' },
-              { id: 2, name: '上海' },
-              { id: 3, name: '广州' },
-              { id: 4, name: '深圳' },
+              { id: 1, name: 'Dewas' },
+              { id: 2, name: 'Ujjain' },
+              { id: 3, name: 'Bhopal' },
+              { id: 4, name: 'Indore' },
             ],
             labelProp: 'name',
             valueProp: 'id',
@@ -113,7 +113,7 @@ export class FormsDynamicComponent implements OnInit {
           templateOptions: {
             type: 'number',
             label: 'Zip',
-            max: 99999,
+            max: 999999,
             min: 0,
             pattern: '\\d{5}',
           },

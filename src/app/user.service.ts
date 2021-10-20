@@ -48,11 +48,20 @@ export class UserService {
     return this.http.get(`${this.backendurl}/admin/viewoneprovidedip/${id}`);
   }
 
+  editip(id, data) {
+    return this.http.post(`${this.backendurl}/admin/editprovidedip/${id}`, data);
+  }
+
   getallips() {
     return this.http.get(`${this.backendurl}/admin/allprovidedip`);
   }
 
-  //ips
+  deleteip(id) {
+    return this.http.get(`${this.backendurl}/admin/deleteprovidedip/${id}`);
+  }
+
+
+  //dst
   adddstnumber(data) {
     return this.http.post(`${this.backendurl}/admin/adddstnumber`, data);
   }
@@ -71,5 +80,28 @@ export class UserService {
 
   getalldstnumbers() {
     return this.http.get(`${this.backendurl}/admin/alldstnumber`);
+  }
+
+
+  //prepaid plan
+  addplan(data) {
+    return this.http.post(`${this.backendurl}/admin/addplan`, data);
+  }
+  viewoneplan(id) {
+    return this.http.get(`${this.backendurl}/admin/viewoneplan/${id}`);
+  }
+  editplan(id, data) {
+    return this.http.post(`${this.backendurl}/admin/editplan/${id}`, data);
+  }
+  deleteplan(id) {
+    return this.http.get(`${this.backendurl}/admin/deleteplan/${id}`);
+  }
+  getallplans() {
+    return this.http.get(`${this.backendurl}/admin/allplan`);
+  }
+
+  //Cdr Report
+  getdatewisereport() {
+    return this.http.get(`${this.backendurl}/admin/viewreportsfromneronserver`);
   }
 }

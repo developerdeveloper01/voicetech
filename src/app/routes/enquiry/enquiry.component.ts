@@ -41,11 +41,23 @@ export class EnquiryComponent implements OnInit {
   reactiveForm2: FormGroup;
   addroleform: FormGroup;
 
-  //variables
-
-  //dataSource: any;
-
   translateSubscription: Subscription;
+
+  columns = []
+  list = [];
+  total = 0;
+  isLoading: Boolean;
+  multiSelectable = true;
+  rowSelectable = true;
+  hideRowSelectionCheckbox = false;
+  showToolbar = true;
+  columnHideable = true;
+  columnMovable = true;
+  rowHover = true;
+  rowStriped = true;
+  showPaginator = true;
+  expandable = true;
+  columnResizable = false;
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +66,7 @@ export class EnquiryComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  displayedColumns: string[] = ['product', 'desc', 'mobile', 'name', 'createdAt', 'actions'];
+
   dataSource: any;
 
   ngOnInit() {
@@ -62,29 +74,73 @@ export class EnquiryComponent implements OnInit {
     this.translateSubscription = this.translate.onLangChange.subscribe((res: { lang: any }) => {
       this.dateAdapter.setLocale(res.lang);
     });
+
+
+    this.columns = [
+      { header: 'Name', sortable: true, field: 'name' },
+      { header: 'Product', sortable: true, field: 'product' },
+      { header: 'Email', sortable: true, field: 'email' },
+      { header: 'Mobile', sortable: true, field: 'mobile' },
+      { header: 'Description', sortable: true, field: 'desc',showExpand: true },
+      {
+        header: 'Actions',
+        field: 'action',
+        minWidth: 120,
+        width: '120px',
+        pinned: 'right',
+        type: 'button',
+        buttons: [
+          {
+            type: 'icon',
+            icon: 'edit',
+            tooltip: 'edit',
+            click: record => this.openEditDstNumber(record),
+          },
+          {
+            color: 'warn',
+            icon: 'delete',
+            text: 'delete',
+            tooltip: 'delete',
+            pop: true,
+            popTitle: 'Confirm Delete',
+            popCloseText: 'Cancel',
+            popOkText: 'Delete',
+            click: record => this.delete(record),
+          },
+        ],
+      },
+    ];
   }
 
   ngOnDestroy() {
     this.translateSubscription.unsubscribe();
   }
 
-  getErrorMessage(form: FormGroup) {
-    return form.get('email').hasError('required')
-      ? 'validations.required'
-      : form.get('email').hasError('email')
-      ? 'validations.invalid_email'
-      : '';
-  }
-
   getallenquiries() {
     this.userService.getinquires().subscribe(
       (response: any) => {
         console.log(response);
-        this.dataSource = response.data;
+        this.list = response.data;
       },
       error => {
         console.log(error);
       }
     );
+  }
+
+  changeSelect(e: any) {
+    console.log(e);
+  }
+
+  changeSort(e: any) {
+    console.log(e);
+  }
+
+  openEditDstNumber(data){
+    console.log(data)
+  }
+
+  delete(data){
+    console.log(data)
   }
 }

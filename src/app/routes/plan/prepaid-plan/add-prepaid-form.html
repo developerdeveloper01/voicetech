@@ -1,11 +1,11 @@
-<h2 mat-dialog-title>Edit IP</h2>
-<form [formGroup]="editip" (ngSubmit)="submiteditip()">
+<h2 mat-dialog-title>Add IP</h2>
+<form [formGroup]="addprepaidplan" (ngSubmit)="submitprepaid()">
   <mat-dialog-content>
     <mat-form-field class="demo-full-width">
       <mat-label>Title</mat-label>
       <input type="text" matInput placeholder="Neron" formControlName="title"
              required>
-      <mat-error *ngIf="editip.get('title').invalid">
+      <mat-error *ngIf="addprepaidplan.get('title').invalid">
         {{'validations.required'| translate}}
       </mat-error>
     </mat-form-field>
@@ -16,8 +16,8 @@
           <mat-form-field class="demo-full-width">
             <mat-label>IP</mat-label>
             <input type="text" matInput placeholder="xxx.xxx.xxx.xxx" formControlName="ipnumber" required>
-            <mat-error *ngIf="editip.get('ipnumber').invalid">
-              {{getErrorMessage(editip)}}
+            <mat-error *ngIf="addprepaidplan.get('ipnumber').invalid">
+              {{getErrorMessage(addprepaidplan)}}
             </mat-error>
           </mat-form-field>
         </td>
@@ -33,7 +33,7 @@
 
   <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button mat-dialog-close [disabled]="editip.invalid" color="primary"
+    <button mat-raised-button mat-dialog-close [disabled]="addprepaidplan.invalid" color="primary"
             cdkFocusInitial
             type="submit">Submit</button>
   </mat-dialog-actions>

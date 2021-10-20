@@ -155,7 +155,8 @@
     "max": "This value should be less than {{number}}",
     "exist": "The {{value}} has exists",
     "inconsistent": "Inconsistent with {{value}}",
-    "invalid_email": "Invalid email"
+    "invalid_email": "Invalid email",
+    "pattern": "Pattern doesn't match."
   },
   "user": {
     "profile": "profile",

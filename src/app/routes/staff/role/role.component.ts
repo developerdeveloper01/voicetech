@@ -18,6 +18,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MtxAlertComponent, MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
 import { TablesRemoteDataService } from 'app/routes/service/service/monitoring/agent-table/remote-data.service';
 import { TablesKitchenSinkEditComponent } from 'app/routes/tables/kitchen-sink/edit/edit.component';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface PeriodicElement {
   name: string;
@@ -166,13 +167,12 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
       ],
     },
   ];
-
-  list = [];
-  total = 0;
-  isLoading = true;
   allroles: any;
 
   //table
+  list = [];
+  total = 0;
+  isLoading: Boolean;
   multiSelectable = true;
   rowSelectable = true;
   hideRowSelectionCheckbox = false;
@@ -192,7 +192,8 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
     private translate: TranslateService,
     public userService: UserService,
     private snackBar: MatSnackBar,
-    public dialog: MtxDialog,
+    public dialog: MatDialog,
+    public dialogx: MtxDialog,
     private cdr: ChangeDetectorRef
   ) {
     this.reactiveForm1 = this.fb.group({
@@ -311,7 +312,9 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
       (response: any) => {
         console.log('%crole.component.ts line:311 response', 'color: #26bfa5;', response);
         this.list = response.data;
+        this.total = response.data.length;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error => {
         console.log('%cerror role.component.ts line:318 ', 'color: red; display: block; width: 100%;', error);
@@ -345,8 +348,8 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   edit(value: any) {
-    const dialogRef = this.dialog.originalOpen(TablesKitchenSinkEditComponent, {
-      width: '900px',
+    const dialogRef = this.dialogx.originalOpen(TablesKitchenSinkEditComponent, {
+      width: '90%',
       data: { record: value },
     });
     // const onOk = () => {
@@ -357,7 +360,7 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   delete(value: any) {
-    this.dialog.alert(`You have deleted ${value.position}!`);
+    this.dialogx.alert(`You have deleted ${value.position}!`);
   }
 
   changeSelect(e: any) {
@@ -366,5 +369,198 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
 
   changeSort(e: any) {
     console.log(e);
+  }
+
+
+
+  openRole() {
+    let adddailogRef = this.dialog.open(AddRoleFormComponent, { width: '500px' });
+
+    adddailogRef.afterClosed().subscribe(() => {
+      this.getallroles();
+    });
+  }
+}
+
+
+export interface Task {
+  name: string;
+  completed: boolean;
+  subtasks?: Task[];
+}
+
+@Component({
+  selector: 'add-role-form',
+  styles: [
+    `
+      .demo-full-width {
+        width: 100%;
+      }
+
+      .demo-sub-list {
+  margin-left: 20px;
+
+
+input[type="checkbox"] {
+	visibility: hidden;
+	&:checked + label {
+		transform: rotate(360deg);
+		background-color: #000;
+		&:before {
+			transform: translateX(90px);
+			background-color: #FFF;
+		}
+	}
+}
+
+label {
+	display: flex;
+	width: 180px;
+	height: 90px;
+	border: 6px solid;
+	border-radius: 99em;
+	position: relative;
+	transition: transform .75s ease-in-out;
+	transform-origin: 50% 50%;
+	cursor: pointer;
+
+	&:before {
+		transition: transform .75s ease;
+		transition-delay: .5s;
+		content: "";
+		display: block;
+		position: absolute;
+		width: 54px;
+		height: 54px;
+		background-color: #000;
+		border-radius: 50%;
+		top: 12px;
+		left: 12px;
+	}
+}
+}
+
+    `,
+  ],
+  templateUrl: './add-role-form.html',
+})
+export class AddRoleFormComponent implements OnInit {
+  falseValue = 'false';
+  trueValue = 'true';
+
+  addroleform: FormGroup;
+  allips: any;
+
+  constructor(
+    private fb: FormBuilder,
+    public userService: UserService,
+    private snackBar: MatSnackBar
+  ) {
+    this.addroleform = this.fb.group({
+      ip: ['', [Validators.required]],
+      dstnumber: [
+        '',
+        [Validators.required, Validators.min(1000000000), Validators.max(9999999999)],
+      ],
+      inusestatus: [false],
+    });
+  }
+
+  ngOnInit(): void {
+    this.getallips();
+  }
+
+
+  tasks: Task[] = [
+    {
+      name: 'Enquiry',
+      completed: false,
+      subtasks: [
+        { name: 'View Enquiry', completed: false },
+        { name: 'Followup Enquiry', completed: true },
+      ],
+    },
+    {
+      name: 'Manage Staff',
+      completed: false,
+      subtasks: [
+        { name: 'View Staff', completed: true },
+        { name: 'Add Staff', completed: false },
+        { name: 'Edit Staff', completed: false },
+        { name: 'Delete Staff', completed: false },
+      ],
+    },
+  ];
+
+  allComplete(task: Task): boolean {
+    const subtasks = task.subtasks;
+
+    return task.completed || (subtasks != null && subtasks.every(t => t.completed));
+  }
+
+  someComplete(tasks: Task[]): boolean {
+    const numComplete = tasks.filter(t => t.completed).length;
+    return numComplete > 0 && numComplete < tasks.length;
+  }
+
+  setAllCompleted(tasks: Task[], completed: boolean) {
+    tasks.forEach(t => (t.completed = completed));
+  }
+
+
+  getErrorMessage(form: FormGroup) {
+    return form.get('dstnumber').hasError('required')
+      ? 'validations.required'
+      : form.get('dstnumber').hasError('min')
+      ? 'validations.min'
+      : form.get('dstnumber').hasError('max')
+      ? 'validations.max'
+      : '';
+  }
+
+  checkboxChange(checkbox: MatCheckbox, checked: boolean) {
+    checkbox.value = checked ? this.trueValue : this.falseValue;
+  }
+
+  submitdstnumber() {
+    if (this.addroleform.valid) {
+      this.userService.addrole(this.addroleform.value).subscribe(
+        (response: any) => {
+          console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+          this.snackBar.open('DST Number Added Successfully!', '', { duration: 2000 });
+          this.addroleform.reset();
+          //this.addroleform.markAsUntouched();
+        },
+        error => {
+          console.log(
+            '%cerror ips.component.ts line:254 ',
+            'color: red; display: block; width: 100%;',
+            error
+          );
+        }
+      );
+    } else {
+      this.getErrorMessage(this.addroleform);
+    }
+  }
+
+  getallips() {
+    this.userService.getallips().subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+        this.allips = response.data;
+      },
+      error => {
+        console.log(
+          '%cerror ips.component.ts line:254 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
+      }
+    );
+  }
+
+  isFieldValid(field: string) {
+    return !this.addroleform.get(field).valid && this.addroleform.get(field).touched;
   }
 }
