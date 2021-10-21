@@ -133,6 +133,10 @@
     "enquiry": "Enquiry",
     "chat": "Chat",
 
+    "report": "Reports",
+    "report.cdr": "CDR File",
+
+
     "plan": "Plans",
     "plan.prepaid-plan": "Prepaid plan",
     "plan.postpaid-plan": "Postpaid plan",
@@ -142,7 +146,7 @@
     "voice-broadcast": "Voice Broadcast",
     "sms-email-configuration": "SMS/Email Configuration",
     "list-manager": "List Manager",
-    "report": "report",
+    
     "network": "network",
     "security": "security",
     "system-setting": "System setting"

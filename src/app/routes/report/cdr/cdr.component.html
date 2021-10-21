@@ -1,1 +1,70 @@
-<p>cdr works!</p>
+
+<page-header></page-header>
+
+<section>
+   <form>
+    <mat-form-field>
+      <input matInput
+             [matDatepicker]="paymentPicker"
+             [(ngModel)]="paymentDate"
+             #paymentDateModel="ngModel"
+             [min]="minPaymentDate"
+             required
+             aria-label="Payment date">
+      <mat-datepicker-toggle matSuffix [for]="paymentPicker"></mat-datepicker-toggle>
+      <mat-datepicker #paymentPicker></mat-datepicker>
+      <mat-error *ngIf="paymentDateModel.hasError('required')">
+        Please choose a date.
+      </mat-error>
+      <mat-error *ngIf="paymentDateModel.hasError('matDatepickerMin')">
+        Please choose a later date.
+      </mat-error>
+    </mat-form-field>
+  </form>
+ 
+<div class="row">
+    <div class="col-lg-12">
+      <!-- <div class="data-grid-options">
+          <button
+                  mat-raised-button
+                  color="primary"
+                  style="border-radius: 30px; padding: 5px; margin: 5px; float: right; margin-bottom: 10px;"
+                  (click)="openAddDstNumber()">
+            <mat-icon color="white" style="margin-left: 8px;">add</mat-icon>
+            <span style="margin-right: 8px; padding: 5px;">Add Price to Minute Plan </span>
+          </button>
+        </div> -->
+  
+      <mtx-grid
+                class="mat-elevation-z8"
+                [data]="list"
+                [columns]="columns"
+                [loading]="isLoading"
+                [columnResizable]="columnResizable"
+                [multiSelectable]="multiSelectable"
+                [rowSelectable]="rowSelectable"
+                [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+                [rowHover]="rowHover"
+                [rowStriped]="rowStriped"
+                [showToolbar]="showToolbar"
+                [toolbarTitle]="'CDR File'"
+                [columnHideable]="columnHideable"
+                [columnMovable]="columnMovable"
+                [expandable]="expandable"
+                [expansionTemplate]="expansionTpl"
+                [pageOnFront]="showPaginator"
+                [showPaginator]="showPaginator"
+                [pageSizeOptions]="[50, 100, 200, 500]"
+                [pageIndex]="0"
+                [pageSize]="50"
+                (sortChange)="changeSort($event)"
+                (selectionChange)="changeSelect($event)">
+      </mtx-grid>
+      <ng-template #expansionTpl let-row>
+        {{ row.name }}
+      </ng-template>
+    </div>
+  </div>
+
+</section>
+  

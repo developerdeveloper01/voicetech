@@ -299,8 +299,15 @@
     {
       "route": "report",
       "name": "report",
-      "type": "link",
-      "icon": "description"
+      "type": "sub",
+      "icon": "description",
+      "children":[
+          {
+            "route":"cdr",
+            "name":"cdr",
+            "type":"link"
+          }
+      ]
     },
     {
       "route": "network",
