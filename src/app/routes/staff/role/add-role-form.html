@@ -1,3 +1,16 @@
+<style>
+fieldset.st-set {
+    padding: 15px;
+    border-radius: 5px;
+    border-color: #cccccc70 !important;
+}
+legend.st-leg {
+    font-size: 16px;
+}
+.st-mb.ng-star-inserted {
+    margin-bottom: 15px;
+}
+</style>
 <h2 mat-dialog-title>Add Roles</h2>
 <form [formGroup]="addroleform" (ngSubmit)="submitdstnumber()">
   <mat-dialog-content>
@@ -17,15 +30,18 @@
       </mat-error> -->
     </mat-form-field>
 
-    <section class="b-1 r-24">
-      <h2>Permissions</h2>
-      <div *ngFor="let task of tasks">
-        <mat-checkbox color="primary" [(ngModel)]="task.completed"
-                      [checked]="allComplete(task)"
-                      [indeterminate]="someComplete(task.subtasks)"
-                      (change)="setAllCompleted(task.subtasks, $event.checked)">
-          {{task.name}}
-        </mat-checkbox>
+    <section class=" r-24">
+      <h4>Permissions</h4>
+      <div *ngFor="let task of tasks" class="st-mb">
+        <fieldset class="st-set">
+          <legend class="st-leg">
+            <mat-checkbox color="primary" [(ngModel)]="task.completed"
+            [checked]="allComplete(task)"
+            [indeterminate]="someComplete(task.subtasks)"
+            (change)="setAllCompleted(task.subtasks, $event.checked)">
+            </mat-checkbox>
+            {{task.name}}
+          </legend>
         <div class="demo-sub-list">
           <div *ngFor="let subtask of task.subtasks">
             <mat-checkbox color="primary" [(ngModel)]="subtask.completed">
@@ -33,6 +49,7 @@
             </mat-checkbox>
           </div>
         </div>
+      </fieldset>
       </div>
     </section>
 

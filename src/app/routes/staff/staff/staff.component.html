@@ -4,8 +4,9 @@
   <div class="row">
     <div class="col-lg-12">
       <mat-card *ngIf="toggleeditstaff" style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
-        <mat-card-title>Add Staff</mat-card-title>
-
+        <!-- <mat-card-title>Add Staff</mat-card-title> -->
+        <fieldset style="padding: 20px;border-radius: 4px;">
+        <legend style="font-size: 20px;">Add Staff</legend>
         <form class="form-field-full" [formGroup]="addstaffform" (ngSubmit)="submitstaffForm()">
           <div fxLayout="row wrap" fxLayoutGap="8px grid">
 
@@ -100,13 +101,15 @@
           <button mat-raised-button color="primary" class="m-t-8" type="submit">Save</button>
           <button mat-raised-button color="primary" class="m-t-8 m-l-4"
                   (click)="editstaffchk()">Edit</button>
+        
         </form>
-
+      </fieldset>
       </mat-card>
       <!-- editform -->
       <mat-card *ngIf="!toggleeditstaff" style="box-shadow: 2px 4px 14px rgb(0 0 0 / 28%);">
-        <mat-card-title>Edit</mat-card-title>
-
+        <!-- <mat-card-title>Edit</mat-card-title> -->
+        <fieldset style="padding: 20px; border-radius: 4px;">
+        <legend style="font-size: 20px;">Edit</legend>
         <form class="form-field-full">
           <div fxLayout="row wrap" fxLayoutGap="8px grid">
 
@@ -134,6 +137,7 @@
 
           <button mat-raised-button color="primary" class="m-t-8">Update</button>
         </form>
+        </fieldset>
 
       </mat-card>
       <!-- editform close -->
@@ -164,7 +168,7 @@
 
         <button class="m-r-8" mat-raised-button color="primary" (click)="search()">Search</button>
       </form> -->
-
+      <mat-card>
       <div class="data-grid-options">
         <!-- <mat-checkbox [(ngModel)]="rowSelectable">Row Selectable</mat-checkbox>
         <mat-checkbox [(ngModel)]="hideRowSelectionCheckbox">Hide checkbox</mat-checkbox>
@@ -209,10 +213,12 @@
                 (sortChange)="changeSort($event)"
                 (selectionChange)="changeSelect($event)">
       </mtx-grid>
+    </mat-card>
       <ng-template #expansionTpl let-row>
         {{row.name}}
       </ng-template>
     </div>
+ 
 
   </div>
 </section>
