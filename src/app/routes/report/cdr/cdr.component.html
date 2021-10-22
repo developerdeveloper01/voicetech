@@ -10,7 +10,7 @@
              #paymentDateModel="ngModel"
              [min]="minPaymentDate"
              required
-             aria-label="Payment date">
+             aria-label="Start Date" placeholder="Start Date">
       <mat-datepicker-toggle matSuffix [for]="paymentPicker"></mat-datepicker-toggle>
       <mat-datepicker #paymentPicker></mat-datepicker>
       <mat-error *ngIf="paymentDateModel.hasError('required')">
@@ -20,8 +20,40 @@
         Please choose a later date.
       </mat-error>
     </mat-form-field>
+    <mat-form-field>
+      <input matInput
+             [matDatepicker]="paymentPicker"
+             [(ngModel)]="paymentDate"
+             #paymentDateModel="ngModel"
+             [min]="minPaymentDate"
+             required
+             aria-label="End Date" placeholder="End Date">
+      <mat-datepicker-toggle matSuffix [for]="paymentPicker"></mat-datepicker-toggle>
+      <mat-datepicker #paymentPicker></mat-datepicker>
+      <mat-error *ngIf="paymentDateModel.hasError('required')">
+        Please choose a date.
+      </mat-error>
+      <mat-error *ngIf="paymentDateModel.hasError('matDatepickerMin')">
+        Please choose a later date.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="m-r-8">
+      <mat-label>Number</mat-label>
+      <input type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button mat-raised-button color="primary">Search</button>
   </form>
- 
+
 <div class="row">
     <div class="col-lg-12">
       <!-- <div class="data-grid-options">
@@ -34,7 +66,7 @@
             <span style="margin-right: 8px; padding: 5px;">Add Price to Minute Plan </span>
           </button>
         </div> -->
-  
+
       <mtx-grid
                 class="mat-elevation-z8"
                 [data]="list"
@@ -47,11 +79,10 @@
                 [rowHover]="rowHover"
                 [rowStriped]="rowStriped"
                 [showToolbar]="showToolbar"
-                [toolbarTitle]="'CDR File'"
+                [toolbarTitle]="'CDR Reports'"
                 [columnHideable]="columnHideable"
                 [columnMovable]="columnMovable"
                 [expandable]="expandable"
-                [expansionTemplate]="expansionTpl"
                 [pageOnFront]="showPaginator"
                 [showPaginator]="showPaginator"
                 [pageSizeOptions]="[50, 100, 200, 500]"
@@ -60,11 +91,7 @@
                 (sortChange)="changeSort($event)"
                 (selectionChange)="changeSelect($event)">
       </mtx-grid>
-      <ng-template #expansionTpl let-row>
-        {{ row.name }}
-      </ng-template>
     </div>
   </div>
 
 </section>
-  

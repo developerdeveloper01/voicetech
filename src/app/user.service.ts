@@ -104,4 +104,9 @@ export class UserService {
   getdatewisereport() {
     return this.http.get(`${this.backendurl}/admin/viewreportsfromneronserver`);
   }
+
+  //
+  allcdrreport(num) {
+    return this.http.get(`${this.backendurl}/admin/allcdrreport/${num}`);
+  }
 }

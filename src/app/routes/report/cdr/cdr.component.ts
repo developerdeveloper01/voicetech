@@ -8,7 +8,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,6 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'app/user.service';
 import { TablesKitchenSinkEditComponent } from 'app/routes/tables/kitchen-sink/edit/edit.component';
 import { MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cdr',
@@ -26,20 +28,20 @@ import { MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
 export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
   paymentDate = new Date(Date.now() + 48 * 60 * 60 * 1000);
   minPaymentDate = new Date(Date.now() + 48 * 60 * 60 * 1000);
+
   columns: MtxGridColumn[] = [
-    { header: 'CDR File', sortable: true, field: 'cdrfile' },
-    { header: 'Date', sortable: true, field: 'date' },
-    { header: 'Time', sortable: true, field: 'time' },
-    {
-      header: 'Active Status',
-      field: 'inusestatus',
-      type: 'tag',
-      sortable: true,
-      tag: {
-        true: { text: 'Yes', color: 'green-200' },
-        false: { text: 'No', color: 'red-200' },
-      },
-    },
+    { header: 'ID', sortable: true, field: 'id' },
+    { header: 'Caller ID', sortable: true, field: 'caller_id_name' },
+    { header: 'Destination Number', sortable: true, field: 'destination_number' },
+    { header: 'Context', sortable: true, field: 'context' },
+    { header: 'Start Call', sortable: true, field: 'start_stamp' },
+    { header: 'Answer Stamp', sortable: true, field: 'answer_stamp' },
+    { header: 'End Call', sortable: true, field: 'end_stamp' },
+    { header: 'Duration', sortable: true, field: 'duration' },
+    { header: 'Bill', sortable: true, field: 'billsec' },
+    { header: 'Hangup Cause', sortable: true, field: 'hangup_cause' },
+    { header: 'Call Unique ID', sortable: true, field: 'uuid' },
+    { header: 'Date', sortable: true, field: 'created_time' },
     {
       header: 'Actions',
       field: 'action',
@@ -86,7 +88,12 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
   columnResizable = false;
   columnMenuButtonType = 'raised';
 
+  //other
   alldstnumbers: any;
+  myControl = new FormControl();
+
+  options: string[] = ['One', 'Two', 'Three'];
+  filteredOptions: Observable<string[]>;
 
   constructor(
     public dialog: MatDialog,
@@ -96,7 +103,18 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getallnumbers();
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+    this.getallcdrreport();
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   edit(value: any) {
@@ -119,7 +137,7 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
 
     editdailogRef.afterClosed().subscribe(() => {
       console.log('The edit dailog closed');
-      this.getallnumbers();
+      this.getallcdrreport();
     });
   }
 
@@ -128,7 +146,7 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
       (response: any) => {
         console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
         this.isLoading = false;
-        this.getallnumbers();
+        this.getallcdrreport();
         this.cdr.detectChanges();
         this.dialogx.alert(`You have deleted ${value.dstnumber}!`);
       },
@@ -146,7 +164,7 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
     let adddailogRef = this.dialog.open(AddCdrFileFormComponent, { width: '500px' });
 
     adddailogRef.afterClosed().subscribe(() => {
-      this.getallnumbers();
+      this.getallcdrreport();
     });
   }
 
@@ -158,8 +176,9 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(e);
   }
 
-  getallnumbers() {
-    this.userService.getalldstnumbers().subscribe(
+  getallcdrreport() {
+    var num = 1;
+    this.userService.allcdrreport(num).subscribe(
       (response: any) => {
         console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
         this.list = response.data;
@@ -168,11 +187,7 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
         this.cdr.detectChanges();
       },
       error => {
-        console.log(
-          '%cerror ips.component.ts line:254 ',
-          'color: red; display: block; width: 100%;',
-          error
-        );
+        console.log(error);
       }
     );
   }
