@@ -214,11 +214,7 @@
     "delete": "Delete",
     "confirm_delete": "Confirm delete?",
     "ok": "Ok",
-    "close": "Close",
-    "dashboard":"Dasboard",
-    "logs":"Logs",
-    "reports":"Reports",
-    "reports.incoming-call-report":"Incoming Call Report",
-    "reports.outgoing-call-report":"Outgoing Call Report"
+    "close": "Close"
+    
   }
 }

@@ -2,7 +2,7 @@
 fieldset.st-set {
     padding: 15px;
     border-radius: 5px;
-    border-color: #cccccc70 !important;
+    border-color: #2196f35e  !important;
 }
 legend.st-leg {
     font-size: 16px;
@@ -10,6 +10,13 @@ legend.st-leg {
 .st-mb.ng-star-inserted {
     margin-bottom: 15px;
 }
+fieldset.st-set {
+    width: 295px;
+    float: left;
+    height: 180px;
+    margin: 10px;
+} 
+
 </style>
 <h2 mat-dialog-title>Add Roles</h2>
 <form [formGroup]="addroleform" (ngSubmit)="submitdstnumber()">
@@ -39,8 +46,8 @@ legend.st-leg {
             [checked]="allComplete(task)"
             [indeterminate]="someComplete(task.subtasks)"
             (change)="setAllCompleted(task.subtasks, $event.checked)">
-            </mat-checkbox>
             {{task.name}}
+            </mat-checkbox>
           </legend>
         <div class="demo-sub-list">
           <div *ngFor="let subtask of task.subtasks">
@@ -49,16 +56,11 @@ legend.st-leg {
             </mat-checkbox>
           </div>
         </div>
-      </fieldset>
-      </div>
+       </fieldset>
+       </div>
     </section>
 
-
-
-
-
-
-    <table class="demo-full-width" cellspacing="0">
+    <!-- <table class="demo-full-width" cellspacing="0">
       <tr>
         <td>
           <mat-form-field class="demo-full-width">
@@ -77,7 +79,7 @@ legend.st-leg {
           </mat-checkbox>
         </td>
       </tr>
-    </table>
+    </table> -->
   </mat-dialog-content>
 
   <mat-dialog-actions>
