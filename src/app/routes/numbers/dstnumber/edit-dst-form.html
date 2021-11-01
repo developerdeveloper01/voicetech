@@ -21,9 +21,9 @@
         <td>
           <mat-form-field class="demo-full-width">
             <mat-label>DST Number</mat-label>
-            <input type="number" matInput placeholder="991515000" formControlName="dstnumber"
+            <input type="number" matInput placeholder="991515000" formControlName="did_no"
                    required>
-            <mat-error *ngIf="editdstnumber.get('dstnumber').invalid">
+            <mat-error *ngIf="editdstnumber.get('did_no').invalid">
               {{getErrorMessage(editdstnumber)| translate}}
             </mat-error>
           </mat-form-field>

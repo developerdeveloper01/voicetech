@@ -18,6 +18,7 @@ import { TablesKitchenSinkEditComponent } from 'app/routes/tables/kitchen-sink/e
 import { MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { MatDatepickerActions } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-cdr',
@@ -26,8 +27,13 @@ import { map, startWith } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
-  paymentDate = new Date(Date.now() + 48 * 60 * 60 * 1000);
-  minPaymentDate = new Date(Date.now() + 48 * 60 * 60 * 1000);
+  notinusestartingDate = new Date(Date.now() + 48 * 60 * 60 * 1000);
+  notinuseendDate = new Date(Date.now() - 1 * 24 * 60 * 60 * 1000);
+
+  startDate = new FormControl(new Date());
+  endDate = new FormControl(new Date());
+
+  searchform: FormGroup;
 
   columns: MtxGridColumn[] = [
     { header: 'ID', sortable: true, field: 'id' },
@@ -75,8 +81,8 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
   list = [];
   total = 0;
   isLoading: Boolean;
-  multiSelectable = true;
-  rowSelectable = true;
+  multiSelectable = false;
+  rowSelectable = false;
   hideRowSelectionCheckbox = false;
   showToolbar = true;
   columnHideable = true;
@@ -92,23 +98,28 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
   alldstnumbers: any;
   myControl = new FormControl();
 
-  options: string[] = ['One', 'Two', 'Three'];
+  options: string[] = ['1256', '4894', '4642', '8462', '8521'];
   filteredOptions: Observable<string[]>;
 
   constructor(
     public dialog: MatDialog,
     public dialogx: MtxDialog,
     public userService: UserService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
     this.getallcdrreport();
+    this.searchform = this.fb.group({
+      startdate: [new Date(Date.now())],
+      enddate: [Date.now()],
+      searchinput: [''],
+    });
   }
 
   private _filter(value: string): string[] {
@@ -178,7 +189,7 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
 
   getallcdrreport() {
     var num = 1;
-    this.userService.allcdrreport(num).subscribe(
+    this.userService.allcdrreport().subscribe(
       (response: any) => {
         console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
         this.list = response.data;
@@ -198,6 +209,10 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     console.log('component destroyed');
+  }
+
+  submitsearch() {
+    console.log(this.searchform.value);
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

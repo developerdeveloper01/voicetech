@@ -19,9 +19,9 @@
         <td>
           <mat-form-field class="demo-full-width">
             <mat-label>DST Number</mat-label>
-            <input type="number" matInput placeholder="991515000" formControlName="dstnumber"
+            <input type="number" matInput placeholder="991515000" formControlName="did_no"
                    required>
-            <mat-error *ngIf="adddstnumber.get('dstnumber').invalid">
+            <mat-error *ngIf="adddstnumber.get('did_no').invalid">
               {{getErrorMessage(adddstnumber)| translate}}
             </mat-error>
           </mat-form-field>
@@ -29,7 +29,7 @@
         <td>
           <mat-checkbox class="st-chk" [value]="falseValue"
                         (change)="checkboxChange($event.source, $event.checked)"
-                        formControlName="inusestatus">In Use
+                        formControlName="is_used">In Use
           </mat-checkbox>
         </td>
       </tr>

@@ -60,7 +60,6 @@ export class UserService {
     return this.http.get(`${this.backendurl}/admin/deleteprovidedip/${id}`);
   }
 
-
   //dst
   adddstnumber(data) {
     return this.http.post(`${this.backendurl}/admin/adddstnumber`, data);
@@ -81,7 +80,6 @@ export class UserService {
   getalldstnumbers() {
     return this.http.get(`${this.backendurl}/admin/alldstnumber`);
   }
-
 
   //prepaid plan
   addplan(data) {
@@ -106,7 +104,16 @@ export class UserService {
   }
 
   //
-  allcdrreport(num) {
-    return this.http.get(`${this.backendurl}/admin/allcdrreport/${num}`);
+  allcdrreport() {
+    return this.http.get(`${this.backendurl}/admin/allcdrreport`);
+  }
+
+  getreport(id) {
+    return this.http.get(`${this.backendurl}/admin/getdetailofonenumber/${id}`);
+  }
+
+  //Users
+  allusers() {
+    return this.http.get(`${this.backendurl}/user/allusers`);
   }
 }

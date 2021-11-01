@@ -10,7 +10,7 @@
         "value": "5"
       }
     },
-    
+
     {
       "route": "products",
       "name": "products",
@@ -26,13 +26,13 @@
               "route": "centralized-business-number",
               "name": "centralized-business-number",
               "type": "link"
-                            
+
             },
             {
               "route": "ivr-greeting",
               "name": "ivr-greeting",
               "type": "link"
-                            
+
             },
             {
               "route": "call-routing",
@@ -123,7 +123,7 @@
             }
           ]
         }
-       
+
       ]
 
     },
@@ -216,6 +216,37 @@
       ]
     },
     {
+      "route": "subordinate",
+      "name": "subordinate",
+      "type": "sub",
+      "icon": "low_priority",
+      "children": [
+        {
+          "route": "subordinates",
+          "name": "subordinates",
+          "type": "link"
+        },
+        {
+          "route": "agent",
+          "name": "agent",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "user",
+      "name": "user",
+      "type": "sub",
+      "icon": "people",
+      "children": [
+        {
+          "route": "users",
+          "name": "users",
+          "type": "link"
+        }
+      ]
+    },
+    {
       "route": "numbers",
       "name": "numbers",
       "type": "sub",
@@ -261,10 +292,10 @@
           "name": "postpaid-plan",
           "type": "link"
         }
-       
+
       ]
     },
-    
+
     {
       "route": "ivr-services",
       "name": "ivr-services",
@@ -822,7 +853,7 @@
           "name": "outgoing-call-report",
           "type": "link"
         }
-       
+
       ]
     }
 

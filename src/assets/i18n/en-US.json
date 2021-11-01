@@ -126,6 +126,13 @@
     "staff.role": "Role",
     "staff.staff": "Staff",
 
+    "subordinate":"Subordinate",
+    "subordinate.subordinates":"Subordinates",
+    "subordinate.agent":"Agent",
+
+    "user":"User",
+    "user.users":"Users",
+
     "numbers": "Numbers",
     "numbers.dstnumber": "DST Numbers",
     "numbers.ips": "IPs",
@@ -146,7 +153,7 @@
     "voice-broadcast": "Voice Broadcast",
     "sms-email-configuration": "SMS/Email Configuration",
     "list-manager": "List Manager",
-    
+
     "network": "network",
     "security": "security",
     "system-setting": "System setting"

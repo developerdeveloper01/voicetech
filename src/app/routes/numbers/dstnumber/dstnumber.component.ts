@@ -25,15 +25,10 @@ import { MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
-
   @ViewChild('statusTpl', { static: true }) statusTpl: TemplateRef<any>;
 
-
-
-
-
   //table
-  columns = []
+  columns = [];
   list = [];
   total = 0;
   isLoading: Boolean;
@@ -56,16 +51,13 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
     public dialogx: MtxDialog,
     public userService: UserService,
     private cdr: ChangeDetectorRef
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
-
     this.getallnumbers();
 
     this.columns = [
-      { header: 'DST Number', sortable: true, field: 'dstnumber' },
+      { header: 'DID Number', sortable: true, field: 'did_no' },
       { header: 'IP', sortable: true, field: 'ip.ipnumber' },
       {
         header: 'Active Status',
@@ -196,7 +188,6 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 }
 
-
 @Component({
   selector: 'add-dst-form',
   styles: [
@@ -222,10 +213,7 @@ export class AddDstNumberFormComponent implements OnInit {
   ) {
     this.adddstnumber = this.fb.group({
       ip: ['', [Validators.required]],
-      dstnumber: [
-        '',
-        [Validators.required, Validators.min(1000000000), Validators.max(9999999999)],
-      ],
+      did_no: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
       inusestatus: [false],
     });
   }
@@ -235,11 +223,11 @@ export class AddDstNumberFormComponent implements OnInit {
   }
 
   getErrorMessage(form: FormGroup) {
-    return form.get('dstnumber').hasError('required')
+    return form.get('did_no').hasError('required')
       ? 'validations.required'
-      : form.get('dstnumber').hasError('min')
+      : form.get('did_no').hasError('min')
       ? 'validations.min'
-      : form.get('dstnumber').hasError('max')
+      : form.get('did_no').hasError('max')
       ? 'validations.max'
       : '';
   }
@@ -320,12 +308,7 @@ export class EditDstNumberFormComponent implements OnInit {
 
     this.editdstnumber = this.fb.group({
       ip: ['', [Validators.required]],
-      dstnumber: [
-        '',
-        [Validators.required,Validators.min(1000000000),
-          Validators.max(9999999999)],
-
-      ],
+      did_no: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
       inusestatus: [false],
     });
   }
@@ -334,17 +317,17 @@ export class EditDstNumberFormComponent implements OnInit {
     this.getallips();
     this.editdstnumber.setValue({
       ip: this.data?.record?.ip ? this.data?.record?.ip?._id : 'null',
-      dstnumber: this.data?.record?.dstnumber ? this.data?.record?.dstnumber : 'null',
+      did_no: this.data?.record?.did_no ? this.data?.record?.did_no : 'null',
       inusestatus: this.data?.record?.inusestatus ? true : false,
     });
   }
 
   getErrorMessage(form: FormGroup) {
-    return form.get('dstnumber').hasError('required')
+    return form.get('did_no').hasError('required')
       ? 'validations.required'
-      : form.get('dstnumber').hasError('min')
+      : form.get('did_no').hasError('min')
       ? 'validations.min'
-      : form.get('dstnumber').hasError('max')
+      : form.get('did_no').hasError('max')
       ? 'validations.max'
       : '';
   }

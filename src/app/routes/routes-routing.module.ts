@@ -126,6 +126,15 @@ const routes: Routes = [
         path: 'plan',
         loadChildren: () => import('./plan/plan.module').then(m => m.PlanModule),
       },
+      {
+        path: 'user',
+        loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+      },
+      {
+        path: 'subordinate',
+        loadChildren: () =>
+          import('./subordinate/subordinate.module').then(m => m.SubordinateModule),
+      },
     ],
   },
   {
