@@ -65,7 +65,7 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   trueValue = 'true';
 
   columns: MtxGridColumn[] = [
-    { header: 'Name', sortable: true, field: 'name',showExpand: true  },
+    { header: 'Name', sortable: true, field: 'name', showExpand: true },
     { header: 'Status', sortable: true, field: 'status' },
     {
       header: 'Read Call Details',
@@ -317,7 +317,11 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
         this.cdr.detectChanges();
       },
       error => {
-        console.log('%cerror role.component.ts line:318 ', 'color: red; display: block; width: 100%;', error);
+        console.log(
+          '%cerror role.component.ts line:318 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
       }
     );
   }
@@ -371,17 +375,14 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(e);
   }
 
-
-
   openRole() {
-    let adddailogRef = this.dialog.open(AddRoleFormComponent, { width: '500px' });
+    let adddailogRef = this.dialog.open(AddRoleFormComponent, { width: '1000px' });
 
     adddailogRef.afterClosed().subscribe(() => {
       this.getallroles();
     });
   }
 }
-
 
 export interface Task {
   name: string;
@@ -398,48 +399,46 @@ export interface Task {
       }
 
       .demo-sub-list {
-  margin-left: 20px;
+        margin-left: 20px;
 
+        input[type='checkbox'] {
+          visibility: hidden;
+          &:checked + label {
+            transform: rotate(360deg);
+            background-color: #000;
+            &:before {
+              transform: translateX(90px);
+              background-color: #fff;
+            }
+          }
+        }
 
-input[type="checkbox"] {
-	visibility: hidden;
-	&:checked + label {
-		transform: rotate(360deg);
-		background-color: #000;
-		&:before {
-			transform: translateX(90px);
-			background-color: #FFF;
-		}
-	}
-}
+        label {
+          display: flex;
+          width: 180px;
+          height: 90px;
+          border: 6px solid;
+          border-radius: 99em;
+          position: relative;
+          transition: transform 0.75s ease-in-out;
+          transform-origin: 50% 50%;
+          cursor: pointer;
 
-label {
-	display: flex;
-	width: 180px;
-	height: 90px;
-	border: 6px solid;
-	border-radius: 99em;
-	position: relative;
-	transition: transform .75s ease-in-out;
-	transform-origin: 50% 50%;
-	cursor: pointer;
-
-	&:before {
-		transition: transform .75s ease;
-		transition-delay: .5s;
-		content: "";
-		display: block;
-		position: absolute;
-		width: 54px;
-		height: 54px;
-		background-color: #000;
-		border-radius: 50%;
-		top: 12px;
-		left: 12px;
-	}
-}
-}
-
+          &:before {
+            transition: transform 0.75s ease;
+            transition-delay: 0.5s;
+            content: '';
+            display: block;
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            background-color: #000;
+            border-radius: 50%;
+            top: 12px;
+            left: 12px;
+          }
+        }
+      }
     `,
   ],
   templateUrl: './add-role-form.html',
@@ -470,7 +469,6 @@ export class AddRoleFormComponent implements OnInit {
     this.getallips();
   }
 
-
   tasks: Task[] = [
     {
       name: 'Enquiry',
@@ -490,6 +488,44 @@ export class AddRoleFormComponent implements OnInit {
         { name: 'Delete Staff', completed: false },
       ],
     },
+    {
+      name: 'DST Numbers',
+      completed: false,
+      subtasks: [
+        { name: 'View DST Numbers', completed: true },
+        { name: 'Add DST Numbers', completed: false },
+        { name: 'Edit DST Numbers', completed: false },
+        { name: 'Delete DST Numbers', completed: false },
+      ],
+    },
+    {
+      name: 'IPs',
+      completed: false,
+      subtasks: [
+        { name: 'View IPs', completed: true },
+        { name: 'Add IPs', completed: false },
+        { name: 'Edit IPs', completed: false },
+        { name: 'Delete IPs', completed: false },
+      ],
+    },
+    {
+      name: 'Plan',
+      completed: false,
+      subtasks: [
+        { name: 'View Plan', completed: true },
+        { name: 'Add Plan', completed: false },
+        { name: 'Edit Plan', completed: false },
+        { name: 'Delete Plan', completed: false },
+      ],
+    },
+    {
+      name: 'Chat',
+      completed: false,
+      subtasks: [
+        { name: 'View Chat', completed: true },
+        { name: 'Delete Chat', completed: false },
+      ],
+    },
   ];
 
   allComplete(task: Task): boolean {
@@ -506,7 +542,6 @@ export class AddRoleFormComponent implements OnInit {
   setAllCompleted(tasks: Task[], completed: boolean) {
     tasks.forEach(t => (t.completed = completed));
   }
-
 
   getErrorMessage(form: FormGroup) {
     return form.get('dstnumber').hasError('required')
