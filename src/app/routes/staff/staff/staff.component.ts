@@ -83,7 +83,7 @@ export class StaffComponent implements OnInit {
   rowStriped = true;
   showPaginator = true;
   expandable = false;
-  columnResizable = true;
+  columnResizable = false;
 
   query = {
     q: 'user:nzbin',

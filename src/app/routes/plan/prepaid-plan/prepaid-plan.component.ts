@@ -24,31 +24,32 @@ import { MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
 })
 export class PrepaidPlanComponent implements OnInit, AfterViewInit, OnDestroy {
   columns: MtxGridColumn[] = [
-    { header: 'Validity Plan', sortable: true, field: 'validityplan' },
-    { header: 'Price', sortable: true, field: 'price' },
-    {
-      header: 'Active Status',
-      field: 'inusestatus',
-      type: 'tag',
-      sortable: true,
-      tag: {
-        true: { text: 'Yes', color: 'green-200' },
-        false: { text: 'No', color: 'red-200' },
-      },
-    },
+    { header: 'Plan Title', sortable: true, field: 'plantitle' },
+    { header: 'Price (Rs)', sortable: true, field: 'planprice' },
+    { header: 'Validity (Days)', sortable: true, field: 'validityday' },
+    { header: 'Balance (Minutes)', sortable: true, field: 'minute_balance' },
+    { header: 'Description', sortable: true, field: 'desc' },
     {
       header: 'Actions',
       field: 'action',
-      minWidth: 120,
-      width: '120px',
+      minWidth: 180,
+      width: '180px',
       pinned: 'right',
       type: 'button',
       buttons: [
         {
           type: 'icon',
+          color: 'primary',
+          icon: 'visibility',
+          tooltip: 'view',
+          click: record => this.view(record),
+        },
+        {
+          type: 'icon',
+          color: 'accent',
           icon: 'edit',
           tooltip: 'edit',
-          click: record => this.openEditDstNumber(record),
+          click: record => this.edit(record),
         },
         {
           color: 'warn',
@@ -69,8 +70,8 @@ export class PrepaidPlanComponent implements OnInit, AfterViewInit, OnDestroy {
   list = [];
   total = 0;
   isLoading: Boolean;
-  multiSelectable = true;
-  rowSelectable = true;
+  multiSelectable = false;
+  rowSelectable = false;
   hideRowSelectionCheckbox = false;
   showToolbar = true;
   columnHideable = true;
@@ -81,6 +82,7 @@ export class PrepaidPlanComponent implements OnInit, AfterViewInit, OnDestroy {
   expandable = true;
   columnResizable = false;
   columnMenuButtonType = 'raised';
+  filteredData: any;
 
   alldstnumbers: any;
 
@@ -95,16 +97,21 @@ export class PrepaidPlanComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getallnumbers();
   }
 
-  edit(value: any) {
-    const dialogRef = this.dialogx.originalOpen(TablesKitchenSinkEditComponent, {
-      width: '900px',
-      data: { record: value },
-    });
-    const onOk = () => {
-      this.dialogx.alert('Closed');
-    };
+  view(value: any) {
+    console.log(value);
+  }
 
-    dialogRef.afterClosed().subscribe(() => console.log('The dialog was closed'));
+  edit(data: any) {
+    console.log(data);
+    let adddailogRef = this.dialog.open(AddPrepaidplanOneFormComponent, {
+      width: '500px',
+      data: { record: data },
+    });
+
+    adddailogRef.afterClosed().subscribe(() => {
+      console.log('The edit dailog closed');
+      this.getallnumbers();
+    });
   }
 
   openEditDstNumber(value) {
@@ -120,13 +127,13 @@ export class PrepaidPlanComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   delete(value: any) {
-    this.userService.deletenumber(value._id).subscribe(
+    this.userService.deleteplan(value._id).subscribe(
       (response: any) => {
         console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
         this.isLoading = false;
         this.getallnumbers();
         this.cdr.detectChanges();
-        this.dialogx.alert(`You have deleted ${value.dstnumber}!`);
+        this.dialogx.alert(`You have deleted ${value.plantitle}!`);
       },
       error => {
         console.log(
@@ -138,10 +145,11 @@ export class PrepaidPlanComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  openAddDstNumber() {
+  openAddPlan() {
     let adddailogRef = this.dialog.open(AddPrepaidplanOneFormComponent, { width: '500px' });
 
     adddailogRef.afterClosed().subscribe(() => {
+      this.cdr.detectChanges();
       this.getallnumbers();
     });
   }
@@ -154,8 +162,20 @@ export class PrepaidPlanComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log(e);
   }
 
+  searchData(searchValue: any) {
+    if(searchValue){
+    this.filteredData = this.list.filter((item: any) => {
+        return item.plantitle.toLowerCase().includes(searchValue.toLowerCase()) || item.desc.toLowerCase().includes(searchValue.toLowerCase());
+    });}
+    else{
+      this.filteredData = null;
+      this.getallnumbers();
+      this.getallnumbers();
+    }
+  }
+
   getallnumbers() {
-    this.userService.getalldstnumbers().subscribe(
+    this.userService.getallplans().subscribe(
       (response: any) => {
         console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
         this.list = response.data;
@@ -198,28 +218,43 @@ export class PrepaidPlanComponent implements OnInit, AfterViewInit, OnDestroy {
 export class AddPrepaidplanOneFormComponent implements OnInit {
   falseValue = 'false';
   trueValue = 'true';
-
-  adddstnumber: FormGroup;
+  editmode: Boolean = false;
+  addplan: FormGroup;
   allips: any;
+  id: any;
 
   constructor(
     private fb: FormBuilder,
     public userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<AddPrepaidplanOneFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.adddstnumber = this.fb.group({
-      ip: ['', [Validators.required]],
-      dstnumber: [
-        '',
-        [Validators.required, Validators.min(1000000000), Validators.max(9999999999)],
-      ],
-      inusestatus: [false],
+    this.addplan = this.fb.group({
+      plantitle: ['', [Validators.required]],
+      planprice: ['', [Validators.required]],
+      validityday: ['', [Validators.required]],
+      minute_balance: ['', [Validators.required]],
+      desc: ['', [Validators.required]],
     });
+
+    if (data) {
+      console.log(data);
+      this.editmode = true;
+      this.id = this.data?.record?._id;
+      this.addplan.setValue({
+        plantitle: this.data?.record?.plantitle ? this.data?.record?.plantitle : 'null',
+        planprice: this.data?.record?.planprice ? this.data?.record?.planprice : 'null',
+        validityday: this.data?.record?.validityday ? this.data?.record?.validityday : 'null',
+        minute_balance: this.data?.record?.minute_balance
+          ? this.data?.record?.minute_balance
+          : 'null',
+        desc: this.data?.record?.desc ? this.data?.record?.desc : 'null',
+      });
+    }
   }
 
-  ngOnInit(): void {
-    this.getallips();
-  }
+  ngOnInit(): void {}
 
   getErrorMessage(form: FormGroup) {
     return form.get('dstnumber').hasError('required')
@@ -236,45 +271,42 @@ export class AddPrepaidplanOneFormComponent implements OnInit {
   }
 
   submitdstnumber() {
-    if (this.adddstnumber.valid) {
-      this.userService.adddstnumber(this.adddstnumber.value).subscribe(
+    if (this.editmode) {
+      console.log(this.addplan.value);
+      this.userService.editplan(this.id, this.addplan.value).subscribe(
         (response: any) => {
-          console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-          this.snackBar.open('DST Number Added Successfully!', '', { duration: 2000 });
-          this.adddstnumber.reset();
-          //this.adddstnumber.markAsUntouched();
+          console.log(response);
+          this.snackBar.open('Plan Edited Successfully!', '', { duration: 2000 });
+          this.addplan.reset();
         },
         error => {
-          console.log(
-            '%cerror ips.component.ts line:254 ',
-            'color: red; display: block; width: 100%;',
-            error
-          );
+          console.log(error);
         }
       );
     } else {
-      this.getErrorMessage(this.adddstnumber);
+      if (this.addplan.valid) {
+        this.userService.addplan(this.addplan.value).subscribe(
+          (response: any) => {
+            console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+            this.snackBar.open('Plan Added Successfully!', '', { duration: 2000 });
+            this.addplan.reset();
+          },
+          error => {
+            console.log(
+              '%cerror ips.component.ts line:254 ',
+              'color: red; display: block; width: 100%;',
+              error
+            );
+          }
+        );
+      } else {
+        this.getErrorMessage(this.addplan);
+      }
     }
   }
 
-  getallips() {
-    this.userService.getallips().subscribe(
-      (response: any) => {
-        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-        this.allips = response.data;
-      },
-      error => {
-        console.log(
-          '%cerror ips.component.ts line:254 ',
-          'color: red; display: block; width: 100%;',
-          error
-        );
-      }
-    );
-  }
-
   isFieldValid(field: string) {
-    return !this.adddstnumber.get(field).valid && this.adddstnumber.get(field).touched;
+    return !this.addplan.get(field).valid && this.addplan.get(field).touched;
   }
 }
 

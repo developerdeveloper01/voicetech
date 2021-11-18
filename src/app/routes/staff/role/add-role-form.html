@@ -15,26 +15,16 @@ fieldset.st-set {
     float: left;
     height: 180px;
     margin: 10px;
-} 
+}
 
 </style>
 <h2 mat-dialog-title>Add Roles</h2>
 <form [formGroup]="addroleform" (ngSubmit)="submitdstnumber()">
   <mat-dialog-content>
-
-    <div>
-      <input type="checkbox" id="toggle"/>
-      <label for="toggle"></label>
-    </div>
-
-
     <mat-form-field class="demo-full-width">
       <mat-label>Title</mat-label>
       <input matInput placeholder="Admin"
-             required>
-      <!-- <mat-error *ngIf="addroleform.get('name').invalid">
-        {{'validations.required' | translate}}
-      </mat-error> -->
+             required formControlName="dstnumber">
     </mat-form-field>
 
     <section class=" r-24">
@@ -42,16 +32,16 @@ fieldset.st-set {
       <div *ngFor="let task of tasks" class="st-mb">
         <fieldset class="st-set">
           <legend class="st-leg">
-            <mat-checkbox color="primary" [(ngModel)]="task.completed"
+            <mat-checkbox color="primary" [value]="task.completed"
             [checked]="allComplete(task)"
             [indeterminate]="someComplete(task.subtasks)"
-            (change)="setAllCompleted(task.subtasks, $event.checked)">
+            (change)="setAllCompleted(task.subtasks, $event.checked)" >
             {{task.name}}
             </mat-checkbox>
           </legend>
         <div class="demo-sub-list">
           <div *ngFor="let subtask of task.subtasks">
-            <mat-checkbox color="primary" [(ngModel)]="subtask.completed">
+            <mat-checkbox color="primary" [(ngModel)] = "subtask.completed" [ngModelOptions]="{standalone: true}"  (change)="updateAllComplete(subtask)">
               {{subtask.name}}
             </mat-checkbox>
           </div>
@@ -59,32 +49,11 @@ fieldset.st-set {
        </fieldset>
        </div>
     </section>
-
-    <!-- <table class="demo-full-width" cellspacing="0">
-      <tr>
-        <td>
-          <mat-form-field class="demo-full-width">
-            <mat-label>DST Number</mat-label>
-            <input type="number" matInput placeholder="991515000" formControlName="dstnumber"
-                   required>
-            <mat-error *ngIf="addroleform.get('dstnumber').invalid">
-              {{getErrorMessage(addroleform)| translate}}
-            </mat-error>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-checkbox class="st-chk" [value]="falseValue"
-                        (change)="checkboxChange($event.source, $event.checked)"
-                        formControlName="inusestatus">In Use
-          </mat-checkbox>
-        </td>
-      </tr>
-    </table> -->
   </mat-dialog-content>
 
   <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button mat-dialog-close [disabled]="addroleform.invalid" color="primary"
+    <button mat-raised-button mat-dialog-close  color="primary"
             cdkFocusInitial
             type="submit">Submit</button>
   </mat-dialog-actions>

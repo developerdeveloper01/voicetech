@@ -44,8 +44,6 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
   expandable = true;
   columnResizable = false;
 
-  alldstnumbers: any;
-
   constructor(
     public dialog: MatDialog,
     public dialogx: MtxDialog,
@@ -79,6 +77,14 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
         buttons: [
           {
             type: 'icon',
+            color: 'primary',
+            icon: 'visibility',
+            tooltip: 'view',
+            click: record => this.view(record),
+          },
+          {
+            type: 'icon',
+            color: 'accent',
             icon: 'edit',
             tooltip: 'edit',
             click: record => this.openEditDstNumber(record),
@@ -140,6 +146,10 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
         );
       }
     );
+  }
+
+  view(value:any){
+    console.log(value);
   }
 
   openAddDstNumber() {

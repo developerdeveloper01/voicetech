@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UserService {
-  backendurl = 'http://localhost:6789/api';
+  backendurllocal = 'http://localhost:6789/api';
+  backendurl = 'http://103.8.43.13/api';
 
   constructor(public http: HttpClient) {}
 
@@ -115,5 +116,22 @@ export class UserService {
   //Users
   allusers() {
     return this.http.get(`${this.backendurl}/user/allusers`);
+  }
+
+  usersignup(data) {
+    return this.http.post(`${this.backendurl}/user/signup`,data);
+  }
+
+  edituser(id,data) {
+    return this.http.post(`${this.backendurl}/admin/edituser/${id}`,data);
+  }
+
+
+  deleteuser(id) {
+    return this.http.get(`${this.backendurl}/admin/deleteuser/${id}`);
+  }
+
+  userdetail(id){
+    return this.http.get(`${this.backendurl}/admin/viewoneuser/${id}`);
   }
 }

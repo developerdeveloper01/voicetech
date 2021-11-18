@@ -1,7 +1,17 @@
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserService } from 'app/user.service';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
-import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
+  AfterViewInit,
+  Inject,
+} from '@angular/core';
 
 @Component({
   selector: 'app-users',
@@ -9,7 +19,7 @@ import { Component, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@
   styleUrls: ['./users.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, AfterViewInit {
   //table
   columns = [];
   list = [];
@@ -26,41 +36,52 @@ export class UsersComponent implements OnInit {
   showPaginator = true;
   expandable = true;
   columnResizable = false;
+  filteredData:any;
 
   constructor(
     public dialog: MatDialog,
     public dialogx: MtxDialog,
     public userService: UserService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.getallusers();
+
     this.columns = [
       { header: 'Avatar', field: 'userimg', type: 'image' },
       {
         header: 'Name',
         sortable: true,
         field: 'firstname',
-        formatter: (data: any) => `${data.firstname} ${data.lastname}`,
+        formatter: (data: any) =>
+          `<a routerLink="/${data._id}"> ${data.firstname} ${data.lastname}</a>`,
         width: '150px',
       },
       { header: 'Mobile', sortable: true, field: 'mobile' },
       { header: 'Email', sortable: true, field: 'email' },
-      { header: 'Organization', sortable: true, field: 'organization_name', hide: true },
-      { header: 'Company', sortable: true, field: 'companyName' },
+      { header: 'Organization', sortable: true, field: 'organization_name' },
       { header: 'DID Number', sortable: true, field: 'alloted_did.did_no' },
-      { header: 'Created Date', sortable: true, field: 'createdAt' },
+      { header: 'Created Date', sortable: true, field: 'createdAt', },
       {
         header: 'Actions',
         field: 'action',
-        minWidth: 120,
-        width: '120px',
+        minWidth: 180,
+        width: '180px',
         pinned: 'right',
         type: 'button',
         buttons: [
           {
             type: 'icon',
+            color: 'primary',
+            icon: 'visibility',
+            tooltip: 'view',
+            click: record => this.router.navigate(['user/user-detail', record._id]),
+          },
+          {
+            type: 'icon',
+            color: 'accent',
             icon: 'edit',
             tooltip: 'edit',
             click: record => this.edit(record),
@@ -109,10 +130,159 @@ export class UsersComponent implements OnInit {
   }
 
   edit(data) {
-    console.log(data);
+    let adddailogRef = this.dialog.open(AddUserFormComponent, {
+      width: '500px',
+      data: { record: data },
+    });
+
+    adddailogRef.afterClosed().subscribe(() => {
+      console.log('The edit dailog closed');
+      this.getallusers();
+    });
   }
 
   delete(data) {
-    console.log(data);
+    this.userService.deleteuser(data._id).subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+        this.isLoading = false;
+        this.getallusers();
+        this.cdr.detectChanges();
+        this.dialogx.alert(`You have deleted ${data.firstname} ${data.lastname}!`);
+      },
+      error => {
+        console.log(
+          '%cerror ips.component.ts line:254 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
+      }
+    );
+  }
+
+  openAddDstNumber() {
+    let adddailogRef = this.dialog.open(AddUserFormComponent, { width: '500px' });
+
+    adddailogRef.afterClosed().subscribe(() => {
+      this.getallusers();
+      this.getallusers();
+      this.getallusers();
+    });
+  }
+
+  searchData(searchValue: any) {
+    if(searchValue){
+    this.filteredData = this.list.filter((item: any) => {
+        return item.firstname.toLowerCase().includes(searchValue.toLowerCase()) || item.lastname.toLowerCase().includes(searchValue.toLowerCase()) || item.email.toLowerCase().includes(searchValue.toLowerCase()) || item.organization_name.toLowerCase().includes(searchValue.toLowerCase());
+    });}
+    else{
+      this.filteredData = null;
+      this.getallusers();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.isLoading = false;
+  }
+
+  pagechange(e){
+    console.log(e);
+  }
+}
+
+@Component({
+  selector: 'add-user-form',
+  styles: [
+    `
+      .demo-full-width {
+        width: 100%;
+      }
+    `,
+  ],
+  templateUrl: './add-user-form.html',
+})
+export class AddUserFormComponent implements OnInit {
+  adduserform: FormGroup;
+  editmode: Boolean = false;
+  id: any;
+  constructor(
+    private fb: FormBuilder,
+    public userService: UserService,
+    private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<AddUserFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.adduserform = this.fb.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      mobile: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      organization_name: ['', [Validators.required]],
+    });
+
+    if (data) {
+      console.log(data);
+      this.editmode = true;
+      this.id = this.data?.record?._id;
+      this.adduserform.setValue({
+        firstname: this.data?.record?.firstname ? this.data?.record?.firstname : 'null',
+        lastname: this.data?.record?.lastname ? this.data?.record?.lastname : 'null',
+        email: this.data?.record?.email ? this.data?.record?.email : 'null',
+        mobile: this.data?.record?.mobile ? this.data?.record?.mobile : 'null',
+        password: this.data?.record?.password ? this.data?.record?.password : 'null',
+        organization_name: this.data?.record?.organization_name
+          ? this.data?.record?.organization_name
+          : 'null',
+      });
+    }
+  }
+
+  ngOnInit(): void {}
+
+  getErrorMessage(form: FormGroup) {
+    return form.get('firstname').hasError('required')
+      ? 'validations.required'
+      : form.get('lastname').hasError('required')
+      ? 'validations.required'
+      : form.get('email').hasError('required')
+      ? 'validations.required'
+      : '';
+  }
+
+  isFieldValid(field: string) {
+    return !this.adduserform.get(field).valid && this.adduserform.get(field).touched;
+  }
+
+  submituserform() {
+    if (this.editmode) {
+      console.log(this.adduserform.value);
+      this.userService.edituser(this.id, this.adduserform.value).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.snackBar.open('User Edited Successfully!', '', { duration: 2000 });
+          this.adduserform.reset();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      if (this.adduserform.valid) {
+        console.log(this.adduserform.value);
+        this.userService.usersignup(this.adduserform.value).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.snackBar.open('User Added Successfully!', '', { duration: 2000 });
+            this.adduserform.reset();
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      } else {
+        this.getErrorMessage(this.adduserform);
+      }
+    }
   }
 }

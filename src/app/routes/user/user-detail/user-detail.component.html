@@ -1,0 +1,32 @@
+<page-header class="p-t-32 p-b-48 m-b--24 bg-gray-900"
+             title="User Profile" hideBreadcrumb>
+</page-header>
+
+<div fxLayout="row wrap" class="matero-row">
+  <div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="33.33" fxFlex.gt-md="25">
+    <mat-card>
+      <div class="text-center">
+        <img class="m-b-8 r-full" [src]="userdetail?.userimg" alt="" width="200">
+        <h2 class="m-t-0 m-b-8 f-w-400">{{ userdetail?.firstname }} {{ userdetail?.lastname }}</h2>
+        <p class="m-t-0 m-b-8">{{userdetail?.email}} | {{userdetail?.mobile}} </p>
+        <p class="m-t-0 text-grey-500">{{userdetail?.organization_name}} | {{userdetail?.companyName}}</p>
+
+        <a mat-raised-button color="primary" routerLink="/chat" >Chat</a>
+        <button mat-raised-button color="accent" class="m-l-8">Call Now</button>
+      </div>
+      <!-- <mat-nav-list class="m-x--16 m-b--16 m-t-16">
+        <mat-divider inset></mat-divider>
+        <a mat-list-item routerLink="user/overview">
+          <mat-icon class="icon-20 m-r-8">account_circle</mat-icon> Overview
+        </a>
+        <mat-divider inset></mat-divider>
+        <a mat-list-item routerLink="user/settings">
+          <mat-icon class="icon-20 m-r-8">settings</mat-icon> Settings
+        </a>
+      </mat-nav-list> -->
+    </mat-card>
+  </div>
+  <div class="matero-col" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-sm="66.67" fxFlex.gt-md="75">
+    <app-user-overview></app-user-overview>
+  </div>
+</div>

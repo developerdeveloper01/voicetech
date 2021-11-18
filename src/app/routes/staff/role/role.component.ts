@@ -475,14 +475,14 @@ export class AddRoleFormComponent implements OnInit {
       completed: false,
       subtasks: [
         { name: 'View Enquiry', completed: false },
-        { name: 'Followup Enquiry', completed: true },
+        { name: 'Followup Enquiry', completed: false },
       ],
     },
     {
       name: 'Manage Staff',
       completed: false,
       subtasks: [
-        { name: 'View Staff', completed: true },
+        { name: 'View Staff', completed: false },
         { name: 'Add Staff', completed: false },
         { name: 'Edit Staff', completed: false },
         { name: 'Delete Staff', completed: false },
@@ -492,7 +492,7 @@ export class AddRoleFormComponent implements OnInit {
       name: 'DST Numbers',
       completed: false,
       subtasks: [
-        { name: 'View DST Numbers', completed: true },
+        { name: 'View DST Numbers', completed: false },
         { name: 'Add DST Numbers', completed: false },
         { name: 'Edit DST Numbers', completed: false },
         { name: 'Delete DST Numbers', completed: false },
@@ -502,7 +502,7 @@ export class AddRoleFormComponent implements OnInit {
       name: 'IPs',
       completed: false,
       subtasks: [
-        { name: 'View IPs', completed: true },
+        { name: 'View IPs', completed: false },
         { name: 'Add IPs', completed: false },
         { name: 'Edit IPs', completed: false },
         { name: 'Delete IPs', completed: false },
@@ -512,7 +512,7 @@ export class AddRoleFormComponent implements OnInit {
       name: 'Plan',
       completed: false,
       subtasks: [
-        { name: 'View Plan', completed: true },
+        { name: 'View Plan', completed: false },
         { name: 'Add Plan', completed: false },
         { name: 'Edit Plan', completed: false },
         { name: 'Delete Plan', completed: false },
@@ -522,7 +522,7 @@ export class AddRoleFormComponent implements OnInit {
       name: 'Chat',
       completed: false,
       subtasks: [
-        { name: 'View Chat', completed: true },
+        { name: 'View Chat', completed: false },
         { name: 'Delete Chat', completed: false },
       ],
     },
@@ -530,7 +530,6 @@ export class AddRoleFormComponent implements OnInit {
 
   allComplete(task: Task): boolean {
     const subtasks = task.subtasks;
-
     return task.completed || (subtasks != null && subtasks.every(t => t.completed));
   }
 
@@ -541,6 +540,10 @@ export class AddRoleFormComponent implements OnInit {
 
   setAllCompleted(tasks: Task[], completed: boolean) {
     tasks.forEach(t => (t.completed = completed));
+  }
+
+  updateAllComplete(task) {
+    console.log(task);
   }
 
   getErrorMessage(form: FormGroup) {
@@ -559,23 +562,25 @@ export class AddRoleFormComponent implements OnInit {
 
   submitdstnumber() {
     if (this.addroleform.valid) {
-      this.userService.addrole(this.addroleform.value).subscribe(
-        (response: any) => {
-          console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-          this.snackBar.open('DST Number Added Successfully!', '', { duration: 2000 });
-          this.addroleform.reset();
-          //this.addroleform.markAsUntouched();
-        },
-        error => {
-          console.log(
-            '%cerror ips.component.ts line:254 ',
-            'color: red; display: block; width: 100%;',
-            error
-          );
-        }
-      );
+      console.log(this.addroleform.value);
+      // this.userService.addrole(this.addroleform.value).subscribe(
+      //   (response: any) => {
+      //     console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+      //     this.snackBar.open('DST Number Added Successfully!', '', { duration: 2000 });
+      //     this.addroleform.reset();
+      //     //this.addroleform.markAsUntouched();
+      //   },
+      //   error => {
+      //     console.log(
+      //       '%cerror ips.component.ts line:254 ',
+      //       'color: red; display: block; width: 100%;',
+      //       error
+      //     );
+      //   }
+      // );
     } else {
       this.getErrorMessage(this.addroleform);
+      console.log(this.getErrorMessage(this.addroleform));
     }
   }
 
