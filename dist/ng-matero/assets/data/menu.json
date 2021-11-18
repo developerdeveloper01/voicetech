@@ -1,0 +1,824 @@
+{
+  "menu": [
+    {
+      "route": "dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "palette",
+      "badge": {
+        "color": "red-500",
+        "value": "5"
+      }
+    },
+    {
+      "route": "products",
+      "name": "products",
+      "type": "sub",
+      "icon": "subject",
+      "children": [
+        {
+          "route": "off-ivr-system",
+          "name": "off-ivr-system",
+          "type": "sub",
+          "children": [
+            {
+              "route": "centralized-business-number",
+              "name": "centralized-business-number",
+              "type": "link"
+
+            },
+            {
+              "route": "ivr-greeting",
+              "name": "ivr-greeting",
+              "type": "link"
+
+            },
+            {
+              "route": "call-routing",
+              "name": "call-routing",
+              "type": "link"
+            },
+            {
+              "route": "call-recording",
+              "name": "call-recording",
+              "type": "link"
+            },
+            {
+              "route": "call-records",
+              "name": "call-records",
+              "type": "link"
+            },
+            {
+              "route": "timely-follow-up",
+              "name": "timely-follow-up",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route":"cloud-call-centre",
+          "name":"cloud-call-centre",
+          "type" : "sub",
+          "children":[
+             {
+               "route":"click-to-call",
+               "name": "click-to-call",
+               "type":"link"
+             },
+             {
+              "route":"live-call-transfer",
+              "name": "live-call-transfer",
+              "type":"link"
+             },
+             {
+              "route":"crm-integration",
+              "name": "crm-integration",
+              "type":"link"
+            },
+            {
+              "route":"remote-terms",
+              "name": "remote-terms",
+              "type":"link"
+            },
+            {
+              "route":"call-masking",
+              "name": "call-masking",
+              "type":"link"
+            },
+            {
+              "route":"live-panel",
+              "name": "live-panel",
+              "type":"link"
+            },
+            {
+              "route":"outbound-calling",
+              "name": "outbound-calling",
+              "type":"link"
+            },
+            {
+              "route":"toll-free-calls",
+              "name": "toll-free-calls",
+              "type":"link"
+            },
+            {
+              "route":"call-queue",
+              "name": "call-queue",
+              "type":"link"
+            },
+            {
+              "route":"profeesional-number",
+              "name": "profeesional-number",
+              "type":"link"
+            },
+            {
+              "route":"multi-level-ivr",
+              "name": "multi-level-ivr",
+              "type":"link"
+            },
+            {
+              "route":"recorded-conversation",
+              "name": "recorded-conversation",
+              "type":"link"
+            }
+          ]
+        }
+
+      ]
+
+    },
+
+    {
+      "route": "service",
+      "name": "service",
+      "type": "sub",
+      "icon": "store",
+      "children": [
+        {
+          "route": "contact-operator",
+          "name": "contact-operator",
+          "type": "link"
+        },
+        {
+          "route": "live-call",
+          "name": "live-call",
+          "type": "link"
+        },
+        {
+          "route": "monitoring",
+          "name": "monitoring",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "sip-service",
+      "name": "sip-service",
+      "type": "sub",
+      "icon": "account_circle",
+      "children": [
+        {
+          "route": "sip-setting",
+          "name": "sip-setting",
+          "type": "link"
+        },
+        {
+          "route": "sip-profile",
+          "name": "sip-profile",
+          "type": "link"
+        },
+        {
+          "route": "profile-type",
+          "name": "profile-type",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "smart-sip-pbx",
+      "name": "smart-sip-pbx",
+      "type": "sub",
+      "icon": "done_all",
+      "children": [
+        {
+          "route": "sip-user",
+          "name": "sip-user",
+          "type": "link"
+        },
+        {
+          "route": "sip-services",
+          "name": "sip-services",
+          "type": "link"
+        },
+        {
+          "route": "user-group",
+          "name": "user-group",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "staff",
+      "name": "staff",
+      "type": "sub",
+      "icon": "people_outline",
+      "children": [
+        {
+          "route": "role",
+          "name": "role",
+          "type": "link"
+        },
+        {
+          "route": "staff",
+          "name": "staff",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "subordinate",
+      "name": "subordinate",
+      "type": "sub",
+      "icon": "low_priority",
+      "children": [
+        {
+          "route": "subordinates",
+          "name": "subordinates",
+          "type": "link"
+        },
+        {
+          "route": "agent",
+          "name": "agent",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "user",
+      "name": "user",
+      "type": "sub",
+      "icon": "people",
+      "children": [
+        {
+          "route": "users",
+          "name": "users",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "numbers",
+      "name": "numbers",
+      "type": "sub",
+      "icon": "local_phone",
+      "children": [
+        {
+          "route": "dstnumber",
+          "name": "dstnumber",
+          "type": "link"
+        },
+        {
+          "route": "ips",
+          "name": "ips",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "enquiry",
+      "name": "enquiry",
+      "type": "link",
+      "icon": "border_color"
+    },
+    {
+      "route": "chat",
+      "name": "chat",
+      "type": "link",
+      "icon": "chat"
+    },
+    {
+      "route": "plan",
+      "name": "plan",
+      "type": "sub",
+      "icon": "money",
+      "children": [
+        {
+          "route": "prepaid-plan",
+          "name": "prepaid-plan",
+          "type": "link"
+        },
+        {
+          "route": "postpaid-plan",
+          "name": "postpaid-plan",
+          "type": "link"
+        }
+
+      ]
+    },
+
+    {
+      "route": "ivr-services",
+      "name": "ivr-services",
+      "type": "link",
+      "icon": "perm_data_setting"
+    },
+
+    {
+      "route": "call-center",
+      "name": "call-center",
+      "type": "link",
+      "icon": "settings_phone "
+    },
+    {
+      "route": "voice-broadcast",
+      "name": "voice-broadcast",
+      "type": "link",
+      "icon": "settings_remote"
+    },
+    {
+      "route": "sms-email-configuration",
+      "name": "sms-email-configuration",
+      "type": "link",
+      "icon": "textsms"
+    },
+    {
+      "route": "list-manager",
+      "name": "list-manager",
+      "type": "link",
+      "icon": "list"
+    },
+    {
+      "route": "report",
+      "name": "report",
+      "type": "sub",
+      "icon": "description",
+      "children":[
+          {
+            "route":"cdr",
+            "name":"cdr",
+            "type":"link"
+          }
+      ]
+    },
+    {
+      "route": "network",
+      "name": "network",
+      "type": "link",
+      "icon": "signal_cellular_alt"
+    },
+    {
+      "route": "security",
+      "name": "security",
+      "type": "link",
+      "icon": "screen_lock_landscape"
+    },
+    {
+      "route": "system-setting",
+      "name": "system-setting",
+      "type": "link",
+      "icon": "settings"
+    },
+    {
+      "route": "design",
+      "name": "design",
+      "type": "sub",
+      "icon": "color_lens",
+      "children": [
+        {
+          "route": "colors",
+          "name": "colors",
+          "type": "link"
+        },
+        {
+          "route": "icons",
+          "name": "icons",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "only": ["ADMIN", "MANAGER"]
+      }
+    },
+    {
+      "route": "material",
+      "name": "material",
+      "type": "sub",
+      "icon": "favorite",
+      "children": [
+        {
+          "route": "",
+          "name": "form-controls",
+          "type": "sub",
+          "children": [
+            {
+              "route": "autocomplete",
+              "name": "autocomplete",
+              "type": "link"
+            },
+            {
+              "route": "checkbox",
+              "name": "checkbox",
+              "type": "link"
+            },
+            {
+              "route": "datepicker",
+              "name": "datepicker",
+              "type": "link"
+            },
+            {
+              "route": "form-field",
+              "name": "form-field",
+              "type": "link"
+            },
+            {
+              "route": "input",
+              "name": "input",
+              "type": "link"
+            },
+            {
+              "route": "radio",
+              "name": "radio",
+              "type": "link"
+            },
+            {
+              "route": "select",
+              "name": "select",
+              "type": "link"
+            },
+            {
+              "route": "slider",
+              "name": "slider",
+              "type": "link"
+            },
+            {
+              "route": "slide-toggle",
+              "name": "slide-toggle",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "",
+          "name": "navigation",
+          "type": "sub",
+          "children": [
+            {
+              "route": "menu",
+              "name": "menu",
+              "type": "link"
+            },
+            {
+              "route": "sidenav",
+              "name": "sidenav",
+              "type": "link"
+            },
+            {
+              "route": "toolbar",
+              "name": "toolbar",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "",
+          "name": "layout",
+          "type": "sub",
+          "children": [
+            {
+              "route": "card",
+              "name": "card",
+              "type": "link"
+            },
+            {
+              "route": "divider",
+              "name": "divider",
+              "type": "link"
+            },
+            {
+              "route": "expansion",
+              "name": "expansion",
+              "type": "link"
+            },
+            {
+              "route": "grid-list",
+              "name": "grid-list",
+              "type": "link"
+            },
+            {
+              "route": "list",
+              "name": "list",
+              "type": "link"
+            },
+            {
+              "route": "stepper",
+              "name": "stepper",
+              "type": "link"
+            },
+            {
+              "route": "tab",
+              "name": "tab",
+              "type": "link"
+            },
+            {
+              "route": "tree",
+              "name": "tree",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "",
+          "name": "buttons-indicators",
+          "type": "sub",
+          "children": [
+            {
+              "route": "button",
+              "name": "button",
+              "type": "link"
+            },
+            {
+              "route": "button-toggle",
+              "name": "button-toggle",
+              "type": "link"
+            },
+            {
+              "route": "badge",
+              "name": "badge",
+              "type": "link"
+            },
+            {
+              "route": "chips",
+              "name": "chips",
+              "type": "link"
+            },
+            {
+              "route": "icon",
+              "name": "icon",
+              "type": "link"
+            },
+            {
+              "route": "progress-spinner",
+              "name": "progress-spinner",
+              "type": "link"
+            },
+            {
+              "route": "progress-bar",
+              "name": "progress-bar",
+              "type": "link"
+            },
+            {
+              "route": "ripple",
+              "name": "ripple",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "",
+          "name": "popups-modals",
+          "type": "sub",
+          "children": [
+            {
+              "route": "bottom-sheet",
+              "name": "bottom-sheet",
+              "type": "link"
+            },
+            {
+              "route": "dialog",
+              "name": "dialog",
+              "type": "link"
+            },
+            {
+              "route": "snack-bar",
+              "name": "snackbar",
+              "type": "link"
+            },
+            {
+              "route": "tooltip",
+              "name": "tooltip",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "data-table",
+          "name": "data-table",
+          "type": "sub",
+          "children": [
+            {
+              "route": "paginator",
+              "name": "paginator",
+              "type": "link"
+            },
+            {
+              "route": "sort",
+              "name": "sort",
+              "type": "link"
+            },
+            {
+              "route": "table",
+              "name": "table",
+              "type": "link"
+            }
+          ]
+        }
+      ],
+      "permissions": {
+        "except": ["MANAGER", "GUEST"]
+      }
+    },
+    {
+      "route": "permissions",
+      "name": "permissions",
+      "type": "sub",
+      "icon": "lock",
+      "label": {
+        "color": "indigo-500",
+        "value": "new"
+      },
+      "children": [
+        {
+          "route": "role-switching",
+          "name": "role-switching",
+          "type": "link"
+        },
+        {
+          "route": "route-guard",
+          "name": "route-guard",
+          "type": "link",
+          "permissions": {
+            "except": "GUEST"
+          }
+        },
+        {
+          "route": "test",
+          "name": "test",
+          "type": "link",
+          "permissions": {
+            "only": "ADMIN"
+          }
+        }
+      ]
+    },
+    {
+      "route": "media",
+      "name": "media",
+      "type": "sub",
+      "icon": "image",
+      "children": [
+        {
+          "route": "gallery",
+          "name": "gallery",
+          "type": "link"
+        }
+      ]
+    },
+
+    {
+      "route": "forms",
+      "name": "forms",
+      "type": "sub",
+      "icon": "description",
+      "children": [
+        {
+          "route": "elements",
+          "name": "form-elements",
+          "type": "link"
+        },
+        {
+          "route": "dynamic",
+          "name": "dynamic-form",
+          "type": "link"
+        },
+        {
+          "route": "select",
+          "name": "select",
+          "type": "link"
+        },
+        {
+          "route": "datetime",
+          "name": "datetime",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "except": "GUEST"
+      }
+    },
+    {
+      "route": "tables",
+      "name": "tables",
+      "type": "sub",
+      "icon": "format_line_spacing",
+      "children": [
+        {
+          "route": "kitchen-sink",
+          "name": "kitchen-sink",
+          "type": "link"
+        },
+        {
+          "route": "remote-data",
+          "name": "remote-data",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "except": "GUEST"
+      }
+    },
+    {
+      "route": "profile",
+      "name": "profile",
+      "type": "sub",
+      "icon": "person",
+      "children": [
+        {
+          "route": "overview",
+          "name": "overview",
+          "type": "link"
+        },
+        {
+          "route": "settings",
+          "name": "settings",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "https://ng-matero.github.io/extensions/",
+      "name": "extensions",
+      "type": "extTabLink",
+      "icon": "extension",
+      "permissions": {
+        "only": "ADMIN"
+      }
+    },
+    {
+      "route": "sessions",
+      "name": "sessions",
+      "type": "sub",
+      "icon": "question_answer",
+      "children": [
+        {
+          "route": "403",
+          "name": "403",
+          "type": "link"
+        },
+        {
+          "route": "404",
+          "name": "404",
+          "type": "link"
+        },
+        {
+          "route": "500",
+          "name": "500",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "only": "ADMIN"
+      }
+    },
+    {
+      "route": "helpers",
+      "name": "helpers",
+      "type": "sub",
+      "icon": "all_inbox",
+      "children": [
+        {
+          "route": "css-class",
+          "name": "css-class",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route": "menu-level",
+      "name": "menu-level",
+      "type": "sub",
+      "icon": "subject",
+      "children": [
+        {
+          "route": "level-1-1",
+          "name": "level-1-1",
+          "type": "sub",
+          "children": [
+            {
+              "route": "level-2-1",
+              "name": "level-2-1",
+              "type": "sub",
+              "children": [
+                {
+                  "route": "level-3-1",
+                  "name": "level-3-1",
+                  "type": "sub",
+                  "children": [
+                    {
+                      "route": "level-4-1",
+                      "name": "level-4-1",
+                      "type": "link"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "route": "level-2-2",
+              "name": "level-2-2",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "level-1-2",
+          "name": "level-1-2",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "only": "ADMIN"
+      }
+    }
+
+
+  ]
+}
