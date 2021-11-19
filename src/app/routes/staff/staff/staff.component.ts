@@ -237,6 +237,7 @@ export class StaffComponent implements OnInit {
         console.log('%cstaff.component.ts line:238 response', 'color: white; background-color: #007acc;', response);
         this.list = response.data;
         this.isLoading = false;
+        this.cdr.detectChanges();
       },
       error => {
         console.log(error);

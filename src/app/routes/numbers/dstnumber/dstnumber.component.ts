@@ -70,8 +70,8 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
       {
         header: 'Actions',
         field: 'action',
-        minWidth: 120,
-        width: '120px',
+        minWidth: 180,
+        width: '180px',
         pinned: 'right',
         type: 'button',
         buttons: [
@@ -223,7 +223,7 @@ export class AddDstNumberFormComponent implements OnInit {
   ) {
     this.adddstnumber = this.fb.group({
       ip: ['', [Validators.required]],
-      did_no: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      did_no: ['', [Validators.required, Validators.min(10000000), Validators.max(99999999)]],
       inusestatus: [false],
     });
   }
@@ -318,7 +318,7 @@ export class EditDstNumberFormComponent implements OnInit {
 
     this.editdstnumber = this.fb.group({
       ip: ['', [Validators.required]],
-      did_no: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      did_no: ['', [Validators.required, Validators.min(10000000), Validators.max(99999999)]],
       inusestatus: [false],
     });
   }

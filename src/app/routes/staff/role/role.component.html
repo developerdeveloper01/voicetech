@@ -2,7 +2,7 @@
 <div class="row">
 
   <div class="col-lg-12">
-    <div class="data-grid-options">
+    <!-- <div class="data-grid-options">
       <button
         mat-raised-button
         color="primary"
@@ -11,7 +11,7 @@
         <mat-icon color="white" style="margin-left: 8px;">add</mat-icon>
         <span style="margin-right: 8px; padding: 5px; margin-bottom: 10px;">Add Role </span>
       </button>
-    </div>
+    </div> -->
 
     <mtx-grid class="mat-elevation-z8" [data]="list"
               [columns]="columns"
@@ -28,6 +28,7 @@
               [columnMovable]="columnMovable"
               [expandable]="expandable"
               [expansionTemplate]="expansionTpl"
+              [toolbarTemplate]="toolbarTpl"
               [pageOnFront]="showPaginator"
               [showPaginator]="showPaginator"
               [pageSizeOptions]="[5,10,50,100]"
@@ -38,6 +39,25 @@
     </mtx-grid>
     <ng-template #expansionTpl let-row>
       {{row.name}}
+    </ng-template>
+    <ng-template #toolbarTpl>
+      <button mat-stroked-button color="primary" (click)="openRole()()">
+        <mat-icon>add</mat-icon>Add Role
+      </button>
+      <input
+        placeholder="Start typing"
+        type="text"
+        style="
+          padding: 5px;
+          margin: 0px 2px;
+          border: 1px solid #d7d7d7;
+          line-height: 24px;
+          border-radius: 4px;"
+        class="form-control"
+        autocomplete="off"
+        [(ngModel)]="filterSearch"
+        (ngModelChange)="searchData($event)"
+      />
     </ng-template>
   </div>
 

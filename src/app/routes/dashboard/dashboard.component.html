@@ -5,7 +5,8 @@
   <!-- Statistics -->
   <div class="matero-col" fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100"
        *ngFor="let stat of stats">
-    <mat-card [ngClass]="['text-white', stat.color]">
+    <mat-card [ngClass]="['text-white', stat.color]" style="background: linear-gradient(
+      45deg, rgb(255 255 255 / 16%) 0%, rgb(32 32 32 / 17%) 35%, rgb(0 0 0 / 45%) 100%);">
       <mat-card-title class="f-s-12 f-w-100">{{stat.title}}</mat-card-title>
       <mat-card-content>
         <h2>{{stat.amount}}</h2>

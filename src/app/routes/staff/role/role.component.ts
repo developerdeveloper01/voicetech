@@ -65,7 +65,7 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   trueValue = 'true';
 
   columns: MtxGridColumn[] = [
-    { header: 'Name', sortable: true, field: 'name', showExpand: true },
+    { header: 'Name', sortable: true, field: 'name' },
     { header: 'Status', sortable: true, field: 'status' },
     {
       header: 'Read Call Details',
@@ -173,8 +173,8 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   list = [];
   total = 0;
   isLoading: Boolean;
-  multiSelectable = true;
-  rowSelectable = true;
+  multiSelectable = false;
+  rowSelectable = false;
   hideRowSelectionCheckbox = false;
   showToolbar = true;
   columnHideable = true;
@@ -183,7 +183,7 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   rowStriped = false;
   showPaginator = true;
   expandable = true;
-  columnResizable = true;
+  columnResizable = false;
 
   constructor(
     private remoteSrv: TablesRemoteDataService,

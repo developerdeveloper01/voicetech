@@ -1,0 +1,234 @@
+[{
+  "route": "products",
+  "name": "products",
+  "type": "sub",
+  "icon": "subject",
+  "children": [
+    {
+      "route": "off-ivr-system",
+      "name": "off-ivr-system",
+      "type": "sub",
+      "children": [
+        {
+          "route": "centralized-business-number",
+          "name": "centralized-business-number",
+          "type": "link"
+
+        },
+        {
+          "route": "ivr-greeting",
+          "name": "ivr-greeting",
+          "type": "link"
+
+        },
+        {
+          "route": "call-routing",
+          "name": "call-routing",
+          "type": "link"
+        },
+        {
+          "route": "call-recording",
+          "name": "call-recording",
+          "type": "link"
+        },
+        {
+          "route": "call-records",
+          "name": "call-records",
+          "type": "link"
+        },
+        {
+          "route": "timely-follow-up",
+          "name": "timely-follow-up",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "route":"cloud-call-centre",
+      "name":"cloud-call-centre",
+      "type" : "sub",
+      "children":[
+         {
+           "route":"click-to-call",
+           "name": "click-to-call",
+           "type":"link"
+         },
+         {
+          "route":"live-call-transfer",
+          "name": "live-call-transfer",
+          "type":"link"
+         },
+         {
+          "route":"crm-integration",
+          "name": "crm-integration",
+          "type":"link"
+        },
+        {
+          "route":"remote-terms",
+          "name": "remote-terms",
+          "type":"link"
+        },
+        {
+          "route":"call-masking",
+          "name": "call-masking",
+          "type":"link"
+        },
+        {
+          "route":"live-panel",
+          "name": "live-panel",
+          "type":"link"
+        },
+        {
+          "route":"outbound-calling",
+          "name": "outbound-calling",
+          "type":"link"
+        },
+        {
+          "route":"toll-free-calls",
+          "name": "toll-free-calls",
+          "type":"link"
+        },
+        {
+          "route":"call-queue",
+          "name": "call-queue",
+          "type":"link"
+        },
+        {
+          "route":"profeesional-number",
+          "name": "profeesional-number",
+          "type":"link"
+        },
+        {
+          "route":"multi-level-ivr",
+          "name": "multi-level-ivr",
+          "type":"link"
+        },
+        {
+          "route":"recorded-conversation",
+          "name": "recorded-conversation",
+          "type":"link"
+        }
+      ]
+    }
+
+  ]
+
+},
+{
+  "route": "service",
+  "name": "service",
+  "type": "sub",
+  "icon": "store",
+  "children": [
+    {
+      "route": "contact-operator",
+      "name": "contact-operator",
+      "type": "link"
+    },
+    {
+      "route": "live-call",
+      "name": "live-call",
+      "type": "link"
+    },
+    {
+      "route": "monitoring",
+      "name": "monitoring",
+      "type": "link"
+    }
+  ]
+},
+{
+  "route": "sip-service",
+  "name": "sip-service",
+  "type": "sub",
+  "icon": "account_circle",
+  "children": [
+    {
+      "route": "sip-setting",
+      "name": "sip-setting",
+      "type": "link"
+    },
+    {
+      "route": "sip-profile",
+      "name": "sip-profile",
+      "type": "link"
+    },
+    {
+      "route": "profile-type",
+      "name": "profile-type",
+      "type": "link"
+    }
+  ]
+},
+{
+  "route": "smart-sip-pbx",
+  "name": "smart-sip-pbx",
+  "type": "sub",
+  "icon": "done_all",
+  "children": [
+    {
+      "route": "sip-user",
+      "name": "sip-user",
+      "type": "link"
+    },
+    {
+      "route": "sip-services",
+      "name": "sip-services",
+      "type": "link"
+    },
+    {
+      "route": "user-group",
+      "name": "user-group",
+      "type": "link"
+    }
+  ]
+},{
+  "route": "ivr-services",
+  "name": "ivr-services",
+  "type": "link",
+  "icon": "perm_data_setting"
+},
+
+{
+  "route": "call-center",
+  "name": "call-center",
+  "type": "link",
+  "icon": "settings_phone "
+},
+{
+  "route": "voice-broadcast",
+  "name": "voice-broadcast",
+  "type": "link",
+  "icon": "settings_remote"
+},
+{
+  "route": "sms-email-configuration",
+  "name": "sms-email-configuration",
+  "type": "link",
+  "icon": "textsms"
+},
+{
+  "route": "list-manager",
+  "name": "list-manager",
+  "type": "link",
+  "icon": "list"
+},
+{
+  "route": "network",
+  "name": "network",
+  "type": "link",
+  "icon": "signal_cellular_alt"
+},
+{
+  "route": "security",
+  "name": "security",
+  "type": "link",
+  "icon": "screen_lock_landscape"
+},
+{
+  "route": "system-setting",
+  "name": "system-setting",
+  "type": "link",
+  "icon": "settings"
+}
+]

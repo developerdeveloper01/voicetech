@@ -232,6 +232,7 @@ export class IpsComponent implements OnInit, AfterViewInit, OnDestroy {
 
     adddailogRef.afterClosed().subscribe(() => {
       this.getallips();
+      this.cdr.detectChanges();
     });
   }
 
