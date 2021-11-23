@@ -31,13 +31,21 @@ export class UserService {
     return this.http.get(`${this.backendurl}/user/allinquiry`);
   }
 
-  //add staff
+  //staff
   addstaff(data) {
     return this.http.post(`${this.backendurl}/admin/addstaff`, data);
   }
 
+  editstaff(id, data) {
+    return this.http.post(`${this.backendurl}/admin/editstaff/${id}`, data);
+  }
+
   getallstaff() {
     return this.http.get(`${this.backendurl}/admin/allstaff`);
+  }
+
+  deletestaff(id) {
+    return this.http.get(`${this.backendurl}/admin/deletestaff/${id}`);
   }
 
   //ips
@@ -119,19 +127,18 @@ export class UserService {
   }
 
   usersignup(data) {
-    return this.http.post(`${this.backendurl}/user/signup`,data);
+    return this.http.post(`${this.backendurl}/user/signup`, data);
   }
 
-  edituser(id,data) {
-    return this.http.post(`${this.backendurl}/admin/edituser/${id}`,data);
+  edituser(id, data) {
+    return this.http.post(`${this.backendurl}/admin/edituser/${id}`, data);
   }
-
 
   deleteuser(id) {
     return this.http.get(`${this.backendurl}/admin/deleteuser/${id}`);
   }
 
-  userdetail(id){
+  userdetail(id) {
     return this.http.get(`${this.backendurl}/admin/viewoneuser/${id}`);
   }
 }

@@ -3,10 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { SubordinateRoutingModule } from './subordinate-routing.module';
 import { AgentComponent } from './agent/agent.component';
-import { SubordinatesComponent } from './subordinates/subordinates.component';
+import {
+  AddSubordinateFormComponent,
+  SubordinatesComponent,
+} from './subordinates/subordinates.component';
 
 const COMPONENTS = [AgentComponent, SubordinatesComponent];
-const COMPONENTS_DYNAMIC = [];
+const COMPONENTS_DYNAMIC = [AddSubordinateFormComponent];
 
 @NgModule({
   declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC],

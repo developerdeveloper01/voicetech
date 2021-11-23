@@ -3,7 +3,7 @@
 }
 
 .mat-header-cell {
-  color: rgba(0, 0, 0, .54);
+  color: rgba(0, 0, 0, 0.54);
   font-size: 14px !important;
 }
 
@@ -11,4 +11,15 @@
   width: 50%;
   float: left;
   padding: 6px 0;
+}
+:host ::ng-deep .label {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background-color: #ffb74d;
+}
+
+:host ::ng-deep .admin-dy-class {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #6fcffc;
 }

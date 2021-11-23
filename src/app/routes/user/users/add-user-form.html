@@ -1,6 +1,8 @@
 <h2 mat-dialog-title>{{editmode?"Edit User":"Add User"}}</h2>
 <form [formGroup]="adduserform" (ngSubmit)="submituserform()">
   <mat-dialog-content>
+    <div fxLayout="row wrap" fxLayoutGap="8px grid">
+    <div fxFlex="50" fxFlex.lt-sm="100">
     <mat-form-field class="demo-full-width">
       <mat-label>First Name</mat-label>
       <input type="text" matInput placeholder="John" formControlName="firstname" required />
@@ -8,6 +10,8 @@
         {{'validations.required'| translate}}
       </mat-error>
     </mat-form-field>
+  </div>
+  <div fxFlex="50" fxFlex.lt-sm="100">
     <mat-form-field class="demo-full-width">
       <mat-label>Last Name</mat-label>
       <input type="text" matInput placeholder="Deo" formControlName="lastname" required />
@@ -15,6 +19,8 @@
         {{'validations.required'| translate}}
       </mat-error>
     </mat-form-field>
+  </div>
+
     <mat-form-field class="demo-full-width">
       <mat-label>Email</mat-label>
       <input
@@ -31,6 +37,7 @@
     <mat-form-field class="demo-full-width">
       <mat-label>Mobile</mat-label>
       <input type="number" matInput placeholder="9999999999" formControlName="mobile" required />
+      <mat-icon matSuffix>smartphone</mat-icon>
       <mat-error *ngIf="adduserform.get('mobile').invalid">
         {{'validations.required'| translate}}
       </mat-error>
@@ -55,6 +62,7 @@
         {{'validations.required'| translate}}
       </mat-error>
     </mat-form-field>
+  </div>
   </mat-dialog-content>
 
   <mat-dialog-actions>

@@ -20,7 +20,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersComponent implements OnInit, AfterViewInit {
-  //table
   columns = [];
   list = [];
   total = 0;
@@ -36,7 +35,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   showPaginator = true;
   expandable = true;
   columnResizable = false;
-  filteredData:any;
+  filteredData: any;
 
   constructor(
     public dialog: MatDialog,
@@ -63,7 +62,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       { header: 'Email', sortable: true, field: 'email' },
       { header: 'Organization', sortable: true, field: 'organization_name' },
       { header: 'DID Number', sortable: true, field: 'alloted_did.did_no' },
-      { header: 'Created Date', sortable: true, field: 'createdAt', },
+      { header: 'Created Date', sortable: true, field: 'createdAt' },
       {
         header: 'Actions',
         field: 'action',
@@ -171,11 +170,16 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   searchData(searchValue: any) {
-    if(searchValue){
-    this.filteredData = this.list.filter((item: any) => {
-        return item.firstname.toLowerCase().includes(searchValue.toLowerCase()) || item.lastname.toLowerCase().includes(searchValue.toLowerCase()) || item.email.toLowerCase().includes(searchValue.toLowerCase()) || item.organization_name.toLowerCase().includes(searchValue.toLowerCase());
-    });}
-    else{
+    if (searchValue) {
+      this.filteredData = this.list.filter((item: any) => {
+        return (
+          item.firstname.toLowerCase().includes(searchValue.toLowerCase()) ||
+          item.lastname.toLowerCase().includes(searchValue.toLowerCase()) ||
+          item.email.toLowerCase().includes(searchValue.toLowerCase()) ||
+          item.organization_name.toLowerCase().includes(searchValue.toLowerCase())
+        );
+      });
+    } else {
       this.filteredData = null;
       this.getallusers();
     }
@@ -185,7 +189,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.isLoading = false;
   }
 
-  pagechange(e){
+  pagechange(e) {
     console.log(e);
   }
 }
