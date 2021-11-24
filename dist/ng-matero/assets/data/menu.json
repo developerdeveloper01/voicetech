@@ -78,6 +78,102 @@
       ]
     },
     {
+      "route":"cloud-call-centre",
+      "name":"cloud-call-centre",
+      "type" : "sub",
+      "icon": "local_phone",
+      "children":[
+         {
+           "route":"click-to-call",
+           "name": "click-to-call",
+           "type":"link"
+         },
+         {
+          "route":"live-call-transfer",
+          "name": "live-call-transfer",
+          "type":"link"
+         },
+         {
+          "route":"crm-integration",
+          "name": "crm-integration",
+          "type":"link"
+        },
+        {
+          "route":"remote-terms",
+          "name": "remote-terms",
+          "type":"link"
+        },
+        {
+          "route":"call-masking",
+          "name": "call-masking",
+          "type":"link"
+        },
+        {
+          "route":"live-panel",
+          "name": "live-panel",
+          "type":"link"
+        },
+        {
+          "route":"outbound-calling",
+          "name": "outbound-calling",
+          "type":"link"
+        },
+        {
+          "route":"toll-free-calls",
+          "name": "toll-free-calls",
+          "type":"link"
+        },
+        {
+          "route":"call-queue",
+          "name": "call-queue",
+          "type":"link"
+        },
+        {
+          "route":"profeesional-number",
+          "name": "profeesional-number",
+          "type":"link"
+        },
+        {
+          "route":"multi-level-ivr",
+          "name": "multi-level-ivr",
+          "type":"link"
+        },
+        {
+          "route":"recorded-conversation",
+          "name": "recorded-conversation",
+          "type":"link"
+        }
+      ]
+    },
+    {
+      "route": "sip-service",
+      "name": "sip-service",
+      "type": "sub",
+      "icon": "account_circle",
+      "children": [
+        {
+          "route": "live-calls",
+          "name": "live-calls",
+          "type": "link"
+        },
+        {
+          "route": "sip-setting",
+          "name": "sip-setting",
+          "type": "link"
+        },
+        {
+          "route": "sip-profile",
+          "name": "sip-profile",
+          "type": "link"
+        },
+        {
+          "route": "profile-type",
+          "name": "profile-type",
+          "type": "link"
+        }
+      ]
+    },
+    {
       "route": "enquiry",
       "name": "enquiry",
       "type": "link",

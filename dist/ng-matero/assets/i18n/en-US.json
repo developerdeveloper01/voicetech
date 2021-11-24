@@ -51,7 +51,8 @@
     "sip-service": "SIP Service",
     "sip-service.sip-setting": "SIP Setting",
     "sip-service.sip-profile": "SIP Profile",
-    "sip-service.profile-type": " Profile Type",
+    "sip-service.profile-type": "Profile Type",
+    "sip-service.live-calls": "Live Calls",
     "forms": "Forms",
     "forms.form-elements": "Form Elements",
     "forms.dynamic-form": "Dynamic Form",
@@ -86,19 +87,19 @@
     "products.off-ivr-system.call-records": "Call Records",
     "products.off-ivr-system.timely-follow-up": "Timely Follow-up",
 
-    "products.cloud-call-centre": "Cloud Call Centre",
-    "products.cloud-call-centre.click-to-call": "Click to Call",
-    "products.cloud-call-centre.live-call-transfer": "live-call-transfer",
-    "products.cloud-call-centre.crm-integration": "crm-integration",
-    "products.cloud-call-centre.remote-terms": "Remote Terms",
-    "products.cloud-call-centre.call-masking": "Call Masking",
-    "products.cloud-call-centre.live-panel": "Live Panel",
-    "products.cloud-call-centre.outbound-calling": "Outbound Calling",
-    "products.cloud-call-centre.toll-free-calls": "Toll Free calls",
-    "products.cloud-call-centre.call-queue": "Call Queue",
-    "products.cloud-call-centre.profeesional-number": "Profeesional Number",
-    "products.cloud-call-centre.multi-level-ivr": "multi-level-ivr",
-    "products.cloud-call-centre.recorded-conversation": "Recorded Conversation",
+    "cloud-call-centre": "Cloud Call Centre",
+    "cloud-call-centre.click-to-call": "Click to Call",
+    "cloud-call-centre.live-call-transfer": "live-call-transfer",
+    "cloud-call-centre.crm-integration": "crm-integration",
+    "cloud-call-centre.remote-terms": "Remote Terms",
+    "cloud-call-centre.call-masking": "Call Masking",
+    "cloud-call-centre.live-panel": "Live Panel",
+    "cloud-call-centre.outbound-calling": "Outbound Calling",
+    "cloud-call-centre.toll-free-calls": "Toll Free calls",
+    "cloud-call-centre.call-queue": "Call Queue",
+    "cloud-call-centre.profeesional-number": "Profeesional Number",
+    "cloud-call-centre.multi-level-ivr": "multi-level-ivr",
+    "cloud-call-centre.recorded-conversation": "Recorded Conversation",
 
     "menu-level": "Menu Level",
     "menu-level.level-1-1": "Level 1.1",
@@ -222,6 +223,6 @@
     "confirm_delete": "Confirm delete?",
     "ok": "Ok",
     "close": "Close"
-    
+
   }
 }
