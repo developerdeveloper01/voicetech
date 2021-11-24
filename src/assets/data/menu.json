@@ -146,6 +146,34 @@
       ]
     },
     {
+      "route": "sip-service",
+      "name": "sip-service",
+      "type": "sub",
+      "icon": "account_circle",
+      "children": [
+        {
+          "route": "live-calls",
+          "name": "live-calls",
+          "type": "link"
+        },
+        {
+          "route": "sip-setting",
+          "name": "sip-setting",
+          "type": "link"
+        },
+        {
+          "route": "sip-profile",
+          "name": "sip-profile",
+          "type": "link"
+        },
+        {
+          "route": "profile-type",
+          "name": "profile-type",
+          "type": "link"
+        }
+      ]
+    },
+    {
       "route": "enquiry",
       "name": "enquiry",
       "type": "link",

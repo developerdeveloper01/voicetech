@@ -141,4 +141,9 @@ export class UserService {
   userdetail(id) {
     return this.http.get(`${this.backendurl}/admin/viewoneuser/${id}`);
   }
+
+  //live-calls
+  getallivecalls(){
+    return this.http.get(`http://103.8.43.14/onyx/api/callStatus`);
+  }
 }

@@ -1,3 +1,4 @@
+import { LiveCallComponent } from './live-call/live-call.component';
 import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SipProfileComponent } from './sip-profile/sip-profile.component';
@@ -8,6 +9,7 @@ const routes: Routes = [
   { path: 'sip-setting', component: SipSettingComponent },
   { path: 'sip-profile', component: SipProfileComponent },
   { path: 'profile-type', component: ProfileTypeComponent },
+  { path: 'live-calls', component: LiveCallComponent },
 ];
 
 @NgModule({

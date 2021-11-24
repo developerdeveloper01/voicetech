@@ -10,13 +10,14 @@ import { ExtrenalSipComponent } from './sip-setting/extrenal-sip/extrenal-sip.co
 import { LocalProfileComponent } from './sip-profile/local-profile/local-profile.component';
 import { NationalProfileComponent } from './sip-profile/national-profile/national-profile.component';
 import { AllProfileOneComponent } from './sip-profile/all-profile-one/all-profile-one.component';
+import { LiveCallComponent } from './live-call/live-call.component';
 
 
 const COMPONENTS = [SipProfileComponent, SipSettingComponent,ProfileTypeComponent];
 const COMPONENTS_DYNAMIC = [];
 
 @NgModule({
-  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC, ProfileTypeComponent, InternalSipComponent, ExtrenalSipComponent, LocalProfileComponent, NationalProfileComponent, AllProfileOneComponent],
+  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC, ProfileTypeComponent, InternalSipComponent, ExtrenalSipComponent, LocalProfileComponent, NationalProfileComponent, AllProfileOneComponent, LiveCallComponent],
   imports: [
     SharedModule,
     SipServiceRoutingModule
