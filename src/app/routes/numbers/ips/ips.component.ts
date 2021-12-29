@@ -158,7 +158,7 @@ export class IpsComponent implements OnInit, AfterViewInit, OnDestroy {
           error
         );
       }
-    )
+    );
   }
 
   getallips() {
@@ -220,7 +220,7 @@ export class IpsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.isLoading = false;
+    this.isLoading = true;
   }
 
   ngOnDestroy() {
@@ -277,7 +277,9 @@ export class AddIpFormComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'),
+          Validators.pattern(
+            '(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+          ),
         ],
       ],
       title: ['', [Validators.required]],
@@ -326,7 +328,6 @@ export class AddIpFormComponent implements OnInit {
   }
 }
 
-
 @Component({
   selector: 'edit-ip-form',
   styles: [
@@ -359,7 +360,9 @@ export class EditIpFormComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern('(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'),
+          Validators.pattern(
+            '(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+          ),
         ],
       ],
       title: ['', [Validators.required]],
@@ -429,7 +432,4 @@ export class EditIpFormComponent implements OnInit {
       this.getErrorMessage(this.editip);
     }
   }
-
-
 }
-

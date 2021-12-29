@@ -24,13 +24,18 @@
         {
           "route": "staff",
           "name": "staff",
-          "type": "link"
+          "type": "link","permissions": {
+            "only": ["SUPERADMIN"]
+          }
         }
-      ]
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+      }
     },
     {
       "route": "subordinate",
-      "name": "subordinate",
+      "name": "mystaff",
       "type": "sub",
       "icon": "low_priority",
       "children": [
@@ -68,14 +73,26 @@
         {
           "route": "dstnumber",
           "name": "dstnumber",
-          "type": "link"
+          "type": "link","permissions": {
+            "only": ["SUPERADMIN"]
+          }
         },
         {
           "route": "ips",
           "name": "ips",
+          "type": "link","permissions": {
+            "only": ["SUPERADMIN"]
+          }
+        },
+        {
+          "route": "my-numbers",
+          "name": "my-numbers",
           "type": "link"
         }
-      ]
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+      }
     },
     {
       "route":"cloud-call-centre",
@@ -143,7 +160,10 @@
           "name": "recorded-conversation",
           "type":"link"
         }
-      ]
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+      }
     },
     {
       "route": "sip-service",
@@ -171,19 +191,44 @@
           "name": "profile-type",
           "type": "link"
         }
-      ]
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN"]
+      }
+    },
+    {
+      "route": "voice",
+      "name": "voice",
+      "type": "sub",
+      "icon": "music_note",
+      "children": [
+        {
+          "route": "voice-files",
+          "name": "voice-files",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN"]
+      }
     },
     {
       "route": "enquiry",
       "name": "enquiry",
       "type": "link",
-      "icon": "border_color"
+      "icon": "border_color",
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+      }
     },
     {
       "route": "chat",
       "name": "chat",
       "type": "link",
-      "icon": "chat"
+      "icon": "chat",
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+      }
     },
     {
       "route": "plan",
@@ -201,8 +246,10 @@
           "name": "postpaid-plan",
           "type": "link"
         }
-
-      ]
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN"]
+      }
     },
     {
       "route": "report",
@@ -215,7 +262,10 @@
             "name":"cdr",
             "type":"link"
           }
-      ]
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+      }
     },
     {
       "route": "design",
@@ -235,7 +285,7 @@
         }
       ],
       "permissions": {
-        "only": ["ADMIN", "MANAGER"]
+        "only": ["SUPERADMIN"]
       }
     },
     {
@@ -463,7 +513,7 @@
         }
       ],
       "permissions": {
-        "except": ["MANAGER", "GUEST"]
+        "only": ["SUPERADMIN","ADMIN"]
       }
     },
     {
@@ -479,14 +529,17 @@
         {
           "route": "role-switching",
           "name": "role-switching",
-          "type": "link"
+          "type": "link",
+          "permissions": {
+            "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+          }
         },
         {
           "route": "route-guard",
           "name": "route-guard",
           "type": "link",
           "permissions": {
-            "except": "GUEST"
+            "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
           }
         },
         {
@@ -494,7 +547,7 @@
           "name": "test",
           "type": "link",
           "permissions": {
-            "only": "ADMIN"
+            "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
           }
         }
       ]
@@ -510,9 +563,11 @@
           "name": "gallery",
           "type": "link"
         }
-      ]
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+      }
     },
-
     {
       "route": "forms",
       "name": "forms",
@@ -541,7 +596,7 @@
         }
       ],
       "permissions": {
-        "except": "GUEST"
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
       }
     },
     {
@@ -562,7 +617,7 @@
         }
       ],
       "permissions": {
-        "except": "GUEST"
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
       }
     },
     {
@@ -581,7 +636,10 @@
           "name": "settings",
           "type": "link"
         }
-      ]
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+      }
     },
     {
       "route": "https://ng-matero.github.io/extensions/",
@@ -589,7 +647,7 @@
       "type": "extTabLink",
       "icon": "extension",
       "permissions": {
-        "only": "ADMIN"
+        "only": ["SUPERADMIN","ADMIN"]
       }
     },
     {
@@ -615,7 +673,7 @@
         }
       ],
       "permissions": {
-        "only": "ADMIN"
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
       }
     },
     {
@@ -629,7 +687,10 @@
           "name": "css-class",
           "type": "link"
         }
-      ]
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+      }
     },
     {
       "route": "menu-level",
@@ -675,7 +736,7 @@
         }
       ],
       "permissions": {
-        "only": "ADMIN"
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
       }
     }
 

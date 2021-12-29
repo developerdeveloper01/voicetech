@@ -7,6 +7,7 @@ import {
   ChangeDetectionStrategy,
   ViewEncapsulation,
 } from '@angular/core';
+import { SettingsService } from '@core';
 import * as screenfull from 'screenfull';
 
 @Component({
@@ -20,8 +21,10 @@ import * as screenfull from 'screenfull';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
+  //ipserver:String;
   @Input() showToggle = true;
   @Input() showBranding = false;
+  @Input() ipserver = this.settings.getOptions().ipserver;
 
   @Output() toggleSidenav = new EventEmitter<void>();
   @Output() toggleSidenavNotice = new EventEmitter<void>();
@@ -30,13 +33,19 @@ export class HeaderComponent implements OnInit {
     return screenfull as screenfull.Screenfull;
   }
 
-  constructor() {}
+  constructor(private settings: SettingsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getsettingoptions();
+  }
 
   toggleFullscreen() {
     if (this.screenfull.isEnabled) {
       this.screenfull.toggle();
     }
+  }
+
+  getsettingoptions() {
+    this.ipserver = this.settings.getOptions().ipserver;
   }
 }

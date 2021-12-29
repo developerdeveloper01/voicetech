@@ -12,9 +12,85 @@ export class PermissionsRouteGuardComponent implements OnInit {
 
   currentPermissions: string[];
 
+  permis = {
+    SUPERADMIN: [
+      'canAddStaff',
+      'canDeleteStaff',
+      'canEditStaff',
+      'canReadStaff',
+      'canAddUser',
+      'canDeleteUser',
+      'canEditUser',
+      'canReadUser',
+      'canAddNumber',
+      'canDeleteNumber',
+      'canEditNumber',
+      'canReadNumber',
+      'canAddSIP',
+      'canDeleteSIP',
+      'canEditSIP',
+      'canReadSIP',
+      'canAddEnquiry',
+      'canDeleteEnquiry',
+      'canEditEnquiry',
+      'canReadEnquiry',
+      'canAddChat',
+      'canDeleteChat',
+      'canEditChat',
+      'canReadChat',
+      'canAddPlan',
+      'canDeletePlan',
+      'canEditPlan',
+      'canReadPlan',
+      'canAddReport',
+      'canDeleteReport',
+      'canEditReport',
+      'canReadReport',
+    ],
+  };
+
   permissionsOfRole = {
-    ADMIN: ['canAdd', 'canDelete', 'canEdit', 'canRead'],
-    MANAGER: ['canAdd', 'canEdit', 'canRead'],
+    SUPERADMIN: [
+      'canAdd',
+      'canDelete',
+      'canEdit',
+      'canRead',
+      'canAddStaff',
+      'canDeleteStaff',
+      'canEditStaff',
+      'canReadStaff',
+      'canAddUser',
+      'canDeleteUser',
+      'canEditUser',
+      'canReadUser',
+      'canAddNumber',
+      'canDeleteNumber',
+      'canEditNumber',
+      'canReadNumber',
+      'canAddSIP',
+      'canDeleteSIP',
+      'canEditSIP',
+      'canReadSIP',
+      'canAddEnquiry',
+      'canDeleteEnquiry',
+      'canEditEnquiry',
+      'canReadEnquiry',
+      'canAddChat',
+      'canDeleteChat',
+      'canEditChat',
+      'canReadChat',
+      'canAddPlan',
+      'canDeletePlan',
+      'canEditPlan',
+      'canReadPlan',
+      'canAddReport',
+      'canDeleteReport',
+      'canEditReport',
+      'canReadReport',
+    ],
+    ADMIN: ['canAdd', 'canEdit', 'canRead'],
+    MANAGER: ['canAdd', 'canRead'],
+    RESELLER: ['canAdd', 'canRead'],
     GUEST: ['canRead'],
   };
 
@@ -26,14 +102,17 @@ export class PermissionsRouteGuardComponent implements OnInit {
 
   ngOnInit() {
     this.currentRole = Object.keys(this.rolesSrv.getRoles())[0];
+    console.log(this.currentRole);
     this.currentPermissions = Object.keys(this.permissionsSrv.getPermissions());
+    console.log(this.currentPermissions);
   }
 
   onPermissionChange() {
     this.currentPermissions = this.permissionsOfRole[this.currentRole];
+    console.log(this.permissionsOfRole[this.currentRole]);
     this.rolesSrv.flushRolesAndPermissions();
     this.rolesSrv.addRoleWithPermissions(this.currentRole, this.currentPermissions);
 
-    this.router.navigateByUrl('/dashboard');
+    // this.router.navigateByUrl('/dashboard');
   }
 }

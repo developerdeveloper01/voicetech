@@ -40,5 +40,6 @@ export class CustomizerComponent implements OnInit {
 
   sendOptions() {
     this.optionsChange.emit(this.options);
+    console.log(this.options);
   }
 }

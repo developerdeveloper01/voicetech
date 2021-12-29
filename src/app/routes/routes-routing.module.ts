@@ -25,6 +25,7 @@ import { NationalProfileComponent } from './sip-service/sip-profile/national-pro
 import { AllProfileOneComponent } from './sip-service/sip-profile/all-profile-one/all-profile-one.component';
 import { EnquiryComponent } from './enquiry/enquiry.component';
 import { ChatComponent } from './chat/chat.component';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   {
@@ -134,6 +135,10 @@ const routes: Routes = [
         path: 'subordinate',
         loadChildren: () =>
           import('./subordinate/subordinate.module').then(m => m.SubordinateModule),
+      },
+      {
+        path: 'voice',
+        loadChildren: () => import('./voice/voice.module').then(m => m.VoiceModule),
       },
     ],
   },

@@ -29,6 +29,11 @@ export class SettingsService {
     return this.options.language;
   }
 
+  get ipserver() {
+    console.log(this.options.ipserver);
+    return this.options.ipserver;
+  }
+
   setLanguage(lang: string) {
     this.options.language = lang;
     this.notify$.next({ lang });

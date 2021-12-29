@@ -12,6 +12,15 @@
       <mat-icon>close</mat-icon>
     </button>
   </h2>
+  <h3 class="f-w-400">Switch IP</h3>
+  <div class="m-l-8">
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(ngModel)]="options.ipserver" value="Neron" (change)="sendOptions()">
+      <mat-button-toggle value="103.8.43.14">Neron</mat-button-toggle>
+      <mat-button-toggle value="127.89.99.25">NetMax</mat-button-toggle>
+    </mat-button-toggle-group>
+    <h4>Active: <span> <a href="">{{options.ipserver}} </a></span></h4>
+  </div>
+  <mat-divider inset class="m-x-0 m-y-24"></mat-divider>
   <h3 class="f-w-400">Theme</h3>
   <div class="m-l-8">
     <mat-radio-group [(ngModel)]="options.theme" (change)="sendOptions()">

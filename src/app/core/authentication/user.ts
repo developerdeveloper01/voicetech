@@ -9,7 +9,7 @@ export const admin: User = {
 
 export const guest: User = {
   id: null,
-  name: 'unknown',
-  email: 'unknown',
-  avatar: './assets/images/avatar-default.jpg',
+  name: 'Developer',
+  email: 'yadavdeepak486@gmail.com',
+  avatar: './assets/images/avatar.jpg',
 };

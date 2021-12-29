@@ -3,9 +3,27 @@
 <div class="matero-row" fxLayout="row wrap">
 
   <!-- Statistics -->
+  <div *ngIf="onestats" class="matero-col" fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
+<mat-card [ngClass]="['text-white','mat-elevation-z3' , onestats.color]" style="background: linear-gradient(
+ 45deg, rgb(255 255 255 / 16%) 0%, rgb(32 32 32 / 17%) 35%, rgb(0 0 0 / 45%) 100%);">
+ <mat-card-title class="f-s-12 f-w-100">{{onestats.title}}</mat-card-title>
+ <mat-card-content>
+   <h2>{{onestats.amount | number:'1.0':'en-US'}}</h2>
+   <mat-icon class="icon-set">{{onestats.rsicon}}</mat-icon>
+   <mtx-progress [value]="onestats.progress.value"
+                 height="2px"
+                 foreground="rgba(255,255,255,1)"
+                 background='rgba(0,0,0,.5)'>
+   </mtx-progress>
+   <!-- <small class="text-muted">Monthly</small> -->
+ </mat-card-content>
+</mat-card>
+</div>
+
+
   <div class="matero-col" fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100"
        *ngFor="let stat of stats">
-    <mat-card [ngClass]="['text-white', stat.color]" style="background: linear-gradient(
+    <mat-card [ngClass]="['text-white','mat-elevation-z3' , stat.color]" style="background: linear-gradient(
       45deg, rgb(255 255 255 / 16%) 0%, rgb(32 32 32 / 17%) 35%, rgb(0 0 0 / 45%) 100%);">
       <mat-card-title class="f-s-12 f-w-100">{{stat.title}}</mat-card-title>
       <mat-card-content>
@@ -24,7 +42,11 @@
   <div class="section-card">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mat-elevation-z1" style="transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+            position: relative;
+            padding: 16px;
+            border-radius: 4px;">
               <figure class="pie-chart1">
                 <h2 class="tl-c">STORAGE</h2>
                 <figcaption>
@@ -33,7 +55,11 @@
                 </figcaption>
               </figure>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mat-elevation-z1" style="transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+            position: relative;
+            padding: 16px;
+            border-radius: 4px; ">
               <figure class="pie-chart2">
                 <h2 class="tl-c">MEMORY</h2>
                 <figcaption>
@@ -42,7 +68,11 @@
                 </figcaption>
               </figure>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mat-elevation-z1" style="transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+            position: relative;
+            padding: 16px;
+            border-radius: 4px; ">
               <figure class="pie-chart3">
                 <h2 class="tl-c">CALL</h2>
                 <figcaption>
@@ -52,7 +82,11 @@
                 <!-- <cite>International Energy Agency</cite> -->
               </figure>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mat-elevation-z1" style="transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+            display: block;
+            position: relative;
+            padding: 16px;
+            border-radius: 4px;">
               <figure class="pie-chart4">
                 <h2 class="tl-c">CALL SUMMARY</h2>
                 <figcaption>

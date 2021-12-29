@@ -1,7 +1,6 @@
+import { UserService } from 'app/user.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-
 
 export interface PeriodicElement {
   name: string;
@@ -57,21 +56,21 @@ const MESSAGES = [
 ];
 
 @Injectable()
-export class DashboardService{
+export class DashboardService {
   stats = [
-    {
-      title: 'Total Calls',
-      amount: '180,200',
-      rsicon:'phone_paused',
-      progress: {
-        value: 50,
-      },
-      color: 'bg-indigo-500',
-    },
+    // {
+    //   title: 'Total Calls',
+    //   amount: '180,200',
+    //   rsicon:'phone_paused',
+    //   progress: {
+    //     value: 50,
+    //   },
+    //   color: 'bg-indigo-500',
+    // },
     {
       title: 'Missed Calls',
       amount: '70,205',
-      rsicon:'phone_missed',
+      rsicon: 'phone_missed',
       progress: {
         value: 70,
       },
@@ -80,7 +79,7 @@ export class DashboardService{
     {
       title: 'Recived Calls',
       amount: '1,291,922',
-      rsicon:'phone_callback',
+      rsicon: 'phone_callback',
       progress: {
         value: 80,
       },
@@ -89,7 +88,7 @@ export class DashboardService{
     {
       title: 'Dial Fail Calls',
       amount: '1,922',
-      rsicon:'phone_in_talk',
+      rsicon: 'phone_in_talk',
       progress: {
         value: 40,
       },
@@ -193,9 +192,14 @@ export class DashboardService{
       },
     },
   ];
+  allcalls: any;
 
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userService: UserService) {
+    this.userService.getallcallcounts().subscribe((data: any) => {
+      console.log(data.data);
+      this.allcalls = data.data;
+    });
+  }
 
   getData() {
     return ELEMENT_DATA;
@@ -213,5 +217,3 @@ export class DashboardService{
     return this.stats;
   }
 }
-
-

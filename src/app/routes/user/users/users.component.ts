@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { trigger, transition, animate, style, query, stagger } from '@angular/animations';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserService } from 'app/user.service';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
@@ -11,7 +12,9 @@ import {
   ChangeDetectionStrategy,
   AfterViewInit,
   Inject,
+  HostBinding,
 } from '@angular/core';
+import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-users',
@@ -42,11 +45,15 @@ export class UsersComponent implements OnInit, AfterViewInit {
     public dialogx: MtxDialog,
     public userService: UserService,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private rolesSrv: NgxRolesService,
+    private permissonsSrv: NgxPermissionsService
   ) {}
 
   ngOnInit(): void {
     this.getallusers();
+    console.log(this.rolesSrv.getRoles());
+    console.log(this.permissonsSrv.getPermissions());
 
     this.columns = [
       { header: 'Avatar', field: 'userimg', type: 'image' },
@@ -186,7 +193,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.isLoading = false;
+    this.isLoading = true;
   }
 
   pagechange(e) {

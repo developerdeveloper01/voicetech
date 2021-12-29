@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common'; //getCurrencySymbol check currency symbol
 
 @Injectable({
   providedIn: 'root',

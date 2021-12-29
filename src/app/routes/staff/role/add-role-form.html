@@ -22,39 +22,40 @@ fieldset.st-set {
 <form [formGroup]="addroleform" (ngSubmit)="submitdstnumber()">
   <mat-dialog-content>
     <mat-form-field class="demo-full-width">
-      <mat-label>Title</mat-label>
+      <mat-label>Role Name</mat-label>
       <input matInput placeholder="Admin"
-             required formControlName="dstnumber">
+             required formControlName="name">
     </mat-form-field>
+      <mat-checkbox formControlName="status" value="" color="primary">Status</mat-checkbox>
 
-    <section class=" r-24">
-      <h4>Permissions</h4>
-      <div *ngFor="let task of tasks" class="st-mb">
-        <fieldset class="st-set">
-          <legend class="st-leg">
-            <mat-checkbox color="primary" [value]="task.completed"
+    <mat-accordion>
+            <mat-expansion-panel *ngFor="let task of tasks">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{task?.name}}
+          </mat-panel-title>
+          <mat-panel-description style="flex-grow: 1;">
+            <mat-checkbox color="primary" [value]="task?.completed"
             [checked]="allComplete(task)"
-            [indeterminate]="someComplete(task.subtasks)"
-            (change)="setAllCompleted(task.subtasks, $event.checked)" >
+            [indeterminate]="someComplete(task?.subtasks)"
+            (change)="setAllCompleted(task?.subtasks, $event?.checked)" >
             {{task.name}}
             </mat-checkbox>
-          </legend>
-        <div class="demo-sub-list">
-          <div *ngFor="let subtask of task.subtasks">
-            <mat-checkbox color="primary" [(ngModel)] = "subtask.completed" [ngModelOptions]="{standalone: true}"  (change)="updateAllComplete(subtask)">
-              {{subtask.name}}
-            </mat-checkbox>
-          </div>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let subtask of task?.subtasks" >
+          <mat-checkbox color="primary" [(ngModel)] = "subtask.completed" [ngModelOptions]="{standalone: true}"  (change)="updateAllComplete(subtask)">
+            {{subtask?.name}}
+          </mat-checkbox>
         </div>
-       </fieldset>
-       </div>
-    </section>
+      </mat-expansion-panel>
+    </mat-accordion>
   </mat-dialog-content>
 
   <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button mat-dialog-close  color="primary"
-            cdkFocusInitial
+    <button mat-raised-button cdkFocusInitial mat-dialog-close>Cancel</button>
+    <button mat-raised-button mat-dialog-close [disabled]="addroleform.invalid" color="primary"
+
             type="submit">Submit</button>
   </mat-dialog-actions>
 </form>

@@ -1,8 +1,11 @@
 <page-header class="bg-blue-600"></page-header>
+<button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+  <mat-icon (click)="reloadcalls()">refresh</mat-icon>
+</button>
 <section>
   <div class="row">
     <div class="col-lg-12">
-      <mtx-grid class="mat-elevation-z8 r-4" [data]="filteredData || list"
+      <mtx-grid class="mat-elevation-z8 r-4" [data]="list"
                 [columns]="columns"
                 [loading]="isLoading"
                 [columnResizable]="columnResizable"
@@ -12,6 +15,7 @@
                 [rowHover]="rowHover"
                 [rowStriped]="rowStriped"
                 [showToolbar]="showToolbar"
+                [trackBy]="getallcalls()"
                 [toolbarTitle]="'Call Status'"
                 [toolbarTemplate]="toolbarTpl"
                 [columnHideable]="columnHideable"

@@ -20,17 +20,33 @@
       [expandable]="expandable"
       [pageOnFront]="showPaginator"
       [showPaginator]="showPaginator"
-      [pageSizeOptions]="[50, 100, 200, 500]"
+      [pageSizeOptions]="[10,20,50,100,200,500]"
       [pageIndex]="0"
       [pageSize]="50"
       (sortChange)="changeSort($event)"
-      (selectionChange)="changeSelect($event)"
+      (rowSelectionChange)="changerowSelect($event)"
+      (cellSelectionChange)="changecellSelect($event)"
     >
     </mtx-grid>
-    <ng-template #toolbarTpl>
+    <ng-template #toolbarTpl style="display: flex;">
       <button mat-stroked-button color="primary" (click)="openAddDstNumber()">
         <mat-icon>add</mat-icon>Add DST Number
       </button>
+      <div *ngIf="showdeletebutton" class="">
+        <mat-form-field>
+          <mat-label>Allot to</mat-label>
+
+          <mtx-select [items]="allstaff" bindLabel="firstname" bindValue="_id"
+                      [(ngModel)]="staff" [required]="true" >
+          </mtx-select>
+
+          <mat-hint>Allot to someone</mat-hint>
+          <mat-error>Please choose someone!</mat-error>
+        </mat-form-field>
+      </div>
+      <!-- <button *ngIf="showdeletebutton" matTooltip="Delete selected" mat-icon-button color="warn" >
+          <mat-icon class="mat-18">delete</mat-icon>
+      </button> -->
     </ng-template>
   </div>
 </div>

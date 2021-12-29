@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -143,7 +143,67 @@ export class UserService {
   }
 
   //live-calls
-  getallivecalls(){
+  getallivecalls() {
     return this.http.get(`http://103.8.43.14/onyx/api/callStatus`);
+  }
+
+  getrecordings() {
+    return this.http.get(`http://103.8.43.14/onyx/api/recordingsList?date=2021-12-08`);
+  }
+
+  stafflogin(data) {
+    return this.http.post(`${this.backendurl}/admin/stafflogin`, data);
+  }
+
+  searchreportbynumber(data) {
+    return this.http.post(`${this.backendurl}/admin/regexsearch`, data);
+  }
+
+  getrolespermisson() {
+    const id_ = '612f25e59d95d23b34c2de8e';
+    return this.http.get(`${this.backendurl}/admin/viewonestaff/${id_}`);
+  }
+
+  viewstaffbytoken() {
+    let header = new HttpHeaders().set('ad-token', localStorage.getItem('ad-token'));
+    return this.http.get(`${this.backendurl}/admin/viewonestaff`, {
+      headers: header,
+    });
+  }
+
+  viewadminstaff() {
+    let header = new HttpHeaders().set('ad-token', localStorage.getItem('ad-token'));
+    return this.http.get(`${this.backendurl}/admin/viewmystaff`, {
+      headers: header,
+    });
+  }
+
+  getroleslowerthanme() {
+    let header = new HttpHeaders().set('ad-token', localStorage.getItem('ad-token'));
+    return this.http.get(`${this.backendurl}/admin/lowerrolesthanmine`, {
+      headers: header,
+    });
+  }
+
+  getsinglerecording(date, caller_id_number, destination_number, uuid) {
+    return this.http.get(
+      `http://103.8.43.14/onyx/assets/recordings?date=${date}&file_name=${date}/${caller_id_number}_${destination_number}_${uuid}.wav`
+    );
+  }
+
+  mydstnumbers() {
+    let header = new HttpHeaders().set('ad-token', localStorage.getItem('ad-token'));
+    return this.http.get(`${this.backendurl}/admin/mydstnumbers`, {
+      headers: header,
+    });
+  }
+
+  ///Dashboard///
+  getallcallcounts() {
+    return this.http.get(`${this.backendurl}/admin/allcdrcount`);
+  }
+
+  deleterole(id) {
+    return this.http.get(`${this.backendurl}/admin/deleterole/${id}`);
   }
 }

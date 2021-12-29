@@ -68,76 +68,12 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
     { header: 'Name', sortable: true, field: 'name' },
     { header: 'Status', sortable: true, field: 'status' },
     {
-      header: 'Read Call Details',
-      field: 'r_calldetails',
-      type: 'tag',
-      tag: {
-        true: { text: 'Yes', color: 'green-100' },
-        false: { text: 'No', color: 'red-100' },
-      },
-    },
-    {
-      header: 'Write Call Details',
-      field: 'w_calldetails',
-      type: 'tag',
-      tag: {
-        true: { text: 'Yes', color: 'green-100' },
-        false: { text: 'No', color: 'red-100' },
-      },
-    },
-    {
-      header: 'Read IVR',
-      field: 'r_ivr',
-      type: 'tag',
-      tag: {
-        true: { text: 'Yes', color: 'green-100' },
-        false: { text: 'No', color: 'red-100' },
-      },
-    },
-    {
-      header: 'Write IVR',
-      field: 'w_ivr',
-      type: 'tag',
-      tag: {
-        true: { text: 'Yes', color: 'green-100' },
-        false: { text: 'No', color: 'red-100' },
-      },
-    },
-    {
-      header: 'Read SIP',
-      field: 'r_sip',
-      type: 'tag',
-      tag: {
-        true: { text: 'Yes', color: 'green-100' },
-        false: { text: 'No', color: 'red-100' },
-      },
-    },
-    {
-      header: 'Write SIP',
-      field: 'w_sip',
-      type: 'tag',
-      tag: {
-        true: { text: 'Yes', color: 'green-100' },
-        false: { text: 'No', color: 'red-100' },
-      },
-    },
-    {
-      header: 'Read User Details',
-      field: 'r_userdetails',
-      type: 'tag',
-      tag: {
-        true: { text: 'Yes', color: 'green-100' },
-        false: { text: 'No', color: 'red-100' },
-      },
-    },
-    {
-      header: 'Write User Details',
-      field: 'w_userdetails',
-      type: 'tag',
-      tag: {
-        true: { text: 'Yes', color: 'green-100' },
-        false: { text: 'No', color: 'red-100' },
-      },
+      header: 'Permissions',
+      field: 'permissions',
+      showExpand: true,
+      formatter: (data: any) => `<a
+      >click here
+    </a>`,
     },
     {
       header: 'Actions',
@@ -364,7 +300,23 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   delete(value: any) {
-    this.dialogx.alert(`You have deleted ${value.position}!`);
+    console.log(value);
+    this.userService.deleterole(value._id).subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:304 response', 'color: #26bfa5;', response);
+        this.snackBar.open('Role Deleted Successfully!', '', { duration: 2000 });
+        //this.addroleform.reset();
+        this.getallroles();
+      },
+      error => {
+        console.log(
+          '%cerror ips.component.ts line:311 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
+      }
+    );
+    this.dialogx.alert(`You have deleted ${value.name}!`);
   }
 
   changeSelect(e: any) {
@@ -446,6 +398,7 @@ export interface Task {
 export class AddRoleFormComponent implements OnInit {
   falseValue = 'false';
   trueValue = 'true';
+  panelOpenState = false;
 
   addroleform: FormGroup;
   allips: any;
@@ -456,12 +409,9 @@ export class AddRoleFormComponent implements OnInit {
     private snackBar: MatSnackBar
   ) {
     this.addroleform = this.fb.group({
-      ip: ['', [Validators.required]],
-      dstnumber: [
-        '',
-        [Validators.required, Validators.min(1000000000), Validators.max(9999999999)],
-      ],
-      inusestatus: [false],
+      name: ['', [Validators.required]],
+      status: [false],
+      permissions: [],
     });
   }
 
@@ -469,76 +419,89 @@ export class AddRoleFormComponent implements OnInit {
     this.getallips();
   }
 
-  tasks: Task[] = [
+  tasks: any[] = [
+    {
+      name: 'Basic',
+      completed: false,
+      subtasks: [
+        { name: 'Add', value: 'canAdd', completed: false },
+        { name: 'Edit', value: 'canEdit', completed: false },
+        { name: 'Read', value: 'canRead', completed: false },
+        { name: 'Delete', value: 'canDelete', completed: false },
+      ],
+    },
     {
       name: 'Enquiry',
       completed: false,
       subtasks: [
-        { name: 'View Enquiry', completed: false },
-        { name: 'Followup Enquiry', completed: false },
+        { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
+        { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
       ],
     },
     {
       name: 'Manage Staff',
       completed: false,
       subtasks: [
-        { name: 'View Staff', completed: false },
-        { name: 'Add Staff', completed: false },
-        { name: 'Edit Staff', completed: false },
-        { name: 'Delete Staff', completed: false },
+        { name: 'View Staff', value: 'ViewStaff', completed: false },
+        { name: 'Add Staff', value: 'AddStaff', completed: false },
+        { name: 'Edit Staff', value: 'EditStaff', completed: false },
+        { name: 'Delete Staff', value: 'DeleteStaff', completed: false },
       ],
     },
     {
       name: 'DST Numbers',
       completed: false,
       subtasks: [
-        { name: 'View DST Numbers', completed: false },
-        { name: 'Add DST Numbers', completed: false },
-        { name: 'Edit DST Numbers', completed: false },
-        { name: 'Delete DST Numbers', completed: false },
+        { name: 'View DST Numbers', value: 'ViewDST', completed: false },
+        { name: 'Add DST Numbers', value: 'AddDST', completed: false },
+        { name: 'Edit DST Numbers', value: 'EditDST', completed: false },
+        { name: 'Delete DST Numbers', value: 'DeleteDST', completed: false },
       ],
     },
     {
       name: 'IPs',
       completed: false,
       subtasks: [
-        { name: 'View IPs', completed: false },
-        { name: 'Add IPs', completed: false },
-        { name: 'Edit IPs', completed: false },
-        { name: 'Delete IPs', completed: false },
+        { name: 'View IPs', value: 'ViewIP', completed: false },
+        { name: 'Add IPs', value: 'AddIP', completed: false },
+        { name: 'Edit IPs', value: 'EditIP', completed: false },
+        { name: 'Delete IPs', value: 'DeleteIP', completed: false },
       ],
     },
     {
       name: 'Plan',
       completed: false,
       subtasks: [
-        { name: 'View Plan', completed: false },
-        { name: 'Add Plan', completed: false },
-        { name: 'Edit Plan', completed: false },
-        { name: 'Delete Plan', completed: false },
+        { name: 'View Plan', value: 'ViewPlan', completed: false },
+        { name: 'Add Plan', value: 'AddPlan', completed: false },
+        { name: 'Edit Plan', value: 'EditPlan', completed: false },
+        { name: 'Delete Plan', value: 'DeletePlan', completed: false },
       ],
     },
     {
       name: 'Chat',
       completed: false,
       subtasks: [
-        { name: 'View Chat', completed: false },
-        { name: 'Delete Chat', completed: false },
+        { name: 'View Chat', value: 'ViewChat', completed: false },
+        { name: 'Delete Chat', value: 'DeleteChat', completed: false },
       ],
     },
   ];
 
   allComplete(task: Task): boolean {
+    //console.log(task);
     const subtasks = task.subtasks;
     return task.completed || (subtasks != null && subtasks.every(t => t.completed));
   }
 
   someComplete(tasks: Task[]): boolean {
+    //console.log(tasks);
     const numComplete = tasks.filter(t => t.completed).length;
     return numComplete > 0 && numComplete < tasks.length;
   }
 
   setAllCompleted(tasks: Task[], completed: boolean) {
+    //console.log(tasks);
     tasks.forEach(t => (t.completed = completed));
   }
 
@@ -547,13 +510,7 @@ export class AddRoleFormComponent implements OnInit {
   }
 
   getErrorMessage(form: FormGroup) {
-    return form.get('dstnumber').hasError('required')
-      ? 'validations.required'
-      : form.get('dstnumber').hasError('min')
-      ? 'validations.min'
-      : form.get('dstnumber').hasError('max')
-      ? 'validations.max'
-      : '';
+    return form.get('name').hasError('required') ? 'validations.required' : '';
   }
 
   checkboxChange(checkbox: MatCheckbox, checked: boolean) {
@@ -561,23 +518,38 @@ export class AddRoleFormComponent implements OnInit {
   }
 
   submitdstnumber() {
+    let permissionsarr: any = [];
+    this.tasks.forEach(index =>
+      index.subtasks.forEach(element => {
+        if (element.completed == true) {
+          permissionsarr.push(element.value);
+        }
+        //console.log(element);
+      })
+    );
+    console.log(permissionsarr);
+    this.addroleform.setValue({
+      name: this.addroleform.value.name,
+      status: this.addroleform.value.status,
+      permissions: permissionsarr,
+    });
     if (this.addroleform.valid) {
       console.log(this.addroleform.value);
-      // this.userService.addrole(this.addroleform.value).subscribe(
-      //   (response: any) => {
-      //     console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-      //     this.snackBar.open('DST Number Added Successfully!', '', { duration: 2000 });
-      //     this.addroleform.reset();
-      //     //this.addroleform.markAsUntouched();
-      //   },
-      //   error => {
-      //     console.log(
-      //       '%cerror ips.component.ts line:254 ',
-      //       'color: red; display: block; width: 100%;',
-      //       error
-      //     );
-      //   }
-      // );
+      this.userService.addrole(this.addroleform.value).subscribe(
+        (response: any) => {
+          console.log('%cips.component.ts line:511 response', 'color: #26bfa5;', response);
+          this.snackBar.open('Role Added Successfully!', '', { duration: 2000 });
+          this.addroleform.reset();
+          //this.addroleform.markAsUntouched();
+        },
+        error => {
+          console.log(
+            '%cerror ips.component.ts line:254 ',
+            'color: red; display: block; width: 100%;',
+            error
+          );
+        }
+      );
     } else {
       this.getErrorMessage(this.addroleform);
       console.log(this.getErrorMessage(this.addroleform));

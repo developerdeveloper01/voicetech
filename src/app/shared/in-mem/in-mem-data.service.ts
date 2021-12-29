@@ -69,31 +69,41 @@ function getUserFromJWTToken(req: HttpRequest<any>) {
   providedIn: 'root',
 })
 export class InMemDataService implements InMemoryDbService {
-  private users: User[] = [
-    {
-      id: 1,
-      username: 'admin',
-      password: 'admin',
-      name: 'Admin',
-      email: 'admin@gmail.com',
-      avatar: './assets/images/avatar.jpg',
-    },
-    {
-      id: 2,
-      username: 'developer',
-      password: 'developer',
-      name: 'Deepak Developer',
-      email: 'developer@gmail.com',
-      avatar: './assets/images/avatars/avatar-10.jpg',
-    },
-  ];
+  // private users: User[] = [
+  //   {
+  //     id: 1,
+  //     username: 'admin',
+  //     password: 'admin',
+  //     name: 'Admin',
+  //     email: 'admin@gmail.com',
+  //     avatar: './assets/images/avatar.jpg',
+  //   },
+  //   {
+  //     id: 2,
+  //     username: 'developer',
+  //     password: 'developer',
+  //     name: 'Deepak Developer',
+  //     email: 'developer@gmail.com',
+  //     avatar: './assets/images/avatars/avatar-10.jpg',
+  //   },
+  //   {
+  //     id: 3,
+  //     username: '8871782180',
+  //     password: 'pass@123',
+  //     name: 'Deepak Yadav',
+  //     email: 'yadavdeepak486@gmail.com',
+  //     avatar: './assets/images/avatars/avatar-8.jpg',
+  //   },
+  // ];
 
   createDb(reqInfo?: RequestInfo): {} | Observable<{}> | Promise<{}> {
-    return { users: this.users };
+    return { users: this };
   }
 
   get(reqInfo: RequestInfo) {
+    console.log(reqInfo);
     if (is(reqInfo, 'sanctum/csrf-cookie')) {
+      console.log('sactum cokkie');
       return reqInfo.utils.createResponse$(() => {
         const { headers, url } = reqInfo;
 
@@ -102,22 +112,29 @@ export class InMemDataService implements InMemoryDbService {
     }
 
     if (is(reqInfo, 'me/menu')) {
+      console.log('me menu');
       return reqInfo.utils.createResponse$(() => {
         const { headers, url } = reqInfo;
         const menu = JSON.parse(this.fetch('assets/data/menu.json?_t=' + Date.now())).menu;
+        // console.log(menu)
+        // for (let i = 0; i < menu.length; i++) {
+        //   const element = menu[i].permissions;
+        //   console.log(element)
 
+        // }
         return { status: STATUS.OK, headers, url, body: { menu } };
       });
     }
 
     if (is(reqInfo, 'me')) {
+      console.log('me');
       return reqInfo.utils.createResponse$(() => {
         const { headers, url } = reqInfo;
         const user = getUserFromJWTToken(reqInfo.req as HttpRequest<any>);
 
-        if (!user) {
-          return { status: STATUS.UNAUTHORIZED, headers, url, body: {} };
-        }
+        // if (!user) {
+        //   return { status: STATUS.UNAUTHORIZED, headers, url, body: {} };
+        // }
 
         return { status: STATUS.OK, headers, url, body: user };
       });
@@ -125,63 +142,83 @@ export class InMemDataService implements InMemoryDbService {
   }
 
   post(reqInfo: RequestInfo) {
-    if (is(reqInfo, 'auth/login')) {
-      return this.login(reqInfo);
-    }
+    console.log(reqInfo);
+    // if (is(reqInfo, 'auth/login')) {
+    //   console.log("was login request")
+    //   return this.login(reqInfo);
+    // }
 
-    if (is(reqInfo, 'auth/refresh')) {
-      return this.refresh(reqInfo);
+    // if (is(reqInfo, 'auth/refresh')) {
+    //   console.log("was refresh")
+    //   return this.refresh(reqInfo);
+    // }
+    if (is(reqInfo, 'api/')) {
+      console.log('me menu');
+      return reqInfo.utils.createResponse$(() => {
+        const { headers, url } = reqInfo;
+        const menu = JSON.parse(this.fetch('assets/data/menu.json?_t=' + Date.now())).menu;
+
+        // console.log(menu)
+        // for (let i = 0; i < menu.length; i++) {
+        //   const element = menu[i].permissions;
+        //   console.log(element)
+
+        // }
+        return { status: STATUS.OK, headers, url, body: { menu } };
+      });
     }
 
     if (is(reqInfo, 'auth/logout')) {
+      console.log('was logout request');
       return this.logout(reqInfo);
     }
   }
 
-  private login(reqInfo: RequestInfo) {
-    return reqInfo.utils.createResponse$(() => {
-      const { headers, url } = reqInfo;
-      const req = reqInfo.req as HttpRequest<any>;
-      const { email, password } = req.body;
-      const currentUser = Object.assign(
-        {},
-        this.users.find(user => user.email === email || user.username === email)
-      );
+  // private login(reqInfo: RequestInfo) {
+  //   console.log(reqInfo)
+  //   return reqInfo.utils.createResponse$(() => {
+  //     const { headers, url } = reqInfo;
+  //     const req = reqInfo.req as HttpRequest<any>;
+  //     const { email, password } = req.body;
+  //     const currentUser = Object.assign(
+  //       {},
+  //       this.users.find(user => user.email === email || user.username === email)
+  //     );
 
-      if (!currentUser) {
-        return { status: STATUS.UNAUTHORIZED, headers, url, body: {} };
-      }
+  //     // if (!currentUser) {
+  //     //   return { status: STATUS.UNAUTHORIZED, headers, url, body: {} };
+  //     // }
 
-      if (currentUser.password !== password) {
-        return {
-          status: STATUS.UNPROCESSABLE_ENTRY,
-          headers,
-          url,
-          error: {
-            errors: {
-              password: ['The provided password is incorrect.'],
-            },
-          },
-        };
-      }
+  //     // if (currentUser.password !== password) {
+  //     //   return {
+  //     //     status: STATUS.UNPROCESSABLE_ENTRY,
+  //     //     headers,
+  //     //     url,
+  //     //     error: {
+  //     //       errors: {
+  //     //         password: ['The provided password is incorrect.'],
+  //     //       },
+  //     //     },
+  //     //   };
+  //     // }
 
-      delete currentUser.password;
+  //     // delete currentUser.password;
 
-      return { status: STATUS.OK, headers, url, body: generateToken(currentUser) };
-    });
-  }
+  //     return { status: STATUS.OK, headers, url, body: generateToken(currentUser) };
+  //   });
+  // }
 
-  private refresh(reqInfo: RequestInfo) {
-    return reqInfo.utils.createResponse$(() => {
-      const { headers, url } = reqInfo;
-      const user = getUserFromJWTToken(reqInfo.req as HttpRequest<any>);
-      if (!user) {
-        return { status: STATUS.UNAUTHORIZED, headers, url, body: {} };
-      }
+  // private refresh(reqInfo: RequestInfo) {
+  //   return reqInfo.utils.createResponse$(() => {
+  //     const { headers, url } = reqInfo;
+  //     const user = getUserFromJWTToken(reqInfo.req as HttpRequest<any>);
+  //     if (!user) {
+  //       return { status: STATUS.UNAUTHORIZED, headers, url, body: {} };
+  //     }
 
-      return { status: STATUS.OK, headers, url, body: generateToken(user) };
-    });
-  }
+  //     return { status: STATUS.OK, headers, url, body: generateToken(user) };
+  //   });
+  // }
 
   private logout(reqInfo: RequestInfo) {
     return reqInfo.utils.createResponse$(() => {

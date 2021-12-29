@@ -1,12 +1,12 @@
 <h2 mat-dialog-title>{{editmode?"Edit Subordinate":"Create Subordinate"}}</h2>
-<form [formGroup]="adduserform" (ngSubmit)="submituserform()">
+<form [formGroup]="addstaffform" (ngSubmit)="submituserform()">
   <mat-dialog-content>
     <div fxLayout="row wrap" fxLayoutGap="8px grid">
       <div fxFlex="50" fxFlex.lt-sm="100">
         <mat-form-field class="demo-full-width">
           <mat-label>First Name</mat-label>
           <input type="text" matInput placeholder="John" formControlName="firstname" required />
-          <mat-error *ngIf="adduserform.get('firstname').invalid">
+          <mat-error *ngIf="addstaffform.get('firstname').invalid">
             {{'validations.required'| translate}}
           </mat-error>
         </mat-form-field>
@@ -15,7 +15,7 @@
         <mat-form-field class="demo-full-width">
           <mat-label>Last Name</mat-label>
           <input type="text" matInput placeholder="Deo" formControlName="lastname" required />
-          <mat-error *ngIf="adduserform.get('lastname').invalid">
+          <mat-error *ngIf="addstaffform.get('lastname').invalid">
             {{'validations.required'| translate}}
           </mat-error>
         </mat-form-field>
@@ -29,7 +29,7 @@
           formControlName="email"
           required
         />
-        <mat-error *ngIf="adduserform.get('email').invalid">
+        <mat-error *ngIf="addstaffform.get('email').invalid">
           {{'validations.required'| translate}}
         </mat-error>
       </mat-form-field>
@@ -37,24 +37,24 @@
         <mat-label>Mobile</mat-label>
         <input type="number" matInput placeholder="9999999999" formControlName="mobile" required />
         <mat-icon matSuffix>smartphone</mat-icon>
-        <mat-error *ngIf="adduserform.get('mobile').invalid">
+        <mat-error *ngIf="addstaffform.get('mobile').invalid">
           {{'validations.required'| translate}}
         </mat-error>
       </mat-form-field>
-      <mat-form-field class="demo-full-width">
+      <!-- <mat-form-field class="demo-full-width">
         <mat-label>Password</mat-label>
         <input type="password" matInput formControlName="password" required />
-        <mat-error *ngIf="adduserform.get('password').invalid">
+        <mat-error *ngIf="addstaffform.get('password').invalid">
           {{'validations.required'| translate}}
         </mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
       <div fxFlex="50" fxFlex.lt-sm="100">
       <mat-form-field class="demo-full-width">
         <mat-label>Select Role</mat-label>
-        <mat-select formControlName="role" required>
+        <mat-select formControlName="role" required >
           <mat-option *ngFor="let role of allroles" [value]="role._id"> {{role?.name}} </mat-option>
         </mat-select>
-        <mat-error *ngIf="adduserform.get('role').invalid">
+        <mat-error *ngIf="addstaffform.get('role').invalid">
           {{'validations.required'| translate}}
         </mat-error>
       </mat-form-field>
@@ -76,7 +76,7 @@
     <button
       mat-raised-button
       mat-dialog-close
-      [disabled]="adduserform.invalid"
+      [disabled]="addstaffform.invalid"
       color="primary"
       type="submit"
     >

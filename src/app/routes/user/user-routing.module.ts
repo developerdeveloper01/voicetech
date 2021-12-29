@@ -6,10 +6,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
-  { path: 'users', component: UsersComponent },
+  {
+    path: 'users',
+    component: UsersComponent,
+    data: {
+      permissions: {
+        only: ['SUPERADMIN', 'ADMIN', 'MANAGER', 'RESELLER'],
+        redirectTo: '/dashboard',
+      },
+    },
+  },
   {
     path: 'user-detail/:id',
     component: UserDetailComponent,
+    data: {
+      permissions: {
+        only: ['SUPERADMIN', 'ADMIN', 'MANAGER', 'RESELLER'],
+        redirectTo: '/dashboard',
+      },
+    },
   },
 ];
 

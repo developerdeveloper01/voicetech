@@ -1,5 +1,4 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { NoopInterceptor } from './noop-interceptor';
 import { BaseUrlInterceptor } from './base-url-interceptor';
 import { TokenInterceptor } from './token-interceptor';

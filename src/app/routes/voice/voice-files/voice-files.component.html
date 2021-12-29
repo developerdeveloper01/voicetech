@@ -1,0 +1,9 @@
+<page-header class="bg-blue-600"></page-header>
+
+<div class="m-16">
+  <ngx-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle" [autoPlay]="true"
+muted="muted" [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions" (trackEnded)="onEnded($event)"
+  [displayVolumeControls]="msaapDisplayVolumeControls" [displayRepeatControls]="msaapDisplayRepeatControls"
+  [disablePositionSlider]="msaapDisablePositionSlider" [displayArtist]="msaapDisplayArtist"
+  [displayDuration]="msaapDisplayDuration" [expanded]="true"></ngx-audio-player>
+</div>

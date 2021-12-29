@@ -1,28 +1,25 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ToastrModule } from 'ngx-toastr';
+import { UserService } from './user.service';
 import { AppComponent } from './app.component';
-
+import { environment } from '@env/environment';
 import { CoreModule } from './core/core.module';
 import { ThemeModule } from './theme/theme.module';
 import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
-import { FormlyConfigModule } from './formly-config.module';
 import { NgxPermissionsModule } from 'ngx-permissions';
-import { ToastrModule } from 'ngx-toastr';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-import { environment } from '@env/environment';
-import { BASE_URL } from '@core/interceptors/base-url-interceptor';
-import { httpInterceptorProviders } from '@core/interceptors';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormlyConfigModule } from './formly-config.module';
 import { appInitializerProviders } from '@core/initializers';
-
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { httpInterceptorProviders } from '@core/interceptors';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { BASE_URL } from '@core/interceptors/base-url-interceptor';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { InMemDataService } from './shared/in-mem/in-mem-data.service';
-import { UserService } from './user.service';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { AdminAuthService } from './core/authentication/admin-auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Required for AOT compilation
 export function TranslateHttpLoaderFactory(http: HttpClient) {
@@ -49,7 +46,6 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient],
       },
     }),
-    // Demo purposes only for GitHub Pages
     HttpClientInMemoryWebApiModule.forRoot(InMemDataService, {
       dataEncapsulation: false,
       passThruUnknownUrl: true,
@@ -60,6 +56,7 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
     httpInterceptorProviders,
     appInitializerProviders,
     UserService,
+    AdminAuthService,
   ],
   bootstrap: [AppComponent],
 })

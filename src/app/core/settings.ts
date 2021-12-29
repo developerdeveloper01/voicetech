@@ -1,5 +1,6 @@
 export interface AppSettings {
   navPos?: 'side' | 'top';
+  ipserver?: '103.8.43.14' | '127.89.99.25';
   dir?: 'ltr' | 'rtl';
   theme?: 'light' | 'dark';
   showHeader?: boolean;
@@ -12,6 +13,7 @@ export interface AppSettings {
 
 export const defaults: AppSettings = {
   navPos: 'side',
+  ipserver: '103.8.43.14',
   dir: 'ltr',
   theme: 'light',
   showHeader: true,

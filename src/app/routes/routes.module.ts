@@ -17,25 +17,26 @@ import { SystemSettingComponent } from './system-setting/system-setting.componen
 import { EnquiryComponent } from './enquiry/enquiry.component';
 import { ChatComponent } from './chat/chat.component';
 
-const COMPONENTS = [DashboardComponent, LoginComponent, RegisterComponent];
+const COMPONENTS = [
+  DashboardComponent,
+  LoginComponent,
+  RegisterComponent,
+  IvrServiceComponent,
+  CallCenterComponent,
+  VoiceBroadcastComponent,
+  SmsEmailConfigurationComponent,
+  ListManagerComponent,
+  NetworkComponent,
+  SecurityComponent,
+  SystemSettingComponent,
+  EnquiryComponent,
+  ChatComponent,
+];
 const COMPONENTS_DYNAMIC = [];
 
 @NgModule({
   imports: [SharedModule, RoutesRoutingModule, SipServiceModule],
-  declarations: [
-    ...COMPONENTS,
-    ...COMPONENTS_DYNAMIC,
-    IvrServiceComponent,
-    CallCenterComponent,
-    VoiceBroadcastComponent,
-    SmsEmailConfigurationComponent,
-    ListManagerComponent,
-    NetworkComponent,
-    SecurityComponent,
-    SystemSettingComponent,
-    EnquiryComponent,
-    ChatComponent,
-  ],
+  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC],
   entryComponents: COMPONENTS_DYNAMIC,
 })
 export class RoutesModule {}

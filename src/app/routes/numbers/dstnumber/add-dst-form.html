@@ -13,6 +13,18 @@
         {{'validations.required'| translate}}
       </mat-error>
     </mat-form-field>
+    <mat-form-field class="demo-full-width">
+      <mat-label>Allot To</mat-label>
+      <mat-select formControlName="assign"
+                  required>
+        <mat-option *ngFor="let staff of allstaff; index as i;" [value]="staff._id">
+          {{ staff.firstname }} {{ staff.lastname }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="adddstnumber.get('assign').invalid">
+        {{'validations.required'| translate}}
+      </mat-error>
+    </mat-form-field>
 
     <table class="demo-full-width" cellspacing="0">
       <tr>

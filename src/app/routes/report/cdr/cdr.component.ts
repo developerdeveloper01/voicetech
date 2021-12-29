@@ -39,14 +39,14 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
     { header: 'ID', sortable: true, field: 'id' },
     { header: 'Caller ID', sortable: true, field: 'caller_id_name' },
     { header: 'Destination Number', sortable: true, field: 'destination_number' },
-    { header: 'Context', sortable: true, field: 'context' },
+    { header: 'Context', sortable: true, hide: true, field: 'context' },
     { header: 'Start Call', sortable: true, field: 'start_stamp' },
-    { header: 'Answer Stamp', sortable: true, field: 'answer_stamp' },
+    { header: 'Answer Stamp', sortable: true, hide: true, field: 'answer_stamp' },
     { header: 'End Call', sortable: true, field: 'end_stamp' },
-    { header: 'Duration', sortable: true, field: 'duration' },
+    { header: 'Duration', sortable: true, hide: true, field: 'duration' },
     { header: 'Bill', sortable: true, field: 'billsec' },
-    { header: 'Hangup Cause', sortable: true, field: 'hangup_cause' },
-    { header: 'Call Unique ID', sortable: true, field: 'uuid' },
+    { header: 'Hangup Cause', sortable: true, hide: true, field: 'hangup_cause' },
+    { header: 'Call Unique ID', sortable: true, field: 'uuid', showExpand: true },
     { header: 'Date', sortable: true, field: 'created_time' },
     {
       header: 'Actions',
@@ -115,6 +115,7 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
       map(value => this._filter(value))
     );
     this.getallcdrreport();
+    //this.searchcdrreport();
     this.searchform = this.fb.group({
       startdate: [new Date(Date.now())],
       enddate: [Date.now()],
@@ -179,10 +180,6 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  changeSelect(e: any) {
-    console.log(e);
-  }
-
   changeSort(e: any) {
     console.log(e);
   }
@@ -203,8 +200,27 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
+  searchcdrreport() {
+    // var num = 2581;
+    var someform = {
+      oneinput: '61212581',
+    };
+    this.userService.searchreportbynumber(someform).subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+        this.list = response.data;
+        this.total = response.data.length;
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   ngAfterViewInit() {
-    this.isLoading = false;
+    this.isLoading = true;
   }
 
   ngOnDestroy() {
@@ -213,6 +229,47 @@ export class CdrComponent implements OnInit, AfterViewInit, OnDestroy {
 
   submitsearch() {
     console.log(this.searchform.value);
+    this.userService.searchreportbynumber(this.searchform.value).subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+        this.list = response.data;
+        this.total = response.data.length;
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  pagechangeevent(e) {
+    console.log(e);
+  }
+
+  rowselection(e) {
+    console.log(e);
+  }
+  cellselection(e) {
+    console.log(e);
+  }
+  verNotificacion(e) {
+    console.log(e);
+  }
+  expansion(e) {
+    console.log(e);
+    let date = e.data.created_time.split(' ').slice(0, 1).join();
+    let caller_id_number = e.data.caller_id_name;
+    let destination_number = e.data.destination_number;
+    let uuid = e.data.uuid;
+    this.userService.getsinglerecording(date, caller_id_number, destination_number, uuid).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

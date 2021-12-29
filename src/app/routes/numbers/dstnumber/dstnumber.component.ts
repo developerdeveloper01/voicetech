@@ -24,10 +24,11 @@ import { MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
   styleUrls: ['./dstnumber.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
+export class DstnumberComponent implements OnInit, AfterViewInit {
   @ViewChild('statusTpl', { static: true }) statusTpl: TemplateRef<any>;
 
-  //table
+  showdeletebutton: any;
+
   columns = [];
   list = [];
   total = 0;
@@ -43,6 +44,7 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
   showPaginator = true;
   expandable = true;
   columnResizable = false;
+  allstaff: any;
 
   constructor(
     public dialog: MatDialog,
@@ -53,19 +55,23 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.getallnumbers();
-
+    this.getallstaff();
     this.columns = [
       { header: 'DID Number', sortable: true, field: 'did_no' },
       { header: 'IP', sortable: true, field: 'ip.ipnumber' },
       {
-        header: 'Active Status',
-        field: 'inusestatus',
-        type: 'tag',
+        header: 'Alloted to',
+        field: 'giventolevel1.firstname',
+      },
+      {
+        header: 'Use',
+        field: 'is_used',
         sortable: true,
-        tag: {
-          true: { text: 'Yes', color: 'green-200' },
-          false: { text: 'No', color: 'red-200' },
-        },
+      },
+      {
+        header: 'Service',
+        field: 'service_type',
+        sortable: true,
       },
       {
         header: 'Actions',
@@ -148,7 +154,7 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
     );
   }
 
-  view(value:any){
+  view(value: any) {
     console.log(value);
   }
 
@@ -162,6 +168,47 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
 
   changeSelect(e: any) {
     console.log(e);
+  }
+
+  changerowSelect(e: any) {
+    console.table(e);
+    e.map(a => console.log(a._id));
+    this.showdeletebutton = true;
+  }
+
+  changecellSelect(e: any) {
+    console.log(e);
+  }
+
+  allotmultiple() {
+    console.log('todo');
+  }
+
+  foods = [
+    { id: '1', name: 'Apple' },
+    { id: '2', name: 'Lemon' },
+    { id: '3', name: 'Lime' },
+    { id: '4', name: 'Orange', disabled: true },
+    { id: '5', name: 'Strawberry' },
+  ];
+
+  staff: any;
+
+  getallstaff() {
+    this.userService.getallstaff().subscribe(
+      (response: any) => {
+        console.log(
+          '%cstaff.component.ts line:238 response',
+          'color: white; background-color: #007acc;',
+          response
+        );
+        this.allstaff = response.data;
+        this.staff = this.allstaff[0]._id;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   changeSort(e: any) {
@@ -188,13 +235,8 @@ export class DstnumberComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.isLoading = false;
+    this.isLoading = true;
   }
-
-  ngOnDestroy() {
-    console.log('component destroyed');
-  }
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
 }
 
@@ -215,6 +257,7 @@ export class AddDstNumberFormComponent implements OnInit {
 
   adddstnumber: FormGroup;
   allips: any;
+  allstaff: any;
 
   constructor(
     private fb: FormBuilder,
@@ -223,6 +266,7 @@ export class AddDstNumberFormComponent implements OnInit {
   ) {
     this.adddstnumber = this.fb.group({
       ip: ['', [Validators.required]],
+      assign: [''],
       did_no: ['', [Validators.required, Validators.min(10000000), Validators.max(99999999)]],
       inusestatus: [false],
     });
@@ -230,6 +274,7 @@ export class AddDstNumberFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getallips();
+    this.getallstaff();
   }
 
   getErrorMessage(form: FormGroup) {
@@ -287,6 +332,22 @@ export class AddDstNumberFormComponent implements OnInit {
   isFieldValid(field: string) {
     return !this.adddstnumber.get(field).valid && this.adddstnumber.get(field).touched;
   }
+
+  getallstaff() {
+    this.userService.getallstaff().subscribe(
+      (response: any) => {
+        console.log(
+          '%cstaff.component.ts line:238 response',
+          'color: white; background-color: #007acc;',
+          response
+        );
+        this.allstaff = response.data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }
 
 @Component({
@@ -306,6 +367,7 @@ export class EditDstNumberFormComponent implements OnInit {
 
   editdstnumber: FormGroup;
   allips: any;
+  allstaff: any;
 
   constructor(
     private fb: FormBuilder,
@@ -318,6 +380,7 @@ export class EditDstNumberFormComponent implements OnInit {
 
     this.editdstnumber = this.fb.group({
       ip: ['', [Validators.required]],
+      assign: [''],
       did_no: ['', [Validators.required, Validators.min(10000000), Validators.max(99999999)]],
       inusestatus: [false],
     });
@@ -325,8 +388,10 @@ export class EditDstNumberFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getallips();
+    this.getallstaff();
     this.editdstnumber.setValue({
       ip: this.data?.record?.ip ? this.data?.record?.ip?._id : 'null',
+      assign: this.data?.record?.giventolevel1 ? this.data?.record?.giventolevel1 : 'null',
       did_no: this.data?.record?.did_no ? this.data?.record?.did_no : 'null',
       inusestatus: this.data?.record?.inusestatus ? true : false,
     });
@@ -354,6 +419,22 @@ export class EditDstNumberFormComponent implements OnInit {
           'color: red; display: block; width: 100%;',
           error
         );
+      }
+    );
+  }
+
+  getallstaff() {
+    this.userService.getallstaff().subscribe(
+      (response: any) => {
+        console.log(
+          '%cstaff.component.ts line:238 response',
+          'color: white; background-color: #007acc;',
+          response
+        );
+        this.allstaff = response.data;
+      },
+      error => {
+        console.log(error);
       }
     );
   }

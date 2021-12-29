@@ -12,7 +12,16 @@ export class SidemenuComponent {
   @Input() ripple = false;
 
   menu$ = this.menu.getAll();
+
   buildRoute = this.menu.buildRoute;
 
-  constructor(private menu: MenuService) {}
+  constructor(private menu: MenuService) {
+    this._subscribe();
+  }
+
+  _subscribe() {
+    this.menu$.subscribe((data: any) => {
+      console.log(data);
+    });
+  }
 }

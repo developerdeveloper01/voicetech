@@ -10,18 +10,25 @@ import { ExtrenalSipComponent } from './sip-setting/extrenal-sip/extrenal-sip.co
 import { LocalProfileComponent } from './sip-profile/local-profile/local-profile.component';
 import { NationalProfileComponent } from './sip-profile/national-profile/national-profile.component';
 import { AllProfileOneComponent } from './sip-profile/all-profile-one/all-profile-one.component';
-import { LiveCallComponent } from './live-call/live-call.component';
+import { LiveCallComponent, PlayRecordingComponent } from './live-call/live-call.component';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
-
-const COMPONENTS = [SipProfileComponent, SipSettingComponent,ProfileTypeComponent];
-const COMPONENTS_DYNAMIC = [];
+const COMPONENTS = [
+  SipProfileComponent,
+  SipSettingComponent,
+  ProfileTypeComponent,
+  InternalSipComponent,
+  ExtrenalSipComponent,
+  LocalProfileComponent,
+  NationalProfileComponent,
+  AllProfileOneComponent,
+  LiveCallComponent,
+];
+const COMPONENTS_DYNAMIC = [PlayRecordingComponent];
 
 @NgModule({
-  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC, ProfileTypeComponent, InternalSipComponent, ExtrenalSipComponent, LocalProfileComponent, NationalProfileComponent, AllProfileOneComponent, LiveCallComponent],
-  imports: [
-    SharedModule,
-    SipServiceRoutingModule
-  ],
+  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC],
+  imports: [SharedModule, SipServiceRoutingModule, NgxAudioPlayerModule],
   entryComponents: COMPONENTS_DYNAMIC,
 })
-export class SipServiceModule { }
+export class SipServiceModule {}

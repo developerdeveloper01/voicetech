@@ -38,13 +38,25 @@
               (selectionChange)="changeSelect($event)">
     </mtx-grid>
     <ng-template #expansionTpl let-row>
-      {{row.name}}
+
+      <mat-chip-list
+  class="example-chip p-8"
+  cdkDropList
+  cdkDropListOrientation="horizontal"
+  (cdkDropListDropped)="drop($event)">
+  <mat-chip
+    class="example-box"
+    cdkDrag
+    *ngFor="let permission of row.permissions">
+    {{permission}}
+  </mat-chip>
+</mat-chip-list>
     </ng-template>
     <ng-template #toolbarTpl>
-      <button mat-stroked-button color="primary" (click)="openRole()()">
+      <button mat-stroked-button color="primary" (click)="openRole()">
         <mat-icon>add</mat-icon>Add Role
       </button>
-      <input
+      <input fxHide.lt-sm
         placeholder="Start typing"
         type="text"
         style="

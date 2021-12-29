@@ -14,8 +14,10 @@ export class PermissionsRoleSwitchingComponent implements OnInit, OnDestroy {
   currentPermissions: string[];
 
   permissionsOfRole = {
-    ADMIN: ['canAdd', 'canDelete', 'canEdit', 'canRead'],
-    MANAGER: ['canAdd', 'canEdit', 'canRead'],
+    SUPERADMIN: ['canAdd', 'canDelete', 'canEdit', 'canRead'],
+    ADMIN: ['canAdd', 'canEdit', 'canRead'],
+    MANAGER: ['canEdit', 'canRead'],
+    RESELLER: ['canEdit', 'canRead'],
     GUEST: ['canRead'],
   };
 
@@ -26,7 +28,6 @@ export class PermissionsRoleSwitchingComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.currentRole = Object.keys(this.rolesSrv.getRoles())[0];
     this.currentPermissions = Object.keys(this.permissionsSrv.getPermissions());
-
     this.rolesSrv.roles$.pipe(takeUntil(this._destroy$)).subscribe(roles => {
       console.log(roles);
     });

@@ -1,8 +1,11 @@
+import { AdminAuthService } from './../../core/authentication/admin-auth.service';
+import { UserService } from 'app/user.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/authentication/auth.service';
 import { debounceTime, tap } from 'rxjs/operators';
 import { User } from '@core/authentication/interface';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -12,8 +15,10 @@ import { User } from '@core/authentication/interface';
       mat-button
       [matMenuTriggerFor]="menu"
     >
-      <img class="matero-avatar" [src]="user.avatar" width="32" alt="avatar" />
-      <span class="matero-username" fxHide.lt-sm>{{ user.name }}</span>
+      <img class="matero-avatar" [src]="User?.staffimg || user.avatar" width="32" alt="avatar" />
+      <span class="matero-username" fxHide.lt-sm
+        >{{ User?.firstname || user.name }} {{ User?.lastname }}</span
+      >
     </button>
 
     <mat-menu #menu="matMenu">
@@ -34,8 +39,19 @@ import { User } from '@core/authentication/interface';
 })
 export class UserComponent implements OnInit {
   user: User;
+  User: any;
 
-  constructor(private router: Router, private auth: AuthService, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private adminauth: AdminAuthService,
+    private cdr: ChangeDetectorRef,
+    private userService: UserService
+  ) {
+    this.adminauth.getuser().subscribe((response: any) => {
+      this.User = response.data;
+    });
+  }
 
   ngOnInit(): void {
     this.auth
@@ -50,4 +66,13 @@ export class UserComponent implements OnInit {
   logout() {
     this.auth.logout().subscribe(() => this.router.navigateByUrl('/auth/login'));
   }
+
+  // getuser(){
+  //   this.adminauth.getuser().subscribe((response:any)=>{
+  //     console.log(response);
+  //     this.User = response.data;
+  //   },(error)=>{
+  //     console.log(error);
+  //   })
+  // }
 }

@@ -5,15 +5,15 @@
     <form class="form-field-full" [formGroup]="loginForm">
 
       <mat-form-field appearance="outline">
-        <mat-label>{{'login.username' | translate}}: admin</mat-label>
-        <input matInput placeholder="admin" formControlName="username" required>
-        <mat-error *ngIf="username.invalid">
-          <span *ngIf="username.errors.required">
+        <mat-label>{{'login.mobile' | translate}}: admin</mat-label>
+        <input matInput placeholder="admin" formControlName="mobile" required>
+        <mat-error *ngIf="mobile.invalid">
+          <span *ngIf="mobile.errors.required">
             {{'login.please_enter' | translate}} <strong>admin</strong>
           </span>
 
-          <span *ngIf="username.errors.remote">
-            {{ username.errors.remote }}
+          <span *ngIf="mobile.errors.remote">
+            {{ mobile.errors.remote }}
           </span>
         </mat-error>
       </mat-form-field>

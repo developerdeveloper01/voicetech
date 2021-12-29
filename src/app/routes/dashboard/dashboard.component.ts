@@ -8,11 +8,10 @@ import {
   NgZone,
 } from '@angular/core';
 import { SettingsService } from '@core';
+import { UserService } from 'app/user.service';
 import { Subscription } from 'rxjs';
 
 import { DashboardService } from './dashboard.srevice';
-
-
 
 @Component({
   selector: 'app-dashboard',
@@ -39,19 +38,31 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   chart2 = null;
 
   stats = this.dashboardSrv.getStats();
+  //onestats = this.dashboardSrv.getStats();
+  onestats: any;
+  // onestats =
+  //   {
+  //     title: 'Total Calls',
+  //     amount: '180,200',
+  //     rsicon:'phone_paused',
+  //     progress: {
+  //       value: 50,
+  //     },
+  //     color: 'bg-indigo-500',
+  //   }
 
   notifySubscription: Subscription;
 
   constructor(
     private ngZone: NgZone,
     private dashboardSrv: DashboardService,
-    private settings: SettingsService
+    private settings: SettingsService,
+    public userService: UserService
   ) {}
 
   ngOnInit() {
-    this.notifySubscription = this.settings.notify.subscribe(res => {
-      console.log(res);
-    });
+    this.getallcallcount();
+    this.notifySubscription = this.settings.notify.subscribe(res => {});
   }
 
   ngAfterViewInit() {
@@ -75,6 +86,28 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
     this.chart2 = new ApexCharts(document.querySelector('#chart2'), this.charts[1]);
     this.chart2.render();
   }
+
+  getallcallcount() {
+    this.userService.getallcallcounts().subscribe(
+      (response: any) => {
+        console.log(
+          '%cstaff.component.ts line:238 response',
+          'color: white; background-color: #007acc;',
+          response
+        );
+        this.onestats = {
+          title: 'Total Calls',
+          amount: response.data,
+          rsicon: 'phone_paused',
+          progress: {
+            value: 50,
+          },
+          color: 'bg-indigo-500',
+        };
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }
-
-

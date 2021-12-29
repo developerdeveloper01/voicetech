@@ -1,3 +1,4 @@
+import { AdminAuthService } from './admin-auth.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -13,7 +14,11 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate, CanActivateChild {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private adminauth: AdminAuthService
+  ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.authenticate();
@@ -27,6 +32,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   private authenticate(): boolean | UrlTree {
-    return this.auth.check() ? true : this.router.parseUrl('/auth/login');
+    return this.adminauth.tokenExpired() ? true : this.router.parseUrl('/auth/login');
   }
 }

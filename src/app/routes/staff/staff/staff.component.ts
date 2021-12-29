@@ -16,6 +16,7 @@ import { TablesKitchenSinkEditComponent } from 'app/routes/tables/kitchen-sink/e
 import { UserService } from 'app/user.service';
 import { TablesRemoteDataService } from '../../staff/staff/remote-data.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxPermissionsService } from 'ngx-permissions';
 @Component({
   selector: 'app-staff',
   templateUrl: './staff.component.html',
@@ -69,7 +70,8 @@ export class StaffComponent implements OnInit, AfterViewInit {
     public userService: UserService,
     public dialog: MatDialog,
     public dialogx: MtxDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private permissionsSrv: NgxPermissionsService
   ) {
     this.addstaffform = this.fb.group({
       firstname: ['', [Validators.required]],
@@ -102,7 +104,7 @@ export class StaffComponent implements OnInit, AfterViewInit {
       {
         header: 'Role',
         field: 'role.name',
-        formatter: (data: any) => `<span class="label">${data.role.name}</span>`,
+        formatter: (data: any) => `<span class="label">${data?.role?.name}</span>`,
       },
       {
         header: 'Added By',

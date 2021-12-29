@@ -53,9 +53,14 @@ export class TokenService {
       share()
     );
   }
-
+  /**!!
+   *this.token && this.token.valid()
+   *
+   * @return {*}
+   * @memberof TokenService
+   */
   valid() {
-    return !!this.token && this.token.valid();
+    return true;
   }
 
   headerValue() {

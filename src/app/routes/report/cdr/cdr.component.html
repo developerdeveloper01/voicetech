@@ -11,7 +11,7 @@
 
     <mat-form-field>
       <input matInput [matDatepicker]="picker2" placeholder="End Date"
-       [min]="" [max]="notinuseendDate" formControlName="enddate">
+       [min]="this.searchform.value['startdate']" [max]="notinuseendDate" formControlName="enddate">
       <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
@@ -22,7 +22,7 @@
              placeholder="Pick one"
              aria-label="Number"
              matInput
-             [formControl]="myControl"
+             formControlName="searchinput"
              [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -30,7 +30,7 @@
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <button mat-raised-button color="primary">Search</button>
+    <button mat-raised-button type="submit" color="primary">Search</button>
   </form>
 
 <div class="row">
@@ -51,14 +51,26 @@
                 [columnHideable]="columnHideable"
                 [columnMovable]="columnMovable"
                 [expandable]="expandable"
+                [expansionTemplate]="expansionTpl"
+                [summaryTemplate]="summaryTpl"
                 [pageOnFront]="showPaginator"
                 [showPaginator]="showPaginator"
                 [pageSizeOptions]="[50, 100, 200, 500]"
                 [pageIndex]="0"
                 [pageSize]="50"
+                (page)="pagechangeevent($event)"
                 (sortChange)="changeSort($event)"
-                (selectionChange)="changeSelect($event)">
+                (rowSelectionChange)="rowselection($event)"
+                (expansionChange)="expansion($event)"
+          (cellSelectionChange)="cellselection($event)"
+          (rowClick)="verNotificacion($event)">
       </mtx-grid>
+    <ng-template #expansionTpl let-row>
+      {{ row.uuid }}
+    </ng-template>
+    <ng-template #summaryTpl let-row>
+      {{ row.uuid }}
+    </ng-template>
     </div>
   </div>
 
