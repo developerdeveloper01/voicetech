@@ -48,11 +48,16 @@
     "material.data-table.table": "Table",
     "media": "Media",
     "media.gallery": "Gallery",
+
     "sip-service": "SIP Service",
     "sip-service.sip-setting": "SIP Setting",
     "sip-service.sip-profile": "SIP Profile",
     "sip-service.profile-type": "Profile Type",
     "sip-service.live-calls": "Live Calls",
+
+    "voice": "Voice",
+    "voice.voice-files": "Voice Files",
+
     "forms": "Forms",
     "forms.form-elements": "Form Elements",
     "forms.dynamic-form": "Dynamic Form",
@@ -127,9 +132,9 @@
     "staff.role": "Role",
     "staff.staff": "Staff",
 
-    "subordinate":"Subordinate",
-    "subordinate.subordinates":"Subordinates",
-    "subordinate.agent":"Agent",
+    "mystaff":"My Staff",
+    "mystaff.subordinates":"Subordinates",
+    "mystaff.agent":"Agent",
 
     "user":"User",
     "user.users":"Users",
@@ -137,6 +142,7 @@
     "numbers": "Numbers",
     "numbers.dstnumber": "DST Numbers",
     "numbers.ips": "IPs",
+    "numbers.my-numbers": "My Numbers",
 
     "enquiry": "Enquiry",
     "chat": "Chat",
@@ -178,6 +184,7 @@
   "login": {
     "title": "Welcome Back",
     "username": "Username",
+    "mobile": "Mobile",
     "password": "Password",
     "remember_me": "Remember Me",
     "login": "Login",
