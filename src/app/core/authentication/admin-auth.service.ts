@@ -14,7 +14,8 @@ import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
 })
 export class AdminAuthService {
   private usertype$ = new BehaviorSubject<User>(guest);
-  backendurl = 'http://localhost:6789/api';
+  backendurllocal = 'http://localhost:6789/api';
+  backendurl = 'http://103.8.43.13/api/api';
   token: string;
   constructor(
     private http: HttpClient,
@@ -33,7 +34,7 @@ export class AdminAuthService {
   tokenExpired() {
     console.log('checking token');
     this.store.get('TOKEN');
-    const permissions = ['canAdd'];
+    const permissions = ['canAdd', 'canEdit', 'canDelete', 'canRead'];
     // console.log(this.permissonsSrv.loadPermissions(permissions));
 
     this.rolesSrv.addRoles({ ADMIN: permissions });
@@ -43,7 +44,9 @@ export class AdminAuthService {
   }
 
   getuser() {
-    let header = new HttpHeaders().set('ad-token', localStorage.getItem('ad-token'));
+    let header = new HttpHeaders({
+      'ad-token': localStorage.getItem('ad-token'),
+    });
     return this.http.get(`${this.backendurl}/admin/viewonestaff`, {
       headers: header,
     });

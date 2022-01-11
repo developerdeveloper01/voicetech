@@ -165,21 +165,27 @@ export class UserService {
   }
 
   viewstaffbytoken() {
-    let header = new HttpHeaders().set('ad-token', localStorage.getItem('ad-token'));
+    let header = new HttpHeaders({
+      'ad-token': localStorage.getItem('ad-token'),
+    });
     return this.http.get(`${this.backendurl}/admin/viewonestaff`, {
       headers: header,
     });
   }
 
   viewadminstaff() {
-    let header = new HttpHeaders().set('ad-token', localStorage.getItem('ad-token'));
+    let header = new HttpHeaders({
+      'ad-token': localStorage.getItem('ad-token'),
+    });
     return this.http.get(`${this.backendurl}/admin/viewmystaff`, {
       headers: header,
     });
   }
 
   getroleslowerthanme() {
-    let header = new HttpHeaders().set('ad-token', localStorage.getItem('ad-token'));
+    let header = new HttpHeaders({
+      'ad-token': localStorage.getItem('ad-token'),
+    });
     return this.http.get(`${this.backendurl}/admin/lowerrolesthanmine`, {
       headers: header,
     });
@@ -192,7 +198,9 @@ export class UserService {
   }
 
   mydstnumbers() {
-    let header = new HttpHeaders().set('ad-token', localStorage.getItem('ad-token'));
+    let header = new HttpHeaders({
+      'ad-token': localStorage.getItem('ad-token'),
+    });
     return this.http.get(`${this.backendurl}/admin/mydstnumbers`, {
       headers: header,
     });

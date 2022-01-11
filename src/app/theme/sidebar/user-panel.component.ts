@@ -43,6 +43,7 @@ export class UserPanelComponent implements OnInit {
     private adminauth: AdminAuthService
   ) {
     this.adminauth.getuser().subscribe((response: any) => {
+      console.log(response.data);
       this.User = response.data;
     });
   }
