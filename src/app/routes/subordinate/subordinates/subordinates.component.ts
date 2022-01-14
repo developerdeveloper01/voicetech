@@ -152,7 +152,9 @@ export class SubordinatesComponent implements OnInit {
     let adddailogRef = this.dialog.open(AddSubordinateFormComponent, { width: '500px' });
 
     adddailogRef.afterClosed().subscribe(() => {
-      // this.getallusers();
+      this.getallstaff();
+      this.getallstaff();
+      this.getallstaff();
       console.log('Dailog Closed');
     });
   }
@@ -209,8 +211,8 @@ export class AddSubordinateFormComponent implements OnInit {
       firstname: ['', [Validators.required]],
       lastname: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      mobile: ['', [Validators.required]],
-      //password: ['', [Validators.required]],
+      mobile: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      password: ['', [Validators.required]],
       role: [{ value: '' }, [Validators.required]],
       approvedstatus: [false],
     });
@@ -239,6 +241,19 @@ export class AddSubordinateFormComponent implements OnInit {
 
   submituserform() {
     console.log(this.addstaffform.value);
+    if (this.addstaffform.valid) {
+      this.userService.addsubstaff(this.addstaffform.value).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.snackBar.open('Staff Added Successfully!', '', { duration: 2000 });
+          this.addstaffform.reset();
+          this.addstaffform.markAsUntouched();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   getallroles() {

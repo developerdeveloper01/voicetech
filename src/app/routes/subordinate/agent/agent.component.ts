@@ -1,7 +1,16 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'app/user.service';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
-import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Inject,
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-agent',
@@ -34,7 +43,9 @@ export class AgentComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getallagents();
+  }
 
   changeSelect(e: any) {
     console.log(e);
@@ -42,5 +53,94 @@ export class AgentComponent implements OnInit {
 
   changeSort(e: any) {
     console.log(e);
+  }
+
+  openAgent() {
+    let adddailogRef = this.dialog.open(AgentFormComponent, { width: '500px' });
+
+    adddailogRef.afterClosed().subscribe(() => {
+      // this.getallstaff();
+      console.log('Dailog Closed');
+    });
+  }
+
+  getallagents() {
+    console.log('requested all agents');
+  }
+}
+
+@Component({
+  selector: 'agent-form',
+  styles: [
+    `
+      .demo-full-width {
+        width: 100%;
+      }
+    `,
+  ],
+  templateUrl: './agent-form.html',
+})
+export class AgentFormComponent implements OnInit {
+  addagentform: FormGroup;
+  editmode: Boolean = false;
+  id: any;
+  hide = true;
+
+  falseValue = 'false';
+  trueValue = 'true';
+
+  constructor(
+    private fb: FormBuilder,
+    public userService: UserService,
+    private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<AgentFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.addagentform = this.fb.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      mobile: ['', [Validators.required, Validators.min(1000000000), Validators.max(9999999999)]],
+      password: ['', [Validators.required]],
+      approvedstatus: [false],
+    });
+
+    if (data) {
+      console.log(data);
+      this.editmode = true;
+      this.id = this.data?.record?._id;
+      this.addagentform.setValue({
+        firstname: this.data?.record?.firstname ? this.data?.record?.firstname : 'null',
+        lastname: this.data?.record?.lastname ? this.data?.record?.lastname : 'null',
+        email: this.data?.record?.email ? this.data?.record?.email : 'null',
+        mobile: this.data?.record?.mobile ? this.data?.record?.mobile : 'null',
+        approvedstatus: this.data?.record?.approvedstatus
+          ? this.data?.record?.approvedstatus
+          : false,
+      });
+    }
+  }
+  ngOnInit(): void {}
+
+  submituserform() {
+    console.log(this.addagentform.value);
+    if (this.addagentform.valid) {
+      this.userService.addagent(this.addagentform.value).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.snackBar.open('Agent Added Successfully!', '', { duration: 2000 });
+          this.addagentform.reset();
+          this.addagentform.markAsUntouched();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+  }
+
+  checkboxChange(checkbox: MatCheckbox, checked: boolean) {
+    checkbox.value = checked ? this.trueValue : this.falseValue;
+    console.log(checkbox.value);
   }
 }

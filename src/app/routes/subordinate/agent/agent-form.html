@@ -1,12 +1,12 @@
-<h2 mat-dialog-title>{{editmode?"Edit Subordinate":"Create Subordinate"}}</h2>
-<form [formGroup]="addstaffform" (ngSubmit)="submituserform()">
+<h2 mat-dialog-title>{{editmode?"Edit Agent":"Create Agent"}}</h2>
+<form [formGroup]="addagentform" (ngSubmit)="submituserform()">
   <mat-dialog-content>
-    <div fxLayout="row wrap" fxLayoutGap="8px grid">
+    <div fxLayout="row wrap" fxLayoutGap="8px grid" >
       <div fxFlex="50" fxFlex.lt-sm="100">
         <mat-form-field class="demo-full-width">
           <mat-label>First Name</mat-label>
           <input type="text" matInput placeholder="John" formControlName="firstname" required />
-          <mat-error *ngIf="addstaffform.get('firstname').invalid">
+          <mat-error *ngIf="addagentform.get('firstname').invalid">
             {{'validations.required'| translate}}
           </mat-error>
         </mat-form-field>
@@ -15,7 +15,7 @@
         <mat-form-field class="demo-full-width">
           <mat-label>Last Name</mat-label>
           <input type="text" matInput placeholder="Deo" formControlName="lastname" required />
-          <mat-error *ngIf="addstaffform.get('lastname').invalid">
+          <mat-error *ngIf="addagentform.get('lastname').invalid">
             {{'validations.required'| translate}}
           </mat-error>
         </mat-form-field>
@@ -29,39 +29,53 @@
           formControlName="email"
           required
         />
-        <mat-error *ngIf="addstaffform.get('email').invalid">
-          {{'validations.required'| translate}}
+        <mat-error *ngIf="addagentform.get('email').invalid">
+          <span *ngIf="addagentform.get('email').hasError('required')"
+            >This field is required
+          </span>
+          <span *ngIf="addagentform.get('email').hasError('email')">Please enter valid Email</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="demo-full-width">
         <mat-label>Mobile</mat-label>
-        <input type="number" matInput placeholder="9999999999" formControlName="mobile" required />
+        <input type="text" maxlength="10" matInput placeholder="9999999999" formControlName="mobile" required />
         <mat-icon matSuffix>smartphone</mat-icon>
-        <mat-error *ngIf="addstaffform.get('mobile').invalid">
-          <span *ngIf="addstaffform.get('mobile').hasError('required')">Required Field</span>
-                <span *ngIf="addstaffform.get('mobile').hasError('min')">Minimum Length is 10</span>
-                <span *ngIf="addstaffform.get('mobile').hasError('max')">Maximum Length is 10</span>
+        <mat-error *ngIf="addagentform.get('mobile').invalid">
+          <span *ngIf="addagentform.get('mobile').hasError('required')"
+            >This field is required
+          </span>
+          <span *ngIf="addagentform.get('mobile').hasError('min')">Minimum Length is 10</span>
+          <span *ngIf="addagentform.get('mobile').hasError('max')">Maximum Length is 10</span>
         </mat-error>
       </mat-form-field>
       <mat-form-field class="demo-full-width">
         <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="password" required />
-        <mat-error *ngIf="addstaffform.get('password').invalid">
+        <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" required />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="addagentform.get('password').invalid">
           {{'validations.required'| translate}}
         </mat-error>
       </mat-form-field>
-      <div fxFlex="50" fxFlex.lt-sm="100">
+      <!-- <div fxFlex="50" fxFlex.lt-sm="100">
       <mat-form-field class="demo-full-width">
         <mat-label>Select Role</mat-label>
         <mat-select formControlName="role" required >
           <mat-option *ngFor="let role of allroles" [value]="role._id"> {{role?.name}} </mat-option>
         </mat-select>
-        <mat-error *ngIf="addstaffform.get('role').invalid">
+        <mat-error *ngIf="addagentform.get('role').invalid">
           {{'validations.required'| translate}}
         </mat-error>
       </mat-form-field>
-    </div>
-    <div fxFlex="50" fxFlex.lt-sm="100">
+    </div>-->
+      <div fxFlex="50" fxFlex.lt-sm="100">
         <mat-checkbox
           class="st-chk"
           [value]="falseValue"
@@ -78,7 +92,7 @@
     <button
       mat-raised-button
       mat-dialog-close
-      [disabled]="addstaffform.invalid"
+      [disabled]="addagentform.invalid"
       color="primary"
       type="submit"
     >

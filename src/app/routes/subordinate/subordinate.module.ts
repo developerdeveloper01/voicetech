@@ -2,14 +2,14 @@ import { SharedModule } from '@shared/shared.module';
 import { NgModule } from '@angular/core';
 
 import { SubordinateRoutingModule } from './subordinate-routing.module';
-import { AgentComponent } from './agent/agent.component';
+import { AgentComponent, AgentFormComponent } from './agent/agent.component';
 import {
   AddSubordinateFormComponent,
   SubordinatesComponent,
 } from './subordinates/subordinates.component';
 
 const COMPONENTS = [AgentComponent, SubordinatesComponent];
-const COMPONENTS_DYNAMIC = [AddSubordinateFormComponent];
+const COMPONENTS_DYNAMIC = [AddSubordinateFormComponent, AgentFormComponent];
 
 @NgModule({
   declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC],

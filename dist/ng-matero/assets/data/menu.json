@@ -24,7 +24,8 @@
         {
           "route": "staff",
           "name": "staff",
-          "type": "link","permissions": {
+          "type": "link",
+          "permissions": {
             "only": ["SUPERADMIN"]
           }
         }
@@ -47,7 +48,10 @@
         {
           "route": "agent",
           "name": "agent",
-          "type": "link"
+          "type": "link",
+          "permissions": {
+            "only": ["SUPERADMIN"]
+          }
         }
       ]
     },

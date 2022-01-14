@@ -214,4 +214,42 @@ export class UserService {
   deleterole(id) {
     return this.http.get(`${this.backendurl}/admin/deleterole/${id}`);
   }
+
+  addsubstaff(data) {
+    let header = new HttpHeaders({
+      'ad-token': localStorage.getItem('ad-token'),
+    });
+    return this.http.post(`${this.backendurl}/admin/addsubstaff`, data, {
+      headers: header,
+    });
+  }
+
+  addagent(data) {
+    return this.http.post(`${this.backendurl}/admin/addagent`, data);
+  }
+
+  //support chat
+  getchatwithuser(id) {
+    return this.http.get(`${this.backendurl}/admin/allchatwithuser/${id}`);
+  }
+
+  getchatrooms() {
+    return this.http.get(`${this.backendurl}/admin/getallchatrooms`);
+  }
+
+  sendchat(data) {
+    return this.http.post(`${this.backendurl}/admin/addchat`, data);
+  }
+
+  markasread(id) {
+    return this.http.get(`${this.backendurl}/admin/markasread/${id}`);
+  }
+
+  deleteonechat(id) {
+    return this.http.get(`${this.backendurl}/admin/deletechat/${id}`);
+  }
+
+  deleteallchat(id) {
+    return this.http.get(`${this.backendurl}/admin/deleteallchat/${id}`);
+  }
 }

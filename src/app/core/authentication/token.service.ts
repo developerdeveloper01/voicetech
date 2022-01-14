@@ -10,6 +10,7 @@ import { SimpleToken } from './token';
 })
 export class TokenService {
   private key = 'TOKEN';
+  private key2 = 'ad-token';
   private token: SimpleToken;
   private change$ = new BehaviorSubject<RefreshToken>(this.get());
 
@@ -33,6 +34,7 @@ export class TokenService {
 
   clear() {
     this.store.remove(this.key);
+    this.store.remove(this.key2);
     this.change$.next(null);
     this.token = null;
   }
