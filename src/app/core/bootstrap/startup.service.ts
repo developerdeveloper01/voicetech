@@ -2,7 +2,7 @@ import { UserService } from 'app/user.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { iif, of, throwError } from 'rxjs';
-import { catchError, switchMap } from 'rxjs/operators';
+import { catchError, ignoreElements, switchMap } from 'rxjs/operators';
 import { MenuService } from './menu.service';
 import { TokenService } from '../authentication/token.service';
 import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
@@ -27,31 +27,43 @@ export class StartupService {
     private permissonsSrv: NgxPermissionsService,
     private rolesSrv: NgxRolesService,
     private userService: UserService
-  ) {}
+  ) {
+    console.log("start up service started")
+  }
 
   /** Load the application only after get the menu or other essential informations such as roles and permissions. */
   load(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.token
-        .change()
-        .pipe(
-          switchMap(() => this.menuReq$),
-          catchError(error => throwError(error))
-        )
-        .subscribe((response: any) => {
-          console.log(response);
+      this.menuReq$.subscribe((response:any)=>{
+        console.log(response);
           this.menu.addNamespace(response.menu, 'menu');
           this.menu.set(response.menu);
-
-          // Demo purposes only. You can add essential permissions and roles with your own cases.
-          // const permissions = ['canRead'];
-
-          // Tips: Alternative you can add permissions with role at the same time.
-          // this.rolesSrv.addRolesWithPermissions({ ADMIN: permissions });
-
           resolve(null);
-        });
+      })
 
+      // this.token
+      //   .change()
+      //   .pipe(
+      //     switchMap(() => this.menuReq$),
+      //     catchError(error => throwError(error))
+      //   )
+      //   .subscribe((response: any) => {
+      //     console.log(response);
+      //     this.menu.addNamespace(response.menu, 'menu');
+      //     this.menu.set(response.menu);
+
+      //     // Demo purposes only. You can add essential permissions and roles with your own cases.
+      //     // const permissions = ['canRead'];
+
+      //     // Tips: Alternative you can add permissions with role at the same time.
+      //     // this.rolesSrv.addRolesWithPermissions({ ADMIN: permissions });
+
+      //     resolve(null);
+      //   });
+
+      const token = localStorage.getItem('ad-token')
+
+      if(token){
       this.userpermissions$.subscribe(
         (data: any) => {
           console.log(data);
@@ -73,6 +85,7 @@ export class StartupService {
           console.log(error);
         }
       );
+    }
     });
   }
 

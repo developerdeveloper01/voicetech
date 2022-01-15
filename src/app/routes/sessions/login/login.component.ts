@@ -8,6 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { filter } from 'rxjs/operators';
 import { LocalStorageService } from '@shared';
 import { TokenService } from '@core';
+import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,9 @@ export class LoginComponent implements OnInit {
     private userservice: UserService,
     private store: LocalStorageService,
     private token: TokenService,
-    private authserv: AdminAuthService
+    private authserv: AdminAuthService,
+    private permissonsSrv: NgxPermissionsService,
+    private rolesSrv: NgxRolesService,
   ) {}
 
   ngOnInit() {
@@ -58,6 +61,16 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         console.log(response);
         console.log(response.ad_token);
+        if(response.staff.role){
+          const permissions = ['canAdd', 'canEdit', 'canRead'];
+          //const permissions = Object.keys(data.data.role);
+          this.permissonsSrv.loadPermissions(response.staff.role.permissions || permissions);
+          // addRoleWithPermissions
+          this.rolesSrv.addRoleWithPermissions(
+            response.staff.role.name,
+            response.staff.role.permissions || permissions
+          );
+        }
         /// this.store.set(this.key, response.ad_token);
         this.authserv.set(response.ad_token);
         localStorage.setItem('ad-token', response.ad_token);
