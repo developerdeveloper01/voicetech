@@ -1330,12 +1330,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 /* harmony import */ var _noop_interceptor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./noop-interceptor */ "YVV4");
 /* harmony import */ var _base_url_interceptor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base-url-interceptor */ "QU45");
-/* harmony import */ var _token_interceptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./token-interceptor */ "O89z");
-/* harmony import */ var _default_interceptor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./default-interceptor */ "/iEW");
-/* harmony import */ var _error_interceptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./error-interceptor */ "ALRA");
-/* harmony import */ var _logging_interceptor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./logging-interceptor */ "2fSt");
-/* harmony import */ var _settings_interceptor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./settings-interceptor */ "QEe/");
-
+/* harmony import */ var _default_interceptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./default-interceptor */ "/iEW");
+/* harmony import */ var _error_interceptor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./error-interceptor */ "ALRA");
+/* harmony import */ var _logging_interceptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./logging-interceptor */ "2fSt");
+/* harmony import */ var _settings_interceptor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./settings-interceptor */ "QEe/");
 
 
 
@@ -1348,11 +1346,10 @@ const httpInterceptorProviders = [
     { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _noop_interceptor__WEBPACK_IMPORTED_MODULE_1__["NoopInterceptor"], multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: SanctumInterceptor, multi: true },
     { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _base_url_interceptor__WEBPACK_IMPORTED_MODULE_2__["BaseUrlInterceptor"], multi: true },
-    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _token_interceptor__WEBPACK_IMPORTED_MODULE_3__["TokenInterceptor"], multi: true },
-    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _settings_interceptor__WEBPACK_IMPORTED_MODULE_7__["SettingsInterceptor"], multi: true },
-    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _error_interceptor__WEBPACK_IMPORTED_MODULE_5__["ErrorInterceptor"], multi: true },
-    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _default_interceptor__WEBPACK_IMPORTED_MODULE_4__["DefaultInterceptor"], multi: true },
-    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _logging_interceptor__WEBPACK_IMPORTED_MODULE_6__["LoggingInterceptor"], multi: true },
+    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _settings_interceptor__WEBPACK_IMPORTED_MODULE_6__["SettingsInterceptor"], multi: true },
+    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _error_interceptor__WEBPACK_IMPORTED_MODULE_4__["ErrorInterceptor"], multi: true },
+    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _default_interceptor__WEBPACK_IMPORTED_MODULE_3__["DefaultInterceptor"], multi: true },
+    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _logging_interceptor__WEBPACK_IMPORTED_MODULE_5__["LoggingInterceptor"], multi: true },
 ];
 
 
@@ -2949,79 +2946,6 @@ LocalProfileComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵde
 
 /***/ }),
 
-/***/ "O89z":
-/*!********************************************************!*\
-  !*** ./src/app/core/interceptors/token-interceptor.ts ***!
-  \********************************************************/
-/*! exports provided: TokenInterceptor */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenInterceptor", function() { return TokenInterceptor; });
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "qCKp");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var _authentication_token_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../authentication/token.service */ "Dbl6");
-/* harmony import */ var _base_url_interceptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./base-url-interceptor */ "QU45");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ "fXoL");
-
-
-
-
-
-
-
-
-
-class TokenInterceptor {
-    constructor(token, router, baseUrl) {
-        this.token = token;
-        this.router = router;
-        this.baseUrl = baseUrl;
-    }
-    intercept(request, next) {
-        const logoutHandler = () => {
-            if (request.url.includes('/auth/logout')) {
-                this.router.navigateByUrl('/auth/login');
-            }
-        };
-        if (this.token.valid() && this.shouldAppendToken(request.url)) {
-            return next
-                .handle(request.clone({
-                headers: request.headers.append('Authorization', this.token.headerValue()),
-                withCredentials: true,
-            }))
-                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(() => logoutHandler()), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])((error) => {
-                if (error.status === 401) {
-                    this.token.clear();
-                }
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(error);
-            }));
-        }
-        return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(() => logoutHandler()));
-    }
-    shouldAppendToken(url) {
-        return !this.hasHttpScheme(url) || this.includeBaseUrl(url);
-    }
-    hasHttpScheme(url) {
-        return new RegExp('^http(s)?://', 'i').test(url);
-    }
-    includeBaseUrl(url) {
-        if (!this.baseUrl) {
-            return false;
-        }
-        const baseUrl = this.baseUrl.replace(/\/$/, '');
-        return new RegExp(`^${baseUrl}`, 'i').test(url);
-    }
-}
-TokenInterceptor.ɵfac = function TokenInterceptor_Factory(t) { return new (t || TokenInterceptor)(_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](_authentication_token_service__WEBPACK_IMPORTED_MODULE_4__["TokenService"]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](_base_url_interceptor__WEBPACK_IMPORTED_MODULE_5__["BASE_URL"], 8)); };
-TokenInterceptor.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineInjectable"]({ token: TokenInterceptor, factory: TokenInterceptor.ɵfac });
-
-
-/***/ }),
-
 /***/ "PCNd":
 /*!*****************************************!*\
   !*** ./src/app/shared/shared.module.ts ***!
@@ -4382,7 +4306,7 @@ const routes = [
             },
             {
                 path: 'staff',
-                loadChildren: () => Promise.all(/*! import() | staff-staff-module */[__webpack_require__.e("common"), __webpack_require__.e("staff-staff-module")]).then(__webpack_require__.bind(null, /*! ./staff/staff.module */ "Gan4")).then(m => m.StaffModule),
+                loadChildren: () => __webpack_require__.e(/*! import() | staff-staff-module */ "staff-staff-module").then(__webpack_require__.bind(null, /*! ./staff/staff.module */ "Gan4")).then(m => m.StaffModule),
             },
             {
                 path: 'numbers',

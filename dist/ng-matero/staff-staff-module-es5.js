@@ -120,7 +120,7 @@
       "fXoL");
 
       var COMPONENTS = [_role_role_component__WEBPACK_IMPORTED_MODULE_1__["RoleComponent"], _staff_staff_component__WEBPACK_IMPORTED_MODULE_2__["StaffComponent"]];
-      var COMPONENTS_DYNAMIC = [_role_role_component__WEBPACK_IMPORTED_MODULE_1__["AddRoleFormComponent"], _staff_staff_component__WEBPACK_IMPORTED_MODULE_2__["AddStaffFormComponent"]];
+      var COMPONENTS_DYNAMIC = [_role_role_component__WEBPACK_IMPORTED_MODULE_1__["AddRoleFormComponent"], _staff_staff_component__WEBPACK_IMPORTED_MODULE_2__["AddStaffFormComponent"], _role_role_component__WEBPACK_IMPORTED_MODULE_1__["EditRoleFormComponent"]];
 
       var StaffModule = function StaffModule() {
         _classCallCheck(this, StaffModule);
@@ -139,7 +139,7 @@
 
       (function () {
         (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵsetNgModuleScope"](StaffModule, {
-          declarations: [_role_role_component__WEBPACK_IMPORTED_MODULE_1__["RoleComponent"], _staff_staff_component__WEBPACK_IMPORTED_MODULE_2__["StaffComponent"], _role_role_component__WEBPACK_IMPORTED_MODULE_1__["AddRoleFormComponent"], _staff_staff_component__WEBPACK_IMPORTED_MODULE_2__["AddStaffFormComponent"]],
+          declarations: [_role_role_component__WEBPACK_IMPORTED_MODULE_1__["RoleComponent"], _staff_staff_component__WEBPACK_IMPORTED_MODULE_2__["StaffComponent"], _role_role_component__WEBPACK_IMPORTED_MODULE_1__["AddRoleFormComponent"], _staff_staff_component__WEBPACK_IMPORTED_MODULE_2__["AddStaffFormComponent"], _role_role_component__WEBPACK_IMPORTED_MODULE_1__["EditRoleFormComponent"]],
           imports: [_shared__WEBPACK_IMPORTED_MODULE_3__["SharedModule"], _staff_routing_module__WEBPACK_IMPORTED_MODULE_0__["StaffRoutingModule"]]
         });
       })();
@@ -1159,7 +1159,7 @@
       !*** ./src/app/routes/staff/role/role.component.ts ***!
       \*****************************************************/
 
-    /*! exports provided: RoleComponent, AddRoleFormComponent */
+    /*! exports provided: RoleComponent, AddRoleFormComponent, EditRoleFormComponent */
 
     /***/
     function wy1b(module, __webpack_exports__, __webpack_require__) {
@@ -1177,6 +1177,12 @@
 
       __webpack_require__.d(__webpack_exports__, "AddRoleFormComponent", function () {
         return AddRoleFormComponent;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "EditRoleFormComponent", function () {
+        return EditRoleFormComponent;
       });
       /* harmony import */
 
@@ -1235,85 +1241,79 @@
       /* harmony import */
 
 
-      var app_routes_tables_kitchen_sink_edit_edit_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-      /*! app/routes/tables/kitchen-sink/edit/edit.component */
-      "wwJg");
-      /* harmony import */
-
-
-      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! @angular/material/dialog */
       "0IaG");
       /* harmony import */
 
 
-      var _shared_components_page_header_page_header_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      var _shared_components_page_header_page_header_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! ../../../shared/components/page-header/page-header.component */
       "tgey");
       /* harmony import */
 
 
-      var _ng_matero_extensions_data_grid__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      var _ng_matero_extensions_data_grid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! @ng-matero/extensions/data-grid */
       "hGDI");
       /* harmony import */
 
 
-      var _angular_material_chips__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      var _angular_material_chips__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/material/chips */
       "A5z7");
       /* harmony import */
 
 
-      var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      var _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! @angular/cdk/drag-drop */
       "5+WD");
       /* harmony import */
 
 
-      var _angular_common__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      var _angular_common__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! @angular/common */
       "ofXK");
       /* harmony import */
 
 
-      var _angular_material_button__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+      var _angular_material_button__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
       /*! @angular/material/button */
       "bTqV");
       /* harmony import */
 
 
-      var _angular_material_icon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
+      var _angular_material_icon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
       /*! @angular/material/icon */
       "NFeN");
       /* harmony import */
 
 
-      var _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
+      var _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! @angular/flex-layout/extended */
       "znSr");
       /* harmony import */
 
 
-      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
+      var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
       /*! @angular/material/form-field */
       "kmnG");
       /* harmony import */
 
 
-      var _angular_material_input__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
+      var _angular_material_input__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! @angular/material/input */
       "qFsG");
       /* harmony import */
 
 
-      var _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
+      var _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
       /*! @angular/material/checkbox */
       "bSwM");
       /* harmony import */
 
 
-      var _angular_material_expansion__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(
+      var _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
       /*! @angular/material/expansion */
       "7EHt");
 
@@ -1529,6 +1529,8 @@
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", task_r1 == null ? null : task_r1.subtasks);
         }
       }
+
+      var _c2 = ".demo-full-width[_ngcontent-%COMP%] {\n        width: 100%;\n      }\n\n      .demo-sub-list[_ngcontent-%COMP%] {\n        margin-left: 20px;\n\n        input[type='checkbox'] {\n          visibility: hidden;\n          &:checked + label {\n            transform: rotate(360deg);\n            background-color: #000;\n            &:before {\n              transform: translateX(90px);\n              background-color: #fff;\n            }\n          }\n        }\n\n        label {\n          display: flex;\n          width: 180px;\n          height: 90px;\n          border: 6px solid;\n          border-radius: 99em;\n          position: relative;\n          transition: transform 0.75s ease-in-out;\n          transform-origin: 50% 50%;\n          cursor: pointer;\n\n          &:before {\n            transition: transform 0.75s ease;\n            transition-delay: 0.5s;\n            content: '';\n            display: block;\n            position: absolute;\n            width: 54px;\n            height: 54px;\n            background-color: #000;\n            border-radius: 50%;\n            top: 12px;\n            left: 12px;\n          }\n        }\n      }";
 
       var RoleComponent = /*#__PURE__*/function () {
         function RoleComponent(remoteSrv, fb, dateAdapter, translate, userService, snackBar, dialog, dialogx, cdr) {
@@ -1775,35 +1777,41 @@
         }, {
           key: "edit",
           value: function edit(value) {
-            var dialogRef = this.dialogx.originalOpen(app_routes_tables_kitchen_sink_edit_edit_component__WEBPACK_IMPORTED_MODULE_9__["TablesKitchenSinkEditComponent"], {
-              width: '90%',
+            var _this16 = this;
+
+            var adddailogRef = this.dialog.open(EditRoleFormComponent, {
+              width: '1000px',
               data: {
                 record: value
               }
-            }); // const onOk = () => {
-            //   this.dialog.alert('Closed');
-            // };
-            // const dialogRef = this.dialog.alert('Clicked alert', 'this is description');
-
-            dialogRef.afterClosed().subscribe(function () {
-              return console.log('The dialog was closed');
             });
+            adddailogRef.afterClosed().subscribe(function () {
+              _this16.getallroles();
+            }); // const dialogRef = this.dialogx.originalOpen(TablesKitchenSinkEditComponent, {
+            //   width: '90%',
+            //   data: { record: value },
+            // });
+            // // const onOk = () => {
+            // //   this.dialog.alert('Closed');
+            // // };
+            // // const dialogRef = this.dialog.alert('Clicked alert', 'this is description');
+            // dialogRef.afterClosed().subscribe(() => console.log('The dialog was closed'));
           }
         }, {
           key: "delete",
           value: function _delete(value) {
-            var _this16 = this;
+            var _this17 = this;
 
             console.log(value);
             this.userService.deleterole(value._id).subscribe(function (response) {
               console.log('%cips.component.ts line:304 response', 'color: #26bfa5;', response);
 
-              _this16.snackBar.open('Role Deleted Successfully!', '', {
+              _this17.snackBar.open('Role Deleted Successfully!', '', {
                 duration: 2000
               }); //this.addroleform.reset();
 
 
-              _this16.getallroles();
+              _this17.getallroles();
             }, function (error) {
               console.log('%cerror ips.component.ts line:311 ', 'color: red; display: block; width: 100%;', error);
             });
@@ -1822,13 +1830,13 @@
         }, {
           key: "openRole",
           value: function openRole() {
-            var _this17 = this;
+            var _this18 = this;
 
             var adddailogRef = this.dialog.open(AddRoleFormComponent, {
               width: '1000px'
             });
             adddailogRef.afterClosed().subscribe(function () {
-              _this17.getallroles();
+              _this18.getallroles();
             });
           }
         }]);
@@ -1837,7 +1845,7 @@
       }();
 
       RoleComponent.ɵfac = function RoleComponent_Factory(t) {
-        return new (t || RoleComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](app_routes_service_service_monitoring_agent_table_remote_data_service__WEBPACK_IMPORTED_MODULE_8__["TablesRemoteDataService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_core__WEBPACK_IMPORTED_MODULE_2__["DateAdapter"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](app_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_10__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_matero_extensions__WEBPACK_IMPORTED_MODULE_7__["MtxDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]));
+        return new (t || RoleComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](app_routes_service_service_monitoring_agent_table_remote_data_service__WEBPACK_IMPORTED_MODULE_8__["TablesRemoteDataService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_core__WEBPACK_IMPORTED_MODULE_2__["DateAdapter"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ngx_translate_core__WEBPACK_IMPORTED_MODULE_3__["TranslateService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](app_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_ng_matero_extensions__WEBPACK_IMPORTED_MODULE_7__["MtxDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"]));
       };
 
       RoleComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
@@ -1895,7 +1903,7 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("data", ctx.list)("columns", ctx.columns)("loading", ctx.isLoading)("columnResizable", ctx.columnResizable)("multiSelectable", ctx.multiSelectable)("rowSelectable", ctx.rowSelectable)("hideRowSelectionCheckbox", ctx.hideRowSelectionCheckbox)("rowHover", ctx.rowHover)("rowStriped", ctx.rowStriped)("showToolbar", ctx.showToolbar)("toolbarTitle", "Role & Permissions")("columnHideable", ctx.columnHideable)("columnMovable", ctx.columnMovable)("expandable", ctx.expandable)("expansionTemplate", _r0)("toolbarTemplate", _r2)("pageOnFront", ctx.showPaginator)("showPaginator", ctx.showPaginator)("pageSizeOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](21, _c0))("pageIndex", 0)("pageSize", 50);
           }
         },
-        directives: [_shared_components_page_header_page_header_component__WEBPACK_IMPORTED_MODULE_11__["PageHeaderComponent"], _ng_matero_extensions_data_grid__WEBPACK_IMPORTED_MODULE_12__["MtxGridComponent"], _angular_material_chips__WEBPACK_IMPORTED_MODULE_13__["MatChipList"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_14__["CdkDropList"], _angular_common__WEBPACK_IMPORTED_MODULE_15__["NgForOf"], _angular_material_chips__WEBPACK_IMPORTED_MODULE_13__["MatChip"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_14__["CdkDrag"], _angular_material_button__WEBPACK_IMPORTED_MODULE_16__["MatButton"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_17__["MatIcon"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_18__["DefaultShowHideDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgModel"]],
+        directives: [_shared_components_page_header_page_header_component__WEBPACK_IMPORTED_MODULE_10__["PageHeaderComponent"], _ng_matero_extensions_data_grid__WEBPACK_IMPORTED_MODULE_11__["MtxGridComponent"], _angular_material_chips__WEBPACK_IMPORTED_MODULE_12__["MatChipList"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_13__["CdkDropList"], _angular_common__WEBPACK_IMPORTED_MODULE_14__["NgForOf"], _angular_material_chips__WEBPACK_IMPORTED_MODULE_12__["MatChip"], _angular_cdk_drag_drop__WEBPACK_IMPORTED_MODULE_13__["CdkDrag"], _angular_material_button__WEBPACK_IMPORTED_MODULE_15__["MatButton"], _angular_material_icon__WEBPACK_IMPORTED_MODULE_16__["MatIcon"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_flex_layout_extended__WEBPACK_IMPORTED_MODULE_17__["DefaultShowHideDirective"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgModel"]],
         styles: [".st-chk[_ngcontent-%COMP%] {\n  width: 50%;\n  float: left;\n  padding: 6px 0;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxccm9sZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFVBQUE7RUFDQSxXQUFBO0VBQ0EsY0FBQTtBQUNGIiwiZmlsZSI6InJvbGUuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuc3QtY2hrIHtcclxuICB3aWR0aDogNTAlO1xyXG4gIGZsb2F0OiBsZWZ0O1xyXG4gIHBhZGRpbmc6IDZweCAwO1xyXG59XHJcbiJdfQ== */"],
         changeDetection: 0
       });
@@ -2091,7 +2099,7 @@
         }, {
           key: "submitdstnumber",
           value: function submitdstnumber() {
-            var _this18 = this;
+            var _this19 = this;
 
             var permissionsarr = [];
             this.tasks.forEach(function (index) {
@@ -2114,11 +2122,11 @@
               this.userService.addrole(this.addroleform.value).subscribe(function (response) {
                 console.log('%cips.component.ts line:511 response', 'color: #26bfa5;', response);
 
-                _this18.snackBar.open('Role Added Successfully!', '', {
+                _this19.snackBar.open('Role Added Successfully!', '', {
                   duration: 2000
                 });
 
-                _this18.addroleform.reset(); //this.addroleform.markAsUntouched();
+                _this19.addroleform.reset(); //this.addroleform.markAsUntouched();
 
               }, function (error) {
                 console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
@@ -2131,11 +2139,11 @@
         }, {
           key: "getallips",
           value: function getallips() {
-            var _this19 = this;
+            var _this20 = this;
 
             this.userService.getallips().subscribe(function (response) {
               console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-              _this19.allips = response.data;
+              _this20.allips = response.data;
             }, function (error) {
               console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
             });
@@ -2235,8 +2243,271 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("disabled", ctx.addroleform.invalid);
           }
         },
-        directives: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_10__["MatDialogTitle"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_10__["MatDialogContent"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_19__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_19__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_20__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_21__["MatCheckbox"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_22__["MatAccordion"], _angular_common__WEBPACK_IMPORTED_MODULE_15__["NgForOf"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_10__["MatDialogActions"], _angular_material_button__WEBPACK_IMPORTED_MODULE_16__["MatButton"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_10__["MatDialogClose"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_22__["MatExpansionPanel"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_22__["MatExpansionPanelHeader"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_22__["MatExpansionPanelTitle"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_22__["MatExpansionPanelDescription"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgModel"]],
-        styles: [".demo-full-width[_ngcontent-%COMP%] {\n        width: 100%;\n      }\n\n      .demo-sub-list[_ngcontent-%COMP%] {\n        margin-left: 20px;\n\n        input[type='checkbox'] {\n          visibility: hidden;\n          &:checked + label {\n            transform: rotate(360deg);\n            background-color: #000;\n            &:before {\n              transform: translateX(90px);\n              background-color: #fff;\n            }\n          }\n        }\n\n        label {\n          display: flex;\n          width: 180px;\n          height: 90px;\n          border: 6px solid;\n          border-radius: 99em;\n          position: relative;\n          transition: transform 0.75s ease-in-out;\n          transform-origin: 50% 50%;\n          cursor: pointer;\n\n          &:before {\n            transition: transform 0.75s ease;\n            transition-delay: 0.5s;\n            content: '';\n            display: block;\n            position: absolute;\n            width: 54px;\n            height: 54px;\n            background-color: #000;\n            border-radius: 50%;\n            top: 12px;\n            left: 12px;\n          }\n        }\n      }", "fieldset.st-set[_ngcontent-%COMP%] {\n    padding: 15px;\n    border-radius: 5px;\n    border-color: #2196f35e  !important;\n}\nlegend.st-leg[_ngcontent-%COMP%] {\n    font-size: 16px;\n}\n.st-mb.ng-star-inserted[_ngcontent-%COMP%] {\n    margin-bottom: 15px;\n}\nfieldset.st-set[_ngcontent-%COMP%] {\n    width: 295px;\n    float: left;\n    height: 180px;\n    margin: 10px;\n}"]
+        directives: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialogTitle"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialogContent"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_18__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_18__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_19__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_20__["MatCheckbox"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__["MatAccordion"], _angular_common__WEBPACK_IMPORTED_MODULE_14__["NgForOf"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialogActions"], _angular_material_button__WEBPACK_IMPORTED_MODULE_15__["MatButton"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialogClose"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__["MatExpansionPanel"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__["MatExpansionPanelHeader"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__["MatExpansionPanelTitle"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__["MatExpansionPanelDescription"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgModel"]],
+        styles: [_c2, "fieldset.st-set[_ngcontent-%COMP%] {\n    padding: 15px;\n    border-radius: 5px;\n    border-color: #2196f35e  !important;\n}\nlegend.st-leg[_ngcontent-%COMP%] {\n    font-size: 16px;\n}\n.st-mb.ng-star-inserted[_ngcontent-%COMP%] {\n    margin-bottom: 15px;\n}\nfieldset.st-set[_ngcontent-%COMP%] {\n    width: 295px;\n    float: left;\n    height: 180px;\n    margin: 10px;\n}"]
+      });
+
+      var EditRoleFormComponent = /*#__PURE__*/function () {
+        function EditRoleFormComponent(fb, userService, snackBar) {
+          _classCallCheck(this, EditRoleFormComponent);
+
+          this.fb = fb;
+          this.userService = userService;
+          this.snackBar = snackBar;
+          this.falseValue = 'false';
+          this.trueValue = 'true';
+          this.panelOpenState = false;
+          this.tasks = [{
+            name: 'Basic',
+            completed: false,
+            subtasks: [{
+              name: 'Add',
+              value: 'canAdd',
+              completed: false
+            }, {
+              name: 'Edit',
+              value: 'canEdit',
+              completed: false
+            }, {
+              name: 'Read',
+              value: 'canRead',
+              completed: false
+            }, {
+              name: 'Delete',
+              value: 'canDelete',
+              completed: false
+            }]
+          }, {
+            name: 'Enquiry',
+            completed: false,
+            subtasks: [{
+              name: 'View Enquiry',
+              value: 'ViewEnquiry',
+              completed: false
+            }, {
+              name: 'Followup Enquiry',
+              value: 'FollowupEnquiry',
+              completed: false
+            }]
+          }, {
+            name: 'Manage Staff',
+            completed: false,
+            subtasks: [{
+              name: 'View Staff',
+              value: 'ViewStaff',
+              completed: false
+            }, {
+              name: 'Add Staff',
+              value: 'AddStaff',
+              completed: false
+            }, {
+              name: 'Edit Staff',
+              value: 'EditStaff',
+              completed: false
+            }, {
+              name: 'Delete Staff',
+              value: 'DeleteStaff',
+              completed: false
+            }]
+          }, {
+            name: 'DST Numbers',
+            completed: false,
+            subtasks: [{
+              name: 'View DST Numbers',
+              value: 'ViewDST',
+              completed: false
+            }, {
+              name: 'Add DST Numbers',
+              value: 'AddDST',
+              completed: false
+            }, {
+              name: 'Edit DST Numbers',
+              value: 'EditDST',
+              completed: false
+            }, {
+              name: 'Delete DST Numbers',
+              value: 'DeleteDST',
+              completed: false
+            }]
+          }, {
+            name: 'IPs',
+            completed: false,
+            subtasks: [{
+              name: 'View IPs',
+              value: 'ViewIP',
+              completed: false
+            }, {
+              name: 'Add IPs',
+              value: 'AddIP',
+              completed: false
+            }, {
+              name: 'Edit IPs',
+              value: 'EditIP',
+              completed: false
+            }, {
+              name: 'Delete IPs',
+              value: 'DeleteIP',
+              completed: false
+            }]
+          }, {
+            name: 'Plan',
+            completed: false,
+            subtasks: [{
+              name: 'View Plan',
+              value: 'ViewPlan',
+              completed: false
+            }, {
+              name: 'Add Plan',
+              value: 'AddPlan',
+              completed: false
+            }, {
+              name: 'Edit Plan',
+              value: 'EditPlan',
+              completed: false
+            }, {
+              name: 'Delete Plan',
+              value: 'DeletePlan',
+              completed: false
+            }]
+          }, {
+            name: 'Chat',
+            completed: false,
+            subtasks: [{
+              name: 'View Chat',
+              value: 'ViewChat',
+              completed: false
+            }, {
+              name: 'Delete Chat',
+              value: 'DeleteChat',
+              completed: false
+            }]
+          }];
+          this.addroleform = this.fb.group({
+            name: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
+            status: [false],
+            permissions: []
+          });
+        }
+
+        _createClass(EditRoleFormComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            this.getallips();
+          }
+        }, {
+          key: "allComplete",
+          value: function allComplete(task) {
+            //console.log(task);
+            var subtasks = task.subtasks;
+            return task.completed || subtasks != null && subtasks.every(function (t) {
+              return t.completed;
+            });
+          }
+        }, {
+          key: "someComplete",
+          value: function someComplete(tasks) {
+            //console.log(tasks);
+            var numComplete = tasks.filter(function (t) {
+              return t.completed;
+            }).length;
+            return numComplete > 0 && numComplete < tasks.length;
+          }
+        }, {
+          key: "setAllCompleted",
+          value: function setAllCompleted(tasks, completed) {
+            //console.log(tasks);
+            tasks.forEach(function (t) {
+              return t.completed = completed;
+            });
+          }
+        }, {
+          key: "updateAllComplete",
+          value: function updateAllComplete(task) {
+            console.log(task);
+          }
+        }, {
+          key: "getErrorMessage",
+          value: function getErrorMessage(form) {
+            return form.get('name').hasError('required') ? 'validations.required' : '';
+          }
+        }, {
+          key: "checkboxChange",
+          value: function checkboxChange(checkbox, checked) {
+            checkbox.value = checked ? this.trueValue : this.falseValue;
+          }
+        }, {
+          key: "submitdstnumber",
+          value: function submitdstnumber() {
+            var _this21 = this;
+
+            var permissionsarr = [];
+            this.tasks.forEach(function (index) {
+              return index.subtasks.forEach(function (element) {
+                if (element.completed == true) {
+                  permissionsarr.push(element.value);
+                } //console.log(element);
+
+              });
+            });
+            console.log(permissionsarr);
+            this.addroleform.setValue({
+              name: this.addroleform.value.name,
+              status: this.addroleform.value.status,
+              permissions: permissionsarr
+            });
+
+            if (this.addroleform.valid) {
+              console.log(this.addroleform.value);
+              this.userService.addrole(this.addroleform.value).subscribe(function (response) {
+                console.log('%cips.component.ts line:511 response', 'color: #26bfa5;', response);
+
+                _this21.snackBar.open('Role Added Successfully!', '', {
+                  duration: 2000
+                });
+
+                _this21.addroleform.reset(); //this.addroleform.markAsUntouched();
+
+              }, function (error) {
+                console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
+              });
+            } else {
+              this.getErrorMessage(this.addroleform);
+              console.log(this.getErrorMessage(this.addroleform));
+            }
+          }
+        }, {
+          key: "getallips",
+          value: function getallips() {
+            var _this22 = this;
+
+            this.userService.getallips().subscribe(function (response) {
+              console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+              _this22.allips = response.data;
+            }, function (error) {
+              console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
+            });
+          }
+        }, {
+          key: "isFieldValid",
+          value: function isFieldValid(field) {
+            return !this.addroleform.get(field).valid && this.addroleform.get(field).touched;
+          }
+        }]);
+
+        return EditRoleFormComponent;
+      }();
+
+      EditRoleFormComponent.ɵfac = function EditRoleFormComponent_Factory(t) {
+        return new (t || EditRoleFormComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](app_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"]));
+      };
+
+      EditRoleFormComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+        type: EditRoleFormComponent,
+        selectors: [["edit-role-form"]],
+        decls: 0,
+        vars: 0,
+        template: function EditRoleFormComponent_Template(rf, ctx) {},
+        styles: [_c2]
       });
       /***/
     },

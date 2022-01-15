@@ -288,15 +288,23 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   edit(value: any) {
-    const dialogRef = this.dialogx.originalOpen(TablesKitchenSinkEditComponent, {
-      width: '90%',
-      data: { record: value },
+    let adddailogRef = this.dialog.open(EditRoleFormComponent, { width: '1000px',
+    data: { record: value } });
+
+    adddailogRef.afterClosed().subscribe(() => {
+      this.getallroles();
     });
-    // const onOk = () => {
-    //   this.dialog.alert('Closed');
-    // };
-    // const dialogRef = this.dialog.alert('Clicked alert', 'this is description');
-    dialogRef.afterClosed().subscribe(() => console.log('The dialog was closed'));
+
+
+    // const dialogRef = this.dialogx.originalOpen(TablesKitchenSinkEditComponent, {
+    //   width: '90%',
+    //   data: { record: value },
+    // });
+    // // const onOk = () => {
+    // //   this.dialog.alert('Closed');
+    // // };
+    // // const dialogRef = this.dialog.alert('Clicked alert', 'this is description');
+    // dialogRef.afterClosed().subscribe(() => console.log('The dialog was closed'));
   }
 
   delete(value: any) {
@@ -396,6 +404,242 @@ export interface Task {
   templateUrl: './add-role-form.html',
 })
 export class AddRoleFormComponent implements OnInit {
+  falseValue = 'false';
+  trueValue = 'true';
+  panelOpenState = false;
+
+  addroleform: FormGroup;
+  allips: any;
+
+  constructor(
+    private fb: FormBuilder,
+    public userService: UserService,
+    private snackBar: MatSnackBar
+  ) {
+    this.addroleform = this.fb.group({
+      name: ['', [Validators.required]],
+      status: [false],
+      permissions: [],
+    });
+  }
+
+  ngOnInit(): void {
+    this.getallips();
+  }
+
+  tasks: any[] = [
+    {
+      name: 'Basic',
+      completed: false,
+      subtasks: [
+        { name: 'Add', value: 'canAdd', completed: false },
+        { name: 'Edit', value: 'canEdit', completed: false },
+        { name: 'Read', value: 'canRead', completed: false },
+        { name: 'Delete', value: 'canDelete', completed: false },
+      ],
+    },
+    {
+      name: 'Enquiry',
+      completed: false,
+      subtasks: [
+        { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
+        { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
+      ],
+    },
+    {
+      name: 'Manage Staff',
+      completed: false,
+      subtasks: [
+        { name: 'View Staff', value: 'ViewStaff', completed: false },
+        { name: 'Add Staff', value: 'AddStaff', completed: false },
+        { name: 'Edit Staff', value: 'EditStaff', completed: false },
+        { name: 'Delete Staff', value: 'DeleteStaff', completed: false },
+      ],
+    },
+    {
+      name: 'DST Numbers',
+      completed: false,
+      subtasks: [
+        { name: 'View DST Numbers', value: 'ViewDST', completed: false },
+        { name: 'Add DST Numbers', value: 'AddDST', completed: false },
+        { name: 'Edit DST Numbers', value: 'EditDST', completed: false },
+        { name: 'Delete DST Numbers', value: 'DeleteDST', completed: false },
+      ],
+    },
+    {
+      name: 'IPs',
+      completed: false,
+      subtasks: [
+        { name: 'View IPs', value: 'ViewIP', completed: false },
+        { name: 'Add IPs', value: 'AddIP', completed: false },
+        { name: 'Edit IPs', value: 'EditIP', completed: false },
+        { name: 'Delete IPs', value: 'DeleteIP', completed: false },
+      ],
+    },
+    {
+      name: 'Plan',
+      completed: false,
+      subtasks: [
+        { name: 'View Plan', value: 'ViewPlan', completed: false },
+        { name: 'Add Plan', value: 'AddPlan', completed: false },
+        { name: 'Edit Plan', value: 'EditPlan', completed: false },
+        { name: 'Delete Plan', value: 'DeletePlan', completed: false },
+      ],
+    },
+    {
+      name: 'Chat',
+      completed: false,
+      subtasks: [
+        { name: 'View Chat', value: 'ViewChat', completed: false },
+        { name: 'Delete Chat', value: 'DeleteChat', completed: false },
+      ],
+    },
+  ];
+
+  allComplete(task: Task): boolean {
+    //console.log(task);
+    const subtasks = task.subtasks;
+    return task.completed || (subtasks != null && subtasks.every(t => t.completed));
+  }
+
+  someComplete(tasks: Task[]): boolean {
+    //console.log(tasks);
+    const numComplete = tasks.filter(t => t.completed).length;
+    return numComplete > 0 && numComplete < tasks.length;
+  }
+
+  setAllCompleted(tasks: Task[], completed: boolean) {
+    //console.log(tasks);
+    tasks.forEach(t => (t.completed = completed));
+  }
+
+  updateAllComplete(task) {
+    console.log(task);
+  }
+
+  getErrorMessage(form: FormGroup) {
+    return form.get('name').hasError('required') ? 'validations.required' : '';
+  }
+
+  checkboxChange(checkbox: MatCheckbox, checked: boolean) {
+    checkbox.value = checked ? this.trueValue : this.falseValue;
+  }
+
+  submitdstnumber() {
+    let permissionsarr: any = [];
+    this.tasks.forEach(index =>
+      index.subtasks.forEach(element => {
+        if (element.completed == true) {
+          permissionsarr.push(element.value);
+        }
+        //console.log(element);
+      })
+    );
+    console.log(permissionsarr);
+    this.addroleform.setValue({
+      name: this.addroleform.value.name,
+      status: this.addroleform.value.status,
+      permissions: permissionsarr,
+    });
+    if (this.addroleform.valid) {
+      console.log(this.addroleform.value);
+      this.userService.addrole(this.addroleform.value).subscribe(
+        (response: any) => {
+          console.log('%cips.component.ts line:511 response', 'color: #26bfa5;', response);
+          this.snackBar.open('Role Added Successfully!', '', { duration: 2000 });
+          this.addroleform.reset();
+          //this.addroleform.markAsUntouched();
+        },
+        error => {
+          console.log(
+            '%cerror ips.component.ts line:254 ',
+            'color: red; display: block; width: 100%;',
+            error
+          );
+        }
+      );
+    } else {
+      this.getErrorMessage(this.addroleform);
+      console.log(this.getErrorMessage(this.addroleform));
+    }
+  }
+
+  getallips() {
+    this.userService.getallips().subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+        this.allips = response.data;
+      },
+      error => {
+        console.log(
+          '%cerror ips.component.ts line:254 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
+      }
+    );
+  }
+
+  isFieldValid(field: string) {
+    return !this.addroleform.get(field).valid && this.addroleform.get(field).touched;
+  }
+}
+
+
+@Component({
+  selector: 'edit-role-form',
+  styles: [
+    `
+      .demo-full-width {
+        width: 100%;
+      }
+
+      .demo-sub-list {
+        margin-left: 20px;
+
+        input[type='checkbox'] {
+          visibility: hidden;
+          &:checked + label {
+            transform: rotate(360deg);
+            background-color: #000;
+            &:before {
+              transform: translateX(90px);
+              background-color: #fff;
+            }
+          }
+        }
+
+        label {
+          display: flex;
+          width: 180px;
+          height: 90px;
+          border: 6px solid;
+          border-radius: 99em;
+          position: relative;
+          transition: transform 0.75s ease-in-out;
+          transform-origin: 50% 50%;
+          cursor: pointer;
+
+          &:before {
+            transition: transform 0.75s ease;
+            transition-delay: 0.5s;
+            content: '';
+            display: block;
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            background-color: #000;
+            border-radius: 50%;
+            top: 12px;
+            left: 12px;
+          }
+        }
+      }
+    `,
+  ],
+  templateUrl: './edit-role-form.html',
+})
+export class EditRoleFormComponent implements OnInit {
   falseValue = 'false';
   trueValue = 'true';
   panelOpenState = false;
