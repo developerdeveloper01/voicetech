@@ -1330,10 +1330,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 /* harmony import */ var _noop_interceptor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./noop-interceptor */ "YVV4");
 /* harmony import */ var _base_url_interceptor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./base-url-interceptor */ "QU45");
-/* harmony import */ var _default_interceptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./default-interceptor */ "/iEW");
-/* harmony import */ var _error_interceptor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./error-interceptor */ "ALRA");
-/* harmony import */ var _logging_interceptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./logging-interceptor */ "2fSt");
-/* harmony import */ var _settings_interceptor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./settings-interceptor */ "QEe/");
+/* harmony import */ var _token_interceptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./token-interceptor */ "O89z");
+/* harmony import */ var _default_interceptor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./default-interceptor */ "/iEW");
+/* harmony import */ var _error_interceptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./error-interceptor */ "ALRA");
+/* harmony import */ var _logging_interceptor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./logging-interceptor */ "2fSt");
+/* harmony import */ var _settings_interceptor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./settings-interceptor */ "QEe/");
+
 
 
 
@@ -1346,10 +1348,11 @@ const httpInterceptorProviders = [
     { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _noop_interceptor__WEBPACK_IMPORTED_MODULE_1__["NoopInterceptor"], multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: SanctumInterceptor, multi: true },
     { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _base_url_interceptor__WEBPACK_IMPORTED_MODULE_2__["BaseUrlInterceptor"], multi: true },
-    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _settings_interceptor__WEBPACK_IMPORTED_MODULE_6__["SettingsInterceptor"], multi: true },
-    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _error_interceptor__WEBPACK_IMPORTED_MODULE_4__["ErrorInterceptor"], multi: true },
-    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _default_interceptor__WEBPACK_IMPORTED_MODULE_3__["DefaultInterceptor"], multi: true },
-    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _logging_interceptor__WEBPACK_IMPORTED_MODULE_5__["LoggingInterceptor"], multi: true },
+    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _token_interceptor__WEBPACK_IMPORTED_MODULE_3__["TokenInterceptor"], multi: true },
+    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _settings_interceptor__WEBPACK_IMPORTED_MODULE_7__["SettingsInterceptor"], multi: true },
+    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _error_interceptor__WEBPACK_IMPORTED_MODULE_5__["ErrorInterceptor"], multi: true },
+    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _default_interceptor__WEBPACK_IMPORTED_MODULE_4__["DefaultInterceptor"], multi: true },
+    { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"], useClass: _logging_interceptor__WEBPACK_IMPORTED_MODULE_6__["LoggingInterceptor"], multi: true },
 ];
 
 
@@ -2942,6 +2945,79 @@ LocalProfileComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵde
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](9);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("data", ctx.list)("columns", ctx.columns)("length", ctx.total)("loading", ctx.isLoading)("pageOnFront", false)("pageIndex", ctx.query.page)("pageSize", ctx.query.per_page)("pageSizeOptions", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction0"](11, _c0));
     } }, directives: [_angular_material_button__WEBPACK_IMPORTED_MODULE_2__["MatButton"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgForm"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_4__["MatFormField"], _angular_material_input__WEBPACK_IMPORTED_MODULE_5__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["NgModel"], _angular_material_select__WEBPACK_IMPORTED_MODULE_6__["MatSelect"], _angular_material_core__WEBPACK_IMPORTED_MODULE_7__["MatOption"], _ng_matero_extensions_data_grid__WEBPACK_IMPORTED_MODULE_8__["MtxGridComponent"]], styles: [".col-lg-12.stt[_ngcontent-%COMP%] {\n  text-align: right;\n  margin: 15px 0px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uXFwuLlxcLi5cXC4uXFwuLlxcLi5cXGxvY2FsLXByb2ZpbGUuY29tcG9uZW50LnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxpQkFBQTtFQUNBLGdCQUFBO0FBQ0oiLCJmaWxlIjoibG9jYWwtcHJvZmlsZS5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb2wtbGctMTIuc3R0IHtcclxuICAgIHRleHQtYWxpZ246IHJpZ2h0O1xyXG4gICAgbWFyZ2luOiAxNXB4IDBweDtcclxufSJdfQ== */"], changeDetection: 0 });
+
+
+/***/ }),
+
+/***/ "O89z":
+/*!********************************************************!*\
+  !*** ./src/app/core/interceptors/token-interceptor.ts ***!
+  \********************************************************/
+/*! exports provided: TokenInterceptor */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TokenInterceptor", function() { return TokenInterceptor; });
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var _authentication_token_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../authentication/token.service */ "Dbl6");
+/* harmony import */ var _base_url_interceptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./base-url-interceptor */ "QU45");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
+
+
+
+
+
+
+
+class TokenInterceptor {
+    constructor(token, router, baseUrl) {
+        this.token = token;
+        this.router = router;
+        this.baseUrl = baseUrl;
+    }
+    intercept(request, next) {
+        const logoutHandler = () => {
+            if (request.url.includes('/auth/logout')) {
+                this.router.navigateByUrl('/auth/login');
+            }
+        };
+        if (this.token.valid() && this.shouldAppendToken(request.url)) {
+            return next
+                .handle(request.clone({
+                headers: request.headers.append('Authorization', this.token.headerValue()),
+                withCredentials: true,
+            }))
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(() => logoutHandler()), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])((error) => {
+                if (error.status === 401) {
+                    this.token.clear();
+                }
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(error);
+            }));
+        }
+        return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(() => logoutHandler()));
+    }
+    shouldAppendToken(url) {
+        return !this.hasHttpScheme(url) || this.includeBaseUrl(url);
+    }
+    hasHttpScheme(url) {
+        return new RegExp('^http(s)?://', 'i').test(url);
+    }
+    includeBaseUrl(url) {
+        if (!this.baseUrl) {
+            return false;
+        }
+        const baseUrl = this.baseUrl.replace(/\/$/, '');
+        return new RegExp(`^${baseUrl}`, 'i').test(url);
+    }
+}
+TokenInterceptor.ɵfac = function TokenInterceptor_Factory(t) { return new (t || TokenInterceptor)(_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](_authentication_token_service__WEBPACK_IMPORTED_MODULE_4__["TokenService"]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](_base_url_interceptor__WEBPACK_IMPORTED_MODULE_5__["BASE_URL"], 8)); };
+TokenInterceptor.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineInjectable"]({ token: TokenInterceptor, factory: TokenInterceptor.ɵfac });
 
 
 /***/ }),

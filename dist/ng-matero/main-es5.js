@@ -2780,25 +2780,31 @@
       /* harmony import */
 
 
-      var _default_interceptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      var _token_interceptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ./token-interceptor */
+      "O89z");
+      /* harmony import */
+
+
+      var _default_interceptor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ./default-interceptor */
       "/iEW");
       /* harmony import */
 
 
-      var _error_interceptor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var _error_interceptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ./error-interceptor */
       "ALRA");
       /* harmony import */
 
 
-      var _logging_interceptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _logging_interceptor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ./logging-interceptor */
       "2fSt");
       /* harmony import */
 
 
-      var _settings_interceptor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _settings_interceptor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ./settings-interceptor */
       "QEe/");
       /** Http interceptor providers in outside-in order */
@@ -2815,19 +2821,23 @@
         multi: true
       }, {
         provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"],
-        useClass: _settings_interceptor__WEBPACK_IMPORTED_MODULE_6__["SettingsInterceptor"],
+        useClass: _token_interceptor__WEBPACK_IMPORTED_MODULE_3__["TokenInterceptor"],
         multi: true
       }, {
         provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"],
-        useClass: _error_interceptor__WEBPACK_IMPORTED_MODULE_4__["ErrorInterceptor"],
+        useClass: _settings_interceptor__WEBPACK_IMPORTED_MODULE_7__["SettingsInterceptor"],
         multi: true
       }, {
         provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"],
-        useClass: _default_interceptor__WEBPACK_IMPORTED_MODULE_3__["DefaultInterceptor"],
+        useClass: _error_interceptor__WEBPACK_IMPORTED_MODULE_5__["ErrorInterceptor"],
         multi: true
       }, {
         provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"],
-        useClass: _logging_interceptor__WEBPACK_IMPORTED_MODULE_5__["LoggingInterceptor"],
+        useClass: _default_interceptor__WEBPACK_IMPORTED_MODULE_4__["DefaultInterceptor"],
+        multi: true
+      }, {
+        provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HTTP_INTERCEPTORS"],
+        useClass: _logging_interceptor__WEBPACK_IMPORTED_MODULE_6__["LoggingInterceptor"],
         multi: true
       }];
       /***/
@@ -5858,6 +5868,143 @@
     },
 
     /***/
+    "O89z":
+    /*!********************************************************!*\
+      !*** ./src/app/core/interceptors/token-interceptor.ts ***!
+      \********************************************************/
+
+    /*! exports provided: TokenInterceptor */
+
+    /***/
+    function O89z(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "TokenInterceptor", function () {
+        return TokenInterceptor;
+      });
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! rxjs */
+      "qCKp");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
+      /* harmony import */
+
+
+      var _authentication_token_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ../authentication/token.service */
+      "Dbl6");
+      /* harmony import */
+
+
+      var _base_url_interceptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ./base-url-interceptor */
+      "QU45");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+
+      var TokenInterceptor = /*#__PURE__*/function () {
+        function TokenInterceptor(token, router, baseUrl) {
+          _classCallCheck(this, TokenInterceptor);
+
+          this.token = token;
+          this.router = router;
+          this.baseUrl = baseUrl;
+        }
+
+        _createClass(TokenInterceptor, [{
+          key: "intercept",
+          value: function intercept(request, next) {
+            var _this17 = this;
+
+            var logoutHandler = function logoutHandler() {
+              if (request.url.includes('/auth/logout')) {
+                _this17.router.navigateByUrl('/auth/login');
+              }
+            };
+
+            if (this.token.valid() && this.shouldAppendToken(request.url)) {
+              return next.handle(request.clone({
+                headers: request.headers.append('Authorization', this.token.headerValue()),
+                withCredentials: true
+              })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function () {
+                return logoutHandler();
+              }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])(function (error) {
+                if (error.status === 401) {
+                  _this17.token.clear();
+                }
+
+                return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(error);
+              }));
+            }
+
+            return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(function () {
+              return logoutHandler();
+            }));
+          }
+        }, {
+          key: "shouldAppendToken",
+          value: function shouldAppendToken(url) {
+            return !this.hasHttpScheme(url) || this.includeBaseUrl(url);
+          }
+        }, {
+          key: "hasHttpScheme",
+          value: function hasHttpScheme(url) {
+            return new RegExp('^http(s)?://', 'i').test(url);
+          }
+        }, {
+          key: "includeBaseUrl",
+          value: function includeBaseUrl(url) {
+            if (!this.baseUrl) {
+              return false;
+            }
+
+            var baseUrl = this.baseUrl.replace(/\/$/, '');
+            return new RegExp("^".concat(baseUrl), 'i').test(url);
+          }
+        }]);
+
+        return TokenInterceptor;
+      }();
+
+      TokenInterceptor.ɵfac = function TokenInterceptor_Factory(t) {
+        return new (t || TokenInterceptor)(_angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](_authentication_token_service__WEBPACK_IMPORTED_MODULE_4__["TokenService"]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]), _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵinject"](_base_url_interceptor__WEBPACK_IMPORTED_MODULE_5__["BASE_URL"], 8));
+      };
+
+      TokenInterceptor.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_6__["ɵɵdefineInjectable"]({
+        token: TokenInterceptor,
+        factory: TokenInterceptor.ɵfac
+      });
+      /***/
+    },
+
+    /***/
     "PCNd":
     /*!*****************************************!*\
       !*** ./src/app/shared/shared.module.ts ***!
@@ -6313,17 +6460,17 @@
         }, {
           key: "login",
           value: function login() {
-            var _this17 = this;
+            var _this18 = this;
 
             this.userservice.stafflogin(this.loginForm.value).subscribe(function (response) {
               console.log(response);
               console.log(response.ad_token); /// this.store.set(this.key, response.ad_token);
 
-              _this17.authserv.set(response.ad_token);
+              _this18.authserv.set(response.ad_token);
 
               localStorage.setItem('ad-token', response.ad_token);
 
-              _this17.router.navigateByUrl('/');
+              _this18.router.navigateByUrl('/');
             }, function (error) {
               console.log(error);
             }); // this.auth
@@ -8561,7 +8708,7 @@
 
       var UserPanelComponent = /*#__PURE__*/function () {
         function UserPanelComponent(router, auth, adminauth) {
-          var _this18 = this;
+          var _this19 = this;
 
           _classCallCheck(this, UserPanelComponent);
 
@@ -8570,26 +8717,26 @@
           this.adminauth = adminauth;
           this.adminauth.getuser().subscribe(function (response) {
             console.log(response.data);
-            _this18.User = response.data;
+            _this19.User = response.data;
           });
         }
 
         _createClass(UserPanelComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this19 = this;
+            var _this20 = this;
 
             this.auth.user().subscribe(function (user) {
-              return _this19.user = user;
+              return _this20.user = user;
             });
           }
         }, {
           key: "logout",
           value: function logout() {
-            var _this20 = this;
+            var _this21 = this;
 
             this.auth.logout().subscribe(function () {
-              return _this20.router.navigateByUrl('/auth/login');
+              return _this21.router.navigateByUrl('/auth/login');
             });
           }
         }]);
@@ -8896,7 +9043,7 @@
         }, {
           key: "get",
           value: function get(reqInfo) {
-            var _this21 = this;
+            var _this22 = this;
 
             console.log(reqInfo);
 
@@ -8919,7 +9066,7 @@
               return reqInfo.utils.createResponse$(function () {
                 var headers = reqInfo.headers,
                     url = reqInfo.url;
-                var menu = JSON.parse(_this21.fetch('assets/data/menu.json?_t=' + Date.now())).menu; // console.log(menu)
+                var menu = JSON.parse(_this22.fetch('assets/data/menu.json?_t=' + Date.now())).menu; // console.log(menu)
                 // for (let i = 0; i < menu.length; i++) {
                 //   const element = menu[i].permissions;
                 //   console.log(element)
@@ -8957,7 +9104,7 @@
         }, {
           key: "post",
           value: function post(reqInfo) {
-            var _this22 = this;
+            var _this23 = this;
 
             console.log(reqInfo); // if (is(reqInfo, 'auth/login')) {
             //   console.log("was login request")
@@ -8973,7 +9120,7 @@
               return reqInfo.utils.createResponse$(function () {
                 var headers = reqInfo.headers,
                     url = reqInfo.url;
-                var menu = JSON.parse(_this22.fetch('assets/data/menu.json?_t=' + Date.now())).menu; // console.log(menu)
+                var menu = JSON.parse(_this23.fetch('assets/data/menu.json?_t=' + Date.now())).menu; // console.log(menu)
                 // for (let i = 0; i < menu.length; i++) {
                 //   const element = menu[i].permissions;
                 //   console.log(element)
@@ -9164,23 +9311,23 @@
         }, {
           key: "getData",
           value: function getData() {
-            var _this23 = this;
+            var _this24 = this;
 
             this.isLoading = true;
             this.remoteSrv.getData(this.params).subscribe(function (res) {
-              _this23.list = res.items;
-              _this23.total = res.total_count;
-              _this23.isLoading = false;
+              _this24.list = res.items;
+              _this24.total = res.total_count;
+              _this24.isLoading = false;
 
-              _this23.cdr.detectChanges();
+              _this24.cdr.detectChanges();
             }, function () {
-              _this23.isLoading = false;
+              _this24.isLoading = false;
 
-              _this23.cdr.detectChanges();
+              _this24.cdr.detectChanges();
             }, function () {
-              _this23.isLoading = false;
+              _this24.isLoading = false;
 
-              _this23.cdr.detectChanges();
+              _this24.cdr.detectChanges();
             });
           }
         }, {
@@ -9917,7 +10064,7 @@
         }, {
           key: "getLevel",
           value: function getLevel(routeArr) {
-            var _this24 = this;
+            var _this25 = this;
 
             var tmpArr = [];
             this.menu$.value.forEach(function (item) {
@@ -9939,17 +10086,17 @@
                     var ele = _step.value;
                     var eachItem = ele.item;
 
-                    var currentNamePathList = _this24.deepClone(ele.parentNamePathList).concat(eachItem.name);
+                    var currentNamePathList = _this25.deepClone(ele.parentNamePathList).concat(eachItem.name);
 
-                    var currentRealRouteArr = _this24.deepClone(ele.realRouteArr).concat(eachItem.route); // Compare the full Array for expandable
+                    var currentRealRouteArr = _this25.deepClone(ele.realRouteArr).concat(eachItem.route); // Compare the full Array for expandable
 
 
-                    if (_this24.isRouteEqual(routeArr, currentRealRouteArr)) {
+                    if (_this25.isRouteEqual(routeArr, currentRealRouteArr)) {
                       tmpArr = currentNamePathList;
                       return "break";
                     }
 
-                    if (!_this24.isLeafItem(eachItem)) {
+                    if (!_this25.isLeafItem(eachItem)) {
                       var wrappedChildren = eachItem.children.map(function (child) {
                         return {
                           item: child,
@@ -9982,13 +10129,13 @@
         }, {
           key: "addNamespace",
           value: function addNamespace(menu, namespace) {
-            var _this25 = this;
+            var _this26 = this;
 
             menu.forEach(function (menuItem) {
               menuItem.name = "".concat(namespace, ".").concat(menuItem.name);
 
               if (menuItem.children && menuItem.children.length > 0) {
-                _this25.addNamespace(menuItem.children, menuItem.name);
+                _this26.addNamespace(menuItem.children, menuItem.name);
               }
             });
           }
@@ -10058,24 +10205,24 @@
         _createClass(FormlyValidation, [{
           key: "init",
           value: function init() {
-            var _this26 = this;
+            var _this27 = this;
 
             // message without params
             this.formlyConfig.addValidatorMessage('required', function (_err, _field) {
-              return _this26.translate.stream('validations.required');
+              return _this27.translate.stream('validations.required');
             }); // message with params
 
             this.formlyConfig.addValidatorMessage('minlength', function (err, field) {
-              return _this26.minlengthValidationMessage(err, field, _this26.translate);
+              return _this27.minlengthValidationMessage(err, field, _this27.translate);
             });
             this.formlyConfig.addValidatorMessage('maxlength', function (err, field) {
-              return _this26.maxlengthValidationMessage(err, field, _this26.translate);
+              return _this27.maxlengthValidationMessage(err, field, _this27.translate);
             });
             this.formlyConfig.addValidatorMessage('min', function (err, field) {
-              return _this26.minValidationMessage(err, field, _this26.translate);
+              return _this27.minValidationMessage(err, field, _this27.translate);
             });
             this.formlyConfig.addValidatorMessage('max', function (err, field) {
-              return _this26.maxValidationMessage(err, field, _this26.translate);
+              return _this27.maxValidationMessage(err, field, _this27.translate);
             });
           }
         }, {
@@ -10309,23 +10456,23 @@
         }, {
           key: "getData",
           value: function getData() {
-            var _this27 = this;
+            var _this28 = this;
 
             this.isLoading = true;
             this.remoteSrv.getData(this.params).subscribe(function (res) {
-              _this27.list = res.items;
-              _this27.total = res.total_count;
-              _this27.isLoading = false;
+              _this28.list = res.items;
+              _this28.total = res.total_count;
+              _this28.isLoading = false;
 
-              _this27.cdr.detectChanges();
+              _this28.cdr.detectChanges();
             }, function () {
-              _this27.isLoading = false;
+              _this28.isLoading = false;
 
-              _this27.cdr.detectChanges();
+              _this28.cdr.detectChanges();
             }, function () {
-              _this27.isLoading = false;
+              _this28.isLoading = false;
 
-              _this27.cdr.detectChanges();
+              _this28.cdr.detectChanges();
             });
           }
         }, {
@@ -10744,7 +10891,7 @@
 
       var AdminLayoutComponent = /*#__PURE__*/function () {
         function AdminLayoutComponent(router, breakpointObserver, overlay, element, settings, document, dir) {
-          var _this28 = this;
+          var _this29 = this;
 
           _classCallCheck(this, AdminLayoutComponent);
 
@@ -10763,16 +10910,16 @@
           this.document.body.dir = this.dir.value;
           this.layoutChangesSubscription = this.breakpointObserver.observe([MOBILE_MEDIAQUERY, TABLET_MEDIAQUERY, MONITOR_MEDIAQUERY]).subscribe(function (state) {
             // SidenavOpened must be reset true when layout changes
-            _this28.options.sidenavOpened = true;
-            _this28.isMobileScreen = state.breakpoints[MOBILE_MEDIAQUERY];
-            _this28.options.sidenavCollapsed = state.breakpoints[TABLET_MEDIAQUERY];
-            _this28.isContentWidthFixed = state.breakpoints[MONITOR_MEDIAQUERY];
+            _this29.options.sidenavOpened = true;
+            _this29.isMobileScreen = state.breakpoints[MOBILE_MEDIAQUERY];
+            _this29.options.sidenavCollapsed = state.breakpoints[TABLET_MEDIAQUERY];
+            _this29.isContentWidthFixed = state.breakpoints[MONITOR_MEDIAQUERY];
           }); // TODO: Scroll top to container
 
           this.router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["filter"])(function (event) {
             return event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["NavigationEnd"];
           })).subscribe(function (e) {
-            _this28.content.scrollTo({
+            _this29.content.scrollTo({
               top: 0
             });
           }); // Initialize project theme with options
@@ -10811,11 +10958,11 @@
         }, {
           key: "resetCollapsedState",
           value: function resetCollapsedState() {
-            var _this29 = this;
+            var _this30 = this;
 
             var timer = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 400;
             setTimeout(function () {
-              return _this29.settings.setOptions(_this29.options);
+              return _this30.settings.setOptions(_this30.options);
             }, timer);
           }
         }, {
@@ -11094,23 +11241,23 @@
         }, {
           key: "getData",
           value: function getData() {
-            var _this30 = this;
+            var _this31 = this;
 
             this.isLoading = true;
             this.remoteSrv.getData(this.params).subscribe(function (res) {
-              _this30.list = res.items;
-              _this30.total = res.total_count;
-              _this30.isLoading = false;
+              _this31.list = res.items;
+              _this31.total = res.total_count;
+              _this31.isLoading = false;
 
-              _this30.cdr.detectChanges();
+              _this31.cdr.detectChanges();
             }, function () {
-              _this30.isLoading = false;
+              _this31.isLoading = false;
 
-              _this30.cdr.detectChanges();
+              _this31.cdr.detectChanges();
             }, function () {
-              _this30.isLoading = false;
+              _this31.isLoading = false;
 
-              _this30.cdr.detectChanges();
+              _this31.cdr.detectChanges();
             });
           }
         }, {
@@ -11252,7 +11399,7 @@
 
       var UserComponent = /*#__PURE__*/function () {
         function UserComponent(router, auth, adminauth, cdr, userService) {
-          var _this31 = this;
+          var _this32 = this;
 
           _classCallCheck(this, UserComponent);
 
@@ -11263,28 +11410,28 @@
           this.userService = userService;
           this.loading = true;
           this.adminauth.getuser().subscribe(function (response) {
-            _this31.User = response.data;
+            _this32.User = response.data;
           });
         }
 
         _createClass(UserComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this32 = this;
+            var _this33 = this;
 
             this.auth.user().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["tap"])(function (user) {
-              return _this32.user = user;
+              return _this33.user = user;
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["debounceTime"])(10)).subscribe(function () {
-              return _this32.cdr.detectChanges();
+              return _this33.cdr.detectChanges();
             });
           }
         }, {
           key: "logout",
           value: function logout() {
-            var _this33 = this;
+            var _this34 = this;
 
             this.auth.logout().subscribe(function () {
-              return _this33.router.navigateByUrl('/auth/login');
+              return _this34.router.navigateByUrl('/auth/login');
             });
           }
         }]);
@@ -11626,7 +11773,7 @@
 
       var AccordionDirective = /*#__PURE__*/function () {
         function AccordionDirective(router, menu) {
-          var _this34 = this;
+          var _this35 = this;
 
           _classCallCheck(this, AccordionDirective);
 
@@ -11636,12 +11783,12 @@
           this.router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (event) {
             return event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_0__["NavigationEnd"];
           })).subscribe(function () {
-            return _this34.checkOpenLinks();
+            return _this35.checkOpenLinks();
           }); // Fix opening status for async menu data
 
           this.menu.change().subscribe(function () {
             setTimeout(function () {
-              return _this34.checkOpenLinks();
+              return _this35.checkOpenLinks();
             });
           });
         }
@@ -11672,14 +11819,14 @@
         }, {
           key: "checkOpenLinks",
           value: function checkOpenLinks() {
-            var _this35 = this;
+            var _this36 = this;
 
             this.navlinks.forEach(function (link) {
               if (link.group) {
-                if (_this35.router.url.split('/').includes(link.group)) {
+                if (_this36.router.url.split('/').includes(link.group)) {
                   link.open = true;
 
-                  _this35.closeOtherLinks(link);
+                  _this36.closeOtherLinks(link);
                 }
               }
             });
@@ -12048,7 +12195,7 @@
 
       var RegisterComponent = /*#__PURE__*/function () {
         function RegisterComponent(fb) {
-          var _this36 = this;
+          var _this37 = this;
 
           _classCallCheck(this, RegisterComponent);
 
@@ -12060,7 +12207,7 @@
                 error: true,
                 required: true
               };
-            } else if (control.value !== _this36.registerForm.controls.password.value) {
+            } else if (control.value !== _this37.registerForm.controls.password.value) {
               return {
                 error: true,
                 confirm: true
@@ -12460,23 +12607,23 @@
         }, {
           key: "getData",
           value: function getData() {
-            var _this37 = this;
+            var _this38 = this;
 
             this.isLoading = true;
             this.remoteSrv.getData(this.params).subscribe(function (res) {
-              _this37.list = res.items;
-              _this37.total = res.total_count;
-              _this37.isLoading = false;
+              _this38.list = res.items;
+              _this38.total = res.total_count;
+              _this38.isLoading = false;
 
-              _this37.cdr.detectChanges();
+              _this38.cdr.detectChanges();
             }, function () {
-              _this37.isLoading = false;
+              _this38.isLoading = false;
 
-              _this37.cdr.detectChanges();
+              _this38.cdr.detectChanges();
             }, function () {
-              _this37.isLoading = false;
+              _this38.isLoading = false;
 
-              _this37.cdr.detectChanges();
+              _this38.cdr.detectChanges();
             });
           }
         }, {
@@ -13033,19 +13180,19 @@
         }, {
           key: "getallchatwithoneuser",
           value: function getallchatwithoneuser(id) {
-            var _this38 = this;
+            var _this39 = this;
 
             this.userService.getchatwithuser(id).subscribe(function (response) {
               var _a, _b, _c, _d;
 
               console.log(response);
-              _this38.chats = response.data;
-              _this38.chatdetail = (_a = _this38.chats[0]) === null || _a === void 0 ? void 0 : _a.userid;
+              _this39.chats = response.data;
+              _this39.chatdetail = (_a = _this39.chats[0]) === null || _a === void 0 ? void 0 : _a.userid;
 
-              _this38.markasread((_b = _this38.chats[0]) === null || _b === void 0 ? void 0 : _b.userid._id);
+              _this39.markasread((_b = _this39.chats[0]) === null || _b === void 0 ? void 0 : _b.userid._id);
 
-              _this38.sendmsg.setValue({
-                userid: (_d = (_c = _this38.chats[0]) === null || _c === void 0 ? void 0 : _c.userid) === null || _d === void 0 ? void 0 : _d._id,
+              _this39.sendmsg.setValue({
+                userid: (_d = (_c = _this39.chats[0]) === null || _c === void 0 ? void 0 : _c.userid) === null || _d === void 0 ? void 0 : _d._id,
                 msg: '',
                 msgbysupport: true
               });
@@ -13056,16 +13203,16 @@
         }, {
           key: "getallchatrooms",
           value: function getallchatrooms() {
-            var _this39 = this;
+            var _this40 = this;
 
             this.userService.getchatrooms().subscribe(function (response) {
               var _a, _b;
 
               console.log(response);
-              _this39.chatrooms = response.data;
+              _this40.chatrooms = response.data;
               console.log((_a = response.data[0].userid) === null || _a === void 0 ? void 0 : _a._id);
 
-              _this39.getallchatwithoneuser((_b = response.data[0].userid) === null || _b === void 0 ? void 0 : _b._id);
+              _this40.getallchatwithoneuser((_b = response.data[0].userid) === null || _b === void 0 ? void 0 : _b._id);
             }, function (error) {
               console.log(error);
             });
@@ -13095,7 +13242,7 @@
         }, {
           key: "submitchat",
           value: function submitchat() {
-            var _this40 = this;
+            var _this41 = this;
 
             console.log(this.sendmsg.value);
 
@@ -13103,11 +13250,11 @@
               this.userService.sendchat(this.sendmsg.value).subscribe(function (response) {
                 console.log(response);
 
-                _this40.getallchatwithoneuser(_this40.sendmsg.value.userid);
+                _this41.getallchatwithoneuser(_this41.sendmsg.value.userid);
 
-                _this40.sendmsg.reset();
+                _this41.sendmsg.reset();
 
-                _this40.sendmsg.markAsUntouched(); //this.getallchatrooms()
+                _this41.sendmsg.markAsUntouched(); //this.getallchatrooms()
                 //this.cdr.detectChanges();
 
               }, function (error) {
@@ -13118,13 +13265,13 @@
         }, {
           key: "deleteonechat",
           value: function deleteonechat(id) {
-            var _this41 = this;
+            var _this42 = this;
 
             console.log(id);
             this.userService.deleteonechat(id).subscribe(function (response) {
               console.log(response);
 
-              _this41.getallchatwithoneuser(_this41.activeid);
+              _this42.getallchatwithoneuser(_this42.activeid);
             }, function (error) {
               console.log(error);
             });
@@ -13132,13 +13279,13 @@
         }, {
           key: "deleteall",
           value: function deleteall(id) {
-            var _this42 = this;
+            var _this43 = this;
 
             console.log(id);
             this.userService.deleteallchat(id).subscribe(function (response) {
               console.log(response);
 
-              _this42.getallchatrooms();
+              _this43.getallchatrooms();
             }, function (error) {
               console.log(error);
             });
@@ -13151,11 +13298,11 @@
         }, {
           key: "getallusers",
           value: function getallusers() {
-            var _this43 = this;
+            var _this44 = this;
 
             this.userService.allusers().subscribe(function (response) {
               console.log(response);
-              _this43.list = response.data;
+              _this44.list = response.data;
             }, function (error) {
               console.log(error);
             });
@@ -13910,7 +14057,7 @@
         _createClass(LiveCallComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this44 = this;
+            var _this45 = this;
 
             this.alllivecalls();
             this.columns = [{
@@ -13955,7 +14102,7 @@
                 icon: 'visibility',
                 tooltip: 'view',
                 click: function click(record) {
-                  return _this44.view(record);
+                  return _this45.view(record);
                 }
               }, {
                 type: 'icon',
@@ -13963,7 +14110,7 @@
                 icon: 'play_circle_filled',
                 tooltip: 'play',
                 click: function click(record) {
-                  return _this44.playrecording(record);
+                  return _this45.playrecording(record);
                 }
               }]
             }];
@@ -13987,14 +14134,14 @@
         }, {
           key: "alllivecalls",
           value: function alllivecalls() {
-            var _this45 = this;
+            var _this46 = this;
 
             this.userService.getallivecalls().subscribe(function (response) {
               console.log('%cstaff.component.ts line:238 response', 'color: white; background-color: #007acc;', response);
-              _this45.list = response.message;
-              _this45.isLoading = false;
+              _this46.list = response.message;
+              _this46.isLoading = false;
 
-              _this45.cdr.detectChanges();
+              _this46.cdr.detectChanges();
             }, function (error) {
               console.log(error);
             });
@@ -14654,11 +14801,11 @@
         _createClass(TopmenuPanelComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this46 = this;
+            var _this47 = this;
 
             this.items.forEach(function (item) {
-              _this46.menuStates.push({
-                active: _this46.checkRoute(item),
+              _this47.menuStates.push({
+                active: _this47.checkRoute(item),
                 route: item.route
               });
             });
@@ -14682,15 +14829,15 @@
         }, {
           key: "checkChildRoute",
           value: function checkChildRoute(menuItems) {
-            var _this47 = this;
+            var _this48 = this;
 
             return menuItems.some(function (child) {
-              if (_this47.router.url.split('/').includes(child.route)) {
+              if (_this48.router.url.split('/').includes(child.route)) {
                 return true;
               }
 
               if (!child.route && child.children) {
-                _this47.checkChildRoute(child.children);
+                _this48.checkChildRoute(child.children);
               }
             });
           }
@@ -14702,7 +14849,7 @@
         }, {
           key: "onRouteChange",
           value: function onRouteChange(rla, index) {
-            var _this48 = this;
+            var _this49 = this;
 
             var _a;
 
@@ -14711,12 +14858,12 @@
             this.routerSubscription = this.router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (event) {
               return event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["NavigationEnd"];
             })).subscribe(function (e) {
-              _this48.menuStates.forEach(function (item) {
+              _this49.menuStates.forEach(function (item) {
                 return item.active = false;
               });
 
               setTimeout(function () {
-                return _this48.menuStates[index].active = rla.isActive;
+                return _this49.menuStates[index].active = rla.isActive;
               });
             });
           }
@@ -15858,20 +16005,20 @@
         _createClass(TranslateLangService, [{
           key: "load",
           value: function load() {
-            var _this49 = this;
+            var _this50 = this;
 
             return new Promise(function (resolve) {
-              var locationInitialized = _this49.injector.get(_angular_common__WEBPACK_IMPORTED_MODULE_1__["LOCATION_INITIALIZED"], Promise.resolve(null));
+              var locationInitialized = _this50.injector.get(_angular_common__WEBPACK_IMPORTED_MODULE_1__["LOCATION_INITIALIZED"], Promise.resolve(null));
 
               locationInitialized.then(function () {
                 var browserLang = navigator.language;
                 var defaultLang = browserLang.match(/en-US|zh-CN|zh-TW/) ? browserLang : 'en-US';
 
-                _this49.settings.setLanguage(defaultLang);
+                _this50.settings.setLanguage(defaultLang);
 
-                _this49.translate.setDefaultLang(defaultLang);
+                _this50.translate.setDefaultLang(defaultLang);
 
-                _this49.translate.use(defaultLang).subscribe(function () {
+                _this50.translate.use(defaultLang).subscribe(function () {
                   return console.log("Successfully initialized '".concat(defaultLang, "' language.'"));
                 }, function () {
                   return console.error("Problem with '".concat(defaultLang, "' language initialization.'"));
@@ -17328,7 +17475,7 @@
 
       var TopmenuComponent = /*#__PURE__*/function () {
         function TopmenuComponent(menu, router) {
-          var _this50 = this;
+          var _this51 = this;
 
           _classCallCheck(this, TopmenuComponent);
 
@@ -17339,11 +17486,11 @@
           this.menuList = [];
           this.menuStates = [];
           this.menuSubscription = this.menu$.subscribe(function (res) {
-            _this50.menuList = res;
+            _this51.menuList = res;
 
-            _this50.menuList.forEach(function (item) {
-              _this50.menuStates.push({
-                active: _this50.router.url.split('/').includes(item.route),
+            _this51.menuList.forEach(function (item) {
+              _this51.menuStates.push({
+                active: _this51.router.url.split('/').includes(item.route),
                 route: item.route
               });
             });
@@ -17361,7 +17508,7 @@
         }, {
           key: "onRouteChange",
           value: function onRouteChange(rla, index) {
-            var _this51 = this;
+            var _this52 = this;
 
             var _a;
 
@@ -17369,12 +17516,12 @@
             this.routerSubscription = this.router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (event) {
               return event instanceof _angular_router__WEBPACK_IMPORTED_MODULE_0__["NavigationEnd"];
             })).subscribe(function (e) {
-              _this51.menuStates.forEach(function (item) {
+              _this52.menuStates.forEach(function (item) {
                 return item.active = false;
               });
 
               setTimeout(function () {
-                return _this51.menuStates[index].active = rla.isActive;
+                return _this52.menuStates[index].active = rla.isActive;
               });
             });
           }
@@ -17617,23 +17764,23 @@
         }, {
           key: "getData",
           value: function getData() {
-            var _this52 = this;
+            var _this53 = this;
 
             this.isLoading = true;
             this.remoteSrv.getData(this.params).subscribe(function (res) {
-              _this52.list = res.items;
-              _this52.total = res.total_count;
-              _this52.isLoading = false;
+              _this53.list = res.items;
+              _this53.total = res.total_count;
+              _this53.isLoading = false;
 
-              _this52.cdr.detectChanges();
+              _this53.cdr.detectChanges();
             }, function () {
-              _this52.isLoading = false;
+              _this53.isLoading = false;
 
-              _this52.cdr.detectChanges();
+              _this53.cdr.detectChanges();
             }, function () {
-              _this52.isLoading = false;
+              _this53.isLoading = false;
 
-              _this52.cdr.detectChanges();
+              _this53.cdr.detectChanges();
             });
           }
         }, {
@@ -18257,10 +18404,10 @@
         }, {
           key: "ngAfterViewInit",
           value: function ngAfterViewInit() {
-            var _this53 = this;
+            var _this54 = this;
 
             this.ngZone.runOutsideAngular(function () {
-              return _this53.initChart();
+              return _this54.initChart();
             });
           }
         }, {
@@ -18287,11 +18434,11 @@
         }, {
           key: "getallcallcount",
           value: function getallcallcount() {
-            var _this54 = this;
+            var _this55 = this;
 
             this.userService.getallcallcounts().subscribe(function (response) {
               console.log('%cstaff.component.ts line:238 response', 'color: white; background-color: #007acc;', response);
-              _this54.onestats = {
+              _this55.onestats = {
                 title: 'Total Calls',
                 amount: response.data,
                 rsicon: 'phone_paused',
