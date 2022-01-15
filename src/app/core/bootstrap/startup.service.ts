@@ -11,13 +11,15 @@ import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
   providedIn: 'root',
 })
 export class StartupService {
+  backendurllocal = 'http://localhost:6789/api';
+  backendurl = 'http://103.8.43.13/api/api';
   private menuReq$ = this.http.get('/me/menu');
   private header = new HttpHeaders().set('ad-token', localStorage.getItem('ad-token'));
-  private userpermissions$ = this.http.get(`http://localhost:6789/api/admin/viewonestaff`, {
+  private userpermissions$ = this.http.get(`${this.backendurl}/admin/viewonestaff`, {
     headers: this.header,
   });
   // let abcd = "";
-  private backendurl = 'http://localhost:6789/api';
+  //private backendurl = 'http://localhost:6789/api';
   constructor(
     private token: TokenService,
     private menu: MenuService,

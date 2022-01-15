@@ -37,11 +37,11 @@ export class ErrorInterceptor implements HttpInterceptor {
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === STATUS.UNAUTHORIZED) {
-      this.router.navigateByUrl('/auth/login');
+      //this.router.navigateByUrl('/auth/login');
     } else if (this.errorPages.includes(error.status)) {
-      this.router.navigateByUrl(`/sessions/${error.status}`, {
-        skipLocationChange: true,
-      });
+      // this.router.navigateByUrl(`/sessions/${error.status}`, {
+      //   skipLocationChange: true,
+      // });
     } else if (error instanceof HttpErrorResponse) {
       console.error('ERROR', error);
       this.toastr.error(error.error.msg || `${error.status} ${error.statusText}`);

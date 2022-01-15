@@ -1594,12 +1594,12 @@ class ErrorInterceptor {
     }
     handleError(error) {
         if (error.status === STATUS.UNAUTHORIZED) {
-            this.router.navigateByUrl('/auth/login');
+            //this.router.navigateByUrl('/auth/login');
         }
         else if (this.errorPages.includes(error.status)) {
-            this.router.navigateByUrl(`/sessions/${error.status}`, {
-                skipLocationChange: true,
-            });
+            // this.router.navigateByUrl(`/sessions/${error.status}`, {
+            //   skipLocationChange: true,
+            // });
         }
         else if (error instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_0__["HttpErrorResponse"]) {
             console.error('ERROR', error);
@@ -2490,6 +2490,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class StartupService {
+    // let abcd = "";
+    //private backendurl = 'http://localhost:6789/api';
     constructor(token, menu, http, permissonsSrv, rolesSrv, userService) {
         this.token = token;
         this.menu = menu;
@@ -2497,13 +2499,13 @@ class StartupService {
         this.permissonsSrv = permissonsSrv;
         this.rolesSrv = rolesSrv;
         this.userService = userService;
+        this.backendurllocal = 'http://localhost:6789/api';
+        this.backendurl = 'http://103.8.43.13/api/api';
         this.menuReq$ = this.http.get('/me/menu');
         this.header = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('ad-token', localStorage.getItem('ad-token'));
-        this.userpermissions$ = this.http.get(`http://localhost:6789/api/admin/viewonestaff`, {
+        this.userpermissions$ = this.http.get(`${this.backendurl}/admin/viewonestaff`, {
             headers: this.header,
         });
-        // let abcd = "";
-        this.backendurl = 'http://localhost:6789/api';
     }
     /** Load the application only after get the menu or other essential informations such as roles and permissions. */
     load() {
