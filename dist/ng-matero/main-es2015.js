@@ -2996,19 +2996,24 @@ class TokenInterceptor {
                 this.router.navigateByUrl('/auth/login');
             }
         };
-        if (this.token.valid() && this.shouldAppendToken(request.url)) {
-            return next
-                .handle(request.clone({
-                headers: request.headers.append('Authorization', this.token.headerValue()),
-                withCredentials: true,
-            }))
-                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(() => logoutHandler()), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["catchError"])((error) => {
-                if (error.status === 401) {
-                    this.token.clear();
-                }
-                return Object(rxjs__WEBPACK_IMPORTED_MODULE_1__["throwError"])(error);
-            }));
-        }
+        // if (this.token.valid() && this.shouldAppendToken(request.url)) {
+        //   return next
+        //     .handle(
+        //       request.clone({
+        //         headers: request.headers.append('Authorization', ''),
+        //         withCredentials: true,
+        //       })
+        //     )
+        //     .pipe(
+        //       tap(() => logoutHandler()),
+        //       catchError((error: HttpErrorResponse) => {
+        //         if (error.status === 401) {
+        //           this.token.clear();
+        //         }
+        //         return throwError(error);
+        //       })
+        //     );
+        // }
         return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["tap"])(() => logoutHandler()));
     }
     shouldAppendToken(url) {
@@ -9351,6 +9356,7 @@ class SimpleToken {
         return this.exp !== 0 && this.exp - Object(_core_authentication_helpers__WEBPACK_IMPORTED_MODULE_0__["now"])() < 0;
     }
     headerValue() {
+        console.log(this.accessToken);
         return !!this.accessToken ? [Object(_core_authentication_helpers__WEBPACK_IMPORTED_MODULE_0__["capitalize"])(this.tokenType), this.accessToken].join(' ') : '';
     }
     refreshTime() {

@@ -29,6 +29,7 @@ export class SimpleToken implements RefreshToken {
   }
 
   headerValue() {
+    console.log(this.accessToken);
     return !!this.accessToken ? [capitalize(this.tokenType), this.accessToken].join(' ') : '';
   }
 

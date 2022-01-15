@@ -27,24 +27,24 @@ export class TokenInterceptor implements HttpInterceptor {
       }
     };
 
-    if (this.token.valid() && this.shouldAppendToken(request.url)) {
-      return next
-        .handle(
-          request.clone({
-            headers: request.headers.append('Authorization', this.token.headerValue()),
-            withCredentials: true,
-          })
-        )
-        .pipe(
-          tap(() => logoutHandler()),
-          catchError((error: HttpErrorResponse) => {
-            if (error.status === 401) {
-              this.token.clear();
-            }
-            return throwError(error);
-          })
-        );
-    }
+    // if (this.token.valid() && this.shouldAppendToken(request.url)) {
+    //   return next
+    //     .handle(
+    //       request.clone({
+    //         headers: request.headers.append('Authorization', ''),
+    //         withCredentials: true,
+    //       })
+    //     )
+    //     .pipe(
+    //       tap(() => logoutHandler()),
+    //       catchError((error: HttpErrorResponse) => {
+    //         if (error.status === 401) {
+    //           this.token.clear();
+    //         }
+    //         return throwError(error);
+    //       })
+    //     );
+    // }
 
     return next.handle(request).pipe(tap(() => logoutHandler()));
   }
