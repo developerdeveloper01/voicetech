@@ -32,6 +32,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   private authenticate(): boolean | UrlTree {
-    return this.adminauth.tokenExpired() ? true : this.router.parseUrl('/auth/login');
+    return localStorage.getItem('ad-token') ? true : this.router.parseUrl('/auth/login');
   }
 }

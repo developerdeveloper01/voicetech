@@ -370,7 +370,7 @@
         }, {
           key: "getallagents",
           value: function getallagents() {
-            console.log("requested all agents");
+            console.log('requested all agents');
           }
         }]);
 

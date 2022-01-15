@@ -15,6 +15,7 @@ export class ChatComponent implements OnInit {
   sendmsg: FormGroup;
   activeid: any;
   interval: any;
+  list:any
 
   abcd = 'http://emilcarlsson.se/assets/mikeross.png';
   defaulturl = '../../../assets/images/support.png';
@@ -33,6 +34,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.getallchatrooms();
+    this.getallusers();
   }
 
   getallchatwithoneuser(id: any) {
@@ -100,6 +102,7 @@ export class ChatComponent implements OnInit {
           this.getallchatwithoneuser(this.sendmsg.value.userid);
           this.sendmsg.reset();
           this.sendmsg.markAsUntouched();
+          //this.getallchatrooms()
           //this.cdr.detectChanges();
         },
         error => {
@@ -134,4 +137,47 @@ export class ChatComponent implements OnInit {
       }
     );
   }
+
+  foods = [
+    { id: 1, name: 'Apple' },
+    { id: 2, name: 'Lemon' },
+    { id: 3, name: 'Lime' },
+    { id: 4, name: 'Orange', disabled: true },
+    { id: 5, name: 'Strawberry' },
+  ];
+
+  food: number | number[] = 2;
+
+  multiple = false;
+  disabled = false;
+  required = true;
+
+  onMultiSelectChange() {
+    this.food = this.multiple ? [2] : 2;
+  }
+
+
+  getallusers() {
+    this.userService.allusers().subscribe(
+      (response: any) => {
+        console.log(response);
+        this.list = response.data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+  // clearchat(id) {
+  //   console.log(id);
+  //   this.userService.clearchat(id).subscribe(
+  //     (response: any) => {
+  //       console.log(response);
+  //       this.getallchatrooms();
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 }

@@ -17,7 +17,7 @@ import { BehaviorSubject } from 'rxjs';
     >
       <img class="matero-avatar" [src]="User?.staffimg || user.avatar" width="32" alt="avatar" />
       <span class="matero-username" fxHide.lt-sm
-        >{{ User?.firstname || user.name }} {{ User?.lastname }} |
+        >{{ User?.firstname}} {{ User?.lastname }} |
         <span class="p-8 r-16 bg-blue-300 text-white">{{ User?.role?.name }}</span></span
       >
     </button>

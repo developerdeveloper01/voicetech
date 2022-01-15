@@ -178,7 +178,7 @@ class AgentComponent {
         });
     }
     getallagents() {
-        console.log("requested all agents");
+        console.log('requested all agents');
     }
 }
 AgentComponent.ɵfac = function AgentComponent_Factory(t) { return new (t || AgentComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_ng_matero_extensions_dialog__WEBPACK_IMPORTED_MODULE_2__["MtxDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](app_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ChangeDetectorRef"])); };
@@ -230,8 +230,7 @@ class AgentFormComponent {
             });
         }
     }
-    ngOnInit() {
-    }
+    ngOnInit() { }
     submituserform() {
         console.log(this.addagentform.value);
         if (this.addagentform.valid) {

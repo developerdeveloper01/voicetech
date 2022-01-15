@@ -22,9 +22,26 @@
                         </div>
                     </div>
                     <div class="search">
-                        <label for=""> <mat-icon matSuffix class="i-size">search</mat-icon></label>
-                        <input type="text" class="int-search" placeholder="Search..." />
-                        <h4 class="ch-txt">Chats</h4>
+                        <!-- <label for=""> <mat-icon matSuffix class="i-size">search</mat-icon></label> -->
+                        <!-- <input type="text" class="int-search" placeholder="Search..." /> -->
+                        <form class="example-form">
+                          <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Search</mat-label>
+                            <mat-select>
+                              <mat-option *ngFor="let user of list" [value]="user._id">
+                                {{user.firstname}} {{user.lastname}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                          <!-- <button matRipple class="submit" type="submit" ><mat-icon matSuffix class="i-size">search</mat-icon></button> -->
+                        <!-- <mat-form-field class="example-full-width" appearance="fill">
+                          <mat-label>Search</mat-label>
+
+                          <mtx-select [items]="list" bindLabel="firstname" bindValue="_id" >
+                          </mtx-select>
+                        </mat-form-field> -->
+                      </form>
+                        <!-- <h4 class="ch-txt">Chats</h4> -->
                     </div>
                     <div class="contacts">
                         <ul style="list-style: none; padding: 0px;">
@@ -149,7 +166,9 @@
                              <button style="float: right;
                                 margin: 6px 0 0 8px;" mat-icon-button  [matMenuTriggerFor]="allchat"><mat-icon>more_vert</mat-icon></button>
 <mat-menu #allchat="matMenu">
-  <button mat-menu-item (click)="deleteall(chatdetail._id)">Delete all</button>
+  <button mat-menu-item routerLink="/user/user-detail/{{chatdetail._id}}" >Contact info</button>
+  <!-- <button mat-menu-item (click)="clearchat(chatdetail._id)">Clear messages</button> -->
+  <button mat-menu-item (click)="deleteall(chatdetail._id)">Delete chat</button>
 </mat-menu>
                         </div>
                     </div>

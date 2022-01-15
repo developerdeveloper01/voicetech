@@ -252,4 +252,8 @@ export class UserService {
   deleteallchat(id) {
     return this.http.get(`${this.backendurl}/admin/deleteallchat/${id}`);
   }
+
+  clearchat(id) {
+    return this.http.get(`${this.backendurl}/admin/clearchat/${id}`);
+  }
 }

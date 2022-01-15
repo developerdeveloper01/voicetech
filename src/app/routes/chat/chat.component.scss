@@ -617,7 +617,7 @@ body {
 				}
 				ul {
 					li.contact {
-						padding: 6px 0 46px 8px;
+						//padding: 6px 0 46px 8px;
 						.wrap {
 							width: 100%;
 							img {
@@ -692,4 +692,14 @@ body {
 			}
 		}
 	}
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
 }
