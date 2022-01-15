@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -18,7 +19,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MtxAlertComponent, MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
 import { TablesRemoteDataService } from 'app/routes/service/service/monitoring/agent-table/remote-data.service';
 import { TablesKitchenSinkEditComponent } from 'app/routes/tables/kitchen-sink/edit/edit.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface PeriodicElement {
   name: string;
@@ -340,6 +341,8 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
 
     adddailogRef.afterClosed().subscribe(() => {
       this.getallroles();
+      this.getallroles();
+      this.getallroles();
     });
   }
 }
@@ -650,13 +653,33 @@ export class EditRoleFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addroleform = this.fb.group({
       name: ['', [Validators.required]],
       status: [false],
       permissions: [],
     });
+    console.log(data);
+    if (data){
+      console.log(data.record.permissions);
+      // this.tasks.forEach(ele => ele.subtasks.forEach(subtasks=>  data.record.permissions.indexOf(subtasks.value) !== -1?console.log(subtasks.value):console.log("ni he")))
+
+      for (let i = 0; i < this.tasks.length; i++) {
+        const element = this.tasks[i];
+        for (let j = 0; j < element.subtasks.length; j++) {
+          const newelement = element.subtasks[j].value;
+          if(data.record.permissions.indexOf(newelement) !== -1){
+            console.log(newelement)
+            element.subtasks[j].completed = true
+          }
+
+        }
+      }
+
+      //console.log(this.tasks)
+    }
   }
 
   ngOnInit(): void {
