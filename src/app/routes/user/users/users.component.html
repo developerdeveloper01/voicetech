@@ -24,10 +24,11 @@
       (page)="pagechange($event)"
       (sortChange)="changeSort($event)"
       (selectionChange)="changeSelect($event)"
+      [cellTemplate]="{operation: OperationTpl}"
     >
     </mtx-grid>
     <ng-template #toolbarTpl>
-      <button mat-stroked-button color="primary" (click)="openAddDstNumber()">
+      <button *ngxPermissionsOnly="'AddUser'" mat-stroked-button color="primary" (click)="openAddDstNumber()">
         <mat-icon>add</mat-icon>Add User
       </button>
       <input
@@ -44,6 +45,9 @@
         [(ngModel)]="filterSearch"
         (ngModelChange)="searchData($event)"
       />
+    </ng-template>
+    <ng-template #OperationTpl let-row let-index="index" let-col="colDef">
+      <button [disabled]="disabled_condition">{{index}}</button>
     </ng-template>
   </div>
 </div>

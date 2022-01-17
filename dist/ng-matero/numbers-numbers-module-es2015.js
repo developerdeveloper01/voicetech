@@ -30,8 +30,12 @@ const routes = [
         canActivate: [ngx_permissions__WEBPACK_IMPORTED_MODULE_1__["NgxPermissionsGuard"]],
         data: {
             permissions: {
-                only: ['SUPERADMIN'],
-                redirectTo: '/dashboard',
+                only: ['AddDST'],
+                redirectTo: {
+                    AddDST: (rejectedPermissionName, activateRouteSnapshot, routeStateSnapshot) => {
+                        return 'dashboard';
+                    },
+                }
             },
         },
     },

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { environment } from '@env/environment';
 
 import { AdminLayoutComponent } from '../theme/admin-layout/admin-layout.component';
@@ -26,6 +26,7 @@ import { AllProfileOneComponent } from './sip-service/sip-profile/all-profile-on
 import { EnquiryComponent } from './enquiry/enquiry.component';
 import { ChatComponent } from './chat/chat.component';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { FollowupComponent } from './followup/followup.component';
 
 const routes: Routes = [
   {
@@ -93,13 +94,60 @@ const routes: Routes = [
       },
 
       { path: 'ivr-services', component: IvrServiceComponent },
-      { path: 'chat', component: ChatComponent },
+      { path: 'chat', component: ChatComponent,canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['ViewChat'],
+          redirectTo: {
+            ViewChat: (
+              rejectedPermissionName: string,
+              activateRouteSnapshot: ActivatedRouteSnapshot,
+              routeStateSnapshot: RouterStateSnapshot
+            ) => {
+              return 'dashboard';
+            },
+          },
+        },
+      }, },
       { path: 'call-center', component: CallCenterComponent },
       { path: 'voice-broadcast', component: VoiceBroadcastComponent },
       { path: 'sms-email-configuration', component: SmsEmailConfigurationComponent },
       { path: 'list-manager', component: ListManagerComponent },
 
-      { path: 'enquiry', component: EnquiryComponent },
+      {
+        path: 'enquiry',
+        component: EnquiryComponent,
+        canActivate: [NgxPermissionsGuard],
+        data: {
+          permissions: {
+            only: ['ViewEnquiry'],
+            redirectTo: {
+              ViewEnquiry: (
+                rejectedPermissionName: string,
+                activateRouteSnapshot: ActivatedRouteSnapshot,
+                routeStateSnapshot: RouterStateSnapshot
+              ) => {
+                return 'dashboard';
+              },
+            },
+          },
+        },
+      },
+      { path: 'followup/:id', component: FollowupComponent,canActivate: [NgxPermissionsGuard],
+      data: {
+        permissions: {
+          only: ['FollowupEnquiry'],
+          redirectTo: {
+            FollowupEnquiry: (
+              rejectedPermissionName: string,
+              activateRouteSnapshot: ActivatedRouteSnapshot,
+              routeStateSnapshot: RouterStateSnapshot
+            ) => {
+              return 'dashboard';
+            },
+          },
+        },
+      }, },
       { path: 'network', component: NetworkComponent },
       { path: 'security', component: SecurityComponent },
       { path: 'system-setting', component: SystemSettingComponent },

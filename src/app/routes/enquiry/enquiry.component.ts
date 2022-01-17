@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
@@ -63,7 +64,8 @@ export class EnquiryComponent implements OnInit {
     private fb: FormBuilder,
     private dateAdapter: DateAdapter<any>,
     private translate: TranslateService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
   ) {}
 
 
@@ -94,7 +96,7 @@ export class EnquiryComponent implements OnInit {
             type: 'icon',
             icon: 'edit',
             tooltip: 'edit',
-            click: record => this.openEditDstNumber(record),
+            click: record => this.router.navigate(['followup', record._id]),
           },
           {
             color: 'warn',

@@ -1105,14 +1105,6 @@ class AddRoleFormComponent {
                 ],
             },
             {
-                name: 'Enquiry',
-                completed: false,
-                subtasks: [
-                    { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
-                    { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
-                ],
-            },
-            {
                 name: 'Manage Staff',
                 completed: false,
                 subtasks: [
@@ -1120,6 +1112,26 @@ class AddRoleFormComponent {
                     { name: 'Add Staff', value: 'AddStaff', completed: false },
                     { name: 'Edit Staff', value: 'EditStaff', completed: false },
                     { name: 'Delete Staff', value: 'DeleteStaff', completed: false },
+                ],
+            },
+            {
+                name: 'Manage Agents',
+                completed: false,
+                subtasks: [
+                    { name: 'View Agents', value: 'ViewAgents', completed: false },
+                    { name: 'Add Agents', value: 'AddAgents', completed: false },
+                    { name: 'Edit Agents', value: 'EditAgents', completed: false },
+                    { name: 'Delete Agents', value: 'DeleteAgents', completed: false },
+                ],
+            },
+            {
+                name: 'Manage Users',
+                completed: false,
+                subtasks: [
+                    { name: 'View User', value: 'ViewUser', completed: false },
+                    { name: 'Add User', value: 'AddUser', completed: false },
+                    { name: 'Edit User', value: 'EditUser', completed: false },
+                    { name: 'Delete User', value: 'DeleteUser', completed: false },
                 ],
             },
             {
@@ -1143,6 +1155,29 @@ class AddRoleFormComponent {
                 ],
             },
             {
+                name: 'Live Calls',
+                completed: false,
+                subtasks: [
+                    { name: 'View Calls', value: 'ViewCalls', completed: false },
+                    { name: 'Terminate Calls', value: 'TerminateCalls', completed: false },
+                ],
+            },
+            {
+                name: 'Voice Files',
+                completed: false,
+                subtasks: [
+                    { name: 'View Voice Files', value: 'ViewVoice', completed: false },
+                    { name: 'Add Voice Files', value: 'AddVoice', completed: false },
+                ],
+            },
+            {
+                name: 'Enquiry',
+                completed: false,
+                subtasks: [
+                    { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
+                    { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
+                ],
+            }, {
                 name: 'Plan',
                 completed: false,
                 subtasks: [
@@ -1275,6 +1310,7 @@ AddRoleFormComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
     } }, directives: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialogTitle"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["ɵangular_packages_forms_forms_ba"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatusGroup"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroupDirective"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialogContent"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_18__["MatFormField"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_18__["MatLabel"], _angular_material_input__WEBPACK_IMPORTED_MODULE_19__["MatInput"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["DefaultValueAccessor"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["RequiredValidator"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgControlStatus"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControlName"], _angular_material_checkbox__WEBPACK_IMPORTED_MODULE_20__["MatCheckbox"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__["MatAccordion"], _angular_common__WEBPACK_IMPORTED_MODULE_14__["NgForOf"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialogActions"], _angular_material_button__WEBPACK_IMPORTED_MODULE_15__["MatButton"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialogClose"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__["MatExpansionPanel"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__["MatExpansionPanelHeader"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__["MatExpansionPanelTitle"], _angular_material_expansion__WEBPACK_IMPORTED_MODULE_21__["MatExpansionPanelDescription"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NgModel"]], styles: [_c2, "fieldset.st-set[_ngcontent-%COMP%] {\n    padding: 15px;\n    border-radius: 5px;\n    border-color: #2196f35e  !important;\n}\nlegend.st-leg[_ngcontent-%COMP%] {\n    font-size: 16px;\n}\n.st-mb.ng-star-inserted[_ngcontent-%COMP%] {\n    margin-bottom: 15px;\n}\nfieldset.st-set[_ngcontent-%COMP%] {\n    width: 295px;\n    float: left;\n    height: 180px;\n    margin: 10px;\n}"] });
 class EditRoleFormComponent {
     constructor(fb, userService, snackBar, data) {
+        var _a;
         this.fb = fb;
         this.userService = userService;
         this.snackBar = snackBar;
@@ -1294,14 +1330,6 @@ class EditRoleFormComponent {
                 ],
             },
             {
-                name: 'Enquiry',
-                completed: false,
-                subtasks: [
-                    { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
-                    { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
-                ],
-            },
-            {
                 name: 'Manage Staff',
                 completed: false,
                 subtasks: [
@@ -1309,6 +1337,26 @@ class EditRoleFormComponent {
                     { name: 'Add Staff', value: 'AddStaff', completed: false },
                     { name: 'Edit Staff', value: 'EditStaff', completed: false },
                     { name: 'Delete Staff', value: 'DeleteStaff', completed: false },
+                ],
+            },
+            {
+                name: 'Manage Agents',
+                completed: false,
+                subtasks: [
+                    { name: 'View Agents', value: 'ViewAgents', completed: false },
+                    { name: 'Add Agents', value: 'AddAgents', completed: false },
+                    { name: 'Edit Agents', value: 'EditAgents', completed: false },
+                    { name: 'Delete Agents', value: 'DeleteAgents', completed: false },
+                ],
+            },
+            {
+                name: 'Manage Users',
+                completed: false,
+                subtasks: [
+                    { name: 'View User', value: 'ViewUser', completed: false },
+                    { name: 'Add User', value: 'AddUser', completed: false },
+                    { name: 'Edit User', value: 'EditUser', completed: false },
+                    { name: 'Delete User', value: 'DeleteUser', completed: false },
                 ],
             },
             {
@@ -1332,6 +1380,29 @@ class EditRoleFormComponent {
                 ],
             },
             {
+                name: 'Live Calls',
+                completed: false,
+                subtasks: [
+                    { name: 'View Calls', value: 'ViewCalls', completed: false },
+                    { name: 'Terminate Calls', value: 'TerminateCalls', completed: false },
+                ],
+            },
+            {
+                name: 'Voice Files',
+                completed: false,
+                subtasks: [
+                    { name: 'View Voice Files', value: 'ViewVoice', completed: false },
+                    { name: 'Add Voice Files', value: 'AddVoice', completed: false },
+                ],
+            },
+            {
+                name: 'Enquiry',
+                completed: false,
+                subtasks: [
+                    { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
+                    { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
+                ],
+            }, {
                 name: 'Plan',
                 completed: false,
                 subtasks: [
@@ -1369,6 +1440,12 @@ class EditRoleFormComponent {
                     }
                 }
             }
+            this.addroleform.setValue({
+                name: data.record.name ? data.record.name : 'null',
+                status: data.record.status ? data.record.status : false,
+                permissions: [],
+            });
+            this.id = (_a = data.record) === null || _a === void 0 ? void 0 : _a._id;
             //console.log(this.tasks)
         }
     }
@@ -1414,13 +1491,14 @@ class EditRoleFormComponent {
         });
         if (this.addroleform.valid) {
             console.log(this.addroleform.value);
-            this.userService.addrole(this.addroleform.value).subscribe((response) => {
-                console.log('%cips.component.ts line:511 response', 'color: #26bfa5;', response);
-                this.snackBar.open('Role Added Successfully!', '', { duration: 2000 });
+            console.log(this.id);
+            this.userService.editrole(this.id, this.addroleform.value).subscribe((response) => {
+                console.log('%crole.component.ts line:816 response', 'color: #26bfa5;', response);
+                this.snackBar.open('Role Edited Successfully!', '', { duration: 2000 });
                 this.addroleform.reset();
                 //this.addroleform.markAsUntouched();
             }, error => {
-                console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
+                console.log('%cerror role.component.ts line:823 ', 'color: red; display: block; width: 100%;', error);
             });
         }
         else {

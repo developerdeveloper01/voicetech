@@ -40,6 +40,11 @@ export class UsersComponent implements OnInit, AfterViewInit {
   columnResizable = false;
   filteredData: any;
 
+  //Permissions
+  seteditpermission:boolean = true
+  setviewpermission:boolean = true
+  setdeletepermission:boolean = true
+
   constructor(
     public dialog: MatDialog,
     public dialogx: MtxDialog,
@@ -52,8 +57,21 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getallusers();
-    console.log(this.rolesSrv.getRoles());
-    console.log(this.permissonsSrv.getPermissions());
+    //console.log(this.rolesSrv.getRoles());
+
+    // console.log(this.permissonsSrv.getPermissions().EditUser);
+    if(this.permissonsSrv.getPermissions().hasOwnProperty('ViewUser')){
+      console.log(this.permissonsSrv.getPermissions().hasOwnProperty('ViewUser'));
+      this.setviewpermission= false
+    }
+    if(this.permissonsSrv.getPermissions().hasOwnProperty('EditUser')){
+      console.log(this.permissonsSrv.getPermissions().hasOwnProperty('EditUser'));
+      this.seteditpermission= false
+    }
+    if(this.permissonsSrv.getPermissions().hasOwnProperty('DeleteUser')){
+      console.log(this.permissonsSrv.getPermissions().hasOwnProperty('DeleteUser'));
+      this.setdeletepermission= false
+    }
 
     this.columns = [
       { header: 'Avatar', field: 'userimg', type: 'image' },
@@ -62,7 +80,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
         sortable: true,
         field: 'firstname',
         formatter: (data: any) =>
-          `<a routerLink="/${data._id}"> ${data.firstname} ${data.lastname}</a>`,
+          `<button routerLink="/${data._id}"> ${data.firstname} ${data.lastname}</button>`,
         width: '150px',
       },
       { header: 'Mobile', sortable: true, field: 'mobile' },
@@ -84,6 +102,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
             icon: 'visibility',
             tooltip: 'view',
             click: record => this.router.navigate(['user/user-detail', record._id]),
+            disabled: this.setviewpermission
           },
           {
             type: 'icon',
@@ -91,6 +110,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
             icon: 'edit',
             tooltip: 'edit',
             click: record => this.edit(record),
+            disabled: this.seteditpermission
           },
           {
             color: 'warn',
@@ -102,11 +122,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
             popCloseText: 'Cancel',
             popOkText: 'Delete',
             click: record => this.delete(record),
+            disabled: this.setdeletepermission
           },
         ],
       },
     ];
   }
+
+  // rowClicked(data){
+  //   //console.log(data.rowData._id);
+  //   this.router.navigate(['/user/user-detail', data.rowData._id])
+  // }
 
   changeSort(e) {
     console.log(e);

@@ -16,6 +16,7 @@ export class UserOverviewComponent implements OnInit {
   id: any;
   userdetail: any;
   panelOpenState = false;
+  callreports:any;
 
   myControl = new FormControl();
 
@@ -90,6 +91,8 @@ export class UserOverviewComponent implements OnInit {
       map(value => this._filter(value))
     );
 
+    this.getusercalldetails();
+
     this.id = this.route.snapshot.params['id'];
     console.log(this.id);
     this.getallnumbers();
@@ -102,6 +105,17 @@ export class UserOverviewComponent implements OnInit {
       //password: ['', [Validators.required]],
       organization_name: ['', [Validators.required]],
     });
+
+    this.allotnumber = this.fb.group({
+      alloted_did: [''],
+      lastname: ['', [Validators.required]],
+      email: ['', [Validators.required]],
+      mobile: ['', [Validators.required]],
+      //password: ['', [Validators.required]],
+      organization_name: ['', [Validators.required]],
+    });
+
+
     this.getallrecordings();
   }
 
@@ -116,6 +130,18 @@ export class UserOverviewComponent implements OnInit {
       (response: any) => {
         console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
         this.userdetail = response.data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getusercalldetails() {
+    this.userService.getalldetailsofuser('2581').subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+        this.callreports = response;
       },
       error => {
         console.log(error);
@@ -143,7 +169,14 @@ export class UserOverviewComponent implements OnInit {
       organization_name: this.userdetail.organization_name
         ? this.userdetail.organization_name
         : 'null',
-    });
+    })
+    this.allotnumber.setValue({
+      alloted_did:this.userdetail.alloted_did
+      ? this.userdetail.alloted_did.did_no
+      : 'null',
+    })
+    console.log(this.allotnumber.value)
+    ;
   }
 
   submituserform() {
@@ -236,4 +269,6 @@ export class UserOverviewComponent implements OnInit {
       }
     );
   }
+
+
 }

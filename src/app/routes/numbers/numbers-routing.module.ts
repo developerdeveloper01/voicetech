@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { DstnumberComponent } from './dstnumber/dstnumber.component';
 import { IpsComponent } from './ips/ips.component';
@@ -12,8 +12,16 @@ const routes: Routes = [
     canActivate: [NgxPermissionsGuard],
     data: {
       permissions: {
-        only: ['SUPERADMIN'],
-        redirectTo: '/dashboard',
+        only: ['AddDST'],
+        redirectTo: {
+          AddDST: (
+            rejectedPermissionName: string,
+            activateRouteSnapshot: ActivatedRouteSnapshot,
+            routeStateSnapshot: RouterStateSnapshot
+          ) => {
+            return 'dashboard';
+          },
+        }
       },
     },
   },

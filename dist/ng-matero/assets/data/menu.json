@@ -64,7 +64,15 @@
         {
           "route": "users",
           "name": "users",
-          "type": "link"
+          "type": "link",
+          "permissions": {
+            "only": ["AddUser","ViewUser","EditUser","DeleteUser"],
+            "redirectTo": {
+              "ViewUser": {
+                "navigationCommands": "/dashboard"
+              }
+            }
+          }
         }
       ]
     },
@@ -93,6 +101,54 @@
           "name": "my-numbers",
           "type": "link"
         }
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+      }
+    },
+    {
+      "route": "plan",
+      "name": "plan",
+      "type": "sub",
+      "icon": "money",
+      "children": [
+        {
+          "route": "prepaid-plan",
+          "name": "prepaid-plan",
+          "type": "link",
+          "permissions": {
+            "only": ["AddPlan"],
+            "redirectTo": {
+              "AddPlan": {
+                "navigationCommands": "/dashboard",
+                "navigationExtras": {
+                  "skipLocationChange": true
+              }
+              }
+            }
+          }
+        },
+        {
+          "route": "postpaid-plan",
+          "name": "postpaid-plan",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "only": ["SUPERADMIN","ADMIN"]
+      }
+    },
+    {
+      "route": "report",
+      "name": "report",
+      "type": "sub",
+      "icon": "description",
+      "children":[
+          {
+            "route":"cdr",
+            "name":"cdr",
+            "type":"link"
+          }
       ],
       "permissions": {
         "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
@@ -222,7 +278,15 @@
       "type": "link",
       "icon": "border_color",
       "permissions": {
-        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+        "only": ["ViewEnquiry"],
+        "redirectTo": {
+          "ViewEnquiry": {
+            "navigationCommands": "/dashboard",
+            "navigationExtras": {
+              "skipLocationChange": true
+          }
+          }
+        }
       }
     },
     {
@@ -231,44 +295,15 @@
       "type": "link",
       "icon": "chat",
       "permissions": {
-        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
-      }
-    },
-    {
-      "route": "plan",
-      "name": "plan",
-      "type": "sub",
-      "icon": "money",
-      "children": [
-        {
-          "route": "prepaid-plan",
-          "name": "prepaid-plan",
-          "type": "link"
-        },
-        {
-          "route": "postpaid-plan",
-          "name": "postpaid-plan",
-          "type": "link"
-        }
-      ],
-      "permissions": {
-        "only": ["SUPERADMIN","ADMIN"]
-      }
-    },
-    {
-      "route": "report",
-      "name": "report",
-      "type": "sub",
-      "icon": "description",
-      "children":[
-          {
-            "route":"cdr",
-            "name":"cdr",
-            "type":"link"
+        "only": ["ViewChat"],
+        "redirectTo": {
+          "ViewChat": {
+            "navigationCommands": "/dashboard",
+            "navigationExtras": {
+              "skipLocationChange": true
           }
-      ],
-      "permissions": {
-        "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+          }
+        }
       }
     },
     {

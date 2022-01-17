@@ -110,9 +110,7 @@
         }
       ]
     }
-
   ]
-
 },
 {
   "route": "service",
@@ -200,6 +198,15 @@
   "name": "voice-broadcast",
   "type": "link",
   "icon": "settings_remote"
+},
+{
+  "route": "followup/:id",
+  "name": "followup",
+  "type": "link",
+  "icon": "border_color",
+  "permissions": {
+    "only": ["SUPERADMIN","ADMIN","MANAGER","RESELLER"]
+  }
 },
 {
   "route": "sms-email-configuration",

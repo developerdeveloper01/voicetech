@@ -442,14 +442,6 @@ export class AddRoleFormComponent implements OnInit {
       ],
     },
     {
-      name: 'Enquiry',
-      completed: false,
-      subtasks: [
-        { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
-        { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
-      ],
-    },
-    {
       name: 'Manage Staff',
       completed: false,
       subtasks: [
@@ -457,6 +449,26 @@ export class AddRoleFormComponent implements OnInit {
         { name: 'Add Staff', value: 'AddStaff', completed: false },
         { name: 'Edit Staff', value: 'EditStaff', completed: false },
         { name: 'Delete Staff', value: 'DeleteStaff', completed: false },
+      ],
+    },
+    {
+      name: 'Manage Agents',
+      completed: false,
+      subtasks: [
+        { name: 'View Agents', value: 'ViewAgents', completed: false },
+        { name: 'Add Agents', value: 'AddAgents', completed: false },
+        { name: 'Edit Agents', value: 'EditAgents', completed: false },
+        { name: 'Delete Agents', value: 'DeleteAgents', completed: false },
+      ],
+    },
+    {
+      name: 'Manage Users',
+      completed: false,
+      subtasks: [
+        { name: 'View User', value: 'ViewUser', completed: false },
+        { name: 'Add User', value: 'AddUser', completed: false },
+        { name: 'Edit User', value: 'EditUser', completed: false },
+        { name: 'Delete User', value: 'DeleteUser', completed: false },
       ],
     },
     {
@@ -480,6 +492,29 @@ export class AddRoleFormComponent implements OnInit {
       ],
     },
     {
+      name: 'Live Calls',
+      completed: false,
+      subtasks: [
+        { name: 'View Calls', value: 'ViewCalls', completed: false },
+        { name: 'Terminate Calls', value: 'TerminateCalls', completed: false },
+      ],
+    },
+    {
+      name: 'Voice Files',
+      completed: false,
+      subtasks: [
+        { name: 'View Voice Files', value: 'ViewVoice', completed: false },
+        { name: 'Add Voice Files', value: 'AddVoice', completed: false },
+      ],
+    },
+    {
+      name: 'Enquiry',
+      completed: false,
+      subtasks: [
+        { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
+        { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
+      ],
+    },{
       name: 'Plan',
       completed: false,
       subtasks: [
@@ -649,6 +684,7 @@ export class EditRoleFormComponent implements OnInit {
 
   addroleform: FormGroup;
   allips: any;
+  id: any;
 
   constructor(
     private fb: FormBuilder,
@@ -677,6 +713,12 @@ export class EditRoleFormComponent implements OnInit {
 
         }
       }
+      this.addroleform.setValue({
+        name: data.record.name?data.record.name:'null',
+      status: data.record.status?data.record.status:false,
+      permissions: [],
+      })
+      this.id = data.record?._id;
 
       //console.log(this.tasks)
     }
@@ -698,14 +740,6 @@ export class EditRoleFormComponent implements OnInit {
       ],
     },
     {
-      name: 'Enquiry',
-      completed: false,
-      subtasks: [
-        { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
-        { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
-      ],
-    },
-    {
       name: 'Manage Staff',
       completed: false,
       subtasks: [
@@ -713,6 +747,26 @@ export class EditRoleFormComponent implements OnInit {
         { name: 'Add Staff', value: 'AddStaff', completed: false },
         { name: 'Edit Staff', value: 'EditStaff', completed: false },
         { name: 'Delete Staff', value: 'DeleteStaff', completed: false },
+      ],
+    },
+    {
+      name: 'Manage Agents',
+      completed: false,
+      subtasks: [
+        { name: 'View Agents', value: 'ViewAgents', completed: false },
+        { name: 'Add Agents', value: 'AddAgents', completed: false },
+        { name: 'Edit Agents', value: 'EditAgents', completed: false },
+        { name: 'Delete Agents', value: 'DeleteAgents', completed: false },
+      ],
+    },
+    {
+      name: 'Manage Users',
+      completed: false,
+      subtasks: [
+        { name: 'View User', value: 'ViewUser', completed: false },
+        { name: 'Add User', value: 'AddUser', completed: false },
+        { name: 'Edit User', value: 'EditUser', completed: false },
+        { name: 'Delete User', value: 'DeleteUser', completed: false },
       ],
     },
     {
@@ -736,6 +790,29 @@ export class EditRoleFormComponent implements OnInit {
       ],
     },
     {
+      name: 'Live Calls',
+      completed: false,
+      subtasks: [
+        { name: 'View Calls', value: 'ViewCalls', completed: false },
+        { name: 'Terminate Calls', value: 'TerminateCalls', completed: false },
+      ],
+    },
+    {
+      name: 'Voice Files',
+      completed: false,
+      subtasks: [
+        { name: 'View Voice Files', value: 'ViewVoice', completed: false },
+        { name: 'Add Voice Files', value: 'AddVoice', completed: false },
+      ],
+    },
+    {
+      name: 'Enquiry',
+      completed: false,
+      subtasks: [
+        { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
+        { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
+      ],
+    },{
       name: 'Plan',
       completed: false,
       subtasks: [
@@ -802,16 +879,18 @@ export class EditRoleFormComponent implements OnInit {
     });
     if (this.addroleform.valid) {
       console.log(this.addroleform.value);
-      this.userService.addrole(this.addroleform.value).subscribe(
+      console.log(this.id);
+
+      this.userService.editrole(this.id,this.addroleform.value).subscribe(
         (response: any) => {
-          console.log('%cips.component.ts line:511 response', 'color: #26bfa5;', response);
-          this.snackBar.open('Role Added Successfully!', '', { duration: 2000 });
+          console.log('%crole.component.ts line:816 response', 'color: #26bfa5;', response);
+          this.snackBar.open('Role Edited Successfully!', '', { duration: 2000 });
           this.addroleform.reset();
           //this.addroleform.markAsUntouched();
         },
         error => {
           console.log(
-            '%cerror ips.component.ts line:254 ',
+            '%cerror role.component.ts line:823 ',
             'color: red; display: block; width: 100%;',
             error
           );

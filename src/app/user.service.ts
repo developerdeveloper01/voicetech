@@ -18,6 +18,10 @@ export class UserService {
     return this.http.post(`${this.backendurl}/admin/addrole`, data);
   }
 
+  editrole(id,data) {
+    return this.http.post(`${this.backendurl}/admin/editrole/${id}`, data);
+  }
+
   viewonerole(id) {
     return this.http.get(`${this.backendurl}/admin/viewonerole/${id}`);
   }
@@ -255,5 +259,9 @@ export class UserService {
 
   clearchat(id) {
     return this.http.get(`${this.backendurl}/admin/clearchat/${id}`);
+  }
+
+  getalldetailsofuser(id){
+    return this.http.get(`${this.backendurl}/admin/allcalldetails/${id}`);
   }
 }

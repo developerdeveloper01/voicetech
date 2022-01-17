@@ -31,41 +31,41 @@
         <div class="row">
           <div class="col-lg-3 text-center">
             <h4>Total Calls:</h4>
-            <h2>57</h2>
+            <h2>{{ callreports?.total }}</h2>
           </div>
           <div class="col-lg-3 text-center">
-            <h4>Missed Calls:</h4>
-            <h2>20</h2>
+            <h4>Outgoing Calls:</h4>
+            <h2>{{ callreports?.outgoing }}</h2>
           </div>
           <div class="col-lg-3 text-center">
             <h4>Received Calls:</h4>
-            <h2>22</h2>
+            <h2>{{ callreports?.incoming }}</h2>
           </div>
           <div class="col-lg-3 text-center">
             <h4>Falled Calls:</h4>
-            <h2>7</h2>
+            <h2>{{ callreports?.missedcall }}</h2>
           </div>
         </div>
         <hr />
-        <mat-accordion class="mat-elevation-z1" >
+        <mat-accordion class="mat-elevation-z1">
           <!-- (opened)="panelOpenState = true; openedituser()"
             (closed)="panelOpenState = false" -->
-          <mat-expansion-panel
-          [expanded]="step === 0" (opened)="setStep(0);openedituser();"
-          >
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0); openedituser()">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <p class="f-w-500">Basic Details</p>
               </mat-panel-title>
-              <mat-panel-description>
-
-              </mat-panel-description>
+              <mat-panel-description> </mat-panel-description>
             </mat-expansion-panel-header>
-            <fieldset style="padding: 20px;border-radius: 4px;">
-            <legend style="font-size: 20px;">Edit Basic Details</legend>
-            <form class="form-field-full" [formGroup]="edituserform" (ngSubmit)="submituserform()">
-              <div class="row">
-                  <mat-form-field class="demo-full-width col-md-6" >
+            <fieldset style="padding: 20px; border-radius: 4px">
+              <legend style="font-size: 20px">Edit Basic Details</legend>
+              <form
+                class="form-field-full"
+                [formGroup]="edituserform"
+                (ngSubmit)="submituserform()"
+              >
+                <div class="row">
+                  <mat-form-field class="demo-full-width col-md-6">
                     <mat-label>First Name</mat-label>
                     <input
                       type="text"
@@ -91,37 +91,37 @@
                       {{ 'validations.required' | translate }}
                     </mat-error>
                   </mat-form-field>
-              <div class="col-lg-12 w-full">
-                <mat-form-field class="w-full">
-                  <mat-label>Email</mat-label>
-                  <input
-                    type="email"
-                    matInput
-                    placeholder="example@gmail.com"
-                    formControlName="email"
-                    required
-                  />
-                  <mat-error *ngIf="edituserform.get('email').invalid">
-                    {{ 'validations.required' | translate }}
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col-lg-12 w-full">
-                <mat-form-field class="demo-full-width">
-                  <mat-label>Mobile</mat-label>
-                  <input
-                    type="number"
-                    matInput
-                    placeholder="9999999999"
-                    formControlName="mobile"
-                    required
-                  />
-                  <mat-error *ngIf="edituserform.get('mobile').invalid">
-                    {{ 'validations.required' | translate }}
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              <!-- <div class="col-lg-12 w-full">
+                  <div class="col-lg-12 w-full">
+                    <mat-form-field class="w-full">
+                      <mat-label>Email</mat-label>
+                      <input
+                        type="email"
+                        matInput
+                        placeholder="example@gmail.com"
+                        formControlName="email"
+                        required
+                      />
+                      <mat-error *ngIf="edituserform.get('email').invalid">
+                        {{ 'validations.required' | translate }}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-12 w-full">
+                    <mat-form-field class="demo-full-width">
+                      <mat-label>Mobile</mat-label>
+                      <input
+                        type="number"
+                        matInput
+                        placeholder="9999999999"
+                        formControlName="mobile"
+                        required
+                      />
+                      <mat-error *ngIf="edituserform.get('mobile').invalid">
+                        {{ 'validations.required' | translate }}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <!-- <div class="col-lg-12 w-full">
                 <mat-form-field class="demo-full-width">
                   <mat-label>Password</mat-label>
                   <input type="password" matInput formControlName="password" required />
@@ -130,22 +130,22 @@
                   </mat-error>
                 </mat-form-field>
               </div> -->
-              <div class="col-lg-12 w-full">
-                <mat-form-field class="demo-full-width">
-                  <mat-label>Organization Name</mat-label>
-                  <input
-                    type="text"
-                    matInput
-                    placeholder="Voicetech"
-                    formControlName="organization_name"
-                    required
-                  />
-                  <mat-error *ngIf="edituserform.get('organization_name').invalid">
-                    {{ 'validations.required' | translate }}
-                  </mat-error>
-                </mat-form-field>
-              </div>
-              </div>
+                  <div class="col-lg-12 w-full">
+                    <mat-form-field class="demo-full-width">
+                      <mat-label>Organization Name</mat-label>
+                      <input
+                        type="text"
+                        matInput
+                        placeholder="Voicetech"
+                        formControlName="organization_name"
+                        required
+                      />
+                      <mat-error *ngIf="edituserform.get('organization_name').invalid">
+                        {{ 'validations.required' | translate }}
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
                 <button
                   mat-raised-button
                   [disabled]="edituserform.invalid"
@@ -154,143 +154,169 @@
                 >
                   Submit
                 </button>
-                <button class="m-l-8" color="accent" type="button" mat-button (click)="nextStep()">Next</button>
-            </form></fieldset>
+                <button class="m-l-8" color="accent" type="button" mat-button (click)="nextStep()">
+                  Next
+                </button>
+              </form>
+            </fieldset>
           </mat-expansion-panel>
 
-          <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" >
+          <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <p class="f-w-500">Numbers</p>
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <fieldset style="padding: 20px;border-radius: 4px;">
-              <legend style="font-size: 20px;">Edit Numbers</legend>
-              <form class="form-field-full" [formGroup]="allotnumber" (ngSubmit)="submitnumberform()">
-              <mat-form-field class="w-full">
-                <mat-label>Number</mat-label>
-                <input type="text"
-                       placeholder="Pick one"
-                       aria-label="Number"
-                       matInput
-                       [formControl]="myControl"
-                       [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete">
-                  <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                    {{option}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-              <button mat-button color="warn" (click)="prevStep()">Previous</button>
-              <button mat-raised-button color="primary" (click)="nextStep()">Submit</button>
-              <button mat-button color="accent" (click)="nextStep()">Next</button>
-            </form>
-          </fieldset>
+            <fieldset style="padding: 20px; border-radius: 4px">
+              <legend style="font-size: 20px">Edit Numbers</legend>
+              <form
+                class="form-field-full"
+                [formGroup]="allotnumber"
+                (ngSubmit)="submitnumberform()"
+              >
+                <mat-form-field class="w-full">
+                  <mat-label>Number</mat-label>
+                  <!-- [formControl]="myControl" -->
+                  <!-- formControlName="alloted_did" -->
+                  <input
+                    type="text"
+                    placeholder="Pick one"
+                    aria-label="Number"
+                    matInput
+                    formControlName="alloted_did"
+                    [matAutocomplete]="auto"
+                  />
+                  <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                      {{ option }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+                <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                <button mat-raised-button color="primary" (click)="nextStep()">Submit</button>
+                <button mat-button color="accent" (click)="nextStep()">Next</button>
+              </form>
+            </fieldset>
           </mat-expansion-panel>
 
-          <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" >
+          <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <p class="f-w-500">Other Details</p>
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <fieldset style="padding: 20px;border-radius: 4px;">
-              <legend style="font-size: 20px;">Edit Numbers</legend>
-            <mat-form-field>
-              <input matInput placeholder="Date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
-            </mat-form-field>
-            <mat-datepicker #picker></mat-datepicker>
+            <fieldset style="padding: 20px; border-radius: 4px">
+              <legend style="font-size: 20px">Edit Numbers</legend>
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Date"
+                  [matDatepicker]="picker"
+                  (focus)="picker.open()"
+                  readonly
+                />
+              </mat-form-field>
+              <mat-datepicker #picker></mat-datepicker>
 
-            <mat-action-row>
-              <button mat-button color="warn" (click)="prevStep()">Previous</button>
-              <button mat-raised-button color="primary" (click)="nextStep()">Submit</button>
-            </mat-action-row>
-
-          </fieldset>
+              <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">Previous</button>
+                <button mat-raised-button color="primary" (click)="nextStep()">Submit</button>
+              </mat-action-row>
+            </fieldset>
           </mat-expansion-panel>
         </mat-accordion>
       </div>
     </mat-tab>
     <mat-tab label="Call logs">
       <div class="m-16">
-        <ngx-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle" [autoPlay]="true"
-    muted="muted" [displayPlaylist]="msaapDisplayPlayList" [pageSizeOptions]="msaapPageSizeOptions" (trackEnded)="onEnded($event)"
-        [displayVolumeControls]="msaapDisplayVolumeControls" [displayRepeatControls]="msaapDisplayRepeatControls"
-        [disablePositionSlider]="msaapDisablePositionSlider" [displayArtist]="msaapDisplayArtist"
-        [displayDuration]="msaapDisplayDuration" [expanded]="true"></ngx-audio-player>
+        <ngx-audio-player
+          [playlist]="msaapPlaylist"
+          [displayTitle]="msaapDisplayTitle"
+          [autoPlay]="false"
+          muted="muted"
+          [displayPlaylist]="msaapDisplayPlayList"
+          [pageSizeOptions]="msaapPageSizeOptions"
+          (trackEnded)="onEnded($event)"
+          [displayVolumeControls]="msaapDisplayVolumeControls"
+          [displayRepeatControls]="msaapDisplayRepeatControls"
+          [disablePositionSlider]="msaapDisablePositionSlider"
+          [displayArtist]="msaapDisplayArtist"
+          [displayDuration]="msaapDisplayDuration"
+          [expanded]="true"
+        ></ngx-audio-player>
       </div>
     </mat-tab>
     <mat-tab label="Report">
       <div class="m-16">
         <h3>Reports</h3>
-        <hr>
+        <hr />
         <h4>Outgoing Calls Report</h4>
         <div class="row">
           <div class="col-md-4 bg-grey-100 text-center align-middle">
             <p class="mat-h2">Outgoing Calls</p>
-            <p class="mat-display-4">120</p>
-          </div>
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-12">
-              <p class="mat-h2">Calls Connected</p>
-            <h1>70</h1>
-          </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-              <p class="mat-h2">Calls Rejected</p>
-            <h1>70</h1>
-          </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="row">
-              <div class="col-md-12">
-                <p class="mat-h2">Calls Missed</p>
-            <h1>70</h1>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <p class="mat-h2">Calls Rejected</p>
-            <h1>70</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr>
-        <h4>Incoming Calls Report</h4>
-        <div class="row">
-          <div class="col-md-4 bg-grey-100 text-center align-middle">
-            <p class="mat-h2">Incoming Calls</p>
-            <p class="mat-display-4">57</p>
+            <p class="mat-display-4">{{ callreports?.outgoing }}</p>
           </div>
           <div class="col-md-4">
             <div class="row">
               <div class="col-md-12">
                 <p class="mat-h2">Calls Connected</p>
-            <h1>11</h1>
-          </div>
+                <h1>{{ callreports?.outgoing - callreports?.missedcall }}</h1>
+              </div>
             </div>
             <div class="row">
               <div class="col-md-12">
-              <p class="mat-h2">Calls Rejected</p>
-            <h1>12</h1>
-          </div>
+                <p class="mat-h2">Calls Rejected</p>
+                <h1>70</h1>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="row">
               <div class="col-md-12">
                 <p class="mat-h2">Calls Missed</p>
-            <h1>10</h1>
+                <h1>{{ callreports?.missedcall }}</h1>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <p class="mat-h2">Calls Rejected</p>
-            <h1>70</h1>
+                <h1>70</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <h4>Incoming Calls Report</h4>
+        <div class="row">
+          <div class="col-md-4 bg-grey-100 text-center align-middle">
+            <p class="mat-h2">Incoming Calls</p>
+            <p class="mat-display-4">{{ callreports?.incoming }}</p>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <p class="mat-h2">Calls Connected</p>
+                <h1>11</h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="mat-h2">Calls Rejected</p>
+                <h1>12</h1>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-12">
+                <p class="mat-h2">Calls Missed</p>
+                <h1>10</h1>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p class="mat-h2">Calls Rejected</p>
+                <h1>70</h1>
               </div>
             </div>
           </div>
@@ -300,28 +326,36 @@
     <mat-tab label="Bill">
       <div class="m-16">
         <h3>Payment Summary</h3>
-        <p class="mat-h2">Payment summary</p>
-        <p>
-          Morbi placerat est nec pharetra placerat. Ut laoreet nunc accumsan orci aliquam accumsan.
-          Maecenas volutpat dolor vitae sapien ultricies fringilla. Suspendisse vitae orci sed nibh
-          ultrices tristique. Aenean in ante eget urna semper imperdiet. Pellentesque sagittis a
-          nulla at scelerisque. Nam augue nulla, accumsan quis nisi a, facilisis eleifend nulla.
-          Praesent aliquet odio non imperdiet fringilla.
-        </p>
-        <p>
-          Morbi placerat est nec pharetra placerat. Ut laoreet nunc accumsan orci aliquam accumsan.
-          Maecenas volutpat dolor vitae sapien ultricies fringilla. Suspendisse vitae orci sed nibh
-          ultrices tristique. Aenean in ante eget urna semper imperdiet. Pellentesque sagittis a
-          nulla at scelerisque. Nam augue nulla, accumsan quis nisi a, facilisis eleifend nulla.
-          Praesent aliquet odio non imperdiet fringilla.
-        </p>
-        <p>
-          Morbi placerat est nec pharetra placerat. Ut laoreet nunc accumsan orci aliquam accumsan.
-          Maecenas volutpat dolor vitae sapien ultricies fringilla. Suspendisse vitae orci sed nibh
-          ultrices tristique. Aenean in ante eget urna semper imperdiet. Pellentesque sagittis a
-          nulla at scelerisque. Nam augue nulla, accumsan quis nisi a, facilisis eleifend nulla.
-          Praesent aliquet odio non imperdiet fringilla.
-        </p>
+        <hr />
+        <h4>Calling</h4>
+        <table>
+          <tbody>
+            <tr>
+              <td width="120px"><strong>Incoming Calls:</strong></td>
+              <td width="80px">25</td>
+              <td width="80px">420sec</td>
+              <td width="80px">Rs 10.00</td>
+            </tr>
+            <tr>
+              <td width="120px"><strong>Outgoing Calls:</strong></td>
+              <td width="80px">25</td>
+              <td width="80px">420sec</td>
+              <td width="80px">Rs 10.00</td>
+            </tr>
+            <tr>
+              <td width="120px"><strong>IVR Service:</strong></td>
+              <td width="80px">25</td>
+              <td width="80px">420sec</td>
+              <td width="80px">Rs 10.00</td>
+            </tr>
+            <tr>
+              <td width="120px"><strong>SIP Service:</strong></td>
+              <td width="80px">25</td>
+              <td width="80px">420sec</td>
+              <td width="80px">Rs 10.00</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </mat-tab>
   </mat-tab-group>
