@@ -9,8 +9,9 @@ import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-user',
+  //templateUrl: './app-user.component.html',
   template: `
-    <button
+    <button *ngIf="User"
       class="matero-toolbar-button matero-avatar-button"
       mat-button
       [matMenuTriggerFor]="menu"
@@ -52,6 +53,9 @@ export class UserComponent implements OnInit {
   ) {
     this.adminauth.getuser().subscribe((response: any) => {
       this.User = response.data;
+      this.cdr.detectChanges()
+    },error =>{
+      console.log(error)
     });
   }
 

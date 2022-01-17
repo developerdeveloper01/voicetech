@@ -2091,6 +2091,10 @@
             name: 'Manage Users',
             completed: false,
             subtasks: [{
+              name: 'User Tab',
+              value: 'ViewTabUser',
+              completed: false
+            }, {
               name: 'View User',
               value: 'ViewUser',
               completed: false
@@ -2497,6 +2501,10 @@
             name: 'Manage Users',
             completed: false,
             subtasks: [{
+              name: 'User Tab',
+              value: 'ViewTabUser',
+              completed: false
+            }, {
               name: 'View User',
               value: 'ViewUser',
               completed: false

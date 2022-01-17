@@ -1128,6 +1128,7 @@ class AddRoleFormComponent {
                 name: 'Manage Users',
                 completed: false,
                 subtasks: [
+                    { name: 'User Tab', value: 'ViewTabUser', completed: false },
                     { name: 'View User', value: 'ViewUser', completed: false },
                     { name: 'Add User', value: 'AddUser', completed: false },
                     { name: 'Edit User', value: 'EditUser', completed: false },
@@ -1353,6 +1354,7 @@ class EditRoleFormComponent {
                 name: 'Manage Users',
                 completed: false,
                 subtasks: [
+                    { name: 'User Tab', value: 'ViewTabUser', completed: false },
                     { name: 'View User', value: 'ViewUser', completed: false },
                     { name: 'Add User', value: 'AddUser', completed: false },
                     { name: 'Edit User', value: 'EditUser', completed: false },
