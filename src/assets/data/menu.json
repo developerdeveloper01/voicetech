@@ -28,6 +28,10 @@
           "permissions": {
             "only": ["SUPERADMIN"]
           }
+        },{
+          "route": "staff-detail",
+          "name": "staff-detail",
+          "type": "link"
         }
       ],
       "permissions": {

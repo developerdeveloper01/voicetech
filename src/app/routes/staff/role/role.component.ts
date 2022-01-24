@@ -19,7 +19,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MtxAlertComponent, MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
 import { TablesRemoteDataService } from 'app/routes/service/service/monitoring/agent-table/remote-data.service';
 import { TablesKitchenSinkEditComponent } from 'app/routes/tables/kitchen-sink/edit/edit.component';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface PeriodicElement {
   name: string;
@@ -289,13 +289,14 @@ export class RoleComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   edit(value: any) {
-    let adddailogRef = this.dialog.open(EditRoleFormComponent, { width: '1000px',
-    data: { record: value } });
+    let adddailogRef = this.dialog.open(EditRoleFormComponent, {
+      width: '1000px',
+      data: { record: value },
+    });
 
     adddailogRef.afterClosed().subscribe(() => {
       this.getallroles();
     });
-
 
     // const dialogRef = this.dialogx.originalOpen(TablesKitchenSinkEditComponent, {
     //   width: '90%',
@@ -417,7 +418,8 @@ export class AddRoleFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<AddRoleFormComponent>
   ) {
     this.addroleform = this.fb.group({
       name: ['', [Validators.required]],
@@ -515,7 +517,8 @@ export class AddRoleFormComponent implements OnInit {
         { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
         { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
       ],
-    },{
+    },
+    {
       name: 'Plan',
       completed: false,
       subtasks: [
@@ -588,6 +591,7 @@ export class AddRoleFormComponent implements OnInit {
           this.snackBar.open('Role Added Successfully!', '', { duration: 2000 });
           this.addroleform.reset();
           //this.addroleform.markAsUntouched();
+          this.dialogRef.close();
         },
         error => {
           console.log(
@@ -623,7 +627,6 @@ export class AddRoleFormComponent implements OnInit {
     return !this.addroleform.get(field).valid && this.addroleform.get(field).touched;
   }
 }
-
 
 @Component({
   selector: 'edit-role-form',
@@ -699,7 +702,7 @@ export class EditRoleFormComponent implements OnInit {
       permissions: [],
     });
     console.log(data);
-    if (data){
+    if (data) {
       console.log(data.record.permissions);
       // this.tasks.forEach(ele => ele.subtasks.forEach(subtasks=>  data.record.permissions.indexOf(subtasks.value) !== -1?console.log(subtasks.value):console.log("ni he")))
 
@@ -707,18 +710,17 @@ export class EditRoleFormComponent implements OnInit {
         const element = this.tasks[i];
         for (let j = 0; j < element.subtasks.length; j++) {
           const newelement = element.subtasks[j].value;
-          if(data.record.permissions.indexOf(newelement) !== -1){
-            console.log(newelement)
-            element.subtasks[j].completed = true
+          if (data.record.permissions.indexOf(newelement) !== -1) {
+            console.log(newelement);
+            element.subtasks[j].completed = true;
           }
-
         }
       }
       this.addroleform.setValue({
-        name: data.record.name?data.record.name:'null',
-      status: data.record.status?data.record.status:false,
-      permissions: [],
-      })
+        name: data.record.name ? data.record.name : 'null',
+        status: data.record.status ? data.record.status : false,
+        permissions: [],
+      });
       this.id = data.record?._id;
 
       //console.log(this.tasks)
@@ -814,7 +816,8 @@ export class EditRoleFormComponent implements OnInit {
         { name: 'View Enquiry', value: 'ViewEnquiry', completed: false },
         { name: 'Followup Enquiry', value: 'FollowupEnquiry', completed: false },
       ],
-    },{
+    },
+    {
       name: 'Plan',
       completed: false,
       subtasks: [
@@ -883,7 +886,7 @@ export class EditRoleFormComponent implements OnInit {
       console.log(this.addroleform.value);
       console.log(this.id);
 
-      this.userService.editrole(this.id,this.addroleform.value).subscribe(
+      this.userService.editrole(this.id, this.addroleform.value).subscribe(
         (response: any) => {
           console.log('%crole.component.ts line:816 response', 'color: #26bfa5;', response);
           this.snackBar.open('Role Edited Successfully!', '', { duration: 2000 });

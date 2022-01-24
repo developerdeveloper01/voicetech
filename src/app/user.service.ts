@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UserService {
-  backendurllocal = 'http://localhost:6789/api';
-  backendurl = 'http://103.8.43.13/api/api';
+  backendurl = 'http://localhost:6789/api';
+  backendurllocal = 'http://103.8.43.13/api/api';
 
   constructor(public http: HttpClient) {}
 
@@ -18,7 +18,7 @@ export class UserService {
     return this.http.post(`${this.backendurl}/admin/addrole`, data);
   }
 
-  editrole(id,data) {
+  editrole(id, data) {
     return this.http.post(`${this.backendurl}/admin/editrole/${id}`, data);
   }
 
@@ -177,6 +177,10 @@ export class UserService {
     });
   }
 
+  viewonestaff(id) {
+    return this.http.get(`${this.backendurl}/admin/viewonestaff/${id}`);
+  }
+
   viewadminstaff() {
     let header = new HttpHeaders({
       'ad-token': localStorage.getItem('ad-token'),
@@ -261,7 +265,11 @@ export class UserService {
     return this.http.get(`${this.backendurl}/admin/clearchat/${id}`);
   }
 
-  getalldetailsofuser(id){
+  getalldetailsofuser(id) {
     return this.http.get(`${this.backendurl}/admin/allcalldetails/${id}`);
+  }
+
+  viewstaffdstnumbers(id) {
+    return this.http.get(`${this.backendurl}/admin/staffdstnumbers/${id}`);
   }
 }

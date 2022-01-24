@@ -161,6 +161,7 @@
                                 margin: 6px 0 0 8px;" mat-icon-button  [matMenuTriggerFor]="allchat"><mat-icon>more_vert</mat-icon></button>
 <mat-menu #allchat="matMenu">
   <button mat-menu-item routerLink="/user/user-detail/{{chatdetail._id}}" >Contact info</button>
+  <!--routerLink="/user/user-detail/{{chatdetail._id}}"-->
   <!-- <button mat-menu-item (click)="clearchat(chatdetail._id)">Clear messages</button> -->
   <button mat-menu-item (click)="deleteall(chatdetail._id)">Delete chat</button>
 </mat-menu>

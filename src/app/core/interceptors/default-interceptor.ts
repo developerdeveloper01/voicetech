@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
@@ -15,9 +21,7 @@ export class DefaultInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
-    return next.handle(req).pipe(
-      mergeMap((event: HttpEvent<any>) => this.handleOkReq(event)),
-    );
+    return next.handle(req).pipe(mergeMap((event: HttpEvent<any>) => this.handleOkReq(event)));
   }
 
   private handleOkReq(event: HttpEvent<any>): Observable<any> {
@@ -28,6 +32,9 @@ export class DefaultInterceptor implements HttpInterceptor {
       if (body && 'code' in body && body.code !== 0) {
         if (body.msg && body.msg !== '') {
           this.toastr.error(body.msg);
+        }
+        if (body.message && body.message !== '') {
+          this.toastr.error(body.message);
         }
         return throwError([]);
       }

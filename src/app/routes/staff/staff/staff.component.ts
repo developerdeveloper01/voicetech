@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {
   Component,
   OnInit,
@@ -68,6 +69,7 @@ export class StaffComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
     public userService: UserService,
+    private router: Router,
     public dialog: MatDialog,
     public dialogx: MtxDialog,
     private snackBar: MatSnackBar,
@@ -124,13 +126,21 @@ export class StaffComponent implements OnInit, AfterViewInit {
       {
         header: 'Actions',
         field: 'action',
-        minWidth: 120,
-        width: '120px',
+        minWidth: 180,
+        width: '180px',
         pinned: 'right',
         type: 'button',
         buttons: [
           {
             type: 'icon',
+            color: 'primary',
+            icon: 'visibility',
+            tooltip: 'view',
+            click: record => this.router.navigate(['staff/staff-detail', record._id]),
+          },
+          {
+            type: 'icon',
+            color: 'accent',
             icon: 'edit',
             tooltip: 'edit',
             click: record => this.edit(record),
@@ -167,7 +177,7 @@ export class StaffComponent implements OnInit, AfterViewInit {
   }
 
   edit(value: any) {
-    const dialogRef = this.dialog.open(AddStaffFormComponent, {
+    const dialogRef = this.dialog.open(EditStaffFormComponent, {
       width: '500px',
       data: { record: value },
     });
@@ -363,6 +373,7 @@ export class AddStaffFormComponent implements OnInit {
           console.log(response);
           this.snackBar.open('User Edited Successfully!', '', { duration: 2000 });
           this.addstaffform.reset();
+          this.dialogRef.close();
         },
         error => {
           console.log(error);
@@ -377,6 +388,147 @@ export class AddStaffFormComponent implements OnInit {
             this.snackBar.open('Staff Added Successfully!', '', { duration: 2000 });
             this.addstaffform.reset();
             this.addstaffform.markAsUntouched();
+            this.dialogRef.close();
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      } else {
+        this.getErrorMessage(this.addstaffform);
+      }
+    }
+  }
+
+  getallroles() {
+    this.userService.getallroles().subscribe(
+      (response: any) => {
+        console.log(response);
+
+        this.allroles = response.data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  checkboxChange(checkbox: MatCheckbox, checked: boolean) {
+    checkbox.value = checked ? this.trueValue : this.falseValue;
+    console.log(checkbox.value);
+  }
+
+  getallstaff() {
+    this.userService.getallstaff().subscribe(
+      (response: any) => {
+        console.log(
+          '%cstaff.component.ts line:238 response',
+          'color: white; background-color: #007acc;',
+          response
+        );
+        this.allstaff = response.data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+}
+
+@Component({
+  selector: 'edit-staff-form',
+  styles: [
+    `
+      .demo-full-width {
+        width: 100%;
+      }
+    `,
+  ],
+  templateUrl: './edit-staff-form.html',
+})
+export class EditStaffFormComponent implements OnInit {
+  addstaffform: FormGroup;
+  editmode: Boolean = false;
+  id: any;
+  allroles: any;
+  allstaff: any;
+
+  falseValue = 'false';
+  trueValue = 'true';
+  constructor(
+    private fb: FormBuilder,
+    public userService: UserService,
+    private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<EditStaffFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.addstaffform = this.fb.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      mobile: ['', [Validators.required]],
+      role: ['', [Validators.required]],
+      added_by: ['', [Validators.required]],
+      approvedstatus: [false],
+    });
+
+    if (data) {
+      console.log(data);
+      this.editmode = true;
+      this.id = this.data?.record?._id;
+      this.addstaffform.setValue({
+        firstname: this.data?.record?.firstname ? this.data?.record?.firstname : 'null',
+        lastname: this.data?.record?.lastname ? this.data?.record?.lastname : 'null',
+        email: this.data?.record?.email ? this.data?.record?.email : 'null',
+        mobile: this.data?.record?.mobile ? this.data?.record?.mobile : 'null',
+        role: this.data?.record?.role ? this.data?.record?.role._id : 'null',
+        added_by: this.data?.record?.added_by ? this.data?.record?.added_by?._id : 'null',
+        approvedstatus: this.data?.record?.approvedstatus
+          ? this.data?.record?.approvedstatus
+          : false,
+      });
+    }
+  }
+
+  ngOnInit(): void {
+    this.getallroles();
+    this.getallstaff();
+  }
+
+  getErrorMessage(form: FormGroup) {
+    return form.get('firstname').hasError('required')
+      ? 'validations.required'
+      : form.get('lastname').hasError('required')
+      ? 'validations.required'
+      : form.get('email').hasError('required')
+      ? 'validations.required'
+      : '';
+  }
+
+  submitstaffForm() {
+    if (this.editmode) {
+      console.log(this.addstaffform.value);
+      this.userService.editstaff(this.id, this.addstaffform.value).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.snackBar.open('User Edited Successfully!', '', { duration: 2000 });
+          this.addstaffform.reset();
+          this.dialogRef.close();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      if (this.addstaffform.valid) {
+        console.log(this.addstaffform.value);
+        this.userService.addstaff(this.addstaffform.value).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.snackBar.open('Staff Added Successfully!', '', { duration: 2000 });
+            this.addstaffform.reset();
+            this.addstaffform.markAsUntouched();
+            this.dialogRef.close();
           },
           error => {
             console.log(error);

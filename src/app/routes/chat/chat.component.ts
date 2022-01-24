@@ -15,7 +15,8 @@ export class ChatComponent implements OnInit {
   sendmsg: FormGroup;
   activeid: any;
   interval: any;
-  list:any
+  list: any;
+  showFiller = false;
 
   abcd = 'http://emilcarlsson.se/assets/mikeross.png';
   defaulturl = '../../../assets/images/support.png';
@@ -155,7 +156,6 @@ export class ChatComponent implements OnInit {
   onMultiSelectChange() {
     this.food = this.multiple ? [2] : 2;
   }
-
 
   getallusers() {
     this.userService.allusers().subscribe(
