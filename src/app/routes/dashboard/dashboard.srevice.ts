@@ -74,7 +74,7 @@ export class DashboardService {
       progress: {
         value: 70,
       },
-      color: 'bg-blue-500',
+      color: 'bg-light-blue-700',
     },
     {
       title: 'Recived Calls',
@@ -83,7 +83,7 @@ export class DashboardService {
       progress: {
         value: 80,
       },
-      color: 'bg-green-500',
+      color: 'bg-light-blue-700',
     },
     {
       title: 'Dial Fail Calls',
@@ -92,7 +92,7 @@ export class DashboardService {
       progress: {
         value: 40,
       },
-      color: 'bg-teal-500',
+      color: 'bg-light-blue-700',
     },
   ];
 

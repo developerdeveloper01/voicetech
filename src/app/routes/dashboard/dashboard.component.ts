@@ -102,7 +102,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
           progress: {
             value: 50,
           },
-          color: 'bg-indigo-500',
+          color: 'bg-light-blue-700',
         };
       },
       error => {

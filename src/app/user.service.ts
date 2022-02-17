@@ -148,7 +148,7 @@ export class UserService {
 
   //live-calls
   getallivecalls() {
-    return this.http.get(`http://103.8.43.14/onyx/api/callStatus`);
+    return this.http.get(`http://103.8.43.14/onyxcxm/api/callStatus`);
   }
 
   getrecordings() {

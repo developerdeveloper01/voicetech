@@ -4,8 +4,9 @@
 
   <!-- Statistics -->
   <div *ngIf="onestats" class="matero-col" fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100">
-<mat-card [ngClass]="['text-white','mat-elevation-z3' , onestats.color]" style="background: linear-gradient(
- 45deg, rgb(255 255 255 / 16%) 0%, rgb(32 32 32 / 17%) 35%, rgb(0 0 0 / 45%) 100%);">
+<mat-card [ngClass]="['text-white','mat-elevation-z3' , onestats.color]" >
+  <!-- style="background: linear-gradient(
+ 45deg, rgb(255 255 255 / 16%) 0%, rgb(32 32 32 / 17%) 35%, rgb(0 0 0 / 45%) 100%);" -->
  <mat-card-title class="f-s-12 f-w-100">{{onestats.title}}</mat-card-title>
  <mat-card-content>
    <h2>{{onestats.amount | number:'1.0':'en-US'}}</h2>
@@ -23,8 +24,7 @@
 
   <div class="matero-col" fxFlex.gt-sm="25" fxFlex.gt-xs="50" fxFlex="100"
        *ngFor="let stat of stats">
-    <mat-card [ngClass]="['text-white','mat-elevation-z3' , stat.color]" style="background: linear-gradient(
-      45deg, rgb(255 255 255 / 16%) 0%, rgb(32 32 32 / 17%) 35%, rgb(0 0 0 / 45%) 100%);">
+    <mat-card [ngClass]="['text-white','mat-elevation-z3' , stat.color]" >
       <mat-card-title class="f-s-12 f-w-100">{{stat.title}}</mat-card-title>
       <mat-card-content>
         <h2>{{stat.amount}}</h2>
@@ -51,7 +51,7 @@
                 <h2 class="tl-c">STORAGE</h2>
                 <figcaption>
                   Used 50%<span style="color: #218cfd;"></span><br>
-                  Free 50%<span style="color: #f28e2c;"></span><br>
+                  Free 50%<span style="color: #fff;"></span><br>
                 </figcaption>
               </figure>
               <!-- <div class="chart-wrapper">
@@ -68,7 +68,7 @@
                 <h2 class="tl-c">MEMORY</h2>
                 <figcaption>
                   Used 30%<span style="color: #218cfd;"></span><br>
-                  Free 70%<span style="color: #e15759;"></span><br>
+                  Free 70%<span style="color: #fff;"></span><br>
                 </figcaption>
               </figure>
             </div>
@@ -81,7 +81,7 @@
                 <h2 class="tl-c">CALL</h2>
                 <figcaption>
                   Used 10%<span style="color: #218cfd;"></span><br>
-                  Free 90%<span style="color: #59a14f;"></span>
+                  Free 90%<span style="color: #fff;"></span>
                 </figcaption>
                 <!-- <cite>International Energy Agency</cite> -->
               </figure>
@@ -95,9 +95,9 @@
                 <h2 class="tl-c">CALL SUMMARY</h2>
                 <figcaption>
                   Tatal Calls 20%<span style="color: #218cfd;"></span><br>
-                 Missed Calls 30%<span style="color: #f28e2c;"></span><br>
-                 DialFail 10%<span style="color: #e15759;"></span><br>
-                  Received 40%<span style="color: #76b7b2;"></span>
+                 Missed Calls 80%<span style="color: #fff;"></span><br>
+                 <!-- DialFail 10%<span style="color: #e15759;"></span><br>
+                  Received 40%<span style="color: #76b7b2;"></span> -->
                 </figcaption>
                 <!-- <cite>International Energy Agency</cite> -->
               </figure>

@@ -68,18 +68,18 @@ h2.tl-c {
   background:
     radial-gradient(
       circle closest-side,
-      white 0,
-      white 50%,
+      #efefef 0,
+      #efefef 50%,
       #cdcdcd 40%,
       transparent 63%,
       transparent 70%,
-      white 0
+      #efefef 0
     ),
     conic-gradient(
       #218cfd 0,
-      #218cfd 50%,
-      #f28e2c 0,
-      #f28e2c 50%,
+      rgb(33, 140, 253) 50%,
+      #fff 0,
+      #fff 50%,
     );
   position: relative;
   width: 100%;
@@ -124,12 +124,12 @@ h2.tl-c {
   background:
     radial-gradient(
       circle closest-side,
-      #dddddd 0,
-      #dddddd 50%,
+      #efefef 0,
+      #efefef 50%,
       #cdcdcd 40%,
       transparent 63%,
       transparent 70%,
-      #dddddd 0
+      #efefef 0
     ),
     conic-gradient(
       #218cfd 0,
@@ -179,18 +179,18 @@ h2.tl-c {
   background:
     radial-gradient(
       circle closest-side,
-      white 0,
-      white 50%,
+      #efefef 0,
+      #efefef 50%,
       #cdcdcd 40%,
       transparent 63%,
       transparent 70%,
-      white 0
+      #efefef 0
     ),
     conic-gradient(
       #218cfd 0,
       #218cfd 10%,
-      #59a14f 0,
-      #59a14f 90%
+      #fff 0,
+      #fff 90%
     );
   position: relative;
   width: 100%;
@@ -235,22 +235,18 @@ h2.tl-c {
   background:
     radial-gradient(
       circle closest-side,
-      white 0,
-      white 50%,
+      #efefef 0,
+      #efefef 50%,
       #cdcdcd 40%,
       transparent 63%,
       transparent 70%,
-      white 0
+      #efefef 0
     ),
     conic-gradient(
       #218cfd 0,
       #218cfd 20%,
-      #f28e2c 0,
-      #f28e2c 30%,
-      #e15759 0,
-      #e15759 20%,
-      #76b7b2 0,
-      #76b7b2 30%
+      #fff 0,
+      #fff 80%,
     );
   position: relative;
   width: 100%;

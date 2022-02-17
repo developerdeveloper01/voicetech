@@ -1,6 +1,6 @@
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
 import { UserService } from 'app/user.service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Track } from 'ngx-audio-player';
 
@@ -9,7 +9,7 @@ import { Track } from 'ngx-audio-player';
   templateUrl: './live-call.component.html',
   styleUrls: ['./live-call.component.scss'],
 })
-export class LiveCallComponent implements OnInit {
+export class LiveCallComponent implements OnInit, OnDestroy {
   time = new Observable<string>(observer => {
     setInterval(() => observer.next(new Date().toString()), 1000);
   });
@@ -32,6 +32,7 @@ export class LiveCallComponent implements OnInit {
   showPaginator = true;
   expandable = false;
   columnResizable = false;
+  subscription$;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -40,6 +41,9 @@ export class LiveCallComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.subscription$ = interval(2000).subscribe(x => {
+      this.alllivecalls();
+    });
     this.alllivecalls();
 
     this.columns = [
@@ -95,6 +99,10 @@ export class LiveCallComponent implements OnInit {
 
   reloadcalls() {
     this.alllivecalls();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription$.unsubscribe();
   }
 
   changeSelect(e: any) {
