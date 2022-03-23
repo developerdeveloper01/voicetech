@@ -499,7 +499,7 @@
     /***/
     function _(module, exports, __webpack_require__) {
       __webpack_require__(
-      /*! D:\dy\Frontend\voicetech\node_modules\@angular-devkit\build-angular\src\webpack\es5-polyfills.js */
+      /*! C:\Users\deepa\OneDrive\Documents\githubclo\voicetech\node_modules\@angular-devkit\build-angular\src\webpack\es5-polyfills.js */
       "voQr");
 
       __webpack_require__(
@@ -507,7 +507,7 @@
       "R0gw");
 
       module.exports = __webpack_require__(
-      /*! D:\dy\Frontend\voicetech\src\polyfills.ts */
+      /*! C:\Users\deepa\OneDrive\Documents\githubclo\voicetech\src\polyfills.ts */
       "hN/g");
       /***/
     },

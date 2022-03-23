@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UserService {
-  backendurl = 'http://localhost:6789/api';
+  // backendurl = 'http://localhost:6789/api';
+  backendurl = 'http://3.111.139.178/v1/api';
   backendurllocal = 'http://103.8.43.13/api/api';
 
   constructor(public http: HttpClient) {}

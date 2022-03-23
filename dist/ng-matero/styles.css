@@ -1748,7 +1748,7 @@ h2.tl-c {
   padding: 40px 10px;
 }
 .pie-chart1 {
-  background: radial-gradient(circle closest-side, white 0, white 50%, #cdcdcd 40%, transparent 63%, transparent 70%, white 0), conic-gradient(#2f3ad0 0, #2f3ad0 50%, #f28e2c 0, #f28e2c 50%);
+  background: radial-gradient(circle closest-side, #efefef 0, #efefef 50%, #cdcdcd 40%, transparent 63%, transparent 70%, #efefef 0), conic-gradient(#218cfd 0, #218cfd 50%, #fff 0, #fff 50%);
   position: relative;
   width: 100%;
   min-height: 350px;
@@ -1782,7 +1782,7 @@ h2.tl-c {
   background: currentColor;
 }
 .pie-chart2 {
-  background: radial-gradient(circle closest-side, white 0, white 50%, #cdcdcd 40%, transparent 63%, transparent 70%, white 0), conic-gradient(#2f3ad0 0, #2f3ad0 30%, #e15759 0, #e15759 70%);
+  background: radial-gradient(circle closest-side, #efefef 0, #efefef 50%, #cdcdcd 40%, transparent 63%, transparent 70%, #efefef 0), conic-gradient(#218cfd 0, #218cfd 30%, #fff 0, #fff 70%);
   position: relative;
   width: 100%;
   min-height: 350px;
@@ -1816,7 +1816,7 @@ h2.tl-c {
   background: currentColor;
 }
 .pie-chart3 {
-  background: radial-gradient(circle closest-side, white 0, white 50%, #cdcdcd 40%, transparent 63%, transparent 70%, white 0), conic-gradient(#2f3ad0 0, #2f3ad0 10%, #59a14f 0, #59a14f 90%);
+  background: radial-gradient(circle closest-side, #efefef 0, #efefef 50%, #cdcdcd 40%, transparent 63%, transparent 70%, #efefef 0), conic-gradient(#218cfd 0, #218cfd 10%, #fff 0, #fff 90%);
   position: relative;
   width: 100%;
   min-height: 350px;
@@ -1850,7 +1850,7 @@ h2.tl-c {
   background: currentColor;
 }
 .pie-chart4 {
-  background: radial-gradient(circle closest-side, white 0, white 50%, #cdcdcd 40%, transparent 63%, transparent 70%, white 0), conic-gradient(#2f3ad0 0, #2f3ad0 20%, #f28e2c 0, #f28e2c 30%, #e15759 0, #e15759 20%, #76b7b2 0, #76b7b2 30%);
+  background: radial-gradient(circle closest-side, #efefef 0, #efefef 50%, #cdcdcd 40%, transparent 63%, transparent 70%, #efefef 0), conic-gradient(#218cfd 0, #218cfd 20%, #fff 0, #fff 80%);
   position: relative;
   width: 100%;
   min-height: 350px;

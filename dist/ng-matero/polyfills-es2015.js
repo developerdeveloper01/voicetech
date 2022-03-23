@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\dy\Frontend\voicetech\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! C:\Users\deepa\OneDrive\Documents\githubclo\voicetech\src\polyfills.ts */"hN/g");
 
 
 /***/ }),
