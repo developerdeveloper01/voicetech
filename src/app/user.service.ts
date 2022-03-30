@@ -95,6 +95,23 @@ export class UserService {
     return this.http.get(`${this.backendurl}/admin/alldstnumber`);
   }
 
+  //postpaid plan
+  addpospaidplan(data) {
+    return this.http.post(`${this.backendurl}/admin/addpospaidplan`, data);
+  }
+  viewonepospaidplan(id) {
+    return this.http.get(`${this.backendurl}/admin/viewonepospaidplan/${id}`);
+  }
+  editpospaidplan(id, data) {
+    return this.http.post(`${this.backendurl}/admin/editpospaidplan/${id}`, data);
+  }
+  deletepospaidplan(id) {
+    return this.http.get(`${this.backendurl}/admin/deletepospaidplan/${id}`);
+  }
+  getallpospaidplan() {
+    return this.http.get(`${this.backendurl}/admin/allpospaidplan`);
+  }
+
   //prepaid plan
   addplan(data) {
     return this.http.post(`${this.backendurl}/admin/addplan`, data);

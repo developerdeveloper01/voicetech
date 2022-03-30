@@ -62,6 +62,13 @@
         {{'validations.required'| translate}}
       </mat-error>
     </mat-form-field>
+
+    <div fxFlex="50" fxFlex.lt-sm="100">
+      <mat-checkbox class="st-chk" [value]="falseValue"
+                    (change)="checkboxChange($event.source, $event.checked)"
+                    formControlName="varifystatus">Approve
+      </mat-checkbox>
+    </div>
   </div>
   </mat-dialog-content>
 

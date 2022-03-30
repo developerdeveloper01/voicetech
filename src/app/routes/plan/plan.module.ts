@@ -24,13 +24,23 @@ import {
   EditMinutePlanFormComponent,
   MinutePlanComponent,
 } from './postpaid-plan/minute-plan/minute-plan.component';
+import {
+  AddPostpaidFormComponent,
+  AddPostpaidplanOneFormComponent,
+  EditPostpaidplanOneFormComponent,
+  PostpaidComponent,
+} from './postpaid/postpaid.component';
 
 const COMPONENTS = [
   PrepaidPlanComponent,
   PostpaidPlanComponent,
+  PostpaidComponent,
   ValidityPlanComponent,
   PricetominPlanComponent,
-  MinutePlanComponent
+  MinutePlanComponent,
+  AddPostpaidFormComponent,
+  AddPostpaidplanOneFormComponent,
+  EditPostpaidplanOneFormComponent,
 ];
 const COMPONENTS_DYNAMIC = [
   AddValidityPlanFormComponent,
@@ -40,11 +50,11 @@ const COMPONENTS_DYNAMIC = [
   EditPtominPlanFormComponent,
   AddMinutePlanFormComponent,
   EditMinutePlanFormComponent,
-  AddPrepaidFormComponent
+  AddPrepaidFormComponent,
 ];
 
 @NgModule({
-  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC],
+  declarations: [...COMPONENTS, ...COMPONENTS_DYNAMIC, PostpaidComponent],
   imports: [SharedModule, PlanRoutingModule],
   entryComponents: COMPONENTS_DYNAMIC,
 })

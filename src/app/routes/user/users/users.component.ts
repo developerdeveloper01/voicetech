@@ -15,6 +15,7 @@ import {
   HostBinding,
 } from '@angular/core';
 import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-users',
@@ -40,10 +41,13 @@ export class UsersComponent implements OnInit, AfterViewInit {
   columnResizable = false;
   filteredData: any;
 
+  falseValue = 'false';
+  trueValue = 'true';
+
   //Permissions
-  seteditpermission:boolean = true
-  setviewpermission:boolean = true
-  setdeletepermission:boolean = true
+  seteditpermission: boolean = true;
+  setviewpermission: boolean = true;
+  setdeletepermission: boolean = true;
 
   constructor(
     public dialog: MatDialog,
@@ -60,17 +64,17 @@ export class UsersComponent implements OnInit, AfterViewInit {
     //console.log(this.rolesSrv.getRoles());
 
     // console.log(this.permissonsSrv.getPermissions().EditUser);
-    if(this.permissonsSrv.getPermissions().hasOwnProperty('ViewUser')){
+    if (this.permissonsSrv.getPermissions().hasOwnProperty('ViewUser')) {
       console.log(this.permissonsSrv.getPermissions().hasOwnProperty('ViewUser'));
-      this.setviewpermission= false
+      this.setviewpermission = false;
     }
-    if(this.permissonsSrv.getPermissions().hasOwnProperty('EditUser')){
+    if (this.permissonsSrv.getPermissions().hasOwnProperty('EditUser')) {
       console.log(this.permissonsSrv.getPermissions().hasOwnProperty('EditUser'));
-      this.seteditpermission= false
+      this.seteditpermission = false;
     }
-    if(this.permissonsSrv.getPermissions().hasOwnProperty('DeleteUser')){
+    if (this.permissonsSrv.getPermissions().hasOwnProperty('DeleteUser')) {
       console.log(this.permissonsSrv.getPermissions().hasOwnProperty('DeleteUser'));
-      this.setdeletepermission= false
+      this.setdeletepermission = false;
     }
 
     this.columns = [
@@ -89,6 +93,15 @@ export class UsersComponent implements OnInit, AfterViewInit {
       { header: 'DID Number', sortable: true, field: 'alloted_did.did_no' },
       { header: 'Created Date', sortable: true, field: 'createdAt' },
       {
+        header: 'Approved',
+        field: 'varifystatus',
+        type: 'tag',
+        tag: {
+          true: { text: 'Yes', color: 'red-100' },
+          false: { text: 'No', color: 'green-100' },
+        },
+      },
+      {
         header: 'Actions',
         field: 'action',
         minWidth: 180,
@@ -102,7 +115,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
             icon: 'visibility',
             tooltip: 'view',
             click: record => this.router.navigate(['user/user-detail', record._id]),
-            disabled: this.setviewpermission
+            disabled: this.setviewpermission,
           },
           {
             type: 'icon',
@@ -110,7 +123,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
             icon: 'edit',
             tooltip: 'edit',
             click: record => this.edit(record),
-            disabled: this.seteditpermission
+            disabled: this.seteditpermission,
           },
           {
             color: 'warn',
@@ -122,7 +135,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
             popCloseText: 'Cancel',
             popOkText: 'Delete',
             click: record => this.delete(record),
-            disabled: this.setdeletepermission
+            disabled: this.setdeletepermission,
           },
         ],
       },
@@ -242,6 +255,10 @@ export class AddUserFormComponent implements OnInit {
   adduserform: FormGroup;
   editmode: Boolean = false;
   id: any;
+
+  falseValue = 'false';
+  trueValue = 'true';
+
   constructor(
     private fb: FormBuilder,
     public userService: UserService,
@@ -256,6 +273,7 @@ export class AddUserFormComponent implements OnInit {
       mobile: ['', [Validators.required]],
       password: ['', [Validators.required]],
       organization_name: ['', [Validators.required]],
+      varifystatus: [false],
     });
 
     if (data) {
@@ -271,6 +289,7 @@ export class AddUserFormComponent implements OnInit {
         organization_name: this.data?.record?.organization_name
           ? this.data?.record?.organization_name
           : 'null',
+        varifystatus: this.data?.record?.varifystatus ? this.data?.record?.varifystatus : false,
       });
     }
   }
@@ -285,6 +304,11 @@ export class AddUserFormComponent implements OnInit {
       : form.get('email').hasError('required')
       ? 'validations.required'
       : '';
+  }
+
+  checkboxChange(checkbox: MatCheckbox, checked: boolean) {
+    checkbox.value = checked ? this.trueValue : this.falseValue;
+    console.log(checkbox.value);
   }
 
   isFieldValid(field: string) {

@@ -136,6 +136,11 @@
           "route": "postpaid-plan",
           "name": "postpaid-plan",
           "type": "link"
+        },
+        {
+          "route": "postpaid",
+          "name": "postpaid",
+          "type": "link"
         }
       ],
       "permissions": {
