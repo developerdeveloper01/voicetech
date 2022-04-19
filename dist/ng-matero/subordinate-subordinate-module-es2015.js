@@ -162,7 +162,83 @@ class AgentComponent {
         this.columnResizable = false;
     }
     ngOnInit() {
-        this.getallagents();
+        this.getallagent();
+        this.columns = [
+            {
+                header: 'Avatar',
+                field: 'staffimg',
+                type: 'image',
+            },
+            {
+                header: 'Name',
+                field: 'name',
+                formatter: (data) => `${data.firstname} ${data.lastname} `,
+            },
+            { header: 'Email', sortable: true, field: 'email' },
+            { header: 'Mobile', sortable: true, field: 'mobile' },
+            {
+                header: 'Approved',
+                field: 'approvedstatus',
+                type: 'tag',
+                tag: {
+                    true: { text: 'Yes', color: 'red-100' },
+                    false: { text: 'No', color: 'green-100' },
+                },
+            },
+            {
+                header: 'Actions',
+                field: 'action',
+                minWidth: 120,
+                width: '120px',
+                pinned: 'right',
+                type: 'button',
+                buttons: [
+                    {
+                        type: 'icon',
+                        icon: 'edit',
+                        tooltip: 'edit',
+                        click: record => this.edit(record),
+                    },
+                    {
+                        color: 'warn',
+                        icon: 'delete',
+                        text: 'delete',
+                        tooltip: 'delete',
+                        pop: true,
+                        popTitle: 'Confirm Delete',
+                        popCloseText: 'Cancel',
+                        popOkText: 'Delete',
+                        click: record => this.delete(record),
+                    },
+                ],
+            },
+        ];
+    }
+    edit(value) {
+        const dialogRef = this.dialog.open(AgentFormComponent, {
+            width: '500px',
+            data: { record: value },
+        });
+    }
+    delete(data) {
+        this.userService.deleteagent(data._id).subscribe((response) => {
+            console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+            this.isLoading = false;
+            this.getallagent();
+            this.cdr.detectChanges();
+            this.dialogx.alert(`You have deleted ${data.firstname} ${data.lastname}!`);
+        }, error => {
+            console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
+        });
+    }
+    openAddDstNumber() {
+        let adddailogRef = this.dialog.open(AgentFormComponent, { width: '500px' });
+        adddailogRef.afterClosed().subscribe(() => {
+            this.getallagent();
+            this.getallagent();
+            this.getallagent();
+            console.log('Dailog Closed');
+        });
     }
     changeSelect(e) {
         console.log(e);
@@ -179,6 +255,16 @@ class AgentComponent {
     }
     getallagents() {
         console.log('requested all agents');
+    }
+    getallagent() {
+        this.userService.getallagent().subscribe((response) => {
+            console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+            this.list = response.data;
+            this.isLoading = false;
+            this.cdr.detectChanges();
+        }, error => {
+            console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
+        });
     }
 }
 AgentComponent.ɵfac = function AgentComponent_Factory(t) { return new (t || AgentComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MatDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_ng_matero_extensions_dialog__WEBPACK_IMPORTED_MODULE_2__["MtxDialog"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](app_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_4__["ChangeDetectorRef"])); };
@@ -654,7 +740,7 @@ class SubordinatesComponent {
     }
     edit(value) {
         const dialogRef = this.dialog.open(AddSubordinateFormComponent, {
-            width: '500px',
+            width: '1000px',
             data: { record: value },
         });
         dialogRef.afterClosed().subscribe(() => {

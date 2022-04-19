@@ -344,7 +344,115 @@
         _createClass(AgentComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.getallagents();
+            var _this = this;
+
+            this.getallagent();
+            this.columns = [{
+              header: 'Avatar',
+              field: 'staffimg',
+              type: 'image'
+            }, {
+              header: 'Name',
+              field: 'name',
+              formatter: function formatter(data) {
+                return "".concat(data.firstname, " ").concat(data.lastname, " ");
+              }
+            }, {
+              header: 'Email',
+              sortable: true,
+              field: 'email'
+            }, {
+              header: 'Mobile',
+              sortable: true,
+              field: 'mobile'
+            }, {
+              header: 'Approved',
+              field: 'approvedstatus',
+              type: 'tag',
+              tag: {
+                "true": {
+                  text: 'Yes',
+                  color: 'red-100'
+                },
+                "false": {
+                  text: 'No',
+                  color: 'green-100'
+                }
+              }
+            }, {
+              header: 'Actions',
+              field: 'action',
+              minWidth: 120,
+              width: '120px',
+              pinned: 'right',
+              type: 'button',
+              buttons: [{
+                type: 'icon',
+                icon: 'edit',
+                tooltip: 'edit',
+                click: function click(record) {
+                  return _this.edit(record);
+                }
+              }, {
+                color: 'warn',
+                icon: 'delete',
+                text: 'delete',
+                tooltip: 'delete',
+                pop: true,
+                popTitle: 'Confirm Delete',
+                popCloseText: 'Cancel',
+                popOkText: 'Delete',
+                click: function click(record) {
+                  return _this["delete"](record);
+                }
+              }]
+            }];
+          }
+        }, {
+          key: "edit",
+          value: function edit(value) {
+            var dialogRef = this.dialog.open(AgentFormComponent, {
+              width: '500px',
+              data: {
+                record: value
+              }
+            });
+          }
+        }, {
+          key: "delete",
+          value: function _delete(data) {
+            var _this2 = this;
+
+            this.userService.deleteagent(data._id).subscribe(function (response) {
+              console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+              _this2.isLoading = false;
+
+              _this2.getallagent();
+
+              _this2.cdr.detectChanges();
+
+              _this2.dialogx.alert("You have deleted ".concat(data.firstname, " ").concat(data.lastname, "!"));
+            }, function (error) {
+              console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
+            });
+          }
+        }, {
+          key: "openAddDstNumber",
+          value: function openAddDstNumber() {
+            var _this3 = this;
+
+            var adddailogRef = this.dialog.open(AgentFormComponent, {
+              width: '500px'
+            });
+            adddailogRef.afterClosed().subscribe(function () {
+              _this3.getallagent();
+
+              _this3.getallagent();
+
+              _this3.getallagent();
+
+              console.log('Dailog Closed');
+            });
           }
         }, {
           key: "changeSelect",
@@ -371,6 +479,21 @@
           key: "getallagents",
           value: function getallagents() {
             console.log('requested all agents');
+          }
+        }, {
+          key: "getallagent",
+          value: function getallagent() {
+            var _this4 = this;
+
+            this.userService.getallagent().subscribe(function (response) {
+              console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+              _this4.list = response.data;
+              _this4.isLoading = false;
+
+              _this4.cdr.detectChanges();
+            }, function (error) {
+              console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
+            });
           }
         }]);
 
@@ -469,7 +592,7 @@
         }, {
           key: "submituserform",
           value: function submituserform() {
-            var _this = this;
+            var _this5 = this;
 
             console.log(this.addagentform.value);
 
@@ -477,13 +600,13 @@
               this.userService.addagent(this.addagentform.value).subscribe(function (response) {
                 console.log(response);
 
-                _this.snackBar.open('Agent Added Successfully!', '', {
+                _this5.snackBar.open('Agent Added Successfully!', '', {
                   duration: 2000
                 });
 
-                _this.addagentform.reset();
+                _this5.addagentform.reset();
 
-                _this.addagentform.markAsUntouched();
+                _this5.addagentform.markAsUntouched();
               }, function (error) {
                 console.log(error);
               });
@@ -1237,7 +1360,7 @@
         _createClass(SubordinatesComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this2 = this;
+            var _this6 = this;
 
             this.getallstaff();
             this.columns = [{
@@ -1300,7 +1423,7 @@
                 icon: 'edit',
                 tooltip: 'edit',
                 click: function click(record) {
-                  return _this2.edit(record);
+                  return _this6.edit(record);
                 }
               }, {
                 color: 'warn',
@@ -1312,7 +1435,7 @@
                 popCloseText: 'Cancel',
                 popOkText: 'Delete',
                 click: function click(record) {
-                  return _this2["delete"](record);
+                  return _this6["delete"](record);
                 }
               }]
             }];
@@ -1320,10 +1443,10 @@
         }, {
           key: "edit",
           value: function edit(value) {
-            var _this3 = this;
+            var _this7 = this;
 
             var dialogRef = this.dialog.open(AddSubordinateFormComponent, {
-              width: '500px',
+              width: '1000px',
               data: {
                 record: value
               }
@@ -1331,23 +1454,23 @@
             dialogRef.afterClosed().subscribe(function () {
               console.log('The dialog was closed');
 
-              _this3.getallstaff();
+              _this7.getallstaff();
             });
           }
         }, {
           key: "delete",
           value: function _delete(data) {
-            var _this4 = this;
+            var _this8 = this;
 
             this.userService.deletestaff(data._id).subscribe(function (response) {
               console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-              _this4.isLoading = false;
+              _this8.isLoading = false;
 
-              _this4.getallstaff();
+              _this8.getallstaff();
 
-              _this4.cdr.detectChanges();
+              _this8.cdr.detectChanges();
 
-              _this4.dialogx.alert("You have deleted ".concat(data.firstname, " ").concat(data.lastname, "!"));
+              _this8.dialogx.alert("You have deleted ".concat(data.firstname, " ").concat(data.lastname, "!"));
             }, function (error) {
               console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
             });
@@ -1365,17 +1488,17 @@
         }, {
           key: "openSubordinate",
           value: function openSubordinate() {
-            var _this5 = this;
+            var _this9 = this;
 
             var adddailogRef = this.dialog.open(AddSubordinateFormComponent, {
               width: '500px'
             });
             adddailogRef.afterClosed().subscribe(function () {
-              _this5.getallstaff();
+              _this9.getallstaff();
 
-              _this5.getallstaff();
+              _this9.getallstaff();
 
-              _this5.getallstaff();
+              _this9.getallstaff();
 
               console.log('Dailog Closed');
             });
@@ -1383,14 +1506,14 @@
         }, {
           key: "getallstaff",
           value: function getallstaff() {
-            var _this6 = this;
+            var _this10 = this;
 
             this.userService.viewadminstaff().subscribe(function (response) {
               console.log('%cstaff.component.ts line:238 response', 'color: white; background-color: #007acc;', response);
-              _this6.list = response.data;
-              _this6.isLoading = false;
+              _this10.list = response.data;
+              _this10.isLoading = false;
 
-              _this6.cdr.detectChanges();
+              _this10.cdr.detectChanges();
             }, function (error) {
               console.log(error);
             });
@@ -1499,7 +1622,7 @@
         }, {
           key: "submituserform",
           value: function submituserform() {
-            var _this7 = this;
+            var _this11 = this;
 
             console.log(this.addstaffform.value);
 
@@ -1507,13 +1630,13 @@
               this.userService.addsubstaff(this.addstaffform.value).subscribe(function (response) {
                 console.log(response);
 
-                _this7.snackBar.open('Staff Added Successfully!', '', {
+                _this11.snackBar.open('Staff Added Successfully!', '', {
                   duration: 2000
                 });
 
-                _this7.addstaffform.reset();
+                _this11.addstaffform.reset();
 
-                _this7.addstaffform.markAsUntouched();
+                _this11.addstaffform.markAsUntouched();
               }, function (error) {
                 console.log(error);
               });
@@ -1522,11 +1645,11 @@
         }, {
           key: "getallroles",
           value: function getallroles() {
-            var _this8 = this;
+            var _this12 = this;
 
             this.userService.getroleslowerthanme().subscribe(function (response) {
               console.log(response);
-              _this8.allroles = response.data;
+              _this12.allroles = response.data;
             }, function (error) {
               console.log(error);
             });

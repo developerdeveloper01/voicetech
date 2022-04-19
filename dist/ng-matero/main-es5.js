@@ -5116,7 +5116,7 @@
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "p");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "ivr-service works!");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "ivr-service works");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
           }
@@ -17496,6 +17496,32 @@
           key: "getalldstnumbers",
           value: function getalldstnumbers() {
             return this.http.get("".concat(this.backendurl, "/admin/alldstnumber"));
+          } // agent
+
+        }, {
+          key: "addagent",
+          value: function addagent(data) {
+            return this.http.post("".concat(this.backendurl, "/admin/addagent"), data);
+          }
+        }, {
+          key: "viewoneagent",
+          value: function viewoneagent(id) {
+            return this.http.get("".concat(this.backendurl, "/admin/viewoneagent/").concat(id));
+          }
+        }, {
+          key: "editagent",
+          value: function editagent(id, data) {
+            return this.http.post("".concat(this.backendurl, "/admin/editagent/").concat(id), data);
+          }
+        }, {
+          key: "deleteagent",
+          value: function deleteagent(id) {
+            return this.http.get("".concat(this.backendurl, "/admin/deleteagent/").concat(id));
+          }
+        }, {
+          key: "getallagent",
+          value: function getallagent() {
+            return this.http.get("".concat(this.backendurl, "/admin/allagent"));
           } //postpaid plan
 
         }, {
@@ -17689,11 +17715,6 @@
             return this.http.post("".concat(this.backendurl, "/admin/addsubstaff"), data, {
               headers: header
             });
-          }
-        }, {
-          key: "addagent",
-          value: function addagent(data) {
-            return this.http.post("".concat(this.backendurl, "/admin/addagent"), data);
           } //support chat
 
         }, {
