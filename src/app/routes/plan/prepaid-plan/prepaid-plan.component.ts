@@ -24,6 +24,7 @@ import { MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
 })
 export class PrepaidPlanComponent implements OnInit, AfterViewInit, OnDestroy {
   columns: MtxGridColumn[] = [
+    { header: 'Plan type', sortable: true, field: 'plantype' },
     { header: 'Plan Title', sortable: true, field: 'plantitle' },
     { header: 'Price (Rs)', sortable: true, field: 'planprice' },
     { header: 'Validity (Days)', sortable: true, field: 'validityday' },
@@ -163,11 +164,14 @@ export class PrepaidPlanComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   searchData(searchValue: any) {
-    if(searchValue){
-    this.filteredData = this.list.filter((item: any) => {
-        return item.plantitle.toLowerCase().includes(searchValue.toLowerCase()) || item.desc.toLowerCase().includes(searchValue.toLowerCase());
-    });}
-    else{
+    if (searchValue) {
+      this.filteredData = this.list.filter((item: any) => {
+        return (
+          item.plantitle.toLowerCase().includes(searchValue.toLowerCase()) ||
+          item.desc.toLowerCase().includes(searchValue.toLowerCase())
+        );
+      });
+    } else {
       this.filteredData = null;
       this.getallnumbers();
       this.getallnumbers();
@@ -231,6 +235,7 @@ export class AddPrepaidplanOneFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addplan = this.fb.group({
+      plantype: ['', [Validators.required]],
       plantitle: ['', [Validators.required]],
       planprice: ['', [Validators.required]],
       validityday: ['', [Validators.required]],
@@ -243,6 +248,7 @@ export class AddPrepaidplanOneFormComponent implements OnInit {
       this.editmode = true;
       this.id = this.data?.record?._id;
       this.addplan.setValue({
+        plantype: this.data?.record?.plantype ? this.data?.record?.plantype : 'null',
         plantitle: this.data?.record?.plantitle ? this.data?.record?.plantitle : 'null',
         planprice: this.data?.record?.planprice ? this.data?.record?.planprice : 'null',
         validityday: this.data?.record?.validityday ? this.data?.record?.validityday : 'null',

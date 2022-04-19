@@ -95,6 +95,28 @@ export class UserService {
     return this.http.get(`${this.backendurl}/admin/alldstnumber`);
   }
 
+  // agent
+
+  addagent(data) {
+    return this.http.post(`${this.backendurl}/admin/addagent`, data);
+  }
+
+  viewoneagent(id) {
+    return this.http.get(`${this.backendurl}/admin/viewoneagent/${id}`);
+  }
+
+  editagent(id, data) {
+    return this.http.post(`${this.backendurl}/admin/editagent/${id}`, data);
+  }
+
+  deleteagent(id) {
+    return this.http.get(`${this.backendurl}/admin/deleteagent/${id}`);
+  }
+
+  getallagent() {
+    return this.http.get(`${this.backendurl}/admin/allagent`);
+  }
+
   //postpaid plan
   addpospaidplan(data) {
     return this.http.post(`${this.backendurl}/admin/addpospaidplan`, data);
@@ -248,10 +270,6 @@ export class UserService {
     return this.http.post(`${this.backendurl}/admin/addsubstaff`, data, {
       headers: header,
     });
-  }
-
-  addagent(data) {
-    return this.http.post(`${this.backendurl}/admin/addagent`, data);
   }
 
   //support chat

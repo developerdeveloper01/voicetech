@@ -111,7 +111,7 @@ export class SubordinatesComponent implements OnInit {
 
   edit(value: any) {
     const dialogRef = this.dialog.open(AddSubordinateFormComponent, {
-      width: '500px',
+      width: '1000px',
       data: { record: value },
     });
 

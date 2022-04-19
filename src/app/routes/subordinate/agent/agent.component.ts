@@ -44,7 +44,96 @@ export class AgentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getallagents();
+    this.getallagent();
+
+    this.columns = [
+      {
+        header: 'Avatar',
+        field: 'staffimg',
+        type: 'image',
+      },
+      {
+        header: 'Name',
+        field: 'name',
+        formatter: (data: any) => `${data.firstname} ${data.lastname} `,
+      },
+      { header: 'Email', sortable: true, field: 'email' },
+      { header: 'Mobile', sortable: true, field: 'mobile' },
+
+      {
+        header: 'Approved',
+        field: 'approvedstatus',
+        type: 'tag',
+        tag: {
+          true: { text: 'Yes', color: 'red-100' },
+          false: { text: 'No', color: 'green-100' },
+        },
+      },
+      {
+        header: 'Actions',
+        field: 'action',
+        minWidth: 120,
+        width: '120px',
+        pinned: 'right',
+        type: 'button',
+        buttons: [
+          {
+            type: 'icon',
+            icon: 'edit',
+            tooltip: 'edit',
+            click: record => this.edit(record),
+          },
+          {
+            color: 'warn',
+            icon: 'delete',
+            text: 'delete',
+            tooltip: 'delete',
+            pop: true,
+            popTitle: 'Confirm Delete',
+            popCloseText: 'Cancel',
+            popOkText: 'Delete',
+            click: record => this.delete(record),
+          },
+        ],
+      },
+    ];
+  }
+
+  edit(value: any) {
+    const dialogRef = this.dialog.open(AgentFormComponent, {
+      width: '500px',
+      data: { record: value },
+    });
+  }
+
+  delete(data: any) {
+    this.userService.deleteagent(data._id).subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+        this.isLoading = false;
+        this.getallagent();
+        this.cdr.detectChanges();
+        this.dialogx.alert(`You have deleted ${data.firstname} ${data.lastname}!`);
+      },
+      error => {
+        console.log(
+          '%cerror ips.component.ts line:254 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
+      }
+    );
+  }
+
+  openAddDstNumber() {
+    let adddailogRef = this.dialog.open(AgentFormComponent, { width: '500px' });
+
+    adddailogRef.afterClosed().subscribe(() => {
+      this.getallagent();
+      this.getallagent();
+      this.getallagent();
+      console.log('Dailog Closed');
+    });
   }
 
   changeSelect(e: any) {
@@ -66,6 +155,24 @@ export class AgentComponent implements OnInit {
 
   getallagents() {
     console.log('requested all agents');
+  }
+
+  getallagent() {
+    this.userService.getallagent().subscribe(
+      (response: any) => {
+        console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
+        this.list = response.data;
+        this.isLoading = false;
+        this.cdr.detectChanges();
+      },
+      error => {
+        console.log(
+          '%cerror ips.component.ts line:254 ',
+          'color: red; display: block; width: 100%;',
+          error
+        );
+      }
+    );
   }
 }
 

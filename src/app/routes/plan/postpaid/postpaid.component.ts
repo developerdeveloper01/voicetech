@@ -24,6 +24,7 @@ import { MtxDialog, MtxGridColumn } from '@ng-matero/extensions';
 })
 export class PostpaidComponent implements OnInit, AfterViewInit, OnDestroy {
   columns: MtxGridColumn[] = [
+    { header: 'Plan Type', sortable: true, field: 'plantype' },
     { header: 'Plan Title', sortable: true, field: 'plantitle' },
     { header: 'Price (Rs)', sortable: true, field: 'planprice' },
     { header: 'Validity (Days)', sortable: true, field: 'validityday' },
@@ -234,6 +235,7 @@ export class AddPostpaidplanOneFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addpospaidplan = this.fb.group({
+      plantype: ['', [Validators.required]],
       plantitle: ['', [Validators.required]],
       planprice: ['', [Validators.required]],
       validityday: ['', [Validators.required]],
@@ -246,6 +248,7 @@ export class AddPostpaidplanOneFormComponent implements OnInit {
       this.editmode = true;
       this.id = this.data?.record?._id;
       this.addpospaidplan.setValue({
+        plantype: this.data?.record?.plantype ? this.data?.record?.plantype : 'null',
         plantitle: this.data?.record?.plantitle ? this.data?.record?.plantitle : 'null',
         planprice: this.data?.record?.planprice ? this.data?.record?.planprice : 'null',
         validityday: this.data?.record?.validityday ? this.data?.record?.validityday : 'null',
