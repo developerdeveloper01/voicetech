@@ -258,6 +258,7 @@ export class AddDstNumberFormComponent implements OnInit {
   adddstnumber: FormGroup;
   allips: any;
   allstaff: any;
+  allusers: any;
 
   constructor(
     private fb: FormBuilder,
@@ -267,6 +268,7 @@ export class AddDstNumberFormComponent implements OnInit {
     this.adddstnumber = this.fb.group({
       ip: ['', [Validators.required]],
       assign: [''],
+      assignm: [''],
       did_no: ['', [Validators.required, Validators.min(10000000), Validators.max(99999999)]],
       inusestatus: [false],
     });
@@ -275,6 +277,7 @@ export class AddDstNumberFormComponent implements OnInit {
   ngOnInit(): void {
     this.getallips();
     this.getallstaff();
+    this.getallusers();
   }
 
   getErrorMessage(form: FormGroup) {
@@ -342,6 +345,22 @@ export class AddDstNumberFormComponent implements OnInit {
           response
         );
         this.allstaff = response.data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  getallusers() {
+    this.userService.allusers().subscribe(
+      (response: any) => {
+        console.log(
+          '%cstaff.component.ts line:238 response',
+          'color: white; background-color: #007acc;',
+          response
+        );
+        this.allusers = response.data;
       },
       error => {
         console.log(error);

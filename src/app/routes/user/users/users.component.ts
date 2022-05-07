@@ -90,7 +90,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
       { header: 'Mobile', sortable: true, field: 'mobile' },
       { header: 'Email', sortable: true, field: 'email' },
       { header: 'Organization', sortable: true, field: 'organization_name' },
-      { header: 'DID Number', sortable: true, field: 'alloted_did.did_no' },
+      { header: 'DID Number', sortable: true, field: 'alloted_did' },
       { header: 'Created Date', sortable: true, field: 'createdAt' },
       {
         header: 'Approved',

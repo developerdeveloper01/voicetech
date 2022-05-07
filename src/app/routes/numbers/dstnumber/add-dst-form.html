@@ -26,6 +26,22 @@
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field class="demo-full-width">
+      <mat-label>Allot by</mat-label>
+      <mat-select formControlName="assign"
+                  required>
+       <mat-option *ngFor="let user of allusers; index as i;" [value]="user._id">
+          {{ user.firstname }} {{ user.lastname }}
+        </mat-option>
+
+      </mat-select>
+
+
+      <mat-error *ngIf="adddstnumber.get('assignm').invalid">
+        {{'validations.required'| translate}}
+      </mat-error>
+    </mat-form-field>
+
     <table class="demo-full-width" cellspacing="0">
       <tr>
         <td>
