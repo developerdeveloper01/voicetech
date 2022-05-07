@@ -2328,7 +2328,7 @@
             }, {
               header: 'DID Number',
               sortable: true,
-              field: 'alloted_did.did_no'
+              field: 'alloted_did'
             }, {
               header: 'Created Date',
               sortable: true,

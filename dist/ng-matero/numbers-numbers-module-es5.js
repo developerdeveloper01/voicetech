@@ -379,13 +379,13 @@
         }
 
         if (rf & 2) {
-          var ip_r5 = ctx.$implicit;
+          var ip_r7 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", ip_r5._id);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", ip_r7._id);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ip_r5.ipnumber, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ip_r7.ipnumber, " ");
         }
       }
 
@@ -417,13 +417,13 @@
         }
 
         if (rf & 2) {
-          var staff_r7 = ctx.$implicit;
+          var staff_r9 = ctx.$implicit;
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", staff_r7._id);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", staff_r9._id);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", staff_r7.firstname, " ", staff_r7.lastname, " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", staff_r9.firstname, " ", staff_r9.lastname, " ");
         }
       }
 
@@ -445,7 +445,27 @@
         }
       }
 
-      function AddDstNumberFormComponent_mat_error_23_Template(rf, ctx) {
+      function AddDstNumberFormComponent_mat_option_20_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 12);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var user_r11 = ctx.$implicit;
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("value", user_r11._id);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate2"](" ", user_r11.firstname, " ", user_r11.lastname, " ");
+        }
+      }
+
+      function AddDstNumberFormComponent_mat_error_21_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-error");
 
@@ -457,11 +477,29 @@
         }
 
         if (rf & 2) {
-          var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 1, "validations.required"), " ");
+        }
+      }
+
+      function AddDstNumberFormComponent_mat_error_29_Template(rf, ctx) {
+        if (rf & 1) {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-error");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](2, "translate");
+
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        }
+
+        if (rf & 2) {
+          var ctx_r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 1, ctx_r4.getErrorMessage(ctx_r4.adddstnumber)), " ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 1, ctx_r6.getErrorMessage(ctx_r6.adddstnumber)), " ");
         }
       }
 
@@ -884,6 +922,7 @@
           this.adddstnumber = this.fb.group({
             ip: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]],
             assign: [''],
+            assignm: [''],
             did_no: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].min(10000000), _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].max(99999999)]],
             inusestatus: [false]
           });
@@ -894,6 +933,7 @@
           value: function ngOnInit() {
             this.getallips();
             this.getallstaff();
+            this.getallusers();
           }
         }, {
           key: "getErrorMessage",
@@ -956,6 +996,18 @@
               console.log(error);
             });
           }
+        }, {
+          key: "getallusers",
+          value: function getallusers() {
+            var _this11 = this;
+
+            this.userService.allusers().subscribe(function (response) {
+              console.log('%cstaff.component.ts line:238 response', 'color: white; background-color: #007acc;', response);
+              _this11.allusers = response.data;
+            }, function (error) {
+              console.log(error);
+            });
+          }
         }]);
 
         return AddDstNumberFormComponent;
@@ -968,8 +1020,8 @@
       AddDstNumberFormComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
         type: AddDstNumberFormComponent,
         selectors: [["add-dst-form"]],
-        decls: 32,
-        vars: 8,
+        decls: 38,
+        vars: 10,
         consts: [["mat-dialog-title", ""], [3, "formGroup", "ngSubmit"], [1, "demo-full-width"], ["formControlName", "ip", "required", ""], [3, "value", 4, "ngFor", "ngForOf"], [4, "ngIf"], ["formControlName", "assign", "required", ""], ["cellspacing", "0", 1, "demo-full-width"], ["type", "number", "matInput", "", "placeholder", "991515000", "formControlName", "did_no", "required", ""], ["formControlName", "is_used", 1, "st-chk", 3, "value", "change"], ["mat-raised-button", "", "mat-dialog-close", ""], ["mat-raised-button", "", "mat-dialog-close", "", "color", "primary", "cdkFocusInitial", "", "type", "submit", 3, "disabled"], [3, "value"]],
         template: function AddDstNumberFormComponent_Template(rf, ctx) {
           if (rf & 1) {
@@ -1023,37 +1075,55 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "table", 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "mat-form-field", 2);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "tr");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "mat-label");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "td");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "mat-form-field", 2);
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "mat-label");
-
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](21, "DST Number");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](18, "Allot by");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](22, "input", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "mat-select", 6);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](23, AddDstNumberFormComponent_mat_error_23_Template, 3, 3, "mat-error", 5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](20, AddDstNumberFormComponent_mat_option_20_Template, 2, 3, "mat-option", 4);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](21, AddDstNumberFormComponent_mat_error_21_Template, 3, 3, "mat-error", 5);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "table", 7);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "tr");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "td");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "mat-checkbox", 9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](25, "mat-form-field", 2);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function AddDstNumberFormComponent_Template_mat_checkbox_change_25_listener($event) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](26, "mat-label");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](27, "DST Number");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](28, "input", 8);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](29, AddDstNumberFormComponent_mat_error_29_Template, 3, 3, "mat-error", 5);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "td");
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "mat-checkbox", 9);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function AddDstNumberFormComponent_Template_mat_checkbox_change_31_listener($event) {
               return ctx.checkboxChange($event.source, $event.checked);
             });
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](26, "In Use ");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, "In Use ");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1065,17 +1135,17 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "mat-dialog-actions");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "mat-dialog-actions");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "button", 10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "button", 10);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](29, "Cancel");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](35, "Cancel");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "button", 11);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "button", 11);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](31, "Submit");
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](37, "Submit");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
@@ -1104,6 +1174,14 @@
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.adddstnumber.get("assign").invalid);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](5);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.allusers);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", ctx.adddstnumber.get("assignm").invalid);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](8);
 
@@ -1165,11 +1243,11 @@
         }, {
           key: "getallips",
           value: function getallips() {
-            var _this11 = this;
+            var _this12 = this;
 
             this.userService.getallips().subscribe(function (response) {
               console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-              _this11.allips = response.data;
+              _this12.allips = response.data;
             }, function (error) {
               console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
             });
@@ -1177,11 +1255,11 @@
         }, {
           key: "getallstaff",
           value: function getallstaff() {
-            var _this12 = this;
+            var _this13 = this;
 
             this.userService.getallstaff().subscribe(function (response) {
               console.log('%cstaff.component.ts line:238 response', 'color: white; background-color: #007acc;', response);
-              _this12.allstaff = response.data;
+              _this13.allstaff = response.data;
             }, function (error) {
               console.log(error);
             });
@@ -1199,7 +1277,7 @@
         }, {
           key: "submitdstnumber",
           value: function submitdstnumber() {
-            var _this13 = this;
+            var _this14 = this;
 
             console.log(this.editdstnumber.value);
 
@@ -1207,11 +1285,11 @@
               this.userService.editdstnumber(this.data.record._id, this.editdstnumber.value).subscribe(function (response) {
                 console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
 
-                _this13.snackBar.open('IP Edited Successfully!', '', {
+                _this14.snackBar.open('IP Edited Successfully!', '', {
                   duration: 2000
                 });
 
-                _this13.editdstnumber.reset();
+                _this14.editdstnumber.reset();
               }, function (error) {
                 console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
               });
@@ -1562,7 +1640,7 @@
         _createClass(NumberListComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this14 = this;
+            var _this15 = this;
 
             this.getallnumbers();
             this.columns = [{
@@ -1604,7 +1682,7 @@
                 icon: 'visibility',
                 tooltip: 'view',
                 click: function click(record) {
-                  return _this14.view(record);
+                  return _this15.view(record);
                 }
               }, {
                 color: 'warn',
@@ -1616,7 +1694,7 @@
                 popCloseText: 'Cancel',
                 popOkText: 'Delete',
                 click: function click(record) {
-                  return _this14["delete"](record);
+                  return _this15["delete"](record);
                 }
               }]
             }];
@@ -1624,7 +1702,7 @@
         }, {
           key: "edit",
           value: function edit(value) {
-            var _this15 = this;
+            var _this16 = this;
 
             var dialogRef = this.dialogx.originalOpen(app_routes_tables_kitchen_sink_edit_edit_component__WEBPACK_IMPORTED_MODULE_4__["TablesKitchenSinkEditComponent"], {
               width: '900px',
@@ -1634,7 +1712,7 @@
             });
 
             var onOk = function onOk() {
-              _this15.dialogx.alert('Closed');
+              _this16.dialogx.alert('Closed');
             };
 
             dialogRef.afterClosed().subscribe(function () {
@@ -1654,17 +1732,17 @@
         }, {
           key: "delete",
           value: function _delete(value) {
-            var _this16 = this;
+            var _this17 = this;
 
             this.userService.deletenumber(value._id).subscribe(function (response) {
               console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-              _this16.isLoading = false;
+              _this17.isLoading = false;
 
-              _this16.getallnumbers();
+              _this17.getallnumbers();
 
-              _this16.cdr.detectChanges();
+              _this17.cdr.detectChanges();
 
-              _this16.dialogx.alert("You have deleted ".concat(value.dstnumber, "!"));
+              _this17.dialogx.alert("You have deleted ".concat(value.dstnumber, "!"));
             }, function (error) {
               console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
             });
@@ -1707,15 +1785,15 @@
         }, {
           key: "getallnumbers",
           value: function getallnumbers() {
-            var _this17 = this;
+            var _this18 = this;
 
             this.userService.mydstnumbers().subscribe(function (response) {
               console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-              _this17.list = response.data;
-              _this17.total = response.data.length;
-              _this17.isLoading = false;
+              _this18.list = response.data;
+              _this18.total = response.data.length;
+              _this18.isLoading = false;
 
-              _this17.cdr.detectChanges();
+              _this18.cdr.detectChanges();
             }, function (error) {
               console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
             });
@@ -2106,7 +2184,7 @@
 
       var IpsComponent = /*#__PURE__*/function () {
         function IpsComponent(fb, userService, snackBar, translate, dateAdapter, dialog, cdr, dialogx) {
-          var _this18 = this;
+          var _this19 = this;
 
           _classCallCheck(this, IpsComponent);
 
@@ -2155,7 +2233,7 @@
               icon: 'edit',
               tooltip: 'edit',
               click: function click(record) {
-                return _this18.openEditIp(record);
+                return _this19.openEditIp(record);
               }
             }, {
               color: 'warn',
@@ -2167,7 +2245,7 @@
               popCloseText: 'Cancel',
               popOkText: 'Delete',
               click: function click(record) {
-                return _this18["delete"](record);
+                return _this19["delete"](record);
               }
             }]
           }]; //table
@@ -2201,17 +2279,17 @@
         _createClass(IpsComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this19 = this;
+            var _this20 = this;
 
             this.getallips();
             this.translateSubscription = this.translate.onLangChange.subscribe(function (res) {
-              _this19.dateAdapter.setLocale(res.lang);
+              _this20.dateAdapter.setLocale(res.lang);
             });
           }
         }, {
           key: "edit",
           value: function edit(value) {
-            var _this20 = this;
+            var _this21 = this;
 
             var dialogRef = this.dialogx.originalOpen(app_routes_tables_kitchen_sink_edit_edit_component__WEBPACK_IMPORTED_MODULE_8__["TablesKitchenSinkEditComponent"], {
               width: '900px',
@@ -2221,7 +2299,7 @@
             });
 
             var onOk = function onOk() {
-              _this20.dialogx.alert('Closed');
+              _this21.dialogx.alert('Closed');
             }; // const dialogRef = this.dialog.alert('Clicked alert', 'this is description');
 
 
@@ -2232,17 +2310,17 @@
         }, {
           key: "delete",
           value: function _delete(value) {
-            var _this21 = this;
+            var _this22 = this;
 
             this.userService.deleteip(value._id).subscribe(function (response) {
               console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-              _this21.isLoading = false;
+              _this22.isLoading = false;
 
-              _this21.getallips();
+              _this22.getallips();
 
-              _this21.cdr.detectChanges();
+              _this22.cdr.detectChanges();
 
-              _this21.dialogx.alert("You have deleted ".concat(value.title, "!"));
+              _this22.dialogx.alert("You have deleted ".concat(value.title, "!"));
             }, function (error) {
               console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
             });
@@ -2250,15 +2328,15 @@
         }, {
           key: "getallips",
           value: function getallips() {
-            var _this22 = this;
+            var _this23 = this;
 
             this.userService.getallips().subscribe(function (response) {
               console.log('%crole.component.ts line:311 response', 'color: #26bfa5;', response);
-              _this22.list = response.data;
-              _this22.total = response.data.length;
-              _this22.isLoading = false;
+              _this23.list = response.data;
+              _this23.total = response.data.length;
+              _this23.isLoading = false;
 
-              _this22.cdr.detectChanges();
+              _this23.cdr.detectChanges();
             }, function (error) {
               console.log('%cerror role.component.ts line:318 ', 'color: red; display: block; width: 100%;', error);
             });
@@ -2286,19 +2364,19 @@
         }, {
           key: "submitipForm",
           value: function submitipForm() {
-            var _this23 = this;
+            var _this24 = this;
 
             console.log(this.addipform.value);
             this.userService.addip(this.addipform.value).subscribe(function (response) {
               console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
 
-              _this23.snackBar.open('IP Added Successfully!', '', {
+              _this24.snackBar.open('IP Added Successfully!', '', {
                 duration: 2000
               });
 
-              _this23.addipform.reset();
+              _this24.addipform.reset();
 
-              _this23.getallips();
+              _this24.getallips();
             }, function (error) {
               console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
             });
@@ -2316,21 +2394,21 @@
         }, {
           key: "openAddIp",
           value: function openAddIp() {
-            var _this24 = this;
+            var _this25 = this;
 
             var adddailogRef = this.dialog.open(AddIpFormComponent, {
               width: '500px'
             });
             adddailogRef.afterClosed().subscribe(function () {
-              _this24.getallips();
+              _this25.getallips();
 
-              _this24.cdr.detectChanges();
+              _this25.cdr.detectChanges();
             });
           }
         }, {
           key: "openEditIp",
           value: function openEditIp(value) {
-            var _this25 = this;
+            var _this26 = this;
 
             var editdailogRef = this.dialog.open(EditIpFormComponent, {
               width: '500px',
@@ -2341,7 +2419,7 @@
             editdailogRef.afterClosed().subscribe(function () {
               console.log('The edit dailog closed');
 
-              _this25.getallips();
+              _this26.getallips();
             });
           }
         }]);
@@ -2449,17 +2527,17 @@
         }, {
           key: "submitip",
           value: function submitip() {
-            var _this26 = this;
+            var _this27 = this;
 
             if (this.addip.valid) {
               this.userService.addip(this.addip.value).subscribe(function (response) {
                 console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
 
-                _this26.snackBar.open('IP Added Successfully!', '', {
+                _this27.snackBar.open('IP Added Successfully!', '', {
                   duration: 2000
                 });
 
-                _this26.addip.reset(); //this.addip.markAsUntouched();
+                _this27.addip.reset(); //this.addip.markAsUntouched();
 
               }, function (error) {
                 console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
@@ -2644,11 +2722,11 @@
         }, {
           key: "getallips",
           value: function getallips() {
-            var _this27 = this;
+            var _this28 = this;
 
             this.userService.getallips().subscribe(function (response) {
               console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
-              _this27.allips = response.data;
+              _this28.allips = response.data;
             }, function (error) {
               console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
             });
@@ -2666,7 +2744,7 @@
         }, {
           key: "submiteditip",
           value: function submiteditip() {
-            var _this28 = this;
+            var _this29 = this;
 
             console.log(this.editip.value);
 
@@ -2674,11 +2752,11 @@
               this.userService.editip(this.data.record._id, this.editip.value).subscribe(function (response) {
                 console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
 
-                _this28.snackBar.open('IP Edited Successfully!', '', {
+                _this29.snackBar.open('IP Edited Successfully!', '', {
                   duration: 2000
                 });
 
-                _this28.editip.reset();
+                _this29.editip.reset();
               }, function (error) {
                 console.log('%cerror ips.component.ts line:254 ', 'color: red; display: block; width: 100%;', error);
               });
