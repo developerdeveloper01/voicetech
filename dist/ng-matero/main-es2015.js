@@ -505,7 +505,7 @@ DefaultInterceptor.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_5__["ɵɵdefi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\deepa\OneDrive\Documents\voicetechmainall\voicetech\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Users\deepa\OneDrive\Documents\voicetechmainall\newvoicetech\voicetech\src\main.ts */"zUnb");
 
 
 /***/ }),
