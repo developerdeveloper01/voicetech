@@ -286,6 +286,7 @@ export class AddUserFormComponent implements OnInit {
         email: this.data?.record?.email ? this.data?.record?.email : 'null',
         mobile: this.data?.record?.mobile ? this.data?.record?.mobile : 'null',
         password: this.data?.record?.password ? this.data?.record?.password : 'null',
+
         organization_name: this.data?.record?.organization_name
           ? this.data?.record?.organization_name
           : 'null',

@@ -28,7 +28,7 @@
 
     <mat-form-field class="demo-full-width">
       <mat-label>Allot by</mat-label>
-      <mat-select formControlName="assign"
+      <mat-select formControlName="assignm"
                   required>
        <mat-option *ngFor="let user of allusers; index as i;" [value]="user._id">
           {{ user.firstname }} {{ user.lastname }}

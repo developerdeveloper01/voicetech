@@ -57,7 +57,7 @@ export class DstnumberComponent implements OnInit, AfterViewInit {
     this.getallnumbers();
     this.getallstaff();
     this.columns = [
-      { header: 'DID Number', sortable: true, field: 'did_no' },
+      { header: 'DID Number', sortable: true, field: 'alloted_did' },
       { header: 'IP', sortable: true, field: 'ip.ipnumber' },
       {
         header: 'Alloted to',
@@ -271,6 +271,11 @@ export class AddDstNumberFormComponent implements OnInit {
       assignm: [''],
       did_no: ['', [Validators.required, Validators.min(10000000), Validators.max(99999999)]],
       inusestatus: [false],
+      alottedtouser: [''],
+      is_used: ['f'],
+      itsp_name: ['Tata'],
+      voice_channel: [],
+      service_type: ['open'],
     });
   }
 
@@ -296,6 +301,8 @@ export class AddDstNumberFormComponent implements OnInit {
 
   submitdstnumber() {
     if (this.adddstnumber.valid) {
+      this.adddstnumber.controls.alottedtouser.setValue(this.adddstnumber.controls.assignm.value);
+      console.log('*********************************', this.adddstnumber.value);
       this.userService.adddstnumber(this.adddstnumber.value).subscribe(
         (response: any) => {
           console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
