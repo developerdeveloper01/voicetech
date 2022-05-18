@@ -371,7 +371,7 @@
 
       function AddDstNumberFormComponent_mat_option_8_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 13);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
@@ -409,7 +409,7 @@
 
       function AddDstNumberFormComponent_mat_option_14_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 13);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
@@ -447,7 +447,7 @@
 
       function AddDstNumberFormComponent_mat_option_20_Template(rf, ctx) {
         if (rf & 1) {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "mat-option", 13);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
 
@@ -652,7 +652,7 @@
             this.columns = [{
               header: 'DID Number',
               sortable: true,
-              field: 'did_no'
+              field: 'alloted_did'
             }, {
               header: 'IP',
               sortable: true,
@@ -924,7 +924,12 @@
             assign: [''],
             assignm: [''],
             did_no: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].min(10000000), _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].max(99999999)]],
-            inusestatus: [false]
+            inusestatus: [false],
+            alottedtouser: [''],
+            is_used: ['f'],
+            itsp_name: ['Tata'],
+            voice_channel: [],
+            service_type: ['open']
           });
         }
 
@@ -951,6 +956,8 @@
             var _this8 = this;
 
             if (this.adddstnumber.valid) {
+              this.adddstnumber.controls.alottedtouser.setValue(this.adddstnumber.controls.assignm.value);
+              console.log('*********************************', this.adddstnumber.value);
               this.userService.adddstnumber(this.adddstnumber.value).subscribe(function (response) {
                 console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
 
@@ -1022,7 +1029,7 @@
         selectors: [["add-dst-form"]],
         decls: 38,
         vars: 10,
-        consts: [["mat-dialog-title", ""], [3, "formGroup", "ngSubmit"], [1, "demo-full-width"], ["formControlName", "ip", "required", ""], [3, "value", 4, "ngFor", "ngForOf"], [4, "ngIf"], ["formControlName", "assign", "required", ""], ["cellspacing", "0", 1, "demo-full-width"], ["type", "number", "matInput", "", "placeholder", "991515000", "formControlName", "did_no", "required", ""], ["formControlName", "is_used", 1, "st-chk", 3, "value", "change"], ["mat-raised-button", "", "mat-dialog-close", ""], ["mat-raised-button", "", "mat-dialog-close", "", "color", "primary", "cdkFocusInitial", "", "type", "submit", 3, "disabled"], [3, "value"]],
+        consts: [["mat-dialog-title", ""], [3, "formGroup", "ngSubmit"], [1, "demo-full-width"], ["formControlName", "ip", "required", ""], [3, "value", 4, "ngFor", "ngForOf"], [4, "ngIf"], ["formControlName", "assign", "required", ""], ["formControlName", "assignm", "required", ""], ["cellspacing", "0", 1, "demo-full-width"], ["type", "number", "matInput", "", "placeholder", "991515000", "formControlName", "did_no", "required", ""], ["formControlName", "is_used", 1, "st-chk", 3, "value", "change"], ["mat-raised-button", "", "mat-dialog-close", ""], ["mat-raised-button", "", "mat-dialog-close", "", "color", "primary", "cdkFocusInitial", "", "type", "submit", 3, "disabled"], [3, "value"]],
         template: function AddDstNumberFormComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h2", 0);
@@ -1083,7 +1090,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "mat-select", 6);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "mat-select", 7);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](20, AddDstNumberFormComponent_mat_option_20_Template, 2, 3, "mat-option", 4);
 
@@ -1093,7 +1100,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "table", 7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "table", 8);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "tr");
 
@@ -1107,7 +1114,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](28, "input", 8);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](28, "input", 9);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](29, AddDstNumberFormComponent_mat_error_29_Template, 3, 3, "mat-error", 5);
 
@@ -1117,7 +1124,7 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "td");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "mat-checkbox", 9);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "mat-checkbox", 10);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function AddDstNumberFormComponent_Template_mat_checkbox_change_31_listener($event) {
               return ctx.checkboxChange($event.source, $event.checked);
@@ -1137,13 +1144,13 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "mat-dialog-actions");
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "button", 10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "button", 11);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](35, "Cancel");
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "button", 11);
+            _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "button", 12);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](37, "Submit");
 
