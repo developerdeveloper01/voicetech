@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private token: TokenService,
     private authserv: AdminAuthService,
     private permissonsSrv: NgxPermissionsService,
-    private rolesSrv: NgxRolesService,
+    private rolesSrv: NgxRolesService
   ) {}
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         console.log(response);
         console.log(response.ad_token);
-        if(response.staff.role){
+        if (response.staff.role) {
           const permissions = ['canAdd', 'canEdit', 'canRead'];
           //const permissions = Object.keys(data.data.role);
           this.permissonsSrv.loadPermissions(response.staff.role.permissions || permissions);
@@ -74,6 +74,8 @@ export class LoginComponent implements OnInit {
         /// this.store.set(this.key, response.ad_token);
         this.authserv.set(response.ad_token);
         localStorage.setItem('ad-token', response.ad_token);
+        localStorage.setItem('email', response?.staff?.email);
+        localStorage.setItem('role', response?.staff?.role?.name);
         this.router.navigateByUrl('/');
       },
       (error: HttpErrorResponse) => {

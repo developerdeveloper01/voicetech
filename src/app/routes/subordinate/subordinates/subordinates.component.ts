@@ -110,8 +110,8 @@ export class SubordinatesComponent implements OnInit {
   }
 
   edit(value: any) {
-    const dialogRef = this.dialog.open(AddSubordinateFormComponent, {
-      width: '1000px',
+    const dialogRef = this.dialog.open(EditSubordinatesFormComponent, {
+      width: '500px',
       data: { record: value },
     });
 
@@ -271,5 +271,145 @@ export class AddSubordinateFormComponent implements OnInit {
   checkboxChange(checkbox: MatCheckbox, checked: boolean) {
     checkbox.value = checked ? this.trueValue : this.falseValue;
     console.log(checkbox.value);
+  }
+}
+
+@Component({
+  selector: 'edit-subordinates-form',
+  styles: [
+    `
+      .demo-full-width {
+        width: 100%;
+      }
+    `,
+  ],
+  templateUrl: './edit-subordinates-form.html',
+})
+export class EditSubordinatesFormComponent implements OnInit {
+  addstaffform: FormGroup;
+  editmode: Boolean = false;
+  id: any;
+  allroles: any;
+  allstaff: any;
+
+  falseValue = 'false';
+  trueValue = 'true';
+  constructor(
+    private fb: FormBuilder,
+    public userService: UserService,
+    private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<EditSubordinatesFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.addstaffform = this.fb.group({
+      firstname: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      mobile: ['', [Validators.required]],
+      role: ['', [Validators.required]],
+      added_by: ['', [Validators.required]],
+      approvedstatus: [false],
+    });
+
+    if (data) {
+      console.log(data);
+      this.editmode = true;
+      this.id = this.data?.record?._id;
+      this.addstaffform.setValue({
+        firstname: this.data?.record?.firstname ? this.data?.record?.firstname : 'null',
+        lastname: this.data?.record?.lastname ? this.data?.record?.lastname : 'null',
+        email: this.data?.record?.email ? this.data?.record?.email : 'null',
+        mobile: this.data?.record?.mobile ? this.data?.record?.mobile : 'null',
+        role: this.data?.record?.role ? this.data?.record?.role._id : 'null',
+        added_by: this.data?.record?.added_by ? this.data?.record?.added_by?._id : 'null',
+        approvedstatus: this.data?.record?.approvedstatus
+          ? this.data?.record?.approvedstatus
+          : false,
+      });
+    }
+  }
+
+  ngOnInit(): void {
+    this.getallroles();
+    this.getallstaff();
+  }
+
+  getErrorMessage(form: FormGroup) {
+    return form.get('firstname').hasError('required')
+      ? 'validations.required'
+      : form.get('lastname').hasError('required')
+      ? 'validations.required'
+      : form.get('email').hasError('required')
+      ? 'validations.required'
+      : '';
+  }
+
+  submituserform() {
+    if (this.editmode) {
+      console.log(this.addstaffform.value);
+      this.userService.editstaff(this.id, this.addstaffform.value).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.snackBar.open('User Edited Successfully!', '', { duration: 2000 });
+          this.addstaffform.reset();
+          this.dialogRef.close();
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      if (this.addstaffform.valid) {
+        console.log(this.addstaffform.value);
+        this.userService.addstaff(this.addstaffform.value).subscribe(
+          (response: any) => {
+            console.log(response);
+            this.snackBar.open('Staff Added Successfully!', '', { duration: 2000 });
+            this.addstaffform.reset();
+            this.addstaffform.markAsUntouched();
+            this.dialogRef.close();
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      } else {
+        this.getErrorMessage(this.addstaffform);
+      }
+    }
+  }
+
+  getallroles() {
+    this.userService.getallroles().subscribe(
+      (response: any) => {
+        console.log(response);
+
+        this.allroles = response.data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  checkboxChange(checkbox: MatCheckbox, checked: boolean) {
+    checkbox.value = checked ? this.trueValue : this.falseValue;
+    console.log(checkbox.value);
+  }
+
+  getallstaff() {
+    this.userService.getallstaff().subscribe(
+      (response: any) => {
+        console.log(
+          '%cstaff.component.ts line:238 response',
+          'color: white; background-color: #007acc;',
+          response
+        );
+        this.allstaff = response.data;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

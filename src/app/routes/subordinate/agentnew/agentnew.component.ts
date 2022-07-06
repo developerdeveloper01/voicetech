@@ -1,4 +1,4 @@
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { UserService } from 'app/user.service';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -10,15 +10,15 @@ import {
   Inject,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-agent',
-  templateUrl: './agent.component.html',
-  styleUrls: ['./agent.component.scss'],
+  selector: 'app-agentnew',
+  templateUrl: './agentnew.component.html',
+  styleUrls: ['./agentnew.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AgentComponent implements OnInit {
+export class AgentnewComponent implements OnInit {
   //table
   columns = [];
   list = [];
@@ -100,7 +100,7 @@ export class AgentComponent implements OnInit {
   }
 
   edit(value: any) {
-    const dialogRef = this.dialog.open(EditAgentFormComponent, {
+    const dialogRef = this.dialog.open(EditFormComponent, {
       width: '500px',
       data: { record: value },
     });
@@ -112,7 +112,7 @@ export class AgentComponent implements OnInit {
   }
 
   delete(data: any) {
-    this.userService.deleteagent(data._id).subscribe(
+    this.userService.deletestaff(data._id).subscribe(
       (response: any) => {
         console.log('%cips.component.ts line:248 response', 'color: #26bfa5;', response);
         this.isLoading = false;
@@ -130,17 +130,6 @@ export class AgentComponent implements OnInit {
     );
   }
 
-  openAddDstNumber() {
-    let adddailogRef = this.dialog.open(AgentFormComponent, { width: '500px' });
-
-    adddailogRef.afterClosed().subscribe(() => {
-      this.getallagent();
-      this.getallagent();
-      this.getallagent();
-      console.log('Dailog Closed');
-    });
-  }
-
   changeSelect(e: any) {
     console.log(e);
   }
@@ -150,7 +139,7 @@ export class AgentComponent implements OnInit {
   }
 
   openAgent() {
-    let adddailogRef = this.dialog.open(AgentFormComponent, { width: '500px' });
+    let adddailogRef = this.dialog.open(AddAgentFormComponent, { width: '500px' });
 
     adddailogRef.afterClosed().subscribe(() => {
       this.getallagent();
@@ -158,10 +147,6 @@ export class AgentComponent implements OnInit {
       this.getallagent();
       console.log('Dailog Closed');
     });
-  }
-
-  getallagents() {
-    console.log('requested all agents');
   }
 
   getallagent() {
@@ -181,10 +166,12 @@ export class AgentComponent implements OnInit {
       }
     );
   }
+
+  //viewadminstaff()
 }
 
 @Component({
-  selector: 'agent-form',
+  selector: 'add-agent-form',
   styles: [
     `
       .demo-full-width {
@@ -192,9 +179,9 @@ export class AgentComponent implements OnInit {
       }
     `,
   ],
-  templateUrl: './agent-form.html',
+  templateUrl: 'add-agent-form.html',
 })
-export class AgentFormComponent implements OnInit {
+export class AddAgentFormComponent implements OnInit {
   addagentform: FormGroup;
   editmode: Boolean = false;
   id: any;
@@ -207,7 +194,7 @@ export class AgentFormComponent implements OnInit {
     private fb: FormBuilder,
     public userService: UserService,
     private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<AgentFormComponent>,
+    public dialogRef: MatDialogRef<AddAgentFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addagentform = this.fb.group({
@@ -260,7 +247,7 @@ export class AgentFormComponent implements OnInit {
 }
 
 @Component({
-  selector: 'edit-agent-form',
+  selector: 'edit-form',
   styles: [
     `
       .demo-full-width {
@@ -268,9 +255,9 @@ export class AgentFormComponent implements OnInit {
       }
     `,
   ],
-  templateUrl: './edit-agent-form.html',
+  templateUrl: './edit-form.html',
 })
-export class EditAgentFormComponent implements OnInit {
+export class EditFormComponent implements OnInit {
   addagentform: FormGroup;
   editmode: Boolean = false;
   id: any;
@@ -282,7 +269,7 @@ export class EditAgentFormComponent implements OnInit {
     private fb: FormBuilder,
     public userService: UserService,
     private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<EditAgentFormComponent>,
+    public dialogRef: MatDialogRef<EditFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.addagentform = this.fb.group({

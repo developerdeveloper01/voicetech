@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>{{editmode?"Edit Staff":"Add Staff"}}</h2>
-  <form class="form-field-full" [formGroup]="addstaffform" (ngSubmit)="submitstaffForm()">
-    <mat-dialog-content>
+<h2 mat-dialog-title>Edit Subordinate </h2>
+<form class="form-field-full"  [formGroup]="addstaffform" (ngSubmit)="submituserform()">
+<mat-dialog-content >
     <div fxLayout="row wrap" fxLayoutGap="8px grid">
 
       <div fxFlex="50" fxFlex.lt-sm="100">
@@ -49,7 +49,7 @@
       </div>
 
 
-      <div fxFlex="100" fxFlex.lt-sm="100">
+      <!-- <div fxFlex="100" fxFlex.lt-sm="100">
         <mat-form-field>
           <mat-label>Password</mat-label>
           <input type="password" matInput placeholder="Password" formControlName="password"
@@ -58,7 +58,7 @@
             {{'validations.required' | translate}}
           </mat-error>
         </mat-form-field>
-      </div>
+      </div> -->
 
       <div fxFlex="50" fxFlex.lt-sm="100">
         <mat-form-field>
@@ -89,7 +89,7 @@
         </mat-checkbox>
       </div>
     </div>
-    </mat-dialog-content>
+  </mat-dialog-content>
 
   <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
